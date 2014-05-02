@@ -1,0 +1,9 @@
+@import "addons.scss";
+@import "vaadintest01.scss";
+
+/* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
+/* The actual styles should be defined in vaadintest01.scss */
+.vaadintest01 {
+  @include addons;
+  @include vaadintest01;
+}
