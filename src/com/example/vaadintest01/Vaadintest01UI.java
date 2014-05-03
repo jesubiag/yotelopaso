@@ -57,6 +57,8 @@ public class Vaadintest01UI extends UI {
 		Notification.show("Authorization denied");
 		}
 		});
+		
+		ob.setScope("https://www.google.com/calendar/feeds/");
 
 		layout.addComponent(ob);
 		
