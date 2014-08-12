@@ -11,6 +11,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
@@ -63,6 +64,7 @@ public class MainView extends VerticalLayout implements View {
 		
 		// topHorizontalLayout
 		topHorizontalLayout.setMargin(true);
+		topHorizontalLayout.setSizeFull();
 		topHorizontalLayout.addComponent(homeLink);
 		addGoogleButton();
 		
@@ -117,8 +119,8 @@ public class MainView extends VerticalLayout implements View {
 		// open in a new window, not in a tab.
 		// You can also set size with eg. "resizable,width=400,height=300"
 		button.setPopupWindowFeatures("resizable,width=800,height=600");
-
 		topHorizontalLayout.addComponent(button);
+		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
 		button.addOAuthListener(new Listener(service, topHorizontalLayout));
 	}
 
