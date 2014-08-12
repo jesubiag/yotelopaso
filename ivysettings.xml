@@ -17,6 +17,10 @@
 			<!-- OAuth Popup Add-on repository -->
 				<ibiblio name="vaadin-addons" usepoms="true" m2compatible="true"
 				root="http://maven.vaadin.com/vaadin-addons" />
+				
+			<!-- Dawn Theme repository-->
+			<ibiblio name="vaadin-addons" usepoms="true" m2compatible="true" 
+			root="http://maven.vaadin.com/vaadin-addons" />
 			
 			<!-- Repository used for Vaadin modified smartsprites library -->
 			<dual name="custom-smartsprites">

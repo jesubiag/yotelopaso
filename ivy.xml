@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE ivy-module [
-	<!ENTITY vaadin.version "7.1.14">
+	<!ENTITY vaadin.version "7.2.3">
 ]>
 <ivy-module version="2.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -47,5 +47,8 @@
 		<!-- Server Push -->
 		<dependency org="com.vaadin" name="vaadin-push"
 		rev="&vaadin.version;" conf="default->default"/>
+		
+		<!-- Dawn Theme -->
+		<dependency org="org.peimari" name="dawn" rev="2" />
 	</dependencies>
 </ivy-module>
