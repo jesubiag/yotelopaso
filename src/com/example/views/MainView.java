@@ -28,6 +28,8 @@ public class MainView extends VerticalLayout implements View {
 	
 	private static final long serialVersionUID = 1L;
 	
+	ApiInfo api = GOOGLE_API;
+	
 	final HorizontalLayout topHorizontalLayout = new HorizontalLayout();
 	Link homeLink = new Link("Home", new ExternalResource("http://localhost:8080/VaadinTest01/"));
 	Label appTitle = new Label("<h1><b>Nombre de la Aplicación</b></h1>");
@@ -70,7 +72,14 @@ public class MainView extends VerticalLayout implements View {
 		topHorizontalLayout.setWidth("100%");
 		topHorizontalLayout.addComponent(homeLink);
 		topHorizontalLayout.setComponentAlignment(homeLink, Alignment.MIDDLE_LEFT);
-		addGoogleButton();
+		
+		// Google Button
+		OAuthPopupButton button = new GoogleButton(api.apiKey, api.apiSecret);
+		button.setScope("https://www.googleapis.com/auth/drive");
+		button.setPopupWindowFeatures("resizable,width=800,height=600");
+		topHorizontalLayout.addComponent(button);
+		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
+		button.addOAuthListener(new Listener(api));
 		
 		// appTitle
 		appTitle.setContentMode(ContentMode.HTML);
@@ -116,16 +125,6 @@ public class MainView extends VerticalLayout implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		// Hacer algo
-	}
-	
-	private void addGoogleButton() {
-		ApiInfo api = GOOGLE_API;
-		OAuthPopupButton button = new GoogleButton(api.apiKey, api.apiSecret);
-		button.setScope("https://www.googleapis.com/auth/drive");
-		button.setPopupWindowFeatures("resizable,width=800,height=600");
-		topHorizontalLayout.addComponent(button);
-		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
-		button.addOAuthListener(new Listener(api));
 	}
 
 	private class Listener implements OAuthListener {

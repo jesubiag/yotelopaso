@@ -4,15 +4,21 @@ import com.example.vaadintest01.Vaadintest01UI;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Window;
 
 public class HomeView extends VerticalLayout implements View {
 
 	private static final long serialVersionUID = 1L;
 	Panel panel;
+	Window windowNews;
+	Window windowRecentFiles;
+	Window windowRecentEvents;
 
 	public HomeView() {
 		
@@ -41,13 +47,31 @@ public class HomeView extends VerticalLayout implements View {
 		hLayout.addComponent(menu);
 
 		// A panel that contains a content area on right
-		panel = new Panel("");
+		panel = new Panel("Inicio");
 		panel.setSizeFull();
 		hLayout.addComponent(panel);
 		hLayout.setExpandRatio(panel, 1.0f);
-
 		addComponent(hLayout);
 		setExpandRatio(hLayout, 1.0f);
+		
+		//VerticalLayout panelLayout = new VerticalLayout();
+		//panel.setContent(panelLayout);
+		
+		// Windows
+		windowNews = new Window("Novedades");
+		VerticalLayout subContent = new VerticalLayout();
+		subContent.setMargin(true);
+		windowNews.setContent(subContent);
+		windowNews.setClosable(false);
+		windowNews.setDraggable(false);
+		windowNews.setResizable(false);
+		windowNews.setHeight("27%");
+		windowNews.setWidth("89%");
+		windowNews.setPositionX(180);
+		windowNews.setPositionY(120);
+		// Content should be retrieved from database
+		subContent.addComponent(new Label("Contenido"));
+		UI.getCurrent().addWindow(windowNews);
 		
 		// Allow going back to the start
 		Button logout = new Button("Logout",
