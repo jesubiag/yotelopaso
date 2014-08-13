@@ -12,17 +12,11 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.themes.BaseTheme;
 
 public class MainView extends VerticalLayout implements View {
 	
@@ -70,8 +64,8 @@ public class MainView extends VerticalLayout implements View {
 		// topHorizontalLayout
 		topHorizontalLayout.setMargin(true);
 		topHorizontalLayout.setWidth("100%");
-		topHorizontalLayout.addComponent(homeLink);
-		topHorizontalLayout.setComponentAlignment(homeLink, Alignment.MIDDLE_LEFT);
+		//topHorizontalLayout.addComponent(homeLink);
+		//topHorizontalLayout.setComponentAlignment(homeLink, Alignment.MIDDLE_LEFT);
 		
 		// Google Button
 		OAuthPopupButton button = new GoogleButton(api.apiKey, api.apiSecret);
@@ -105,12 +99,12 @@ public class MainView extends VerticalLayout implements View {
 		midHorizontalLayout.addComponent(vl2);
 		midHorizontalLayout.addComponent(vl3);
 		midHorizontalLayout.setMargin(true);
-		midHorizontalLayout.setWidth("75%");
-		//midHorizontalLayout.setSpacing(true);
+		midHorizontalLayout.setWidth(null);
+		midHorizontalLayout.setSpacing(true);
 		
 		// layout
 		addComponent(topHorizontalLayout);
-		setComponentAlignment(topHorizontalLayout, Alignment.TOP_CENTER);
+		//setComponentAlignment(topHorizontalLayout, Alignment.TOP_CENTER);
 		appTitle.setWidth(null);
 		addComponent(appTitle);
 		setComponentAlignment(appTitle, Alignment.MIDDLE_CENTER);

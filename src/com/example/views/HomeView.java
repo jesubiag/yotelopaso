@@ -16,9 +16,9 @@ public class HomeView extends VerticalLayout implements View {
 
 	private static final long serialVersionUID = 1L;
 	Panel panel;
-	Window windowNews;
-	Window windowRecentFiles;
-	Window windowRecentEvents;
+	Panel windowNews;
+	Panel windowRecentFiles;
+	Panel windowRecentEvents;
 
 	public HomeView() {
 		
@@ -32,15 +32,19 @@ public class HomeView extends VerticalLayout implements View {
 		Panel menu = new Panel("PEI");
 		menu.setHeight("100%");
 		menu.setWidth(null);
+		Button buttonHome = new Button("Inicio", new ButtonListener("inicio"));
+		Button buttonSubjects = new Button("Materias", new ButtonListener("materias"));
+		Button buttonCalendar = new Button("Mi Calendario", new ButtonListener("calendario"));
+		Button buttonActivity = new Button("Mi Actividad", new ButtonListener("actividad"));
+		buttonHome.setWidth("100%");
+		buttonSubjects.setWidth("100%");
+		buttonCalendar.setWidth(null);
+		buttonActivity.setWidth("100%");
 		VerticalLayout menuContent = new VerticalLayout();
-		menuContent.addComponent(new Button("Inicio",
-				  new ButtonListener("inicio")));
-		menuContent.addComponent(new Button("Materias",
-				  new ButtonListener("materias")));
-		menuContent.addComponent(new Button("Mi Calendario",
-				  new ButtonListener("calendario")));
-		menuContent.addComponent(new Button("Mi Actividad",
-				  new ButtonListener("actividad")));
+		menuContent.addComponent(buttonHome);
+		menuContent.addComponent(buttonSubjects);
+		menuContent.addComponent(buttonCalendar);
+		menuContent.addComponent(buttonActivity);
 		menuContent.setWidth(null);
 		menuContent.setMargin(true);
 		menu.setContent(menuContent);
@@ -54,24 +58,42 @@ public class HomeView extends VerticalLayout implements View {
 		addComponent(hLayout);
 		setExpandRatio(hLayout, 1.0f);
 		
-		//VerticalLayout panelLayout = new VerticalLayout();
-		//panel.setContent(panelLayout);
+		VerticalLayout panelLayout = new VerticalLayout();
+		panelLayout.setSpacing(true);
+		panelLayout.setSizeFull();
+		panelLayout.setMargin(true);
+		panel.setContent(panelLayout);
 		
-		// Windows
-		windowNews = new Window("Novedades");
-		VerticalLayout subContent = new VerticalLayout();
-		subContent.setMargin(true);
-		windowNews.setContent(subContent);
-		windowNews.setClosable(false);
-		windowNews.setDraggable(false);
-		windowNews.setResizable(false);
-		windowNews.setHeight("27%");
-		windowNews.setWidth("89%");
-		windowNews.setPositionX(180);
-		windowNews.setPositionY(120);
+		windowNews = new Panel("Novedades");
+		VerticalLayout subContentNews = new VerticalLayout();
+		subContentNews.setMargin(true);
+		windowNews.setContent(subContentNews);
+		windowNews.setHeight("100%");
+		windowNews.setWidth("100%");
 		// Content should be retrieved from database
-		subContent.addComponent(new Label("Contenido"));
-		UI.getCurrent().addWindow(windowNews);
+		subContentNews.addComponent(new Label("Contenido"));
+		
+		windowRecentFiles = new Panel("Archivos más recientes");
+		VerticalLayout subContentRecentFiles = new VerticalLayout();
+		subContentRecentFiles.setMargin(true);
+		windowRecentFiles.setContent(subContentRecentFiles);
+		windowRecentFiles.setHeight("100%");
+		windowRecentFiles.setWidth("100%");
+		// Content should be retrieved from database
+		subContentRecentFiles.addComponent(new Label("Contenido"));
+		
+		windowRecentEvents = new Panel("Eventos más recientes");
+		VerticalLayout subContentRecentEvents = new VerticalLayout();
+		subContentRecentEvents.setMargin(true);
+		windowRecentEvents.setContent(subContentRecentEvents);
+		windowRecentEvents.setHeight("100%");
+		windowRecentEvents.setWidth("100%");
+		// Content should be retrieved from database
+		subContentRecentEvents.addComponent(new Label("Contenido"));
+		
+		panelLayout.addComponent(windowNews);
+		panelLayout.addComponent(windowRecentFiles);
+		panelLayout.addComponent(windowRecentEvents);
 		
 		// Allow going back to the start
 		Button logout = new Button("Logout",
