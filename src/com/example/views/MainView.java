@@ -13,6 +13,7 @@ import com.vaadin.server.ExternalResource;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
@@ -25,9 +26,11 @@ import com.vaadin.ui.themes.BaseTheme;
 
 public class MainView extends VerticalLayout implements View {
 	
+	private static final long serialVersionUID = 1L;
+	
 	final HorizontalLayout topHorizontalLayout = new HorizontalLayout();
 	Link homeLink = new Link("Home", new ExternalResource("http://localhost:8080/VaadinTest01/"));
-	Label appTitle = new Label("<b>Nombre de la Aplicación</b>");
+	Label appTitle = new Label("<h1><b>Nombre de la Aplicación</b></h1>");
 	Label appDesc = new Label("Descripción de la Aplicacón");
 	final HorizontalLayout midHorizontalLayout = new HorizontalLayout();
 	final VerticalLayout vl1 = new VerticalLayout();
@@ -37,11 +40,11 @@ public class MainView extends VerticalLayout implements View {
 	Image vl2Image = new Image();
 	Image vl3Image = new Image();
 	final ExternalResource vl1ExtRes = new ExternalResource("" +
-			"http://i.imgur.com/VV64GUk.png");
+			"http://i.imgur.com/EInoeTU.png");
 	final ExternalResource vl2ExtRes = new ExternalResource("" +
-			"http://i.imgur.com/8HHQxDA.png");
+			"http://i.imgur.com/EInoeTU.png");
 	final ExternalResource vl3ExtRes = new ExternalResource("" +
-			"http://i.imgur.com/k5qFjSj.png");
+			"http://i.imgur.com/EInoeTU.png");
 	Label vl1Desc = new Label("Lorem ipsum dolor sit amet, consectetur adipiscing " +
 			"elit. Integer in tortor ac velit cursus dictum id non libero. Quisque " +
 			"condimentum iaculis est id varius. In hac habitasse platea dictumst");
@@ -64,8 +67,9 @@ public class MainView extends VerticalLayout implements View {
 		
 		// topHorizontalLayout
 		topHorizontalLayout.setMargin(true);
-		topHorizontalLayout.setSizeFull();
+		topHorizontalLayout.setWidth("100%");
 		topHorizontalLayout.addComponent(homeLink);
+		topHorizontalLayout.setComponentAlignment(homeLink, Alignment.MIDDLE_LEFT);
 		addGoogleButton();
 		
 		// appTitle
@@ -92,12 +96,20 @@ public class MainView extends VerticalLayout implements View {
 		midHorizontalLayout.addComponent(vl2);
 		midHorizontalLayout.addComponent(vl3);
 		midHorizontalLayout.setMargin(true);
+		midHorizontalLayout.setWidth("75%");
+		//midHorizontalLayout.setSpacing(true);
 		
 		// layout
 		addComponent(topHorizontalLayout);
+		setComponentAlignment(topHorizontalLayout, Alignment.TOP_CENTER);
+		appTitle.setWidth(null);
 		addComponent(appTitle);
+		setComponentAlignment(appTitle, Alignment.MIDDLE_CENTER);
 		addComponent(appDesc);
+		appDesc.setWidth(null);
+		setComponentAlignment(appDesc, Alignment.MIDDLE_CENTER);
 		addComponent(midHorizontalLayout);
+		setComponentAlignment(midHorizontalLayout, Alignment.TOP_CENTER);
 		
 	}
 	
@@ -110,34 +122,23 @@ public class MainView extends VerticalLayout implements View {
 		ApiInfo api = GOOGLE_API;
 		OAuthPopupButton button = new GoogleButton(api.apiKey, api.apiSecret);
 		button.setScope("https://www.googleapis.com/auth/drive");
-		addButton(api, button);
-	}
-	
-	private void addButton(final ApiInfo service, OAuthPopupButton button) {
-
-		// In most browsers "resizable" makes the popup
-		// open in a new window, not in a tab.
-		// You can also set size with eg. "resizable,width=400,height=300"
 		button.setPopupWindowFeatures("resizable,width=800,height=600");
 		topHorizontalLayout.addComponent(button);
 		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
-		button.addOAuthListener(new Listener(service, topHorizontalLayout));
+		button.addOAuthListener(new Listener(api));
 	}
 
 	private class Listener implements OAuthListener {
 
 		private final ApiInfo service;
-		private final HorizontalLayout hola;
 
-		private Listener(ApiInfo service, HorizontalLayout hola) {
+		private Listener(ApiInfo service) {
 			this.service = service;
-			this.hola = hola;
 		}
 
 		@Override
 		public void authSuccessful(final String accessToken,
 				final String accessTokenSecret) {
-			hola.addComponent(new Label("Authorized."));
 			getUI().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
 			//getUI().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW + "/");
 			
@@ -145,7 +146,7 @@ public class MainView extends VerticalLayout implements View {
 
 		@Override
 		public void authDenied(String reason) {
-			hola.addComponent(new Label("Auth failed."));
+			//hola.addComponent(new Label("Auth failed."));
 		}
 	}
 
