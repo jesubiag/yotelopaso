@@ -50,5 +50,18 @@
 		
 		<!-- Dawn Theme -->
 		<dependency org="org.peimari" name="dawn" rev="2" />
+		
+		<!-- H2 -->
+		<dependency org="com.h2database" name="h2" rev="1.4.180"/>
+		
+		<!-- EclipseLink -->
+		<dependency org="org.eclipse.persistence" name="org.eclipse.persistence.jpa" rev="2.5.2"/>
+		
+		<!-- JPAContainer -->
+		<dependency org="com.vaadin.addon" name="jpacontainer" rev="3.1.1" />
+		
+		<!-- Hibernate Validator -->
+		<dependency org="org.hibernate" name="hibernate-validator" rev="5.1.1.Final"/>
+		
 	</dependencies>
 </ivy-module>

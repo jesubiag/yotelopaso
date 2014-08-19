@@ -19,6 +19,8 @@ import com.vaadin.ui.VerticalLayout;
 @Push
 public class Vaadintest01UI extends UI {
 	
+	public static final String PERSISTENCE_UNIT = "vaadintest";
+	
 	// UI Components declaration
 	
 	//Navigator
