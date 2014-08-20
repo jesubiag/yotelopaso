@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
@@ -27,13 +28,17 @@ public class User {
 	private String email;
 	
 	@NotNull
-	private Long idCarreer;
+	@OneToOne
+	private Career career;
 	
 	@Min(1) @Max(5)
 	private Integer year;
 	
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
+	
+	@OneToOne
+	PersonalInfo personalinfo;
 	
 
 	public Date getBirthday() {
@@ -66,17 +71,23 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Long getIdCarreer() {
-		return idCarreer;
-	}
-	public void setIdCarreer(Long idCarrera) {
-		this.idCarreer = idCarrera;
-	}
 	public Integer getYear() {
 		return year;
 	}
 	public void setYear(Integer año) {
 		this.year = año;
+	}
+	public PersonalInfo getPersonalinfo() {
+		return personalinfo;
+	}
+	public void setPersonalinfo(PersonalInfo personalinfo) {
+		this.personalinfo = personalinfo;
+	}
+	public Career getCareer() {
+		return career;
+	}
+	public void setCareer(Career career) {
+		this.career = career;
 	}
 
 }

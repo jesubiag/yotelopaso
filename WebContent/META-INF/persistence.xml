@@ -17,7 +17,7 @@
 			<property name="eclipselink.jdbc.platform"
 				value="org.eclipse.persistence.platform.database.H2Platform"/>
 			<property name="eclipselink.jdbc.driver" value="org.h2.Driver" />
-			<property name="eclipselink.jdbc.url" value="jdbc:h2:~/Programas/my-app-h2db"/>
+			<property name="eclipselink.jdbc.url" value="jdbc:h2:../resources/my-app-h2db"/>
 			<property name="eclipselink.jdbc.user" value="sa"/>
 			<property name="eclipselink.jdbc.password" value="sa"/>
 			<property name="eclipselink.logging.level" value="FINE" />
