@@ -50,7 +50,6 @@ public class HomeView extends VerticalLayout implements View {
 		menu.setContent(menuContent);
 		hLayout.addComponent(menu);
 
-		// A panel that contains a content area on right
 		panel = new Panel("Inicio");
 		panel.setSizeFull();
 		hLayout.addComponent(panel);

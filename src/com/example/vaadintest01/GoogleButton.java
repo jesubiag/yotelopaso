@@ -3,7 +3,6 @@ package com.example.vaadintest01;
 import org.scribe.builder.api.Google2Api;
 import org.vaadin.addon.oauthpopup.OAuthPopupButton;
 
-import com.vaadin.server.ClassResource;
 import com.vaadin.ui.themes.BaseTheme;
 
 @SuppressWarnings("serial")

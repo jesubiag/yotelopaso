@@ -1,6 +1,12 @@
 package com.example.views;
 
+import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.GoogleApi;
+import org.scribe.model.OAuthRequest;
+import org.scribe.model.Response;
+import org.scribe.model.Token;
+import org.scribe.model.Verb;
+import org.scribe.oauth.OAuthService;
 import org.vaadin.addon.oauthpopup.OAuthListener;
 import org.vaadin.addon.oauthpopup.OAuthPopupButton;
 
@@ -17,6 +23,7 @@ import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.BaseTheme;
 
 public class MainView extends VerticalLayout implements View {
 	
@@ -50,11 +57,21 @@ public class MainView extends VerticalLayout implements View {
 	Label vl3Desc = new Label("Lorem ipsum dolor sit amet, consectetur adipiscing " +
 			"elit. Integer in tortor ac velit cursus dictum id non libero. Quisque " +
 			"condimentum iaculis est id varius. In hac habitasse platea dictumst");
+	
+//	private static String exampleGetRequest = "https://www.googleapis.com/drive/v2/about?key=";
+	private static String exampleGetRequest = "https://www.googleapis.com/plus/v1/people/me?key=";
+	private static String SCOPE = "https://www.googleapis.com/auth/plus.login";
+	
+	private static String REQ_URL = "https://www.googleapis.com/plus/v1/people/me?key=";
+	
 	private static final ApiInfo GOOGLE_API = new ApiInfo("Google",
 			GoogleApi.class,
 			"398023219009.apps.googleusercontent.com",
 			"WjD6Dq0S5_19dw1KlBreZakL",
-			"https://www.googleapis.com/drive/v2/about?key=");
+			exampleGetRequest);
+//			"https://www.googleapis.com/drive/v2/about?key=");
+			//"https://www.googleapis.com/auth/plus.login");
+			//"https://www.googleapis.com/drive/v2/about?key=");
 	
 	public MainView() {
 		
@@ -69,10 +86,11 @@ public class MainView extends VerticalLayout implements View {
 		
 		// Google Button
 		OAuthPopupButton button = new GoogleButton(api.apiKey, api.apiSecret);
-		button.setScope("https://www.googleapis.com/auth/drive");
+		//button.setScope("https://www.googleapis.com/auth/drive");
+		button.setScope(SCOPE);
 		button.setPopupWindowFeatures("resizable,width=800,height=600");
 		topHorizontalLayout.addComponent(button);
-		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
+		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);button.addStyleName(BaseTheme.BUTTON_LINK);
 		button.addOAuthListener(new Listener(api));
 		
 		// appTitle
@@ -119,7 +137,8 @@ public class MainView extends VerticalLayout implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		// Hacer algo
-	}
+		
+		}
 
 	private class Listener implements OAuthListener {
 
@@ -132,9 +151,24 @@ public class MainView extends VerticalLayout implements View {
 		@Override
 		public void authSuccessful(final String accessToken,
 				final String accessTokenSecret) {
+			
+			OAuthRequest request = new OAuthRequest(Verb.GET, REQ_URL);
+			createOAuthService().signRequest(new Token(accessToken, accessTokenSecret), request);
+			Response resp = request.send();
+			getSession().setAttribute("userId", resp.getBody());
+			
 			getUI().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
 			//getUI().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW + "/");
 			
+		}
+		
+		private OAuthService createOAuthService() {
+			ServiceBuilder sb = new ServiceBuilder();
+			sb.provider(service.scribeApi);
+			sb.apiKey(service.apiKey);
+			sb.apiSecret(service.apiSecret);
+			sb.callback("http://www.google.com");
+			return sb.build();
 		}
 
 		@Override
