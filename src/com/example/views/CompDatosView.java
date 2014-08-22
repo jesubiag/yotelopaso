@@ -65,7 +65,7 @@ public class CompDatosView extends VerticalLayout implements View {
 		HorizontalLayout hciu = new HorizontalLayout();
 		HorizontalLayout hfnac = new HorizontalLayout();
 		HorizontalLayout hbutton = new HorizontalLayout(); 
-		//Basicamente lo que hay hasta aca es una horizontal layout para cada dato, por layout es un label + el lugar donde se carga el dato
+		// Basicamente lo que hay hasta aca es una horizontal layout para cada dato, por layout es un label + el lugar donde se carga el dato
 		hcarr.addComponent(carrera);
 		hcarr.addComponent(carr);
 		haño.addComponent(año);
