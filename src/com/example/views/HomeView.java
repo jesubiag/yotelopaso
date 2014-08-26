@@ -1,8 +1,10 @@
 package com.example.views;
 
+import com.example.utils.UserUtils;
 import com.example.vaadintest01.Vaadintest01UI;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
@@ -10,7 +12,6 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Window;
 
 public class HomeView extends VerticalLayout implements View {
 
@@ -101,7 +102,9 @@ public class HomeView extends VerticalLayout implements View {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				getUI().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
+				// TODO: el cierre de sesión no es limpio, chequearlo 
+				UserUtils.logOff(getSession());
+				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
 			}
 		});
 		
@@ -122,13 +125,29 @@ public class HomeView extends VerticalLayout implements View {
 		@Override
 		public void buttonClick(ClickEvent event) {
 			// Navigate to a specific state
-			getUI().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW + menuitem);
+			UI.getCurrent().access(new Runnable() {
+				@Override
+				public void run() {
+				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW + menuitem);
+				}
+			});
 		}
 	}
 	
 	@Override
 	public void enter(ViewChangeEvent event) {
-		// Hacer algo
+		if (!UserUtils.isLogged(VaadinSession.getCurrent())) {
+			// lo mejor seria que lo haga loguearse en vez de llevarlo a la pagina principal
+			// 
+			UI.getCurrent().access(new Runnable() {
+				@Override
+				public void run() {
+					UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
+				}
+			});
+		} else {
+			// por ahora nada
+		}
 	}
 
 }

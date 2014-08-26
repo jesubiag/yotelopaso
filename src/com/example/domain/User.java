@@ -18,7 +18,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Double id;
 	
 	private String name;
 	
@@ -27,7 +27,7 @@ public class User {
 	@NotNull
 	private String email;
 	
-	@NotNull
+	//@NotNull
 	@OneToOne
 	private Career career;
 	
@@ -47,10 +47,10 @@ public class User {
 	public void setBirthday(Date fechaNacimiento) {
 		this.birthday = fechaNacimiento;
 	}
-	public Long getId() {
+	public Double getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Double id) {
 		this.id = id;
 	}
 	public String getName() {

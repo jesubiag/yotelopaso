@@ -1,4 +1,4 @@
-package com.example.vaadintest01;
+package com.example.utils;
 
 import org.scribe.builder.api.Api;
 

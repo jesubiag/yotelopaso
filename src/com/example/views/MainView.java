@@ -1,5 +1,7 @@
 package com.example.views;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.GoogleApi;
 import org.scribe.model.OAuthRequest;
@@ -10,18 +12,23 @@ import org.scribe.oauth.OAuthService;
 import org.vaadin.addon.oauthpopup.OAuthListener;
 import org.vaadin.addon.oauthpopup.OAuthPopupButton;
 
-import com.example.vaadintest01.ApiInfo;
+import com.example.domain.User;
+import com.example.persistence.UserManager;
+import com.example.utils.ApiInfo;
+import com.example.utils.UserUtils;
 import com.example.vaadintest01.GoogleButton;
 import com.example.vaadintest01.Vaadintest01UI;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.ExternalResource;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Link;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.BaseTheme;
 
@@ -32,7 +39,7 @@ public class MainView extends VerticalLayout implements View {
 	ApiInfo api = GOOGLE_API;
 	
 	final HorizontalLayout topHorizontalLayout = new HorizontalLayout();
-	Link homeLink = new Link("Home", new ExternalResource("http://localhost:8080/VaadinTest01/"));
+	Link homeLink = new Link("Home", new ExternalResource("/VaadinTest01/#!home"));
 	Label appTitle = new Label("<h1><b>Nombre de la Aplicación</b></h1>");
 	Label appDesc = new Label("Descripción de la Aplicacón");
 	final HorizontalLayout midHorizontalLayout = new HorizontalLayout();
@@ -58,20 +65,18 @@ public class MainView extends VerticalLayout implements View {
 			"elit. Integer in tortor ac velit cursus dictum id non libero. Quisque " +
 			"condimentum iaculis est id varius. In hac habitasse platea dictumst");
 	
-//	private static String exampleGetRequest = "https://www.googleapis.com/drive/v2/about?key=";
-	private static String exampleGetRequest = "https://www.googleapis.com/plus/v1/people/me?key=";
-	private static String SCOPE = "https://www.googleapis.com/auth/plus.login";
-	
-	private static String REQ_URL = "https://www.googleapis.com/plus/v1/people/me?key=";
+	private static String exampleGetRequest = "https://www.googleapis.com/drive/v2/about?key=";
+	//private static String exampleGetRequest = "https://www.googleapis.com/plus/v1/people/me?key=";
+	private static String SCOPE = "https://www.googleapis.com/auth/drive";
+	//private static String SCOPE = "https://www.googleapis.com/auth/plus.login";
+	private static String REQ_URL = "https://www.googleapis.com/drive/v2/about?fields=permissionId,name,user/emailAddress";
+	//private static String REQ_URL = "https://www.googleapis.com/plus/v1/people/me?key=";
 	
 	private static final ApiInfo GOOGLE_API = new ApiInfo("Google",
 			GoogleApi.class,
 			"398023219009.apps.googleusercontent.com",
 			"WjD6Dq0S5_19dw1KlBreZakL",
 			exampleGetRequest);
-//			"https://www.googleapis.com/drive/v2/about?key=");
-			//"https://www.googleapis.com/auth/plus.login");
-			//"https://www.googleapis.com/drive/v2/about?key=");
 	
 	public MainView() {
 		
@@ -81,16 +86,32 @@ public class MainView extends VerticalLayout implements View {
 		// topHorizontalLayout
 		topHorizontalLayout.setMargin(true);
 		topHorizontalLayout.setWidth("100%");
-		//topHorizontalLayout.addComponent(homeLink);
-		//topHorizontalLayout.setComponentAlignment(homeLink, Alignment.MIDDLE_LEFT);
+		
+		//if (UserUtils.isLogged(getSession())) {
+//		User currentUser = UserManager.getById((Double) VaadinSession.getCurrent().getAttribute("userId"));
+//		Label button = new Label("Hola " + currentUser.getName());
+//		topHorizontalLayout.addComponent(homeLink);
+//		topHorizontalLayout.setComponentAlignment(homeLink, Alignment.MIDDLE_LEFT);
+//		topHorizontalLayout.addComponent(button);
+//		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
+//	} else {
+//		// Google Button
+//		OAuthPopupButton button = new GoogleButton(api.apiKey, api.apiSecret);
+//		button.setScope(SCOPE);
+//		button.setPopupWindowFeatures("resizable,width=800,height=600");
+//		topHorizontalLayout.addComponent(button);
+//		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
+//		button.addStyleName(BaseTheme.BUTTON_LINK);
+//		button.addOAuthListener(new Listener(api));
+//	}
 		
 		// Google Button
 		OAuthPopupButton button = new GoogleButton(api.apiKey, api.apiSecret);
-		//button.setScope("https://www.googleapis.com/auth/drive");
 		button.setScope(SCOPE);
 		button.setPopupWindowFeatures("resizable,width=800,height=600");
 		topHorizontalLayout.addComponent(button);
-		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);button.addStyleName(BaseTheme.BUTTON_LINK);
+		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
+		button.addStyleName(BaseTheme.BUTTON_LINK);
 		button.addOAuthListener(new Listener(api));
 		
 		// appTitle
@@ -137,8 +158,15 @@ public class MainView extends VerticalLayout implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		// Hacer algo
-		
+		if (UserUtils.isLogged(VaadinSession.getCurrent())) {
+			UI.getCurrent().access(new Runnable() {
+				@Override
+				public void run() {
+					UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
+				}
+			});
 		}
+	}
 
 	private class Listener implements OAuthListener {
 
@@ -152,14 +180,52 @@ public class MainView extends VerticalLayout implements View {
 		public void authSuccessful(final String accessToken,
 				final String accessTokenSecret) {
 			
-			OAuthRequest request = new OAuthRequest(Verb.GET, REQ_URL);
+			/* la url de consulta debe incluir el token y debe tener el siguiente formato
+			 * ej: https://www.googleapis.com/drive/v2/about/?access_token=<accessToken>
+			 */
+			
+			OAuthRequest request = new OAuthRequest(Verb.GET, REQ_URL + "&access_token=" + accessToken);
 			createOAuthService().signRequest(new Token(accessToken, accessTokenSecret), request);
 			Response resp = request.send();
-			getSession().setAttribute("userId", resp.getBody());
 			
-			getUI().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
-			//getUI().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW + "/");
+			// Extraigo los datos del JSON enviado por Google
+			JSONObject jsonGoogle = null;
+			Double userId = null;
+			try {
+				jsonGoogle = new JSONObject(resp.getBody());
+				userId = jsonGoogle.getDouble("permissionId");
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
+			// Chequeo si el usuario está registrado, y dependiendo el caso tomo diferentes acciones
+			if (UserManager.isRegistered(userId)) {
+				VaadinSession.getCurrent().setAttribute("userId", userId);
+				UI.getCurrent().access(new Runnable() {
+					@Override
+					public void run() {
+						UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
+					}
+				});
+			} else {
+				String name = null;
+				String email = null;
+				try {
+					name = jsonGoogle.getString("name");
+					email = jsonGoogle.getJSONObject("user").getString("emailAddress");
+					// persistir los datos nuevos en la base de datos
+					User newUser = new User();
+					newUser.setId(userId);
+					newUser.setName(name);
+					newUser.setEmail(email);
+					UserManager.save(newUser);
+					//getUI().getNavigator().navigateTo(Vaadintest01UI.REGISTERVIEW);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		private OAuthService createOAuthService() {

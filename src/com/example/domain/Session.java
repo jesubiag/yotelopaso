@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,9 +18,10 @@ public class Session {
 	@GeneratedValue
 	private Long id;
 	
-	@NotNull
-	@ManyToOne
-	private Long idUser;
+	@Transient
+	//@NotNull
+	//@ManyToOne
+	private Double idUser;
 	
 	@Temporal(TemporalType.DATE)
 	private Date in;
@@ -35,11 +37,11 @@ public class Session {
 		this.id = id;
 	}
 
-	public Long getIdUser() {
+	public Double getIdUser() {
 		return idUser;
 	}
 
-	public void setIdUser(Long idUser) {
+	public void setIdUser(Double idUser) {
 		this.idUser= idUser;
 	}
 
