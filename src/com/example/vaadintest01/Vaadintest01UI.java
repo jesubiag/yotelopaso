@@ -16,8 +16,8 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-//@Theme("vaadintest01")
-@Theme("dawn")
+@Theme("vaadintest01")
+//@Theme("dawn")
 @Push
 @PreserveOnRefresh
 public class Vaadintest01UI extends UI {

@@ -39,6 +39,7 @@ public class MainView extends VerticalLayout implements View {
 	ApiInfo api = GOOGLE_API;
 	
 	final HorizontalLayout topHorizontalLayout = new HorizontalLayout();
+	Label bienvenida = new Label("<h1><b>BIENVENIDA</b></h1>");
 	Link homeLink = new Link("Home", new ExternalResource("/VaadinTest01/#!home"));
 	Label appTitle = new Label("<h1><b>Nombre de la Aplicación</b></h1>");
 	Label appDesc = new Label("Descripción de la Aplicacón");
@@ -82,33 +83,21 @@ public class MainView extends VerticalLayout implements View {
 		
 		setMargin(true);
 		setSpacing(true);
-		
+		//setSizeFull();
 		// topHorizontalLayout
 		topHorizontalLayout.setMargin(true);
 		topHorizontalLayout.setWidth("100%");
-		
-		//if (UserUtils.isLogged(getSession())) {
-//		User currentUser = UserManager.getById((Double) VaadinSession.getCurrent().getAttribute("userId"));
-//		Label button = new Label("Hola " + currentUser.getName());
-//		topHorizontalLayout.addComponent(homeLink);
-//		topHorizontalLayout.setComponentAlignment(homeLink, Alignment.MIDDLE_LEFT);
-//		topHorizontalLayout.addComponent(button);
-//		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
-//	} else {
-//		// Google Button
-//		OAuthPopupButton button = new GoogleButton(api.apiKey, api.apiSecret);
-//		button.setScope(SCOPE);
-//		button.setPopupWindowFeatures("resizable,width=800,height=600");
-//		topHorizontalLayout.addComponent(button);
-//		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
-//		button.addStyleName(BaseTheme.BUTTON_LINK);
-//		button.addOAuthListener(new Listener(api));
-//	}
+		bienvenida.setContentMode(ContentMode.HTML);
+		addComponent(bienvenida);
+		bienvenida.setId("bien");
+		setComponentAlignment(bienvenida, Alignment.TOP_CENTER);
+	
 		
 		// Google Button
 		OAuthPopupButton button = new GoogleButton(api.apiKey, api.apiSecret);
 		button.setScope(SCOPE);
 		button.setPopupWindowFeatures("resizable,width=800,height=600");
+		button.setId("acceder");
 		topHorizontalLayout.addComponent(button);
 		topHorizontalLayout.setComponentAlignment(button, Alignment.MIDDLE_RIGHT);
 		button.addStyleName(BaseTheme.BUTTON_LINK);
@@ -143,6 +132,7 @@ public class MainView extends VerticalLayout implements View {
 		
 		// layout
 		addComponent(topHorizontalLayout);
+		topHorizontalLayout.setId("layoutAcceder");
 		//setComponentAlignment(topHorizontalLayout, Alignment.TOP_CENTER);
 		appTitle.setWidth(null);
 		addComponent(appTitle);

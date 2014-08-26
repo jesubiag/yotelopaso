@@ -10,3 +10,39 @@
 
   /* Insert your theme rules here */
 }
+
+/*#rober {background:yellow}*/
+.v-horizontal > .v-spacing {
+    width: 50px;
+    background: blue;
+}
+.v-vertical > .v-spacing {
+    height: 30px;
+}
+.v-button-caption {
+  
+}
+#acceder {margin-left: 90%}
+#layoutAcceder{background: green}
+#bien{font-size: 25pt}
+#bien{margin-left: 35%}
+  
+  /* All labels have white text on black background */
+  .v-label {
+    background: light grey;
+    color: black;
+    font-size: 40pt;
+    line-height: 28pt;
+    padding: 5px;
+  }
+
+	
+  /* All buttons have blue caption and some margin */
+  .v-button {
+    margin: 10px;
+
+    /* A nested selector to increase specificity */
+    .v-button-caption {
+      color: blue;
+    }
+  }
