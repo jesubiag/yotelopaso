@@ -103,7 +103,7 @@ public class HomeView extends VerticalLayout implements View {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				// TODO: el cierre de sesión no es limpio, chequearlo 
-				UserUtils.logOff(getSession());
+				UserUtils.logOff(VaadinSession.getCurrent());
 				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
 			}
 		});
@@ -125,12 +125,7 @@ public class HomeView extends VerticalLayout implements View {
 		@Override
 		public void buttonClick(ClickEvent event) {
 			// Navigate to a specific state
-			UI.getCurrent().access(new Runnable() {
-				@Override
-				public void run() {
-				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW + menuitem);
-				}
-			});
+			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW + menuitem);
 		}
 	}
 	
@@ -139,12 +134,7 @@ public class HomeView extends VerticalLayout implements View {
 		if (!UserUtils.isLogged(VaadinSession.getCurrent())) {
 			// lo mejor seria que lo haga loguearse en vez de llevarlo a la pagina principal
 			// 
-			UI.getCurrent().access(new Runnable() {
-				@Override
-				public void run() {
-					UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
-				}
-			});
+			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
 		} else {
 			// por ahora nada
 		}

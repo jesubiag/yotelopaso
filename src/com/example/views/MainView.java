@@ -149,12 +149,7 @@ public class MainView extends VerticalLayout implements View {
 	public void enter(ViewChangeEvent event) {
 		// Hacer algo
 		if (UserUtils.isLogged(VaadinSession.getCurrent())) {
-			UI.getCurrent().access(new Runnable() {
-				@Override
-				public void run() {
-					UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
-				}
-			});
+			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
 		}
 	}
 
@@ -192,12 +187,7 @@ public class MainView extends VerticalLayout implements View {
 			// Chequeo si el usuario está registrado, y dependiendo el caso tomo diferentes acciones
 			if (UserManager.isRegistered(userId)) {
 				VaadinSession.getCurrent().setAttribute("userId", userId);
-				UI.getCurrent().access(new Runnable() {
-					@Override
-					public void run() {
-						UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
-					}
-				});
+				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
 			} else {
 				String name = null;
 				String email = null;
