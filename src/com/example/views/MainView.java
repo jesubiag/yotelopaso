@@ -90,7 +90,7 @@ public class MainView extends VerticalLayout implements View {
 		bienvenida.setContentMode(ContentMode.HTML);
 		addComponent(bienvenida);
 		bienvenida.setId("bien");
-		setComponentAlignment(bienvenida, Alignment.TOP_CENTER);
+		//setComponentAlignment(bienvenida, Alignment.TOP_CENTER);
 	
 		
 		// Google Button
