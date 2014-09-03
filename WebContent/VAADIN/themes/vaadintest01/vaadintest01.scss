@@ -1,54 +1,53 @@
 /* Import the reindeer theme.*/
 /* This only allows us to use the mixins defined in it and does not add any styles by itself. */
-@import "../chameleon/chameleon.scss";
+@import "../valo/valo.scss";
 
 /* This contains all of your theme.*/
 /* If somebody wants to extend the theme she will include this mixin. */
 @mixin vaadintest01 {
-  /* Include all the styles from the reindeer theme */
-  @include chameleon;
+	@include valo; 
 
-  /* Insert your theme rules here */
+	/* Insert your theme rules here */
 }
 
+.v-ui {
+	
+}
 /*#rober {background:yellow}*/
 .v-horizontal > .v-spacing {
-    width: 50px;
-    background: blue;
+	width: 50px;
+	background: blue;
+	
 }
 .v-vertical > .v-spacing {
-    height: 30px;
+	height: 30px;
 }
 .v-button-caption {
-  
 }
+
 /*#acceder {margin-left: 90%}*/
-#acceder {text-align: right}
-#layoutAcceder{background: #75507b}
-#bien{	
-	font-size: 50pt !important; 
-	text-align: center
+
+#acceder {
+	text-align: right;
+}
+
+#layoutAcceder {
+	background: #75507b;
 	}
 	
-Label.addStyleName("big");
-  
-  /* All labels have white text on black background */
-  .v-label {
-    background: white;
-    color: black;
-    font-family: Cursive;
-    font-size: 40pt;
-    line-height: 28pt;
-    padding: 3px;
-  }
-
+#bien {	
+	/*font-size: 50pt !important;*/ 
+	text-align: center;
+}
 	
-  /* All buttons have blue caption and some margin */
-  .v-button {
-    /*margin: 10px;
+.v-label {
+	/*background: white;
+	color: black;
+	/*font-size: 40pt;
+	line-height: 28pt;*/
+	padding: 3px;
+}
 
-    /* A nested selector to increase specificity */
-    .v-button-caption {
-      color: blue;
-    }
-  }
+.v-button {
+	margin: 10px;
+}
