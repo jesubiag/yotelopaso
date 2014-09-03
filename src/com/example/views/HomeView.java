@@ -2,8 +2,6 @@ package com.example.views;
 
 import com.example.utils.UserUtils;
 import com.example.vaadintest01.Vaadintest01UI;
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -13,7 +11,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 
-public class HomeView extends VerticalLayout implements View {
+public class HomeView extends AuthView {
 
 	private static final long serialVersionUID = 1L;
 	Panel panel;
@@ -129,15 +127,4 @@ public class HomeView extends VerticalLayout implements View {
 		}
 	}
 	
-	@Override
-	public void enter(ViewChangeEvent event) {
-		if (!UserUtils.isLogged(VaadinSession.getCurrent())) {
-			// lo mejor seria que lo haga loguearse en vez de llevarlo a la pagina principal
-			// 
-			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
-		} else {
-			// por ahora nada
-		}
-	}
-
 }
