@@ -10,8 +10,6 @@ import com.vaadin.ui.VerticalLayout;
 
 /**Vista abstracta que comprueba automáticamente si el usuario esta autentificado.
  * Redirige al usuario a la página principal en caso de no estarlo.
- * 
- * @author Jesus Biaggioni
  */
 
 public class AuthView extends VerticalLayout implements View {
@@ -21,7 +19,7 @@ public class AuthView extends VerticalLayout implements View {
 	public void enter(ViewChangeEvent event) {
 		if (!UserUtils.isLogged(VaadinSession.getCurrent())) {
 			// Lo mejor seria que lo haga loguearse en vez de llevarlo a la pagina principal.
-			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
+			//UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
 		} else {
 			// Por ahora nada.
 		}

@@ -14,6 +14,7 @@
 	
 }
 /*#rober {background:yellow}*/
+
 .v-horizontal > .v-spacing {
 	width: 50px;
 	background: blue;
@@ -50,4 +51,46 @@
 
 .v-button {
 	margin: 10px;
+}
+
+.v-link-panelLink {
+	/*direction: ltr;*/
+	border-left-width: 10pt;
+	border-left-style: groove;
+	color: #FAFAFA !important;
+	font-weight: bold !important;
+	text-decoration: none !important;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.v-link-panelLink .v-icon {
+	font-size: 48pt;
+	display: block;
+	text-align: center;
+}
+
+.v-panel-content { 
+}
+
+#menu-panel {
+	background: url('http://api.thumbr.it/whitenoise-361x370.png?background=3d3d3dff&noise=6e6e6e&density=34&opacity=17');
+}
+
+#buttonHome {
+	border-left-color: yellow;
+	a:hover {
+	}
+}
+
+#buttonSubjects {
+	border-left-color: blue;
+}
+
+#buttonCalendar {
+	border-left-color: green;
+}
+
+#buttonActivity {
+	border-left-color: red;
 }

@@ -2,9 +2,13 @@ package com.example.views;
 
 import com.example.utils.UserUtils;
 import com.example.vaadintest01.Vaadintest01UI;
+import com.vaadin.server.ExternalResource;
+import com.vaadin.server.FontAwesome;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Link;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -29,23 +33,36 @@ public class HomeView extends AuthView {
 
 		// Have a menu on the left side of the screen
 		Panel menu = new Panel("PEI");
+		menu.setId("menu-panel");
 		menu.setHeight("100%");
-		menu.setWidth(null);
-		Button buttonHome = new Button("Inicio", new ButtonListener("inicio"));
-		Button buttonSubjects = new Button("Materias", new ButtonListener("materias"));
-		Button buttonCalendar = new Button("Mi Calendario", new ButtonListener("calendario"));
-		Button buttonActivity = new Button("Mi Actividad", new ButtonListener("actividad"));
+		menu.setWidth("182px");
+		Link buttonHome = new Link("Inicio", new ExternalResource(""));
+		Link buttonSubjects = new Link("Materias", new ExternalResource(""));
+		Link buttonCalendar = new Link("Mi Calendario", new ExternalResource(""));
+		Link buttonActivity = new Link("Mi Actividad", new ExternalResource(""));
+		buttonHome.setId("buttonHome");
 		buttonHome.setWidth("100%");
+		buttonHome.setIcon(FontAwesome.HOME);
+		buttonHome.addStyleName("panelLink");
+		buttonSubjects.setId("buttonSubjects");
 		buttonSubjects.setWidth("100%");
-		buttonCalendar.setWidth(null);
+		buttonSubjects.setIcon(FontAwesome.BOOK);
+		buttonSubjects.addStyleName("panelLink");
+		buttonCalendar.setId("buttonCalendar");
+		buttonCalendar.setWidth("100%");
+		buttonCalendar.setIcon(FontAwesome.CALENDAR);
+		buttonCalendar.addStyleName("panelLink");
+		buttonActivity.setId("buttonActivity");
 		buttonActivity.setWidth("100%");
+		buttonActivity.setIcon(FontAwesome.CLOCK_O);
+		buttonActivity.addStyleName("panelLink");
 		VerticalLayout menuContent = new VerticalLayout();
 		menuContent.addComponent(buttonHome);
 		menuContent.addComponent(buttonSubjects);
 		menuContent.addComponent(buttonCalendar);
 		menuContent.addComponent(buttonActivity);
-		menuContent.setWidth(null);
-		menuContent.setMargin(true);
+		menuContent.setWidth("100%");
+		menuContent.setMargin(false);
 		menu.setContent(menuContent);
 		hLayout.addComponent(menu);
 
@@ -100,9 +117,9 @@ public class HomeView extends AuthView {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				// TODO: el cierre de sesión no es limpio, chequearlo 
-				UserUtils.logOff(VaadinSession.getCurrent());
+				// TODO: el cierre de sesión no es limpio, chequearlo
 				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
+				UserUtils.logOff(VaadinSession.getCurrent());
 			}
 		});
 		

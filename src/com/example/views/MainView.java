@@ -81,7 +81,6 @@ public class MainView extends VerticalLayout implements View {
 	
 	public MainView() {
 		
-		setMargin(true);
 		setSpacing(true);
 		//setSizeFull();
 		// topHorizontalLayout
