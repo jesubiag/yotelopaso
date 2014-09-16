@@ -49,24 +49,28 @@
 	padding: 3px;
 }
 
-.v-button {
-	margin: 10px;
+div.v-slot-panelLink .v-button:after {
+	border: none;
 }
 
-.v-link-panelLink {
-	/*direction: ltr;*/
-	border-left-width: 10pt;
-	border-left-style: groove;
-	color: #FAFAFA !important;
-	font-weight: bold !important;
-	text-decoration: none !important;
+div.v-slot-panelLink .v-button-link:hover {
+	color: #CECDD2;
+}
+
+div.v-slot-panelLink .panelLink {
+	border-left-width: 3pt;
+	border-left-style: solid;
+	color: #FAFAFA;
+	font-weight: bold;
+	text-decoration: none;
 	text-transform: uppercase;
+	border-radius: 0px;
 	text-align: center;
 }
 
-.v-link-panelLink .v-icon {
+.panelLink .v-icon {
 	font-size: 48pt;
-	display: block;
+	/*display: block;*/
 	text-align: center;
 }
 
@@ -79,8 +83,8 @@
 
 #buttonHome {
 	border-left-color: yellow;
-	a:hover {
-	}
+	/*a:hover {
+	}*/
 }
 
 #buttonSubjects {
