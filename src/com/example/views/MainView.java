@@ -39,10 +39,10 @@ public class MainView extends VerticalLayout implements View {
 	ApiInfo api = GOOGLE_API;
 	
 	final HorizontalLayout topHorizontalLayout = new HorizontalLayout();
-	Label bienvenida = new Label("<h1><b>BIENVENIDA</b></h1>");
+	Label bienvenida = new Label("<h1><b>Plataforma Estudiantil Integrada</b></h1>");
 	Link homeLink = new Link("Home", new ExternalResource("/VaadinTest01/#!home"));
-	Label appTitle = new Label("<h1><b>Nombre de la Aplicación</b></h1>");
-	Label appDesc = new Label("Descripción de la Aplicacón");
+	/*Label appTitle = new Label("<h1><b></b></h1>");*/
+	Label appDesc = new Label("Todo lo que necesitas en un solo lugar");
 	final HorizontalLayout midHorizontalLayout = new HorizontalLayout();
 	final VerticalLayout vl1 = new VerticalLayout();
 	final VerticalLayout vl2 = new VerticalLayout();
@@ -51,20 +51,20 @@ public class MainView extends VerticalLayout implements View {
 	Image vl2Image = new Image();
 	Image vl3Image = new Image();
 	final ExternalResource vl1ExtRes = new ExternalResource("" +
-			"http://i.imgur.com/EInoeTU.png");
+			"https://photos-2.dropbox.com/t/0/AAC38UuCYEDpILSRtn32J7deoXxnohV3YetmOWL3wLnptQ/12/70181720/png/320x320/1/_/0/4/pensar.png/fczf4dxwglk62k9/AADIIgM_Wr6YdMQSKo6Im-U5a/pensar.png");
 	final ExternalResource vl2ExtRes = new ExternalResource("" +
-			"http://i.imgur.com/EInoeTU.png");
+			"https://photos-2.dropbox.com/t/0/AABSf7Csxwx5WhpiIfcuYX955AL5oSTwtapxQY2wY0GySQ/12/70181720/png/1024x768/3/1410991200/0/2/Google_Calendar_Logo-282x300.png/JSFjdWzr9UN7emmL4qCS5K-fJV9wmPPOgu9uW3_F7J4");
 	final ExternalResource vl3ExtRes = new ExternalResource("" +
-			"http://i.imgur.com/EInoeTU.png");
-	Label vl1Desc = new Label("Lorem ipsum dolor sit amet, consectetur adipiscing " +
-			"elit. Integer in tortor ac velit cursus dictum id non libero. Quisque " +
-			"condimentum iaculis est id varius. In hac habitasse platea dictumst");
-	Label vl2Desc = new Label("Lorem ipsum dolor sit amet, consectetur adipiscing " +
-			"elit. Integer in tortor ac velit cursus dictum id non libero. Quisque " +
-			"condimentum iaculis est id varius. In hac habitasse platea dictumst");
-	Label vl3Desc = new Label("Lorem ipsum dolor sit amet, consectetur adipiscing " +
-			"elit. Integer in tortor ac velit cursus dictum id non libero. Quisque " +
-			"condimentum iaculis est id varius. In hac habitasse platea dictumst");
+			"https://photos-2.dropbox.com/t/0/AACG4QB8Hn3woZR6FwQfPUEeD6rS0gZs7cKMZptCPEO-7Q/12/70181720/jpeg/320x320/1/_/0/4/share.jpg/qsqj9w14vk0gzgx/AACoukyHvrIkDr4KrLLcqeK-a/share.jpg");
+	Label vl1Desc = new Label("La aplicacion que te ayuda a estudiar" +
+			"" +
+			"");
+	Label vl2Desc = new Label("Sincroniza tu Google Calendar con tus eventos de la Facultad" +
+			"" +
+			"");
+	Label vl3Desc = new Label("Es tiempo de compartir! " +
+			" " +
+			"");
 	
 	private static String exampleGetRequest = "https://www.googleapis.com/drive/v2/about?key=";
 	//private static String exampleGetRequest = "https://www.googleapis.com/plus/v1/people/me?key=";
@@ -103,7 +103,7 @@ public class MainView extends VerticalLayout implements View {
 		button.addOAuthListener(new Listener(api));
 		
 		// appTitle
-		appTitle.setContentMode(ContentMode.HTML);
+		//appTitle.setContentMode(ContentMode.HTML);
 		
 		// Images
 		vl1Image.setSource(vl1ExtRes);
@@ -113,13 +113,19 @@ public class MainView extends VerticalLayout implements View {
 		// mid vertical layouts
 		vl1.setWidth("200px");
 		vl1.addComponent(vl1Image);
+		vl1Image.setWidth("200px");
+		vl1Image.setHeight("200px");
 		vl1.addComponent(vl1Desc);
-		vl2.setWidth("200px");
 		vl2.addComponent(vl2Image);
+		vl2.setWidth("200px");
+		vl2Image.setHeight("200px");
+		vl2Image.setWidth("200px");
 		vl2.addComponent(vl2Desc);
 		vl3.setWidth("200px");
 		vl3.addComponent(vl3Image);
 		vl3.addComponent(vl3Desc);
+		vl3Image.setWidth("200px");
+		vl3Image.setHeight("200px");
 		
 		// midHorizontalLayout
 		midHorizontalLayout.addComponent(vl1);
@@ -133,9 +139,9 @@ public class MainView extends VerticalLayout implements View {
 		addComponent(topHorizontalLayout);
 		topHorizontalLayout.setId("layoutAcceder");
 		//setComponentAlignment(topHorizontalLayout, Alignment.TOP_CENTER);
-		appTitle.setWidth(null);
-		addComponent(appTitle);
-		setComponentAlignment(appTitle, Alignment.MIDDLE_CENTER);
+		//appTitle.setWidth(null);
+		//addComponent(appTitle);
+		//setComponentAlignment(appTitle, Alignment.MIDDLE_CENTER);
 		addComponent(appDesc);
 		appDesc.setWidth(null);
 		setComponentAlignment(appDesc, Alignment.MIDDLE_CENTER);
