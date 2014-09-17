@@ -2,20 +2,21 @@ package com.example.views.templates;
 
 import com.example.utils.UserUtils;
 import com.example.vaadintest01.Vaadintest01UI;
-import com.example.views.templates.AuthView;
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class AbstractHomeView extends AuthView {
 
 	private static final long serialVersionUID = 1L;
+	private VerticalLayout rightLayout;
 	private HorizontalLayout hLayout;
 
 	public AbstractHomeView() {
@@ -25,6 +26,10 @@ public class AbstractHomeView extends AuthView {
 		// Layout with menu on left and view area on right
 		hLayout = new HorizontalLayout();
 		hLayout.setSizeFull();
+		
+		// Empty layout on right
+		rightLayout = new VerticalLayout();
+		rightLayout.setSizeFull();
 
 		// Have a menu on the left side of the screen
 		Panel menu = new Panel("PEI");
@@ -61,9 +66,11 @@ public class AbstractHomeView extends AuthView {
 		menu.setContent(menuContent);
 		hLayout.addComponent(menu);
 		
+		hLayout.addComponent(rightLayout);
 		
 		addComponent(hLayout);
 		setExpandRatio(hLayout, 1.0f);
+		hLayout.setExpandRatio(rightLayout, 1.0f);
 		
 		// Allow going back to the start
 		Button logout = new Button("Logout",
@@ -80,6 +87,12 @@ public class AbstractHomeView extends AuthView {
 		
 		addComponent(logout);
 
+	}
+	
+	public void enter(ViewChangeEvent event) {
+		super.enter(event);
+		
+		getRightLayout().removeAllComponents();
 	}
 	
 	class ButtonListener implements Button.ClickListener {
@@ -99,12 +112,13 @@ public class AbstractHomeView extends AuthView {
 		}
 	}
 
-	public HorizontalLayout gethLayout() {
-		return hLayout;
+	public VerticalLayout getRightLayout() {
+		return rightLayout;
 	}
 
-	public void sethLayout(HorizontalLayout hLayout) {
-		this.hLayout = hLayout;
+	public void setRightLayout(VerticalLayout rightLayout) {
+		this.rightLayout = rightLayout;
 	}
+
 	
 }

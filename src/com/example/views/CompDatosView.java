@@ -19,9 +19,6 @@ import com.vaadin.ui.UI;
 
 public class CompDatosView extends AbstractHomeView implements View {
 
-	Panel panel;
-
-
 	
 	private static final long serialVersionUID = 1L;
 
@@ -33,9 +30,14 @@ public class CompDatosView extends AbstractHomeView implements View {
 		//Primero vamos a crear un form que es donde el usuario va a cargar los datos y luego se va a crear el panel
 		//en donde se va a colocar el form
 		FormLayout form = new FormLayout();
-		 form.addStyleName("Menu");
-		 form.setSizeFull();
-		 form.setSpacing(true);
+		form.addStyleName("Menu");
+		form.setSizeFull();
+		form.setSpacing(true);
+		
+		getRightLayout().addComponent(form);
+		getRightLayout().setExpandRatio(form, 1.0f);
+
+		
 		Button aceptar = new Button("Aceptar",
 				new Button.ClickListener() {
 				private static final long serialVersionUID = 1L;
@@ -109,14 +111,6 @@ public class CompDatosView extends AbstractHomeView implements View {
 		botones.addComponent(cancelar);
 		
 		form.addComponent(botones);
-
-		
-		panel = new Panel("Complete sus datos por favor");
-		panel.setContent(form);
-		panel.setSizeFull();
-		gethLayout().addComponent(panel);
-		gethLayout().setExpandRatio(panel, 1.0f);
-		
 
 	}
 	
