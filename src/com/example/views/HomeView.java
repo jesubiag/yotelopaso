@@ -9,10 +9,10 @@ import com.vaadin.ui.VerticalLayout;
 public class HomeView extends AbstractHomeView {
 
 	private static final long serialVersionUID = 1L;
-	Panel panel;
-	Panel windowNews;
-	Panel windowRecentFiles;
-	Panel windowRecentEvents;
+	private Panel panel;
+	private Panel windowNews;
+	private Panel windowRecentFiles;
+	private Panel windowRecentEvents;
 
 	public HomeView() {
 		
@@ -23,8 +23,8 @@ public class HomeView extends AbstractHomeView {
 		
 		panel = new Panel("Inicio");
 		panel.setSizeFull();
-		gethLayout().addComponent(panel);
-		gethLayout().setExpandRatio(panel, 1.0f);
+		getRightLayout().addComponent(panel);
+		getRightLayout().setExpandRatio(panel, 1.0f);
 		
 		VerticalLayout panelLayout = new VerticalLayout();
 		panelLayout.setSpacing(true);
