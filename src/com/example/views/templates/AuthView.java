@@ -1,4 +1,4 @@
-package com.example.views;
+package com.example.views.templates;
 
 import com.example.utils.UserUtils;
 import com.example.vaadintest01.Vaadintest01UI;
