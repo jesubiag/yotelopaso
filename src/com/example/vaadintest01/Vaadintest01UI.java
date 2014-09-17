@@ -33,7 +33,7 @@ public class Vaadintest01UI extends UI {
 	Navigator nav;
 	public static final String MAINVIEW = "";
 	public static final String HOMEVIEW = "home";
-	public static final String REGISTERVIEW = "register/tuvieja";
+	public static final String REGISTERVIEW = "register";
 	
 	final VerticalLayout layout = new VerticalLayout();
 
