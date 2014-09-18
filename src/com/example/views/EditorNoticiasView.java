@@ -43,7 +43,7 @@ public class EditorNoticiasView extends AbstractHomeView implements View {
        	cuerpo.setValue("Complete el contenido de la noticia");
        	cuerpo.setImmediate(true);
         cuerpo.setSizeFull();
-        cuerpo.setCaption("Cuerpo de la Noticia");
+        cuerpo.setCaption("Descripción de la Noticia");
         
         
 		Button aceptar = new Button("Aceptar",
@@ -76,7 +76,7 @@ public class EditorNoticiasView extends AbstractHomeView implements View {
 		fecha.setValue(new Date());
 		fecha.setEnabled(false);
 		
-		TextField titulo = new TextField("Titulo");
+		TextField titulo = new TextField("Título");
 		titulo.setRequired(true);
 		titulo.setRequiredError("Obligatorio");
 		
