@@ -111,6 +111,12 @@ public class CompDatosView extends AbstractHomeView implements View {
 		botones.addComponent(cancelar);
 		
 		form.addComponent(botones);
+		
+		Panel panel = new Panel("Complete sus datos por favor");
+		panel.setSizeFull();
+		panel.setContent(form);
+		getRightLayout().addComponent(panel);
+		getRightLayout().setExpandRatio(panel, 1.0f);
 
 	}
 	
