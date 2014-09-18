@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import com.example.domain.User;
 import com.example.persistence.UserManager;
 import com.example.views.CompDatosView;
+import com.example.views.EditorNoticiasView;
 import com.example.views.HomeView;
 import com.example.views.MainView;
 import com.vaadin.annotations.PreserveOnRefresh;
@@ -34,6 +35,7 @@ public class Vaadintest01UI extends UI {
 	public static final String MAINVIEW = "";
 	public static final String HOMEVIEW = "home";
 	public static final String REGISTERVIEW = "register";
+	public static final String EDITORVIEW = "editornoticias";
 	
 	final VerticalLayout layout = new VerticalLayout();
 
@@ -61,6 +63,7 @@ public class Vaadintest01UI extends UI {
 		nav.addView(MAINVIEW, new MainView());
 		nav.addView(HOMEVIEW, new HomeView());
 		nav.addView(REGISTERVIEW, new CompDatosView());
+		nav.addView(EDITORVIEW, new EditorNoticiasView());
 		nav.navigateTo(MAINVIEW);
 		
 	}
