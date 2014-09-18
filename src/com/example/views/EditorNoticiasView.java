@@ -1,7 +1,6 @@
 package com.example.views;
 
 import java.util.Date;
-
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.example.vaadintest01.Vaadintest01UI;
@@ -45,7 +44,6 @@ public class EditorNoticiasView extends AbstractHomeView implements View {
         cuerpo.setSizeFull();
         cuerpo.setCaption("Descripción de la Noticia");
         
-        
 		Button aceptar = new Button("Aceptar",
 				new Button.ClickListener() {
 				private static final long serialVersionUID = 1L;
@@ -66,24 +64,28 @@ public class EditorNoticiasView extends AbstractHomeView implements View {
 	}); //Lo mismo que el anterior pero para volver al Main
 		
 		ComboBox mat = new ComboBox("Materia");
+		mat.setWidth("25%");
 		mat.addItems("Algebra","Análisis Matematico","Ingenieria y Sociedad","Matematica Discreta");
 		mat.setNullSelectionAllowed(false);
 		mat.setTextInputAllowed(false);
 		mat.setRequired(true);
 		mat.setRequiredError("Obligatorio");
 		
-		DateField fecha = new DateField("Fecha de publicacion");
+		DateField fecha = new DateField("Fecha de publicación");
 		fecha.setValue(new Date());
 		fecha.setEnabled(false);
+		fecha.addStyleName("borderless");
 		
 		TextField titulo = new TextField("Título");
+		titulo.setMaxLength(50);
+		titulo.setWidth("60%");
 		titulo.setRequired(true);
 		titulo.setRequiredError("Obligatorio");
 		
 		form.addComponent(titulo);
 		form.addComponent(mat);
-		form.addComponent(cuerpo);
 		form.addComponent(fecha);
+		form.addComponent(cuerpo);
 		
 		HorizontalLayout botones= new HorizontalLayout();
 		botones.addComponent(aceptar);
