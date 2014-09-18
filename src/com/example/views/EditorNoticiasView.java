@@ -65,7 +65,7 @@ public class EditorNoticiasView extends AbstractHomeView implements View {
 		}
 	}); //Lo mismo que el anterior pero para volver al Main
 		
-		ComboBox mat = new ComboBox("Carrera");
+		ComboBox mat = new ComboBox("Materia");
 		mat.addItems("Algebra","Análisis Matematico","Ingenieria y Sociedad","Matematica Discreta");
 		mat.setNullSelectionAllowed(false);
 		mat.setTextInputAllowed(false);
