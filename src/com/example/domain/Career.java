@@ -9,15 +9,15 @@ public class Career {
 	//Poblar tabla con los valores acorde a cada id y nombre
 	
 	@Id
-	private Long id;
+	private Integer id;
 	
 	private String name;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

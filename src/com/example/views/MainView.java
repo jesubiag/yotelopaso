@@ -36,8 +36,8 @@ public class MainView extends VerticalLayout implements View {
 	
 	private static final long serialVersionUID = 1L;
 	
+	UserManager userManager = new UserManager();
 	ApiInfo api = GOOGLE_API;
-	
 	final HorizontalLayout topHorizontalLayout = new HorizontalLayout();
 	Label bienvenida = new Label("<h1><b>Plataforma Estudiantil Integrada</b></h1>");
 	Link homeLink = new Link("Home", new ExternalResource("/VaadinTest01/#!home"));
@@ -190,7 +190,7 @@ public class MainView extends VerticalLayout implements View {
 			}
 			
 			// Chequeo si el usuario está registrado, y dependiendo el caso tomo diferentes acciones
-			if (UserManager.isRegistered(userId)) {
+			if (userManager.isRegistered(userId)) {
 				VaadinSession.getCurrent().setAttribute("userId", userId);
 				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
 			} else {
@@ -204,7 +204,7 @@ public class MainView extends VerticalLayout implements View {
 					newUser.setId(userId);
 					newUser.setName(name);
 					newUser.setEmail(email);
-					UserManager.save(newUser);
+					userManager.save(newUser);
 					//getUI().getNavigator().navigateTo(Vaadintest01UI.REGISTERVIEW);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block

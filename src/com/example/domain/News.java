@@ -19,7 +19,7 @@ public class News {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	
-	private Long idCarreer;
+	private Long idCareer;
 	
 	private String subject;
 	
@@ -38,10 +38,10 @@ public class News {
 		this.date = fecha;
 	}
 	public Long getIdCarreer() {
-		return idCarreer;
+		return idCareer;
 	}
 	public void setIdCarreer(Long carrera) {
-		this.idCarreer = carrera;
+		this.idCareer = carrera;
 	}
 	public String getSubject() {
 		return subject;

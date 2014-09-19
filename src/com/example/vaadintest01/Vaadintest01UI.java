@@ -4,10 +4,12 @@ import javax.servlet.annotation.WebServlet;
 
 import com.example.domain.User;
 import com.example.persistence.UserManager;
+import com.example.utils.DataInitializer;
 import com.example.views.CompDatosView;
 import com.example.views.EditorNoticiasView;
 import com.example.views.HomeView;
 import com.example.views.MainView;
+import com.example.views.SubjectsView;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
@@ -36,6 +38,7 @@ public class Vaadintest01UI extends UI {
 	public static final String HOMEVIEW = "home";
 	public static final String REGISTERVIEW = "register";
 	public static final String EDITORVIEW = "editornoticias";
+	public static final String SUBJECTSVIEW = "materias";
 	
 	final VerticalLayout layout = new VerticalLayout();
 
@@ -49,12 +52,7 @@ public class Vaadintest01UI extends UI {
 	protected void init(VaadinRequest request) {
 		
 		// datos de prueba
-		User user1 = new User();
-		user1.setId(13122717217802891560D);
-		user1.setName("Jesus");
-		user1.setLastName("Biaggioni");
-		user1.setEmail("jesu772@gmail.com");
-		UserManager.save(user1);
+		DataInitializer.populateTables();
 		//System.out.println(UserManager.isRegistered(user1.getId() - 456000000D));
 		
 		//getSession().setAttribute("userId", 0D);
@@ -64,6 +62,7 @@ public class Vaadintest01UI extends UI {
 		nav.addView(HOMEVIEW, new HomeView());
 		nav.addView(REGISTERVIEW, new CompDatosView());
 		nav.addView(EDITORVIEW, new EditorNoticiasView());
+		nav.addView(SUBJECTSVIEW, new SubjectsView());
 		nav.navigateTo(MAINVIEW);
 		
 	}

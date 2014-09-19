@@ -40,22 +40,30 @@ public class AbstractHomeView extends AuthView {
 		Button buttonSubjects = new Button("Materias");
 		Button buttonCalendar = new Button("Mi Calendario");
 		Button buttonActivity = new Button("Mi Actividad");
-		buttonHome.setId("buttonHome");
+		String buttonStyles = ValoTheme.BUTTON_LINK + " " + ValoTheme.BUTTON_ICON_ALIGN_TOP + " " + "panelLink";
+				buttonHome.setId("buttonHome");
 		buttonHome.setWidth("100%");
 		buttonHome.setIcon(FontAwesome.HOME);
-		buttonHome.addStyleName(ValoTheme.BUTTON_LINK + " " + ValoTheme.BUTTON_ICON_ALIGN_TOP + " " + "panelLink");
+		buttonHome.addStyleName(buttonStyles);
 		buttonSubjects.setId("buttonSubjects");
 		buttonSubjects.setWidth("100%");
 		buttonSubjects.setIcon(FontAwesome.BOOK);
-		buttonSubjects.addStyleName(ValoTheme.BUTTON_LINK + " " + ValoTheme.BUTTON_ICON_ALIGN_TOP + " " + "panelLink");
+		buttonSubjects.addStyleName(buttonStyles);
+		buttonSubjects.addClickListener(new Button.ClickListener() {
+			private static final long serialVersionUID = 1L;
+			@Override
+			public void buttonClick(ClickEvent event) {
+				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.SUBJECTSVIEW);
+			}
+		});
 		buttonCalendar.setId("buttonCalendar");
 		buttonCalendar.setWidth("100%");
 		buttonCalendar.setIcon(FontAwesome.CALENDAR);
-		buttonCalendar.addStyleName(ValoTheme.BUTTON_LINK + " " + ValoTheme.BUTTON_ICON_ALIGN_TOP + " " + "panelLink");
+		buttonCalendar.addStyleName(buttonStyles);
 		buttonActivity.setId("buttonActivity");
 		buttonActivity.setWidth("100%");
 		buttonActivity.setIcon(FontAwesome.CLOCK_O);
-		buttonActivity.addStyleName(ValoTheme.BUTTON_LINK + " " + ValoTheme.BUTTON_ICON_ALIGN_TOP + " " + "panelLink");
+		buttonActivity.addStyleName(buttonStyles);
 		VerticalLayout menuContent = new VerticalLayout();
 		menuContent.addComponent(buttonHome);
 		menuContent.addComponent(buttonSubjects);
@@ -89,6 +97,7 @@ public class AbstractHomeView extends AuthView {
 
 	}
 	
+	@Override
 	public void enter(ViewChangeEvent event) {
 		super.enter(event);
 		

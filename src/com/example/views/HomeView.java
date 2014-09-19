@@ -18,6 +18,7 @@ public class HomeView extends AbstractHomeView {
 		
 	}
 	
+	@Override
 	public void enter(ViewChangeEvent event) {
 		super.enter(event);
 		
