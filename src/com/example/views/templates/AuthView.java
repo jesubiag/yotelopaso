@@ -1,5 +1,6 @@
 package com.example.views.templates;
 
+import com.example.domain.User;
 import com.example.utils.UserUtils;
 import com.example.vaadintest01.Vaadintest01UI;
 import com.vaadin.navigator.View;
@@ -14,6 +15,8 @@ import com.vaadin.ui.VerticalLayout;
 
 public class AuthView extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
+	
+	private User currentUser;
 
 	@Override
 	public void enter(ViewChangeEvent event) {
@@ -23,6 +26,14 @@ public class AuthView extends VerticalLayout implements View {
 		} else {
 			// Por ahora nada.
 		}
+	}
+
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
 	}
 
 }

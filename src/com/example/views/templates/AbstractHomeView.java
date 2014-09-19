@@ -1,5 +1,6 @@
 package com.example.views.templates;
 
+import com.example.domain.User;
 import com.example.utils.UserUtils;
 import com.example.vaadintest01.Vaadintest01UI;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -14,10 +15,14 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class AbstractHomeView extends AuthView {
-
+	
 	private static final long serialVersionUID = 1L;
 	private VerticalLayout rightLayout;
 	private HorizontalLayout hLayout;
+	private Button buttonHome;
+	private Button buttonSubjects;
+	private Button buttonCalendar;
+	private Button buttonActivity;
 
 	public AbstractHomeView() {
 		
@@ -36,12 +41,12 @@ public class AbstractHomeView extends AuthView {
 		menu.setId("menu-panel");
 		menu.setHeight("100%");
 		menu.setWidth("182px");
-		Button buttonHome = new Button("Inicio");
-		Button buttonSubjects = new Button("Materias");
-		Button buttonCalendar = new Button("Mi Calendario");
-		Button buttonActivity = new Button("Mi Actividad");
+		buttonHome = new Button("Inicio");
+		buttonSubjects = new Button("Materias");
+		buttonCalendar = new Button("Mi Calendario");
+		buttonActivity = new Button("Mi Actividad");
 		String buttonStyles = ValoTheme.BUTTON_LINK + " " + ValoTheme.BUTTON_ICON_ALIGN_TOP + " " + "panelLink";
-				buttonHome.setId("buttonHome");
+		buttonHome.setId("buttonHome");
 		buttonHome.setWidth("100%");
 		buttonHome.setIcon(FontAwesome.HOME);
 		buttonHome.addStyleName(buttonStyles);
@@ -127,6 +132,38 @@ public class AbstractHomeView extends AuthView {
 
 	public void setRightLayout(VerticalLayout rightLayout) {
 		this.rightLayout = rightLayout;
+	}
+
+	public Button getButtonHome() {
+		return buttonHome;
+	}
+
+	public void setButtonHome(Button buttonHome) {
+		this.buttonHome = buttonHome;
+	}
+
+	public Button getButtonSubjects() {
+		return buttonSubjects;
+	}
+
+	public void setButtonSubjects(Button buttonSubjects) {
+		this.buttonSubjects = buttonSubjects;
+	}
+
+	public Button getButtonCalendar() {
+		return buttonCalendar;
+	}
+
+	public void setButtonCalendar(Button buttonCalendar) {
+		this.buttonCalendar = buttonCalendar;
+	}
+
+	public Button getButtonActivity() {
+		return buttonActivity;
+	}
+
+	public void setButtonActivity(Button buttonActivity) {
+		this.buttonActivity = buttonActivity;
 	}
 
 	

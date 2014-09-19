@@ -205,7 +205,7 @@ public class MainView extends VerticalLayout implements View {
 					newUser.setName(name);
 					newUser.setEmail(email);
 					userManager.save(newUser);
-					//getUI().getNavigator().navigateTo(Vaadintest01UI.REGISTERVIEW);
+					getUI().getNavigator().navigateTo(Vaadintest01UI.REGISTERVIEW);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

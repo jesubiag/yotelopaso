@@ -15,7 +15,6 @@ public class HomeView extends AbstractHomeView {
 	private Panel windowRecentEvents;
 
 	public HomeView() {
-		
 	}
 	
 	@Override
