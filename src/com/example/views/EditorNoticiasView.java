@@ -50,7 +50,7 @@ public class EditorNoticiasView extends AbstractHomeView implements View {
 
 		//@Override
 		public void buttonClick(ClickEvent event) {
-			getUI().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
+			getUI().getNavigator().navigateTo(Vaadintest01UI.HOME_VIEW);
 		}
 	}); //Aca se crea el boton aceptar que te envia a la Home
 		Button cancelar = new Button("Cancelar",
@@ -59,7 +59,7 @@ public class EditorNoticiasView extends AbstractHomeView implements View {
 
 		//@Override
 		public void buttonClick(ClickEvent event) {
-			getUI().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
+			getUI().getNavigator().navigateTo(Vaadintest01UI.MAIN_VIEW);
 		}
 	}); //Lo mismo que el anterior pero para volver al Main
 		
@@ -108,13 +108,13 @@ public class EditorNoticiasView extends AbstractHomeView implements View {
 		
 		public ButtonListener(String menuitem) {
 			//this.menuitem = menuitem;
-			this.menuitem = Vaadintest01UI.HOMEVIEW;
+			this.menuitem = Vaadintest01UI.HOME_VIEW;
 		}
 
 		@Override
 		public void buttonClick(ClickEvent event) {
 			// Navigate to a specific state
-			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW + menuitem);
+			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAIN_VIEW + menuitem);
 		}
 	}
 		

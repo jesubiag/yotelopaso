@@ -1,5 +1,8 @@
 package com.example.views;
 
+import com.example.domain.Career;
+import com.example.domain.User;
+import com.example.views.components.LastNews;
 import com.example.views.templates.AbstractHomeView;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Label;
@@ -35,11 +38,17 @@ public class HomeView extends AbstractHomeView {
 		windowNews = new Panel("Novedades");
 		VerticalLayout subContentNews = new VerticalLayout();
 		subContentNews.setMargin(true);
-		windowNews.setContent(subContentNews);
+		//windowNews.setContent(subContentNews);
+		User cu = getCurrentUser();
+		Career c = cu.getCareer();
+		String cn = c.getName();
+		LastNews ln = new LastNews(cn);
+		windowNews.setContent(ln);
 		windowNews.setHeight("100%");
 		windowNews.setWidth("100%");
 		// Content should be retrieved from database
-		subContentNews.addComponent(new Label("Contenido"));
+		//LastNews contentNews = new LastNews(getCurrentUser().getCareer().getName());
+		//subContentNews.addComponent(contentNews);
 		
 		windowRecentFiles = new Panel("Archivos más recientes");
 		VerticalLayout subContentRecentFiles = new VerticalLayout();

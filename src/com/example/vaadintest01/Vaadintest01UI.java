@@ -1,9 +1,11 @@
 package com.example.vaadintest01;
 
+import java.util.List;
+
 import javax.servlet.annotation.WebServlet;
 
-import com.example.domain.User;
-import com.example.persistence.UserManager;
+import com.example.domain.News;
+import com.example.persistence.NewsManager;
 import com.example.utils.DataInitializer;
 import com.example.views.CompDatosView;
 import com.example.views.EditorNoticiasView;
@@ -34,11 +36,11 @@ public class Vaadintest01UI extends UI {
 	
 	//Navigator
 	Navigator nav;
-	public static final String MAINVIEW = "";
-	public static final String HOMEVIEW = "home";
-	public static final String REGISTERVIEW = "register";
+	public static final String MAIN_VIEW = "";
+	public static final String HOME_VIEW = "home";
+	public static final String REGISTER_VIEW = "register";
 	public static final String EDITORVIEW = "editornoticias";
-	public static final String SUBJECTSVIEW = "materias";
+	public static final String SUBJECTS_VIEW = "materias";
 	
 	final VerticalLayout layout = new VerticalLayout();
 
@@ -57,13 +59,14 @@ public class Vaadintest01UI extends UI {
 		
 		//getSession().setAttribute("userId", 0D);
 		
+		
 		nav = new Navigator(this, this);
-		nav.addView(MAINVIEW, new MainView());
-		nav.addView(HOMEVIEW, new HomeView());
-		nav.addView(REGISTERVIEW, new CompDatosView());
+		nav.addView(MAIN_VIEW, new MainView());
+		nav.addView(HOME_VIEW, new HomeView());
+		nav.addView(REGISTER_VIEW, new CompDatosView());
 		nav.addView(EDITORVIEW, new EditorNoticiasView());
-		nav.addView(SUBJECTSVIEW, new SubjectsView());
-		nav.navigateTo(MAINVIEW);
+		nav.addView(SUBJECTS_VIEW, new SubjectsView());
+		nav.navigateTo(MAIN_VIEW);
 		
 	}
 

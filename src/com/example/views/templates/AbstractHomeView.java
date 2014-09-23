@@ -58,7 +58,7 @@ public class AbstractHomeView extends AuthView {
 			private static final long serialVersionUID = 1L;
 			@Override
 			public void buttonClick(ClickEvent event) {
-				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.SUBJECTSVIEW);
+				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW);
 			}
 		});
 		buttonCalendar.setId("buttonCalendar");
@@ -93,7 +93,7 @@ public class AbstractHomeView extends AuthView {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				// TODO: el cierre de sesión no es limpio, chequearlo
-				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW);
+				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAIN_VIEW);
 				UserUtils.logOff(VaadinSession.getCurrent());
 			}
 		});
@@ -116,13 +116,13 @@ public class AbstractHomeView extends AuthView {
 		
 		public ButtonListener(String menuitem) {
 			//this.menuitem = menuitem;
-			this.menuitem = Vaadintest01UI.HOMEVIEW;
+			this.menuitem = Vaadintest01UI.HOME_VIEW;
 		}
 
 		@Override
 		public void buttonClick(ClickEvent event) {
 			// Navigate to a specific state
-			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAINVIEW + menuitem);
+			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAIN_VIEW + menuitem);
 		}
 	}
 

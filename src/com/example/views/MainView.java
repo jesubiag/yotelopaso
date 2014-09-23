@@ -37,6 +37,7 @@ public class MainView extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 	
 	UserManager userManager = new UserManager();
+	private User currentUser;
 	ApiInfo api = GOOGLE_API;
 	final HorizontalLayout topHorizontalLayout = new HorizontalLayout();
 	Label bienvenida = new Label("<h1><b>Plataforma Estudiantil Integrada</b></h1>");
@@ -154,7 +155,7 @@ public class MainView extends VerticalLayout implements View {
 	public void enter(ViewChangeEvent event) {
 		// Hacer algo
 		if (UserUtils.isLogged(VaadinSession.getCurrent())) {
-			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
+			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOME_VIEW);
 		}
 	}
 
@@ -192,7 +193,9 @@ public class MainView extends VerticalLayout implements View {
 			// Chequeo si el usuario está registrado, y dependiendo el caso tomo diferentes acciones
 			if (userManager.isRegistered(userId)) {
 				VaadinSession.getCurrent().setAttribute("userId", userId);
-				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOMEVIEW);
+				setCurrentUser(userManager.getById(userId));
+				VaadinSession.getCurrent().setAttribute("currentUser", getCurrentUser());
+				UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOME_VIEW);
 			} else {
 				String name = null;
 				String email = null;
@@ -204,8 +207,10 @@ public class MainView extends VerticalLayout implements View {
 					newUser.setId(userId);
 					newUser.setName(name);
 					newUser.setEmail(email);
+					setCurrentUser(newUser);
 					userManager.save(newUser);
-					getUI().getNavigator().navigateTo(Vaadintest01UI.REGISTERVIEW);
+					VaadinSession.getCurrent().setAttribute("currentUser", getCurrentUser());
+					getUI().getNavigator().navigateTo(Vaadintest01UI.REGISTER_VIEW);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -226,6 +231,14 @@ public class MainView extends VerticalLayout implements View {
 		public void authDenied(String reason) {
 			//hola.addComponent(new Label("Auth failed."));
 		}
+	}
+
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
 	}
 
 }
