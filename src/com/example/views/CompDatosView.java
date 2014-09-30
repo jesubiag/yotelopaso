@@ -37,7 +37,7 @@ public class CompDatosView extends AbstractHomeViewImpl implements View {
 	public void enter(ViewChangeEvent event){
 		super.enter(event);
 		
-		
+		//
 		//Primero vamos a crear un form que es donde el usuario va a cargar los datos y luego se va a crear el panel
 		//en donde se va a colocar el form
 		FormLayout form = new FormLayout();
