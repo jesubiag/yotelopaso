@@ -6,6 +6,7 @@ import com.example.domain.User;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.data.Container.Filter;
 import com.vaadin.data.util.filter.Compare;
+import com.vaadin.server.VaadinSession;
 
 public class UserManager extends DataManager<User> {
 	
@@ -27,6 +28,10 @@ public class UserManager extends DataManager<User> {
 			return true;
 		}
 		
+	}
+	
+	public User getCurrentUser() {
+		return (User) VaadinSession.getCurrent().getAttribute("currentUser");
 	}
 
 }

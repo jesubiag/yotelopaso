@@ -4,7 +4,7 @@ import java.util.Date;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.example.vaadintest01.Vaadintest01UI;
-import com.example.views.templates.AbstractHomeView;
+import com.example.views.templates.AbstractHomeViewImpl;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.ComboBox;
@@ -16,7 +16,7 @@ import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 
-public class EditorNoticiasView extends AbstractHomeView implements View {
+public class EditorNoticiasView extends AbstractHomeViewImpl implements View {
 
 	Panel panel;
 	

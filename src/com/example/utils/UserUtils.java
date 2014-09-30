@@ -4,9 +4,8 @@ import com.vaadin.server.VaadinSession;
 
 public class UserUtils {
 	
-	public static boolean isLogged(VaadinSession session) {
-		if (VaadinSession.getCurrent().getAttribute("userId") == (Double) 0D ||
-				VaadinSession.getCurrent().getAttribute("userId") == null) {
+	public static boolean isLogged(Double userId) {
+		if (userId == (Double) 0D || userId == null) {
 			return false;
 		} else {
 			return true;

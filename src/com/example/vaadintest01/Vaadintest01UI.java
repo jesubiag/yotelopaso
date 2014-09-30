@@ -1,17 +1,18 @@
 package com.example.vaadintest01;
 
-import java.util.List;
-
 import javax.servlet.annotation.WebServlet;
 
-import com.example.domain.News;
 import com.example.persistence.NewsManager;
+import com.example.persistence.UserManager;
+import com.example.presenters.HomePresenter;
+import com.example.presenters.MainPresenter;
+import com.example.presenters.SubjectsPresenter;
 import com.example.utils.DataInitializer;
 import com.example.views.CompDatosView;
 import com.example.views.EditorNoticiasView;
-import com.example.views.HomeView;
-import com.example.views.MainView;
-import com.example.views.SubjectsView;
+import com.example.views.implementations.HomeViewImpl;
+import com.example.views.implementations.MainViewImpl;
+import com.example.views.implementations.SubjectsViewImpl;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
@@ -23,7 +24,6 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @Theme("vaadintest01")
-//@Theme("dawn")
 @Push
 @PreserveOnRefresh
 public class Vaadintest01UI extends UI {
@@ -53,21 +53,35 @@ public class Vaadintest01UI extends UI {
 	@Override
 	protected void init(VaadinRequest request) {
 		
-		// datos de prueba
+		// Datos de prueba
 		DataInitializer.populateTables();
-		//System.out.println(UserManager.isRegistered(user1.getId() - 456000000D));
 		
 		//getSession().setAttribute("userId", 0D);
 		
-		
 		nav = new Navigator(this, this);
-		nav.addView(MAIN_VIEW, new MainView());
-		nav.addView(HOME_VIEW, new HomeView());
+		
+		// Managers
+		UserManager userManager = new UserManager();
+		NewsManager newsManager = new NewsManager();
+		
+		// Views
+		MainViewImpl mainView = new MainViewImpl();
+		HomeViewImpl homeView = new HomeViewImpl();
+		SubjectsViewImpl subjectsView = new SubjectsViewImpl();
+		
+		// Navigator
+		nav.addView(MAIN_VIEW, mainView);
+		nav.addView(HOME_VIEW, homeView);
+		nav.addView(SUBJECTS_VIEW, subjectsView);
 		nav.addView(REGISTER_VIEW, new CompDatosView());
 		nav.addView(EDITORVIEW, new EditorNoticiasView());
-		nav.addView(SUBJECTS_VIEW, new SubjectsView());
-		nav.navigateTo(MAIN_VIEW);
 		
+		// Presenters
+		new MainPresenter(mainView);
+		new HomePresenter(homeView, userManager);
+		new SubjectsPresenter(subjectsView, userManager, newsManager);
+		
+		nav.navigateTo(MAIN_VIEW);
 	}
 
 }

@@ -20,7 +20,7 @@ public class AuthView extends VerticalLayout implements View {
 
 	@Override
 	public void enter(ViewChangeEvent event) {
-		if (!UserUtils.isLogged(VaadinSession.getCurrent())) {
+		if (!UserUtils.isLogged((Double) VaadinSession.getCurrent().getAttribute("userId"))) {
 			// Lo mejor seria que lo haga loguearse en vez de llevarlo a la pagina principal.
 			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAIN_VIEW);
 		} else {

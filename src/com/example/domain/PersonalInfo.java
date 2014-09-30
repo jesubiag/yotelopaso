@@ -15,7 +15,7 @@ public class PersonalInfo {
 	
 	private String city;
 	
-	private Integer phone;
+	private Long phone;
 	
 	private Image avatar;
 
@@ -35,11 +35,11 @@ public class PersonalInfo {
 		this.city = city;
 	}
 
-	public Integer getPhone() {
+	public Long getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(Long phone) {
 		this.phone = phone;
 	}
 
