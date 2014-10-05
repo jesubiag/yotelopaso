@@ -38,7 +38,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 	final ExternalResource vl1ExtRes = new ExternalResource("" +
 			"https://photos-2.dropbox.com/t/0/AAC38UuCYEDpILSRtn32J7deoXxnohV3YetmOWL3wLnptQ/12/70181720/png/320x320/1/_/0/4/pensar.png/fczf4dxwglk62k9/AADIIgM_Wr6YdMQSKo6Im-U5a/pensar.png");
 	final ExternalResource vl2ExtRes = new ExternalResource("" +
-			"https://photos-2.dropbox.com/t/0/AABSf7Csxwx5WhpiIfcuYX955AL5oSTwtapxQY2wY0GySQ/12/70181720/png/1024x768/3/1410991200/0/2/Google_Calendar_Logo-282x300.png");
+			"https://photos-1.dropbox.com/t/1/AADHw9zyHQ-sOyMewr6ke6YaHVSxnvaaCg4LYdb55gj_kQ/12/70181720/jpeg/1024x768/3/1412557200/0/2/calendario.jpeg/SwFwKNEr3W4woh8Wc-Xs9xcwTxcax1e4FLfobbD8cuk");
 	final ExternalResource vl3ExtRes = new ExternalResource("" +
 			"https://photos-2.dropbox.com/t/0/AACG4QB8Hn3woZR6FwQfPUEeD6rS0gZs7cKMZptCPEO-7Q/12/70181720/jpeg/320x320/1/_/0/4/share.jpg/qsqj9w14vk0gzgx/AACoukyHvrIkDr4KrLLcqeK-a/share.jpg");
 	Label vl1Desc = new Label("La aplicacion que te ayuda a estudiar");
@@ -92,8 +92,11 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 		
 		// midHorizontalLayout
 		midHorizontalLayout.addComponent(vl1);
+		vl1.setId("vl1");
 		midHorizontalLayout.addComponent(vl2);
+		vl2.setId("vl2");
 		midHorizontalLayout.addComponent(vl3);
+		vl3.setId("vl3");
 		midHorizontalLayout.setMargin(true);
 		midHorizontalLayout.setWidth(null);
 		midHorizontalLayout.setSpacing(true);
