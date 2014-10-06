@@ -45,7 +45,7 @@ public class Google2ButtonListener implements OAuthListener {
 		 * ej: https://www.googleapis.com/drive/v2/about/?access_token=<accessToken>
 		 */
 		
-		OAuthRequest request = new OAuthRequest(Verb.GET, REQ_URL + "&access_token=" + accessToken);
+		OAuthRequest request = new OAuthRequest(Verb.GET, REQ_URL + "&access_token=" + accessToken + "&state=1");
 		createOAuthService().signRequest(new Token(accessToken, accessTokenSecret), request);
 		Response resp = request.send();
 		
@@ -92,7 +92,7 @@ public class Google2ButtonListener implements OAuthListener {
 		sb.provider(service.scribeApi);
 		sb.apiKey(service.apiKey);
 		sb.apiSecret(service.apiSecret);
-		sb.callback("http://www.google.com");
+		sb.callback("urn:ietf:wg:oauth:2.0:oob");
 		return sb.build();
 	}
 

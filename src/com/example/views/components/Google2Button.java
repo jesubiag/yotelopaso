@@ -6,6 +6,7 @@ import org.vaadin.addon.oauthpopup.OAuthPopupButton;
 import com.example.presenters.Google2ButtonListener;
 import com.example.utils.Google2ApiInfo;
 
+
 @SuppressWarnings("serial")
 public class Google2Button extends OAuthPopupButton {
 

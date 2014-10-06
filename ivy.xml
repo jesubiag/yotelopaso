@@ -40,9 +40,6 @@
 		<!-- Compiler for custom widget sets. Should not be deployed -->
 		<dependency org="com.vaadin" name="vaadin-client-compiler"
 			rev="&vaadin.version;" conf="widgetset-compile->default" />
-			
-		<!-- OAuth Popup Add-on -->
-		<dependency org="org.vaadin.addon" name="oauthpopup" rev="0.0.3" />
 
 		<!-- Server Push -->
 		<dependency org="com.vaadin" name="vaadin-push"
@@ -60,8 +57,14 @@
 		<!-- Hibernate Validator -->
 		<dependency org="org.hibernate" name="hibernate-validator" rev="5.1.1.Final"/>
 		
+		<!-- Scribe -->
+		<dependency org="org.scribe" name="scribe" rev="1.3.5"/>
+		
 		<!-- JSON in Java -->
 		<dependency org="org.json" name="json" rev="20140107"/>
+		
+		<!-- JUnit -->
+		<dependency org="junit" name="junit" rev="4.11"/>
 		
 	</dependencies>
 </ivy-module>
