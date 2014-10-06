@@ -18,4 +18,16 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		view.addListener(this);
 	}
 
+	@Override
+	public void componentAttachedToContainer(String caption) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void buttonClick(String caption) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

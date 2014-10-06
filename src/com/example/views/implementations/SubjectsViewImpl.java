@@ -3,35 +3,41 @@ package com.example.views.implementations;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.persistence.SubjectManager;
 import com.example.views.SubjectsView;
 import com.example.views.templates.AbstractHomeViewImpl;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.HasComponents.ComponentAttachListener;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Link;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.Table;
+import com.vaadin.ui.VerticalLayout;
 
-public class SubjectsViewImpl extends AbstractHomeViewImpl implements SubjectsView {
+public class SubjectsViewImpl extends AbstractHomeViewImpl implements SubjectsView, ComponentAttachListener, ClickListener {
 
 	private static final long serialVersionUID = 1L;
-	private SubjectManager subjectMngr;
+	
+	private Label userCareerName;
 	
 	public void enter(ViewChangeEvent event) {
 		
 		super.enter(event);
 		
-		subjectMngr = new SubjectManager();
+		final VerticalLayout mainLayout = new VerticalLayout();
+		mainLayout.setSizeFull();
+		mainLayout.setMargin(true);
 		
-		//Button b = new Button("Hola", this);
-		
-		Table subsTable = new Table("Materias a lo negro", subjectMngr.getContainer());
-		subsTable.setSizeFull();
-		
-		Panel panel = new Panel("Materias");
+		final Panel panel = new Panel("Materias");
 		panel.setSizeFull();
-		panel.setContent(subsTable);;
+		panel.setContent(mainLayout);
 		
 		getRightLayout().addComponent(panel);
+		
+		userCareerName = new Label();
+		getRightLayout().addComponentAttachListener(this);
+		
+		getRightLayout().addComponent(new SubjectsByYearImpl("Ingeniería en Sistemas", 4));
 	}
 	
 	List<SubjectsViewListener> listeners = new ArrayList<SubjectsViewListener>();
@@ -39,6 +45,17 @@ public class SubjectsViewImpl extends AbstractHomeViewImpl implements SubjectsVi
 	@Override
 	public void addListener(SubjectsViewListener listener) {
 		listeners.add(listener);
+	}
+
+	@Override
+	public void componentAttachedToContainer(ComponentAttachEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void buttonClick(ClickEvent event) {
+		super.buttonClick(event);
 	}
 
 }
