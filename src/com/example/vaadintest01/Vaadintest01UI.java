@@ -51,7 +51,7 @@ public class Vaadintest01UI extends UI {
 	protected void init(VaadinRequest request) {
 		
 		// Datos de prueba
-		//DataInitializer.populateTables();
+		DataInitializer.populateTables();
 		
 		//getSession().setAttribute("userId", 0D);
 		
