@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,8 +9,10 @@ import javax.persistence.Id;
 import com.vaadin.ui.Image;
 
 @Entity
-public class PersonalInfo {
+public class PersonalInfo implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private Long idUsuario;
@@ -18,6 +22,21 @@ public class PersonalInfo {
 	private Long phone;
 	
 	private Image avatar;
+	
+	public PersonalInfo() {}
+
+	/**
+	 * @param idUsuario
+	 * @param city
+	 * @param phone
+	 * @param avatar
+	 */
+	public PersonalInfo(Long idUsuario, String city, Long phone, Image avatar) {
+		this.idUsuario = idUsuario;
+		this.city = city;
+		this.phone = phone;
+		this.avatar = avatar;
+	}
 
 	public Long getIdUsuario() {
 		return idUsuario;

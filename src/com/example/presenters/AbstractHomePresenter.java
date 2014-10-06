@@ -19,7 +19,7 @@ public class AbstractHomePresenter<T extends AbstractHomeView> implements Abstra
 	}
 
 	@Override
-	public void buttonClick(String caption) {
+	public void panelButtonClick(String caption) {
 		Navigator navigator = UI.getCurrent().getNavigator();
 		switch (caption) {
 		case "Inicio":

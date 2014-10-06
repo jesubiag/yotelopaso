@@ -6,21 +6,26 @@
 		http://java.sun.com/xml/ns/persistence
 		http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
-	<persistence-unit name="vaadintest">
+	<persistence-unit name="vaadintest" transaction-type="RESOURCE_LOCAL">
 		<provider>
 			org.eclipse.persistence.jpa.PersistenceProvider
 		</provider>
-		<exclude-unlisted-classes>
-			false
-		</exclude-unlisted-classes>
+		<class>com.example.domain.Algo</class>
+		<class>com.example.domain.Career</class>
+		<class>com.example.domain.News</class>
+		<class>com.example.domain.PersonalInfo</class>
+		<class>com.example.domain.Session</class>
+		<class>com.example.domain.Subject</class>
+		<class>com.example.domain.User</class>
 		<properties>
 			<property name="eclipselink.jdbc.platform"
 				value="org.eclipse.persistence.platform.database.H2Platform"/>
-			<property name="eclipselink.jdbc.driver" value="org.h2.Driver" />
-			<property name="eclipselink.jdbc.url" value="jdbc:h2:./my-app-h2db"/>
-			<property name="eclipselink.jdbc.user" value="sa"/>
-			<property name="eclipselink.jdbc.password" value="sa"/>
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:./my-app-h2db"/>
+			<property name="javax.persistence.jdbc.user" value="sa"/>
+			<property name="javax.persistence.jdbc.password" value="sa"/>
 			<property name="eclipselink.logging.level" value="FINE" />
+			<!-- <property name="eclipselink.ddl-generation" value="create-or-extend-tables" /> -->
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
 			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
 		</properties>

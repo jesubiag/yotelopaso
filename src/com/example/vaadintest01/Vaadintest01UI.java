@@ -21,7 +21,6 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
 @Theme("vaadintest01")
 @Push
@@ -32,18 +31,16 @@ public class Vaadintest01UI extends UI {
 
 	public static final String PERSISTENCE_UNIT = "vaadintest";
 	
-	// UI Components declaration
-	
 	//Navigator
-	Navigator nav;
+	protected Navigator nav;
+	
+	// Nombres de las vistas de la aplicación
 	public static final String MAIN_VIEW = "";
 	public static final String HOME_VIEW = "home";
 	public static final String REGISTER_VIEW = "register";
 	public static final String EDITORVIEW = "editornoticias";
 	public static final String SUBJECTS_VIEW = "materias";
 	
-	final VerticalLayout layout = new VerticalLayout();
-
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = Vaadintest01UI.class)
 	public static class Servlet extends VaadinServlet {
@@ -54,7 +51,7 @@ public class Vaadintest01UI extends UI {
 	protected void init(VaadinRequest request) {
 		
 		// Datos de prueba
-		DataInitializer.populateTables();
+		//DataInitializer.populateTables();
 		
 		//getSession().setAttribute("userId", 0D);
 		
@@ -64,23 +61,24 @@ public class Vaadintest01UI extends UI {
 		UserManager userManager = new UserManager();
 		NewsManager newsManager = new NewsManager();
 		
-		// Views
+		// Vistas
 		MainViewImpl mainView = new MainViewImpl();
 		HomeViewImpl homeView = new HomeViewImpl();
 		SubjectsViewImpl subjectsView = new SubjectsViewImpl();
 		
-		// Navigator
+		// Agrego las vistas al navigator
 		nav.addView(MAIN_VIEW, mainView);
 		nav.addView(HOME_VIEW, homeView);
 		nav.addView(SUBJECTS_VIEW, subjectsView);
 		nav.addView(REGISTER_VIEW, new CompDatosView());
 		nav.addView(EDITORVIEW, new EditorNoticiasView());
 		
-		// Presenters
+		// Presenters con sus vistas y managers asociados
 		new MainPresenter(mainView);
 		new HomePresenter(homeView, userManager);
 		new SubjectsPresenter(subjectsView, userManager, newsManager);
 		
+		// Navego a la vista principal
 		nav.navigateTo(MAIN_VIEW);
 	}
 

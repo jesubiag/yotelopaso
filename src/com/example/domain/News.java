@@ -1,5 +1,6 @@
 package com.example.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,8 +11,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class News {
+public class News implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -27,6 +30,22 @@ public class News {
 	
 	private String content;
 	
+	public News() {}
+	
+	/**
+	 * @param date
+	 * @param career
+	 * @param subject
+	 * @param content
+	 */
+	public News(Date date, Career career, Subject subject,
+			String content) {
+		this.date = date;
+		this.career = career;
+		this.subject = subject;
+		this.content = content;
+	}
+
 	public Long getId() {
 		return id;
 	}

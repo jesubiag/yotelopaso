@@ -17,7 +17,7 @@ public class AuthView extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 	
 	private User currentUser;
-
+	
 	@Override
 	public void enter(ViewChangeEvent event) {
 		if (!UserUtils.isLogged((Double) VaadinSession.getCurrent().getAttribute("userId"))) {

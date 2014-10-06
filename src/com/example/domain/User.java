@@ -1,10 +1,9 @@
 package com.example.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -14,10 +13,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class User {
+public class User implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Double id;
 	
 	private String name;
@@ -40,6 +40,31 @@ public class User {
 	@OneToOne
 	PersonalInfo personalinfo;
 	
+	public User() {}
+
+	/**
+	 * @param id
+	 * @param name
+	 * @param lastName
+	 * @param email
+	 * @param career
+	 * @param year
+	 * @param birthday
+	 * @param personalinfo
+	 */
+	public User(Double id, String name, String lastName, String email,
+			Career career, Integer year, Date birthday,
+			PersonalInfo personalinfo) {
+		this.id = id;
+		this.name = name;
+		this.lastName = lastName;
+		this.email = email;
+		this.career = career;
+		this.year = year;
+		this.birthday = birthday;
+		this.personalinfo = personalinfo;
+	}
+
 
 	public Date getBirthday() {
 		return birthday;

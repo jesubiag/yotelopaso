@@ -96,7 +96,7 @@ public class AbstractHomeViewImpl extends AuthView implements AbstractHomeView, 
 	@Override
 	public void buttonClick(ClickEvent event) {
 		for (AbstractHomeViewListener listener : listeners) {
-			listener.buttonClick(event.getButton().getCaption());
+			listener.panelButtonClick(event.getButton().getCaption());
 		}
 	}
 	
