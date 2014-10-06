@@ -1,9 +1,11 @@
 package com.example.persistence;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.example.domain.Subject;
@@ -12,12 +14,24 @@ import com.example.utils.DataInitializer;
 public class SubjectManagerTest {
 	
 	SubjectManager sm = new SubjectManager();
+	
+	@Before
+	public void setUp() {
+		DataInitializer.populateTables();
+	}
+	
 
 	@Test
 	public void test() {
-		DataInitializer.populateTables();
 		List<Subject> l = sm.getByProperty("year", 2);
 		assertTrue("l no es nulo", !l.isEmpty());
+	}
+	
+	@Test
+	public void otherTest() {
+		sm.filterByCareerAndYear("Ingeniería en Sistemas", 3);
+		Subject s = sm.getByProperty("name", "Comunicaciones").get(0);
+		assertNotNull(s);
 	}
 
 }
