@@ -7,7 +7,7 @@ public interface HomeView extends AbstractHomeView {
 	public void setLastNews(LastNews lastNews);
 	
 	interface HomeViewListener extends AbstractHomeViewListener {
-		public void componentAttachedToContainer(String caption);
+		public void addWindowsNewsContent(String caption);
 	}
 	
 	public void addListener(HomeViewListener listener);
