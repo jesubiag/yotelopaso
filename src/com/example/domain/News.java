@@ -28,6 +28,8 @@ public class News implements Serializable {
 	@ManyToOne
 	private Subject subject;
 	
+	private String title;
+	
 	private String content;
 	
 	public News() {}
@@ -38,9 +40,10 @@ public class News implements Serializable {
 	 * @param subject
 	 * @param content
 	 */
-	public News(Date date, Career career, Subject subject,
+	public News(Date date, Career career, Subject subject, String title,
 			String content) {
 		this.date = date;
+		this.title = title;
 		this.career = career;
 		this.subject = subject;
 		this.content = content;
@@ -57,6 +60,12 @@ public class News implements Serializable {
 	}
 	public void setDate(Date fecha) {
 		this.date = fecha;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String titulo) {
+		this.title = titulo;
 	}
 	public String getContent() {
 		return content;
