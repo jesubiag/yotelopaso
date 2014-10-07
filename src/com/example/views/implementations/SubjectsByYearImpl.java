@@ -13,21 +13,23 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-public class SubjectsByYearImpl extends CustomComponent implements SubjectsByYear, ClickListener {
+public class SubjectsByYearImpl extends CustomComponent implements SubjectsByYear {
 
 	private static final long serialVersionUID = 1L;
 	
 	private VerticalLayout mainLayout;
 	private VerticalLayout contentLayout;
 	private String careerName;
+	private ClickListener parentView;
 	private int year;
 	private Label title;
 	private SubjectsByYearPresenter presenter;
 
-	public SubjectsByYearImpl(final String careerName, final int year) {
+	public SubjectsByYearImpl(final String careerName, final int year, ClickListener parentView) {
 		this.presenter = new SubjectsByYearPresenter(this);
 		this.careerName = careerName;
 		this.year = year;
+		this.parentView = parentView;
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 	}
@@ -36,12 +38,13 @@ public class SubjectsByYearImpl extends CustomComponent implements SubjectsByYea
 		mainLayout = new VerticalLayout();
 		
 		// title
-		title = new Label(careerName);
+		title = new Label();
 		
 		// contentLayout
 		contentLayout = new VerticalLayout();
 		presenter.setContent(careerName, year);
 		
+		// Agrego los componentes
 		mainLayout.addComponents(title, contentLayout);
 		
 	}
@@ -56,7 +59,7 @@ public class SubjectsByYearImpl extends CustomComponent implements SubjectsByYea
 	public void addButtonToContentLayout(String buttonCaption) {
 		Button subjectButton = new Button(buttonCaption);
 		subjectButton.addStyleName(ValoTheme.BUTTON_LINK);
-		subjectButton.addClickListener(this);
+		subjectButton.addClickListener(this.parentView);
 		getContentLayout().addComponent(subjectButton);
 	}
 
@@ -69,9 +72,8 @@ public class SubjectsByYearImpl extends CustomComponent implements SubjectsByYea
 	}
 
 	@Override
-	public void buttonClick(ClickEvent event) {
-		// TODO Auto-generated method stub
-		
+	public void setTitleCaption(String titleCaption) {
+		this.title.setCaption(titleCaption);
 	}
 
 }

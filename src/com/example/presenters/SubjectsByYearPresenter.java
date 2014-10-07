@@ -21,6 +21,7 @@ public class SubjectsByYearPresenter implements SubjectsByYear.SubjectsByYearLis
 	public void setContent(String careerName, int year) {
 		List<Subject> filteredSubjects = service.filterByCareerAndYear(careerName, year);
 		for (Subject s : filteredSubjects) {
+			view.setTitleCaption("Materias de " + s.getYear() + "º año");
 			view.addButtonToContentLayout(s.getName());
 		}
 	}

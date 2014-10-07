@@ -23,5 +23,5 @@ public class SubjectManager extends DataManager<Subject> {
 		query.setParameter("year", year);
 		return query.getResultList();
 	}
-
+	
 }

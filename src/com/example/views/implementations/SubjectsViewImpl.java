@@ -3,28 +3,26 @@ package com.example.views.implementations;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.presenters.SubjectsPresenter;
 import com.example.views.SubjectsView;
 import com.example.views.templates.AbstractHomeViewImpl;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.HasComponents.ComponentAttachListener;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Link;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.VerticalLayout;
 
-public class SubjectsViewImpl extends AbstractHomeViewImpl implements SubjectsView, ComponentAttachListener, ClickListener {
+public class SubjectsViewImpl extends AbstractHomeViewImpl implements SubjectsView, ClickListener {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Label userCareerName;
+	private SubjectsPresenter presenter;
+	final HorizontalLayout mainLayout = new HorizontalLayout();
 	
 	public void enter(ViewChangeEvent event) {
 		
 		super.enter(event);
 		
-		final VerticalLayout mainLayout = new VerticalLayout();
 		mainLayout.setSizeFull();
 		mainLayout.setMargin(true);
 		
@@ -34,10 +32,7 @@ public class SubjectsViewImpl extends AbstractHomeViewImpl implements SubjectsVi
 		
 		getRightLayout().addComponent(panel);
 		
-		userCareerName = new Label();
-		getRightLayout().addComponentAttachListener(this);
-		
-		getRightLayout().addComponent(new SubjectsByYearImpl("Ingeniería en Sistemas", 4));
+		presenter.setContent();
 	}
 	
 	List<SubjectsViewListener> listeners = new ArrayList<SubjectsViewListener>();
@@ -46,16 +41,23 @@ public class SubjectsViewImpl extends AbstractHomeViewImpl implements SubjectsVi
 	public void addListener(SubjectsViewListener listener) {
 		listeners.add(listener);
 	}
-
-	@Override
-	public void componentAttachedToContainer(ComponentAttachEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void buttonClick(ClickEvent event) {
 		super.buttonClick(event);
+	}
+
+	public SubjectsPresenter getPresenter() {
+		return presenter;
+	}
+
+	public void setPresenter(SubjectsPresenter presenter) {
+		this.presenter = presenter;
+	}
+
+	@Override
+	public void setSubjects(String careerName, int year) {
+		this.mainLayout.addComponent(new SubjectsByYearImpl(careerName, year, this));
 	}
 
 }

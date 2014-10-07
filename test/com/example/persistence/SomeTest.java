@@ -8,7 +8,6 @@ import java.util.List;
 import org.apache.tomcat.jni.User;
 import org.junit.Test;
 
-import com.example.domain.Algo;
 import com.example.domain.Career;
 import com.example.domain.News;
 import com.vaadin.addon.jpacontainer.JPAContainer;
@@ -21,14 +20,6 @@ public class SomeTest {
 		CareerManager cm = new CareerManager();
 		JPAContainer<Career> co = cm.getContainer();
 		co.addEntity(c);
-		assertTrue(1 == 1);
-	}
-	
-	//@Test
-	public void otherTest() {
-		Algo a = new Algo(1, "Un algo");
-		DataManager<Algo> am = new DataManager<Algo>(Algo.class);
-		am.save(a);
 		assertTrue(1 == 1);
 	}
 	

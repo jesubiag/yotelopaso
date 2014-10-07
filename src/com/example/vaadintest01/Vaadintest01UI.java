@@ -4,13 +4,13 @@ import javax.servlet.annotation.WebServlet;
 
 import com.example.persistence.CareerManager;
 import com.example.persistence.NewsManager;
+import com.example.persistence.SubjectManager;
 import com.example.persistence.UserManager;
 import com.example.presenters.DatosRegPresenter;
 import com.example.presenters.HomePresenter;
 import com.example.presenters.MainPresenter;
 import com.example.presenters.SubjectsPresenter;
 import com.example.utils.DataInitializer;
-import com.example.views.CompDatosView;
 import com.example.views.EditorNoticiasView;
 import com.example.views.implementations.DatosRegImpl;
 import com.example.views.implementations.HomeViewImpl;
@@ -64,6 +64,8 @@ public class Vaadintest01UI extends UI {
 		UserManager userManager = new UserManager();
 		NewsManager newsManager = new NewsManager();
 		CareerManager carrManager = new CareerManager();
+		SubjectManager subjectManager = new SubjectManager();
+		
 		// Vistas
 		MainViewImpl mainView = new MainViewImpl();
 		HomeViewImpl homeView = new HomeViewImpl();
@@ -80,8 +82,11 @@ public class Vaadintest01UI extends UI {
 		// Presenters con sus vistas y managers asociados
 		new MainPresenter(mainView);
 		new HomePresenter(homeView, userManager);
-		new SubjectsPresenter(subjectsView, userManager, newsManager);
+		SubjectsPresenter subjectsPresenter = new SubjectsPresenter(subjectsView, userManager, subjectManager);
 		new DatosRegPresenter(datosView,userManager,carrManager);
+		
+		subjectsView.setPresenter(subjectsPresenter);
+		
 		// Navego a la vista principal
 		nav.navigateTo(MAIN_VIEW);
 	}
