@@ -10,9 +10,19 @@ import org.junit.Test;
 
 import com.example.domain.Career;
 import com.example.domain.News;
+import com.example.utils.StringUtils;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 
 public class SomeTest {
+	
+	@Test
+	public void stringTest() {
+		String[] s = StringUtils.parseURL("primero/hola/que tal");
+		System.out.println(s.length);
+		for (String a : s) {
+			System.out.println(a);
+		}
+	}
 
 //	@Test
 	public void test() {
@@ -30,7 +40,7 @@ public class SomeTest {
 		assertTrue(ln.isEmpty());
 	}
 	
-	@Test
+	//@Test
 	public void namesTest() {
 		Class<User> c = User.class;
 		String cn = c.getSimpleName();

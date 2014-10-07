@@ -6,7 +6,6 @@ import java.util.List;
 import com.example.presenters.SubjectsByYearPresenter;
 import com.example.views.components.SubjectsByYear;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Label;
@@ -25,6 +24,7 @@ public class SubjectsByYearImpl extends CustomComponent implements SubjectsByYea
 	private Label title;
 	private SubjectsByYearPresenter presenter;
 
+	//public SubjectsByYearImpl(final String careerName, final int year, ClickListener parentView) {
 	public SubjectsByYearImpl(final String careerName, final int year, ClickListener parentView) {
 		this.presenter = new SubjectsByYearPresenter(this);
 		this.careerName = careerName;
@@ -42,6 +42,10 @@ public class SubjectsByYearImpl extends CustomComponent implements SubjectsByYea
 		
 		// contentLayout
 		contentLayout = new VerticalLayout();
+		
+		/**Delego al presenter que genere la informacion necesaria para crear los componentes
+		* titulo y botones
+		*/
 		presenter.setContent(careerName, year);
 		
 		// Agrego los componentes
@@ -49,18 +53,22 @@ public class SubjectsByYearImpl extends CustomComponent implements SubjectsByYea
 		
 	}
 	
-	List<SubjectsByYearListener> listeners = new ArrayList<SubjectsByYearListener>();
-
+	List<SubjectsByYearListener> componentListeners = new ArrayList<SubjectsByYearListener>();
 	@Override
 	public void addListener(SubjectsByYearListener listener) {
-		listeners.add(listener);
+		componentListeners.add(listener);
 	}
 	
 	public void addButtonToContentLayout(String buttonCaption) {
 		Button subjectButton = new Button(buttonCaption);
 		subjectButton.addStyleName(ValoTheme.BUTTON_LINK);
 		subjectButton.addClickListener(this.parentView);
-		getContentLayout().addComponent(subjectButton);
+		this.contentLayout.addComponent(subjectButton);
+	}
+	
+	public void cleanComponents() {
+		mainLayout.removeAllComponents();
+		contentLayout.removeAllComponents();
 	}
 
 	public VerticalLayout getContentLayout() {
