@@ -2,14 +2,17 @@ package com.example.vaadintest01;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.example.persistence.CareerManager;
 import com.example.persistence.NewsManager;
 import com.example.persistence.UserManager;
+import com.example.presenters.DatosRegPresenter;
 import com.example.presenters.HomePresenter;
 import com.example.presenters.MainPresenter;
 import com.example.presenters.SubjectsPresenter;
 import com.example.utils.DataInitializer;
 import com.example.views.CompDatosView;
 import com.example.views.EditorNoticiasView;
+import com.example.views.implementations.DatosRegImpl;
 import com.example.views.implementations.HomeViewImpl;
 import com.example.views.implementations.MainViewImpl;
 import com.example.views.implementations.SubjectsViewImpl;
@@ -60,24 +63,25 @@ public class Vaadintest01UI extends UI {
 		// Managers
 		UserManager userManager = new UserManager();
 		NewsManager newsManager = new NewsManager();
-		
+		CareerManager carrManager = new CareerManager();
 		// Vistas
 		MainViewImpl mainView = new MainViewImpl();
 		HomeViewImpl homeView = new HomeViewImpl();
 		SubjectsViewImpl subjectsView = new SubjectsViewImpl();
+		DatosRegImpl datosView = new DatosRegImpl();
 		
 		// Agrego las vistas al navigator
 		nav.addView(MAIN_VIEW, mainView);
 		nav.addView(HOME_VIEW, homeView);
 		nav.addView(SUBJECTS_VIEW, subjectsView);
-		nav.addView(REGISTER_VIEW, new CompDatosView());
+		nav.addView(REGISTER_VIEW, datosView);
 		nav.addView(EDITORVIEW, new EditorNoticiasView());
 		
 		// Presenters con sus vistas y managers asociados
 		new MainPresenter(mainView);
 		new HomePresenter(homeView, userManager);
 		new SubjectsPresenter(subjectsView, userManager, newsManager);
-		
+		new DatosRegPresenter(datosView,userManager,carrManager);
 		// Navego a la vista principal
 		nav.navigateTo(MAIN_VIEW);
 	}
