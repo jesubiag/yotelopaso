@@ -19,7 +19,7 @@ public class HomePresenter extends AbstractHomePresenter<HomeView> implements Ho
 	}
 
 	@Override
-	public void componentAttachedToContainer(String caption) {
+	public void addWindowsNewsContent(String caption) {
 		switch (caption) {
 		case "Novedades":
 			String cn = service.getCurrentUser().getCareer().getName();

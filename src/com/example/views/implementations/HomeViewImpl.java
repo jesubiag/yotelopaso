@@ -96,7 +96,7 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 	@Override
 	public void componentAttachedToContainer(ComponentAttachEvent event) {
 		for (HomeViewListener listener : listeners) {
-			listener.componentAttachedToContainer(event.getComponent().getCaption());
+			listener.addWindowsNewsContent(event.getComponent().getCaption());
 		}
 	}
 	

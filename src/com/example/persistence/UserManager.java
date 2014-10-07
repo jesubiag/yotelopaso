@@ -33,5 +33,9 @@ public class UserManager extends DataManager<User> {
 	public User getCurrentUser() {
 		return (User) VaadinSession.getCurrent().getAttribute("currentUser");
 	}
+	
+	public void setCurrentUser(User currentUser) {
+		VaadinSession.getCurrent().setAttribute("currentUser", currentUser);
+	}
 
 }

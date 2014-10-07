@@ -62,10 +62,11 @@ public class DatosRegPresenter extends AbstractHomePresenter<DatosReg> implement
 				persInfo.setCity(ciu.getValue());
 				persInfo.setPhone((Long)tel.getConvertedValue());
 				usuario.setPersonalinfo(persInfo);
-				usuario.setCareer( (Career) carr.getData());  
+				usuario.setCareer( carrManager.getById( (Integer) carr.getValue()));
 				usuario.setYear((Integer)taño.getValue()); 
 				usuario.setBirthday(fecha.getValue()); 
 				manager.save(usuario);
+				manager.setCurrentUser(usuario);
 				navigator.navigateTo(Vaadintest01UI.HOME_VIEW);	
 			}
 			else {	

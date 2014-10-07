@@ -1,13 +1,13 @@
 package com.example.views.components;
 
-import com.vaadin.ui.Component;
-
 public interface SubjectsByYear {
 	
 	public void addButtonToContentLayout(String buttonCaption);
+	public void setTitleCaption(String titleCaption);
+	public void cleanComponents();
 	
 	interface SubjectsByYearListener {
-		
+		public void setContent(String careerName, int year);
 	}
 	
 	public void addListener(SubjectsByYearListener listener);

@@ -21,5 +21,17 @@ public class NewsManager extends DataManager<News> {
 		query.setParameter("careerName", careerName);
 		return query.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<News> filterByCareerAndSubject(String careerName, String subjectName) {
+		String jpql = "SELECT n "
+				+ "FROM News n "
+				+ "WHERE n.career.name = :careerName "
+				+ "AND n.subject.name = :subjectName";
+		Query query = em.createQuery(jpql);
+		query.setParameter("careerName", careerName);
+		query.setParameter("subjectName", subjectName);
+		return query.getResultList();
+	}
 
 }
