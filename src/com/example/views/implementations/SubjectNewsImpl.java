@@ -16,15 +16,11 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 	private VerticalLayout mainLayout;
 	private SubjectNewsPresenter presenter;
 	private ClickListener parentView;
-	private Label date;
-	private Label title;
-	private Label career;
-	private Label subject;
-	private Label content;
 	private String careerName;
 	private String subjectName;
-	final private HorizontalLayout topHorizontalLayout = new HorizontalLayout();
-	final private VerticalLayout elementLayout = new VerticalLayout();
+	private HorizontalLayout topHorizontalLayout = new HorizontalLayout();
+	private VerticalLayout elementLayout = new VerticalLayout();
+	ContentMode labelContentMode = ContentMode.HTML;
 	
 	public SubjectNewsImpl(String careerName, String subjectName, ClickListener parentView) {
 		this.presenter = new SubjectNewsPresenter(this);
@@ -38,27 +34,38 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 	private void buildMainLayout() {
 		mainLayout = new VerticalLayout();
 		
-		ContentMode labelContentMode = ContentMode.HTML;
 		
-		// date
-		date = new Label();
-		date.setContentMode(labelContentMode);
+		presenter.setContent(careerName, subjectName);
+	}
+
+	@Override
+	public void buildComponent(String date, String content) {
+		
+		Label subjectDate = new Label();
+		subjectDate.setContentMode(labelContentMode);
+		subjectDate.setValue(date);
 		
 		// career
-		career = new Label();
+		Label career = new Label();
 		career.setContentMode(labelContentMode);
+		career.setValue(this.careerName);
 		
 		// subject
-		subject = new Label();
+		Label subject = new Label();
 		subject.setContentMode(labelContentMode);
+		subject.setValue(this.subjectName);
 		
 		// content
-		content = new Label();
-		content.setContentMode(labelContentMode);
+		Label contentSubject = new Label();
+		contentSubject.setContentMode(labelContentMode);
+		contentSubject.setValue(content);
 		
 		// title
-		title = new Label();
+		Label title = new Label();
 		title.setContentMode(labelContentMode);
+		
+		HorizontalLayout topHorizontalLayout = new HorizontalLayout();
+		VerticalLayout elementLayout = new VerticalLayout();
 		
 		topHorizontalLayout.setWidth("100%");
 		topHorizontalLayout.setSpacing(true);
@@ -67,18 +74,9 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 		elementLayout.setSizeFull();
 		elementLayout.setSpacing(true);
 		
-		presenter.setContent(careerName, subjectName);
-	}
-
-	@Override
-	public void buildComponent(String date, String content) {
-		this.date.setValue(date);
-		this.career.setValue(this.careerName);
-		this.subject.setValue(this.subjectName);
-		this.content.setValue(content);
-		topHorizontalLayout.addComponents(this.date, this.career, this.subject);
-		elementLayout.addComponents(topHorizontalLayout, this.content);
-		mainLayout.addComponent(elementLayout);
+		topHorizontalLayout.addComponents(subjectDate, career, subject);
+		elementLayout.addComponents(topHorizontalLayout, contentSubject);
+		this.mainLayout.addComponent(elementLayout);
 	}
 
 }

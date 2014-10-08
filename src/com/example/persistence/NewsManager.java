@@ -14,9 +14,8 @@ public class NewsManager extends DataManager<News> {
 	
 	@SuppressWarnings("unchecked")
 	public List<News> getAllFromCareer(String careerName) {
-		//String jpql = "SELECT n FROM NEWS n WHERE n.career.name == :careerName";
-		String jpql = "SELECT n FROM News n WHERE n.career.name = :careerName";
-		//String jpql = "SELECT n FROM News n";
+		String jpql = "SELECT n FROM News n WHERE n.career.name = :careerName "
+				+ "ORDER BY n.id DESC";
 		Query query = em.createQuery(jpql);
 		query.setParameter("careerName", careerName);
 		return query.getResultList();
@@ -27,7 +26,8 @@ public class NewsManager extends DataManager<News> {
 		String jpql = "SELECT n "
 				+ "FROM News n "
 				+ "WHERE n.career.name = :careerName "
-				+ "AND n.subject.name = :subjectName";
+				+ "AND n.subject.name = :subjectName "
+				+ "ORDER BY n.id DESC";
 		Query query = em.createQuery(jpql);
 		query.setParameter("careerName", careerName);
 		query.setParameter("subjectName", subjectName);

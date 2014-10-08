@@ -50,6 +50,9 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		case "Logout":
 			//logout
 			break;
+		case "Nueva Noticia":
+			view.showNewsEditorWindow();
+			break;
 		default:
 			this.userCareer = userService.getCurrentUser().getCareer().getName();
 			view.cleanComponents();

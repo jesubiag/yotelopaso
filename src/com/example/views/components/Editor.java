@@ -1,36 +1,38 @@
 package com.example.views.components;
 
 import java.util.Date;
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+
 import com.example.domain.Career;
 import com.example.domain.News;
 import com.example.domain.Subject;
-import com.example.domain.User;
-import com.example.persistence.CareerManager;
 import com.example.persistence.NewsManager;
 import com.example.persistence.SubjectManager;
 import com.example.persistence.UserManager;
 import com.example.vaadintest01.Vaadintest01UI;
-import com.example.views.templates.AbstractHomeViewImpl;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.PopupView.Content;
 import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
-public class Editor extends CustomComponent{
+public class Editor extends CustomComponent implements Content {
 
 	NewsManager manNews = new NewsManager();
+	UserManager manUser = new UserManager();
+	SubjectManager manSubject = new SubjectManager();
 	News news = new News();
+	String subjectName;
+	Career carrera;
+	Subject materia;
 	
 	private Panel panel;
 	private VerticalLayout mainLayout = new VerticalLayout();
@@ -38,7 +40,8 @@ public class Editor extends CustomComponent{
 	
 	private static final long serialVersionUID = 1L;
 
-	public Editor(){
+	public Editor(String subjectName){
+		this.subjectName = subjectName;
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 	}
@@ -57,21 +60,12 @@ public class Editor extends CustomComponent{
 		 
 		//Creamos el RichTextArea para el cuerpo de la noticia
 		final RichTextArea cuerpo = new RichTextArea();
-       	cuerpo.setValue("Complete el contenido de la noticia");
+		cuerpo.setValue(null);
+		cuerpo.setNullRepresentation("Complete el contenido de la noticia");
        	cuerpo.setImmediate(true);
         cuerpo.setSizeFull();
         cuerpo.setCaption("Descripción de la Noticia");
        
-        final SubjectManager manager = new SubjectManager();
-		final ComboBox mat = new ComboBox("Materia", manager.getContainer());
-		mat.setItemCaptionPropertyId("name");
-		mat.setWidth("25%");
-		//mat.addItems("Algebra","Análisis Matematico","Ingenieria y Sociedad","Matematica Discreta");
-		mat.setNullSelectionAllowed(false);
-		mat.setTextInputAllowed(false);
-		mat.setRequired(true);
-		mat.setRequiredError("Obligatorio");
-		
 		final DateField fecha = new DateField("Fecha de publicación");
 		fecha.setValue(new Date());
 		fecha.setEnabled(false);
@@ -84,15 +78,26 @@ public class Editor extends CustomComponent{
 		titulo.setRequired(true);
 		titulo.setRequiredError("Obligatorio");
 		
+		carrera = manUser.getCurrentUser().getCareer();
+		materia = manSubject.getByProperty("name", this.subjectName).get(0);
+		
+		TextField carr = new TextField("Carrera");
+		carr.setValue(carrera.getName());
+		carr.setWidth("60%");
+		carr.setEnabled(false);
+		carr.addStyleName("borderless");
+		
+		TextField mat = new TextField("Materia");
+		mat.setValue(this.subjectName);
+		mat.setWidth("60%");
+		mat.setEnabled(false);
+		mat.addStyleName("borderless");
+		
 		form.addComponent(titulo);
+		form.addComponent(carr);
 		form.addComponent(mat);
 		form.addComponent(fecha);
 		form.addComponent(cuerpo);
-		
-		final Career carrera = new Career();
-		carrera.setName("Ingeniería en Sistemas");
-		carrera.setId(1);
-		
 		
 		Button aceptar = new Button("Aceptar",
 				new Button.ClickListener() {
@@ -101,17 +106,15 @@ public class Editor extends CustomComponent{
 
 				//@Override
 				public void buttonClick(ClickEvent event) {
-					Subject materia = new Subject();
-					SubjectManager subManager = new SubjectManager();
-					materia = subManager.getById((Integer) mat.getValue());
-					if (mat.isValid() & titulo.isValid()) {
+					if (titulo.isValid()) {
 						news.setCareer(carrera);
 						news.setContent(cuerpo.getValue());
 						news.setTitle(titulo.getValue());
 						news.setDate(fecha.getValue());
 						news.setSubject(materia);
 						manNews.save(news);
-						getUI().getNavigator().navigateTo(Vaadintest01UI.HOME_VIEW);		
+						Notification.show("Noticia Creada", Notification.Type.HUMANIZED_MESSAGE);
+						getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW);		
 					}
 					else {
 						Notification.show("Revise los campos obligatorios", Notification.Type.WARNING_MESSAGE);
@@ -125,7 +128,7 @@ public class Editor extends CustomComponent{
 
 		//@Override
 		public void buttonClick(ClickEvent event) {
-			getUI().getNavigator().navigateTo(Vaadintest01UI.HOME_VIEW);
+			getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW);
 		}
 	}); //Boton Cancelar, te envia a la home
 		
@@ -141,6 +144,18 @@ public class Editor extends CustomComponent{
 		mainLayout.addComponent(panel);
 		mainLayout.setExpandRatio(panel, 1.0f);
 
+	}
+
+	@Override
+	public String getMinimizedValueAsHTML() {
+		// TODO Auto-generated method stub
+		return "Agregar Noticia";
+	}
+
+	@Override
+	public Component getPopupComponent() {
+		// TODO Auto-generated method stub
+		return this;
 	}
 
 }

@@ -6,6 +6,7 @@ public interface SubjectsView extends AbstractHomeView {
 	public void nagivate(String viewName);
 	public void cleanComponents();
 	public void buildSubjectLayout(String subjectName, String careerName);
+	public void showNewsEditorWindow();
 	
 	interface SubjectsViewListener extends AbstractHomeViewListener {
 		public void buttonClick(String subjectName);

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.presenters.SubjectsPresenter;
-import com.example.utils.StringUtils;
 import com.example.views.SubjectsView;
+import com.example.views.components.Editor;
 import com.example.views.templates.AbstractHomeViewImpl;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -13,9 +13,11 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.PopupView;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -53,7 +55,7 @@ ClickListener{
 			return;
 		}
 		// TODO: mejorar la navegacion y manejo de la url (una vez que lo implemente)
-		String [] uriFragments = StringUtils.parseURL(parameters);
+		//String [] uriFragments = StringUtils.parseURL(parameters);
 		//buildSubjectLayout(event.getParameters());
 		presenter.setSubjectContent(event.getParameters());
 	}
@@ -112,10 +114,15 @@ ClickListener{
 		HorizontalLayout topLayout = new HorizontalLayout();
 		topLayout.setWidth("100%");
 		topLayout.setMargin(true);
-		Button createNews = new Button("Nueva Noticia");
-		createNews.addStyleName("primary");
-		topLayout.addComponent(createNews);
-		topLayout.setComponentAlignment(createNews, Alignment.MIDDLE_RIGHT);
+		
+		PopupView editor = new PopupView(new Editor(subjectName));
+		topLayout.addComponent(editor);
+		
+		//Button createNews = new Button("Nueva Noticia");
+		//createNews.addClickListener(this);
+		//createNews.addStyleName("primary");
+		//topLayout.addComponent(createNews);
+		topLayout.setComponentAlignment(editor, Alignment.MIDDLE_LEFT);
 		tabNews.addComponent(topLayout);
 		tabNews.addComponent(new Label("<hr/>", ContentMode.HTML));
 		tabNews.addComponent(new SubjectNewsImpl(careerName, subjectName, this));
@@ -125,6 +132,10 @@ ClickListener{
 		sections.addTab(tabFiles, "Archivos");
 		//sections.addSelectedTabChangeListener(this);
 		subjectLayout.addComponent(sections);
+	}
+	
+	@Override
+	public void showNewsEditorWindow() {
 	}
 
 	//@Override

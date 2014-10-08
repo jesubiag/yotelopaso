@@ -37,8 +37,8 @@ public class EditorNoticiasView extends AbstractHomeViewImpl implements View {
 		super.enter(event);
 		
 		//NewsEditorImpl newsEditor = new NewsEditorImpl();
-		Editor newsEditor = new Editor();
-		getRightLayout().addComponent(newsEditor);
+		//Editor newsEditor = new Editor();
+		//getRightLayout().addComponent(newsEditor);
 	}
 
 }
