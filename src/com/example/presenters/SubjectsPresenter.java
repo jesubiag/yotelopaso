@@ -9,6 +9,7 @@ import com.example.vaadintest01.Vaadintest01UI;
 import com.example.views.SubjectsView;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Page;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 
 public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> implements SubjectsView.SubjectsViewListener {
@@ -48,7 +49,9 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 			//navigator.navigateTo(Vaadintest01UI.ACTIVITY_VIEW);
 			break;
 		case "Logout":
-			//logout
+			VaadinSession.getCurrent().setAttribute("userId", null);
+			VaadinSession.getCurrent().setAttribute("currentUser", null);
+			view.nagivate(Vaadintest01UI.MAIN_VIEW);
 			break;
 		case "Nueva Noticia":
 			view.showNewsEditorWindow();

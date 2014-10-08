@@ -4,6 +4,7 @@ import com.example.persistence.UserManager;
 import com.example.vaadintest01.Vaadintest01UI;
 import com.example.views.AbstractHomeView;
 import com.vaadin.navigator.Navigator;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 
 public class AbstractHomePresenter<T extends AbstractHomeView> implements AbstractHomeView.AbstractHomeViewListener {
@@ -36,6 +37,9 @@ public class AbstractHomePresenter<T extends AbstractHomeView> implements Abstra
 			break;
 		case "Logout":
 			//logout
+			VaadinSession.getCurrent().setAttribute("userId", null);
+			VaadinSession.getCurrent().setAttribute("currentUser", null);
+			navigator.navigateTo(Vaadintest01UI.MAIN_VIEW);
 			break;
 		}
 	}
