@@ -8,6 +8,7 @@ import com.example.persistence.UserManager;
 import com.example.vaadintest01.Vaadintest01UI;
 import com.example.views.DatosReg;
 import com.vaadin.navigator.Navigator;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Notification;
@@ -71,12 +72,13 @@ public class DatosRegPresenter extends AbstractHomePresenter<DatosReg> implement
 			}
 			else {	
 				Notification.show("Revise los campos obligatorios\n",
-					"Los campos obligatorios son la carrera y el año que está cursando",
-		                Notification.Type.WARNING_MESSAGE);	
+					"Los campos obligatorios son la carrera y el año que está cursando", 
+					Notification.Type.WARNING_MESSAGE);	
 			}
 			break;
-		
 		case "Cancelar":
+			VaadinSession.getCurrent().setAttribute("userId", 0D);
+			VaadinSession.getCurrent().setAttribute("currentUser", null);
 			navigator.navigateTo(Vaadintest01UI.MAIN_VIEW);
 			break;
 		}

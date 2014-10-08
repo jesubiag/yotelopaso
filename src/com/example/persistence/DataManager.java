@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import com.vaadin.addon.jpacontainer.EntityProvider;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
@@ -34,8 +35,11 @@ public class DataManager<T> {
 		container.addEntity(entity);
 	}
 	
-	public void delete(Object entity) {
-		//container.removeItem(itemId);
+	public <TN extends Number> void delete(TN id) {
+		String jpql = "DELETE FROM " + tableName + " e WHERE e.id = :id";
+		Query query = em.createQuery(jpql);
+		query.setParameter("id", id);
+		query.executeUpdate();
 	}
 	
 	@SuppressWarnings("unchecked")
