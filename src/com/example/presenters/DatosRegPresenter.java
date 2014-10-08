@@ -77,7 +77,7 @@ public class DatosRegPresenter extends AbstractHomePresenter<DatosReg> implement
 			}
 			break;
 		case "Cancelar":
-			VaadinSession.getCurrent().setAttribute("userId", 0D);
+			VaadinSession.getCurrent().setAttribute("userId", null);
 			VaadinSession.getCurrent().setAttribute("currentUser", null);
 			navigator.navigateTo(Vaadintest01UI.MAIN_VIEW);
 			break;
