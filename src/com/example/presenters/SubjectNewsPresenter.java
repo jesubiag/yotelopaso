@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.domain.News;
 import com.example.persistence.NewsManager;
+import com.example.utils.DateUtils;
 import com.example.views.components.SubjectNews;
 
 public class SubjectNewsPresenter implements SubjectNews.SubjectNewsListener {
@@ -19,7 +20,7 @@ public class SubjectNewsPresenter implements SubjectNews.SubjectNewsListener {
 	public void setContent(String careerName, String subjectName) {
 		List<News> news = service.filterByCareerAndSubject(careerName, subjectName);
 		for (News n : news) {
-			String date = n.getDate().toString();
+			String date = DateUtils.dateFormat(n.getDate());
 			String content = n.getContent();
 			view.buildComponent(date, content);
 		}

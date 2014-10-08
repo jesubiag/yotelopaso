@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.domain.News;
 import com.example.persistence.NewsManager;
+import com.example.utils.DateUtils;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
@@ -53,13 +54,13 @@ public class LastNews extends CustomComponent {
 			VerticalLayout elementLayout = new VerticalLayout();
 			
 			topHorizontalLayout.setWidth("100%");
-			topHorizontalLayout.setSpacing(true);
+			topHorizontalLayout.setSpacing(false);
 			
 			elementLayout.setMargin(true);
 			elementLayout.setSizeFull();
 			elementLayout.setSpacing(true);
 			
-			date.setValue(n.getDate().toString());
+			date.setValue(DateUtils.dateFormat(n.getDate()));
 			career.setValue(careerName);
 			subject.setValue(n.getSubject().getName());
 			content.setValue(n.getContent());

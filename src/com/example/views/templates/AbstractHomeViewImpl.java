@@ -37,7 +37,7 @@ public class AbstractHomeViewImpl extends AuthView implements AbstractHomeView, 
 		rightLayout.setSizeFull();
 
 		// Have a menu on the left side of the screen
-		Panel menu = new Panel("PEI");
+		Panel menu = new Panel("<b>Yo Te Lo Paso</b>");
 		menu.setId("menu-panel");
 		menu.setHeight("100%");
 		menu.setWidth("182px");

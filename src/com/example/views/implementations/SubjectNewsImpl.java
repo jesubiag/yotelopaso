@@ -1,6 +1,7 @@
 package com.example.views.implementations;
 
 import com.example.presenters.SubjectNewsPresenter;
+import com.example.utils.DateUtils;
 import com.example.views.components.SubjectNews;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
@@ -68,7 +69,7 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 		VerticalLayout elementLayout = new VerticalLayout();
 		
 		topHorizontalLayout.setWidth("100%");
-		topHorizontalLayout.setSpacing(true);
+		topHorizontalLayout.setSpacing(false);
 		
 		elementLayout.setMargin(true);
 		elementLayout.setSizeFull();

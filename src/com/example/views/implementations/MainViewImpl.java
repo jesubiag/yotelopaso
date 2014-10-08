@@ -24,7 +24,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 	private final Google2ApiInfo api = new Google2ApiInfo();
 	
 	final HorizontalLayout topHorizontalLayout = new HorizontalLayout();
-	Label bienvenida = new Label("<h1><b>Plataforma Estudiantil Integrada</b></h1>");
+	Label bienvenida = new Label("<h1><b>Yo Te Lo Paso!</b></h1>");
 	Link homeLink = new Link("Home", new ExternalResource("/VaadinTest01/#!home"));
 	/*Label appTitle = new Label("<h1><b></b></h1>");*/
 	Label appDesc = new Label("Todo lo que necesitas en un solo lugar");
@@ -38,7 +38,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 	final ExternalResource vl1ExtRes = new ExternalResource("" +
 			"https://photos-2.dropbox.com/t/0/AAC38UuCYEDpILSRtn32J7deoXxnohV3YetmOWL3wLnptQ/12/70181720/png/320x320/1/_/0/4/pensar.png/fczf4dxwglk62k9/AADIIgM_Wr6YdMQSKo6Im-U5a/pensar.png");
 	final ExternalResource vl2ExtRes = new ExternalResource("" +
-			"https://photos-1.dropbox.com/t/1/AADHw9zyHQ-sOyMewr6ke6YaHVSxnvaaCg4LYdb55gj_kQ/12/70181720/jpeg/1024x768/3/1412557200/0/2/calendario.jpeg/SwFwKNEr3W4woh8Wc-Xs9xcwTxcax1e4FLfobbD8cuk");
+			"http://i.imgur.com/nL6W6Na.png");
 	final ExternalResource vl3ExtRes = new ExternalResource("" +
 			"https://photos-2.dropbox.com/t/0/AACG4QB8Hn3woZR6FwQfPUEeD6rS0gZs7cKMZptCPEO-7Q/12/70181720/jpeg/320x320/1/_/0/4/share.jpg/qsqj9w14vk0gzgx/AACoukyHvrIkDr4KrLLcqeK-a/share.jpg");
 	Label vl1Desc = new Label("La aplicacion que te ayuda a estudiar");
