@@ -8,8 +8,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.example.domain.Subject;
-import com.example.utils.DataInitializer;
+import com.yotelopaso.domain.Subject;
+import com.yotelopaso.persistence.SubjectManager;
+import com.yotelopaso.utils.DataInitializer;
 
 public class SubjectManagerTest {
 	

@@ -8,10 +8,12 @@ import java.util.List;
 import org.apache.tomcat.jni.User;
 import org.junit.Test;
 
-import com.example.domain.Career;
-import com.example.domain.News;
-import com.example.utils.StringUtils;
 import com.vaadin.addon.jpacontainer.JPAContainer;
+import com.yotelopaso.domain.Career;
+import com.yotelopaso.domain.News;
+import com.yotelopaso.persistence.CareerManager;
+import com.yotelopaso.persistence.NewsManager;
+import com.yotelopaso.utils.StringUtils;
 
 public class SomeTest {
 	
