@@ -10,13 +10,13 @@
 		<provider>
 			org.eclipse.persistence.jpa.PersistenceProvider
 		</provider>
-		<class>com.example.domain.Algo</class>
-		<class>com.example.domain.Career</class>
-		<class>com.example.domain.News</class>
-		<class>com.example.domain.PersonalInfo</class>
-		<class>com.example.domain.Session</class>
-		<class>com.example.domain.Subject</class>
-		<class>com.example.domain.User</class>
+			<class>com.yotelopaso.domain.Algo</class>
+			<class>com.yotelopaso.domain.Career</class>
+			<class>com.yotelopaso.domain.News</class>
+			<class>com.yotelopaso.domain.PersonalInfo</class>
+			<class>com.yotelopaso.domain.Session</class>
+			<class>com.yotelopaso.domain.Subject</class>
+			<class>com.yotelopaso.domain.User</class>
 		<properties>
 			<property name="eclipselink.jdbc.platform"
 				value="org.eclipse.persistence.platform.database.H2Platform"/>
