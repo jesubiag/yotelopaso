@@ -24,4 +24,8 @@ public class SubjectManager extends DataManager<Subject> {
 		return query.getResultList();
 	}
 	
+	public List<Subject> filterByCareer(final String careerName) {
+		return getByProperty("career.name", careerName);
+	}
+	
 }

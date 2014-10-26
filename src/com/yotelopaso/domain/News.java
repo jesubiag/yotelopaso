@@ -32,6 +32,9 @@ public class News implements Serializable {
 	
 	private String content;
 	
+	@ManyToOne
+	private User author;
+	
 	public News() {}
 	
 	/**
@@ -39,14 +42,16 @@ public class News implements Serializable {
 	 * @param career
 	 * @param subject
 	 * @param content
+	 * @param author
 	 */
 	public News(Date date, Career career, Subject subject, String title,
-			String content) {
+			String content, User author) {
 		this.date = date;
 		this.title = title;
 		this.career = career;
 		this.subject = subject;
 		this.content = content;
+		this.author = author;
 	}
 
 	public Long getId() {
@@ -84,6 +89,14 @@ public class News implements Serializable {
 	}
 	public void setSubject(Subject subject) {
 		this.subject = subject;
+	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 }
