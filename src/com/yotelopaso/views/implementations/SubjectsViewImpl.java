@@ -10,6 +10,7 @@ import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Label;
@@ -34,6 +35,7 @@ ItemClickListener {
 	final Panel panel = new Panel();
 	final TabSheet sections = new TabSheet();
 	private SubjectsByYearImpl subjectsTreeComponent;
+	private String subjectName;
 	
 	@Override
 	public void enter(ViewChangeEvent event) {
@@ -55,6 +57,7 @@ ItemClickListener {
 		cleanComponents();
 		
 		String parameters = event.getParameters(); 
+		subjectName = parameters;
 		
 		if (parameters.isEmpty() || parameters == null) {
 			mainLayout.setSizeUndefined();
@@ -125,10 +128,15 @@ ItemClickListener {
 		topLayout.setWidth("100%");
 		topLayout.setMargin(true);
 		
-		PopupView editor = new PopupView(new Editor(subjectName));
-		topLayout.addComponent(editor);
+		//PopupView editor = new PopupView(new Editor(subjectName));
+		//topLayout.addComponent(editor);
+		//topLayout.setComponentAlignment(editor, Alignment.MIDDLE_LEFT);
 		
-		topLayout.setComponentAlignment(editor, Alignment.MIDDLE_LEFT);
+		Button createNews = new Button("Nueva Noticia");
+		createNews.addClickListener(this);
+		createNews.addStyleName("primary");
+		topLayout.addComponent(createNews);
+		
 		tabNews.addComponent(topLayout);
 		tabNews.addComponent(new Label("<hr/>", ContentMode.HTML));
 		
@@ -164,6 +172,7 @@ ItemClickListener {
 	
 	@Override
 	public void showNewsEditorWindow() {
+		UI.getCurrent().addWindow(new Editor(subjectName));
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package com.yotelopaso.views.components;
 
+
 import java.util.Date;
 
 import com.vaadin.ui.Button;
@@ -15,7 +16,9 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.PopupView.Content;
 import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.domain.Career;
 import com.yotelopaso.domain.News;
@@ -24,7 +27,7 @@ import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.persistence.UserManager;
 
-public class Editor extends CustomComponent implements Content {
+public class Editor extends Window implements Content {
 
 	NewsManager manNews = new NewsManager();
 	UserManager manUser = new UserManager();
@@ -43,7 +46,7 @@ public class Editor extends CustomComponent implements Content {
 	public Editor(String subjectName){
 		this.subjectName = subjectName;
 		buildMainLayout();
-		setCompositionRoot(mainLayout);
+		//setCompositionRoot(mainLayout);
 	}
 	
 	private void buildMainLayout(){
@@ -112,9 +115,11 @@ public class Editor extends CustomComponent implements Content {
 						news.setTitle(titulo.getValue());
 						news.setDate(fecha.getValue());
 						news.setSubject(materia);
+						news.setAuthor(manUser.getCurrentUser());
 						manNews.save(news);
 						Notification.show("Noticia Creada", Notification.Type.HUMANIZED_MESSAGE);
-						getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW);		
+						close();
+						//getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW);		
 					}
 					else {
 						Notification.show("Revise los campos obligatorios", Notification.Type.WARNING_MESSAGE);
@@ -128,7 +133,8 @@ public class Editor extends CustomComponent implements Content {
 
 		//@Override
 		public void buttonClick(ClickEvent event) {
-			getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW);
+			close();
+			//getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW);
 		}
 	}); //Boton Cancelar, te envia a la home
 		
@@ -143,7 +149,9 @@ public class Editor extends CustomComponent implements Content {
 		panel.setSizeFull();
 		mainLayout.addComponent(panel);
 		mainLayout.setExpandRatio(panel, 1.0f);
-
+		this.setContent(mainLayout);
+		this.setWidth("60%");
+		this.setPositionX(180);
 	}
 
 	@Override
