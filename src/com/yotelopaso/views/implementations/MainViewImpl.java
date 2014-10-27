@@ -2,6 +2,7 @@ package com.yotelopaso.views.implementations;
 
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.ExternalResource;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
@@ -62,6 +63,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 		Google2Button gButton = new Google2Button(api.apiKey, api.apiSecret);
 		gButton.setPopupWindowFeatures("resizable,width=800,height=600");
 		gButton.setId("acceder");
+		gButton.setIcon(FontAwesome.GOOGLE);
 		topHorizontalLayout.addComponent(gButton);
 		topHorizontalLayout.setComponentAlignment(gButton, Alignment.MIDDLE_RIGHT);
 		

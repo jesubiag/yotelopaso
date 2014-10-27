@@ -31,9 +31,16 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 	}
 
 	@Override
-	public void buttonClick(String caption) {
+	public void itemClick(String caption) {
 		// TODO: Arreglar, esto debería funcionar, no debería repetirse el contenido del método en este
 		//super.panelButtonClick(caption);
+		
+		// No se como implementar lo siguiente en un case
+		if (caption.contains("Materias")) {
+			// hacer algo en la view
+			view.toggleTreeRoot(caption);
+			return;
+		}
 		
 		switch (caption) {
 		case "Inicio":
@@ -69,9 +76,7 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 	public void setDefaultContent() {
 		User currentUser = userService.getCurrentUser();
 		String careerName = currentUser.getCareer().getName();
-		for (int i=1; i<=5; i++) {
-			view.setSubjects(careerName, i);
-		}
+		view.setSubjects(careerName);
 	}
 
 	@Override

@@ -77,9 +77,15 @@ div.v-slot-panelLink .panelLink {
 }
 
 .panelLink .v-icon {
-	font-size: 48pt;
+	font-size: 36pt;
 	/*display: block;*/
 	text-align: center;
+}
+
+/* no se por que no funca*/
+div.v-slot-subjectNews > div.v-label-subjectNews {
+	font-size: 8pt;
+	color: red !important;
 }
 
 .v-panel-content { 

@@ -1,5 +1,6 @@
 package com.yotelopaso.presenters;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.yotelopaso.domain.Subject;
@@ -18,12 +19,18 @@ public class SubjectsByYearPresenter implements SubjectsByYear.SubjectsByYearLis
 		view.addListener(this);
 	}
 	
-	public void setContent(String careerName, int year) {
+	public void setContent(String careerName) {
 		view.cleanComponents();
-		List<Subject> filteredSubjects = service.filterByCareerAndYear(careerName, year);
+		view.setTreeCaption(careerName);
+		List<Subject> filteredSubjects = service.filterByCareer(careerName);
+		HashMap<Integer, String> treeElements = new HashMap<Integer, String>();
+		for (int i=1; i<6; i++) {
+			treeElements.put(i, "Materias de " + i + "º Año");
+			view.setTreeRoot(treeElements.get(i));
+		}
 		for (Subject s : filteredSubjects) {
-			view.setTitleCaption("Materias de " + s.getYear() + "º año");
-			view.addButtonToContentLayout(s.getName());
+			Integer year = s.getYear();
+			view.setTreeLeafs(s.getName(), treeElements.get(year));
 		}
 	}
 

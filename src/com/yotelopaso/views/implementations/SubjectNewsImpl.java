@@ -19,8 +19,6 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 	private ClickListener parentView;
 	private String careerName;
 	private String subjectName;
-	private HorizontalLayout topHorizontalLayout = new HorizontalLayout();
-	private VerticalLayout elementLayout = new VerticalLayout();
 	ContentMode labelContentMode = ContentMode.HTML;
 	
 	public SubjectNewsImpl(String careerName, String subjectName, ClickListener parentView) {
@@ -34,6 +32,8 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 
 	private void buildMainLayout() {
 		mainLayout = new VerticalLayout();
+		//mainLayout.setSizeUndefined();
+		mainLayout.setSizeFull();
 		
 		
 		presenter.setContent(careerName, subjectName);
@@ -42,9 +42,13 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 	@Override
 	public void buildComponent(String date, String content) {
 		
+		addStyleName("subjectNews");
+		
 		Label subjectDate = new Label();
 		subjectDate.setContentMode(labelContentMode);
 		subjectDate.setValue(date);
+		// no esta funcionando el estilo
+		subjectDate.addStyleName("subjectNews");
 		
 		// career
 		Label career = new Label();
@@ -70,8 +74,10 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 		
 		topHorizontalLayout.setWidth("100%");
 		topHorizontalLayout.setSpacing(false);
+		topHorizontalLayout.setMargin(false);
+		topHorizontalLayout.setSizeUndefined();
 		
-		elementLayout.setMargin(true);
+		elementLayout.setMargin(false);
 		elementLayout.setSizeFull();
 		elementLayout.setSpacing(true);
 		
