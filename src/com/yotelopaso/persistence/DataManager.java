@@ -54,7 +54,8 @@ public class DataManager<T> {
 	}
 	
 	public <TN extends Number> T getById(TN id) {
-		return ep.getEntity(container, id);
+		//return ep.getEntity(container, id);
+		return em.find(clazz, id);
 	}
 	
 	@SuppressWarnings("unchecked")

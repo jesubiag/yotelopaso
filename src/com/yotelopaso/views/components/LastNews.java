@@ -68,9 +68,9 @@ public class LastNews extends CustomComponent {
 			topHorizontalLayout.setWidth("100%");
 			topHorizontalLayout.setSpacing(false);
 			
-			elementLayout.setMargin(true);
+			elementLayout.setMargin(false);
 			elementLayout.setSizeFull();
-			elementLayout.setSpacing(true);
+			elementLayout.setSpacing(false);
 			
 			date.setValue(DateUtils.dateFormat(n.getDate()));
 			career.setValue(careerName);
@@ -82,6 +82,8 @@ public class LastNews extends CustomComponent {
 			Button ampliarButton = new Button("Ampliar");
 			ampliarButton.addClickListener(parentView);
 			ampliarButton.setData(n.getId());
+			ampliarButton.setHeight("70%");
+			ampliarButton.setWidth("40%");
 			
 			topHorizontalLayout.addComponents(date, career, subject, autMail, ampliarButton);
 			elementLayout.addComponents(topHorizontalLayout, title);
