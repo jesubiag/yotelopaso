@@ -3,6 +3,7 @@ package com.yotelopaso.views;
 
 import com.vaadin.data.Item;
 import com.vaadin.ui.Button.ClickEvent;
+import com.yotelopaso.persistence.NewsManager;
 
 
 public interface SubjectsView extends AbstractHomeView {
@@ -26,7 +27,7 @@ public interface SubjectsView extends AbstractHomeView {
 	}
 	
 	public void addListener(SubjectsViewListener listener);
-	
+	public void deleteNew(Long newsId);
 	
 
 }
