@@ -26,6 +26,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.presenters.SubjectsPresenter;
+import com.yotelopaso.utils.Hr;
 import com.yotelopaso.views.SubjectsView;
 import com.yotelopaso.views.components.Editor;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;
@@ -149,11 +150,12 @@ ItemClickListener, ClickListener {
 		Button createNews = new Button("Nueva Noticia");
 		createNews.addClickListener(this);
 		createNews.addStyleName("primary");
-		createNews.setHeight("80%");
+		createNews.setHeight("60%");
 		topLayout.addComponent(createNews);
+		topLayout.setComponentAlignment(createNews, Alignment.MIDDLE_LEFT);
 		
 		tabNews.addComponent(topLayout);
-		tabNews.addComponent(new Label("<hr/>", ContentMode.HTML));
+		tabNews.addComponent(new Hr());
 		
 		Panel newsContainer = new Panel();
 		newsContainer.addStyleName(ValoTheme.PANEL_BORDERLESS);

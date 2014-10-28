@@ -10,6 +10,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.yotelopaso.presenters.SubjectNewsPresenter;
 import com.yotelopaso.utils.DateUtils;
+import com.yotelopaso.utils.Hr;
 import com.yotelopaso.views.SubjectsView.SubjectsViewListener;
 import com.yotelopaso.views.components.SubjectNews;
 
@@ -109,7 +110,7 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 		else
 			topHorizontalLayout.addComponents(subjectDate, career, subject, autMail, editButton, deleteButton);
 		
-		elementLayout.addComponents(topHorizontalLayout, titleSubject, contentSubject);
+		elementLayout.addComponents(topHorizontalLayout, titleSubject, contentSubject, new Hr());
 		this.mainLayout.addComponent(elementLayout);
 	}
 

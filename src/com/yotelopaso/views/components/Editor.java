@@ -3,6 +3,7 @@ package com.yotelopaso.views.components;
 
 import java.util.Date;
 
+import com.vaadin.server.Page;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
@@ -44,6 +45,7 @@ public class Editor extends Window implements Content {
 	private TextField mat;
 	private TextField autor;
 	private Button aceptar;
+	private String labelNotif;
 	
 	
 	private Panel panel;
@@ -140,7 +142,10 @@ public class Editor extends Window implements Content {
 			news = manNews.getById(id);
 			cuerpo.setValue(news.getContent());
 			titulo.setValue(news.getTitle());
+			labelNotif="Noticia editada con éxito";
 		}
+		else
+			labelNotif="Noticia Creada";
 		
 		aceptar = new Button("Aceptar",
 				new Button.ClickListener() {
@@ -157,9 +162,11 @@ public class Editor extends Window implements Content {
 						news.setSubject(materia);
 						news.setAuthor(manUser.getCurrentUser());
 						manNews.save(news);
-						Notification.show("Noticia Creada", Notification.Type.HUMANIZED_MESSAGE);
+						Notification notif = new Notification(labelNotif, Notification.Type.HUMANIZED_MESSAGE);
+						notif.setDelayMsec(2500);
+						notif.show(Page.getCurrent());
+						getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW + "/" + materia.getName());		
 						close();
-						//getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW);		
 					}
 					else {
 						Notification.show("Revise los campos obligatorios", Notification.Type.WARNING_MESSAGE);

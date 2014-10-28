@@ -13,9 +13,10 @@ import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.domain.News;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.utils.DateUtils;
+import com.yotelopaso.utils.Hr;
 
 public class LastNews extends CustomComponent {
-
+	
 	private static final long serialVersionUID = 1L;
 	
 	private VerticalLayout mainLayout;
@@ -70,7 +71,7 @@ public class LastNews extends CustomComponent {
 			
 			elementLayout.setMargin(false);
 			elementLayout.setSizeFull();
-			elementLayout.setSpacing(false);
+			elementLayout.setSpacing(true);
 			
 			date.setValue(DateUtils.dateFormat(n.getDate()));
 			career.setValue(careerName);
@@ -86,7 +87,7 @@ public class LastNews extends CustomComponent {
 			ampliarButton.setWidth("40%");
 			
 			topHorizontalLayout.addComponents(date, career, subject, autMail, ampliarButton);
-			elementLayout.addComponents(topHorizontalLayout, title);
+			elementLayout.addComponents(topHorizontalLayout, title, new Hr());
 			mainLayout.addComponent(elementLayout);
 		}
 	}
