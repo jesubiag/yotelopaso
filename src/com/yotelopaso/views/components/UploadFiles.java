@@ -124,7 +124,7 @@ public class UploadFiles extends Window implements Content {
 			        addExtension(picker);
 
 			        // Abre el picker de Google que muestra las carpetas de drive del usuario
-			        picker.pickDocument(GooglePicker.Type.FOLDERS);
+			        picker.pickDocument(GooglePicker.Type.DOCS);
 				
 			}
 		}

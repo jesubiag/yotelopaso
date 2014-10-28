@@ -37,7 +37,7 @@ public class FilesTablePresenter implements FilesTable.FilesTableListener {
 		}
 		List<File> subjectFiles = fileService.filterByCareerSubjectType(careerName, subjectName, fileType);
 		for (File f : subjectFiles) {
-			view.buildTable(f.getName(), f.getUrl(), f.getAuthor().getName(), 
+			view.buildTable(f.getName(), f.getUrl(), f.getAuthor().getEmail(), 
 					f.getCreationDate(), f.getId(), f.getDescription());
 		}
 	}

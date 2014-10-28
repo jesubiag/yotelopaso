@@ -77,7 +77,7 @@ public class FilesTableImpl extends CustomComponent implements FilesTable {
 		
 		fileDesc.setSizeFull();
 		
-		fileDetailLayout.addComponents(fileNameTitle, fileNameTitle);
+		fileDetailLayout.addComponents(fileNameTitle, fileName);
 		fileDetailLayout.addComponents(fileDateTitle, fileDate);
 		fileDetailLayout.addComponents(fileAuthorTitle, fileAuthor);
 		fileDetailLayout.addComponents(fileDescTitle, fileDesc);
