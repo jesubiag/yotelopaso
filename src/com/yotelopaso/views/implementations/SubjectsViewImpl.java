@@ -26,6 +26,8 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.domain.File;
+import com.yotelopaso.domain.File.Type;
 import com.yotelopaso.domain.Subject;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.persistence.SubjectManager;
@@ -33,6 +35,7 @@ import com.yotelopaso.presenters.SubjectsPresenter;
 import com.yotelopaso.utils.Hr;
 import com.yotelopaso.views.SubjectsView;
 import com.yotelopaso.views.components.Editor;
+import com.yotelopaso.views.components.UploadFiles;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;
 
 public class SubjectsViewImpl extends AbstractHomeViewImpl implements SubjectsView, 
@@ -201,7 +204,12 @@ ItemClickListener, ClickListener {
 		Vaadintest01UI.getCurrent().addWindow(new Editor(subjectName,id));
 		//UI.getCurrent().addWindow(new Editor(subjectName));
 	}
-
+	@Override
+	public void showUploadFileWindow(Type fileType) {
+		Vaadintest01UI.getCurrent().addWindow(new UploadFiles(subjectName,fileType));
+		//UI.getCurrent().addWindow(new Editor(subjectName));
+	}
+	
 	@Override
 	public void toggleTreeRoot(String rootName) {
 		subjectsTreeComponent.toggleRoot(rootName);
@@ -231,6 +239,10 @@ ItemClickListener, ClickListener {
 			FilesTableImpl aux = new FilesTableImpl(subjectName, this, entry.getKey(), careerName);
 			aux.setSizeFull();
 			tables.put(entry.getKey(), aux);
+			Button cargarArchivos = new Button("Subir " + entry.getKey());
+			cargarArchivos.addStyleName("primary");
+			cargarArchivos.addClickListener(this);
+			entry.getValue().addComponent(cargarArchivos);
 			entry.getValue().addComponent(aux);
 			//entry.getValue().setExpandRatio(aux, 1.0f);
 		}

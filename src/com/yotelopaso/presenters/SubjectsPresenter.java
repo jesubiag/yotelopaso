@@ -6,6 +6,7 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.Button.ClickEvent;
 import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.domain.File.Type;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.FileManager;
 import com.yotelopaso.persistence.NewsManager;
@@ -123,6 +124,17 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		case "Eliminar":
 			view.deleteNew((Long)newsId);
 			//newsService.delete(newsId);
+		case "Subir Parciales":
+			view.showUploadFileWindow(Type.PARCIAL);
+			break;
+		case "Subir Finales":
+			view.showUploadFileWindow(Type.FINAL);
+			break;
+		case "Subir TPs":
+			view.showUploadFileWindow(Type.TP);
+			break;
+		case "Subir Apuntes":
+			view.showUploadFileWindow(Type.APUNTE);
 			break;
 		}
 	}
