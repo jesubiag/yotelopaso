@@ -112,7 +112,7 @@ public class File implements Serializable {
 	}
 
 	public Career getCareer() {
-		return career;
+		return this.subject.getCareer();
 	}
 
 	public void setCareer(Career career) {
