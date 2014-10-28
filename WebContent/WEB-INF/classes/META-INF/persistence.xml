@@ -26,10 +26,12 @@
 			<property name="javax.persistence.jdbc.user" value="sa"/>
 			<property name="javax.persistence.jdbc.password" value="sa"/>
 			<property name="eclipselink.logging.level" value="FINE" />
-			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
-			<!-- "create-tables" -->
-			<!-- "create-or-extend-tables" -->
-			<!-- "drop-and-create-tables"-->
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<!-- Posibles valores para la propiedad:
+			"create-tables"
+			"create-or-extend-tables"
+			"drop-and-create-tables"
+			-->
 			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
 		</properties>
 	</persistence-unit>

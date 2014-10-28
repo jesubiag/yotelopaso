@@ -1,8 +1,9 @@
 package com.yotelopaso.views;
 
-import java.util.Date;
 
 import com.vaadin.data.Item;
+import com.vaadin.ui.Button.ClickEvent;
+
 
 public interface SubjectsView extends AbstractHomeView {
 	
@@ -10,7 +11,7 @@ public interface SubjectsView extends AbstractHomeView {
 	public void nagivate(String viewName);
 	public void cleanComponents();
 	public void buildSubjectLayout(String subjectName, String careerName);
-	public void showNewsEditorWindow();
+	public void showNewsEditorWindow(Long id);
 	public void toggleTreeRoot(String rootName);
 	public void showFileDetail(String authorName, String date, String name, String desc);
 	
@@ -21,6 +22,7 @@ public interface SubjectsView extends AbstractHomeView {
 		public void setDefaultContent();
 		public void setSubjectContent(String subjectName);
 		public void selectedTabChange(String caption);
+		public void buttonClick(String caption, ClickEvent event);
 	}
 	
 	public void addListener(SubjectsViewListener listener);

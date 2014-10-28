@@ -23,7 +23,6 @@ public class DataInitializer {
 	private static NewsManager newsMngr = new NewsManager();
 	private static FileManager fileMngr = new FileManager();
 	
-	
 	public DataInitializer() {
 		
 	}
@@ -156,9 +155,11 @@ public class DataInitializer {
 	private static void populateNewsTable() { 
 		News news = new News();
 		news.setCareer(careerMngr.getById(1));
+		news.setTitle("Parcial Simulacion");
 		news.setContent("El parcial del miércoles 1/10 se pasa al viernes 3/10.");
 		news.setDate(new Date());
 		news.setSubject(subjectMngr.getById(32));
+		news.setAuthor(user1);
 		newsMngr.save(news);
 	}
 	

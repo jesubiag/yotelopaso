@@ -30,12 +30,13 @@ public class SomeTest {
 	@Test
 	public void delete() {
 		cm.save(new Career(2000, "Ser borrada"));
-		Career c = cm.getById(2000);
-		System.out.println("***************" + c.getName());
+		Career c1 = cm.getById(2000);
+		System.out.println("***************" + c1.getName());
 		cm.delete(2000);
-		c = cm.getById(2000);
+		Career c = cm.getById(2000);
 	//	System.out.println("***************" + c.getName());
 		assertTrue(c == null);
+		assertTrue(!cm.getContainer().containsId(2000));
 	}
 	
 	//@Test

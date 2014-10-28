@@ -58,10 +58,11 @@ public class FilesTableImpl extends CustomComponent implements FilesTable {
 		//Seteo los elementos de la tabla
 		filesTable.setSizeFull();
 		filesTable.addStyleName("components-inside");
-		filesTable.addContainerProperty("Nombre", Link.class, null);
-		filesTable.addContainerProperty("Autor", String.class, null);
-		filesTable.addContainerProperty("Fecha de creación", String.class, null);
-		filesTable.addContainerProperty("Descripción", String.class, null);
+		String[] tableIds = {"Nombre", "Autor", "Fecha de creación", "Descripción"};
+		filesTable.addContainerProperty(tableIds[0], Link.class, null);
+		filesTable.addContainerProperty(tableIds[1], String.class, null);
+		filesTable.addContainerProperty(tableIds[2], String.class, null);
+		filesTable.addContainerProperty(tableIds[3], String.class, null);
 		
 		filesTable.addStyleName(ValoTheme.TABLE_BORDERLESS);
 		filesTable.addStyleName(ValoTheme.TABLE_COMPACT);
@@ -69,7 +70,9 @@ public class FilesTableImpl extends CustomComponent implements FilesTable {
 		filesTable.addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
 		filesTable.setColumnReorderingAllowed(true);
 		//TODO: cuando seteo esta propiedad, el contenido deja de mostrarse
-		//filesTable.setVisibleColumns(new Object[] {"Nombre", "Autor", "Fecha de creación"});
+		filesTable.setColumnCollapsingAllowed(true);
+		filesTable.setColumnCollapsed(tableIds[3], true);
+		//filesTable.setVisibleColumns(new Object[] {tableIds[0], tableIds[1], tableIds[2]});
 		fileDetailLayout.setSizeFull();
 		
 		fileDesc.setSizeFull();

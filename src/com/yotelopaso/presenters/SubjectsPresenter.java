@@ -4,7 +4,7 @@ package com.yotelopaso.presenters;
 import com.vaadin.data.Item;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Link;
-import com.vaadin.ui.Notification;
+import com.vaadin.ui.Button.ClickEvent;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.FileManager;
@@ -81,9 +81,6 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 			VaadinSession.getCurrent().setAttribute("currentUser", null);
 			view.nagivate(Vaadintest01UI.MAIN_VIEW);
 			break;
-		case "Nueva Noticia":
-			view.showNewsEditorWindow();
-			break;
 		default:
 			//view.buildSubjectLayout(caption);
 			break;
@@ -112,4 +109,19 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		
 	}
 
+	@Override
+	public void buttonClick(String caption, ClickEvent event) {
+		// TODO: pasar el evento a la vista, que solo reciba la data del componente
+		switch (caption) {
+		case "Nueva Noticia":
+			view.showNewsEditorWindow(null);
+			break;
+		case "Editar":
+			view.showNewsEditorWindow((Long)event.getButton().getData());
+			break;
+		case "Eliminar":
+			newsService.delete((Long)event.getButton().getData());
+			break;
+		}
+	}
 }

@@ -4,11 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HasComponents.ComponentAttachListener;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.HomeView;
+import com.yotelopaso.views.SubjectsView.SubjectsViewListener;
+import com.yotelopaso.views.components.Editor;
 import com.yotelopaso.views.components.LastNews;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;
 
@@ -18,6 +25,7 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 	private Panel panel;
 	private Panel windowNews;
 	private VerticalLayout subContentNews;
+	private HorizontalLayout horLayout;
 	private LastNews lastNews;
 	private Panel windowRecentFiles;
 	private Panel windowRecentEvents;
@@ -51,7 +59,7 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 		//String cn = c.getName();
 		//LastNews ln = new LastNews(cn);
 		//windowNews.setContent(lastNews);
-		windowNews.setHeight("100%");
+		windowNews.setHeight("140%");
 		windowNews.setWidth("100%");
 		// Content should be retrieved from database
 		//LastNews contentNews = new LastNews(getCurrentUser().getCareer().getName());
@@ -61,7 +69,7 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 		VerticalLayout subContentRecentFiles = new VerticalLayout();
 		subContentRecentFiles.setMargin(true);
 		windowRecentFiles.setContent(subContentRecentFiles);
-		windowRecentFiles.setHeight("100%");
+		windowRecentFiles.setHeight("60%");
 		windowRecentFiles.setWidth("100%");
 		// Content should be retrieved from database
 		subContentRecentFiles.addComponent(new Label("Contenido"));
@@ -70,14 +78,23 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 		VerticalLayout subContentRecentEvents = new VerticalLayout();
 		subContentRecentEvents.setMargin(true);
 		windowRecentEvents.setContent(subContentRecentEvents);
-		windowRecentEvents.setHeight("100%");
+		windowRecentEvents.setHeight("60%");
 		windowRecentEvents.setWidth("100%");
 		// Content should be retrieved from database
 		subContentRecentEvents.addComponent(new Label("Contenido"));
 		
+		horLayout = new HorizontalLayout();
+		horLayout.setSizeFull();
+		horLayout.setSpacing(true);
+		horLayout.addComponent(windowRecentFiles);
+		horLayout.addComponent(windowRecentEvents);
+		horLayout.setComponentAlignment(windowRecentEvents, Alignment.BOTTOM_CENTER);
+		horLayout.setComponentAlignment(windowRecentFiles, Alignment.BOTTOM_CENTER);
+		
 		panelLayout.addComponent(windowNews);
-		panelLayout.addComponent(windowRecentFiles);
-		panelLayout.addComponent(windowRecentEvents);
+		panelLayout.addComponent(horLayout);
+		//panelLayout.addComponent(windowRecentFiles);
+		//panelLayout.addComponent(windowRecentEvents);
 		
 	}
 	
@@ -89,7 +106,10 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 	}
 
 	@Override
-	public void setLastNews(LastNews lastNews) {
+	public void setLastNews() {
+		UserManager userService = new UserManager();
+		String cn = userService.getCurrentUser().getCareer().getName();
+		LastNews lastNews = new LastNews(cn,this);
 		this.lastNews = lastNews;
 	}
 
@@ -98,6 +118,20 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 		for (HomeViewListener listener : listeners) {
 			listener.addWindowsNewsContent(event.getComponent().getCaption());
 		}
+	}
+
+	@Override
+	public void buttonClick(ClickEvent event) {
+		super.buttonClick(event);
+		for (HomeViewListener listener : listeners) {
+			listener.buttonClick(event.getButton().getCaption(), event);
+		}
+	}
+	@Override
+	public void showNewsEditorWindow(Long id) {
+		// TODO Auto-generated method 
+		Editor editor = new Editor(id);
+		UI.getCurrent().addWindow(editor);
 	}
 	
 }
