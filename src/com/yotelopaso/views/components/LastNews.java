@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -20,9 +21,11 @@ public class LastNews extends CustomComponent {
 	private VerticalLayout mainLayout;
 	private NewsManager newsMngr = new NewsManager();
 	private String careerName;
+	private ClickListener parentView;
 	
-	public LastNews(String careerName) {
+	public LastNews(String careerName, ClickListener parentView) {
 		this.careerName = careerName;
+		this.parentView = parentView;
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 	}
@@ -50,6 +53,15 @@ public class LastNews extends CustomComponent {
 			// content
 			Label content = new Label();
 			content.setContentMode(ContentMode.HTML);
+			
+			// title
+			Label title = new Label();
+			title.setContentMode(ContentMode.HTML);
+			
+			// author
+			Label autMail = new Label();
+			autMail.setContentMode(ContentMode.HTML);
+			
 			HorizontalLayout topHorizontalLayout = new HorizontalLayout();
 			VerticalLayout elementLayout = new VerticalLayout();
 			
@@ -64,8 +76,15 @@ public class LastNews extends CustomComponent {
 			career.setValue(careerName);
 			subject.setValue(n.getSubject().getName());
 			content.setValue(n.getContent());
-			topHorizontalLayout.addComponents(date, career, subject);
-			elementLayout.addComponents(topHorizontalLayout, content);
+			title.setValue(n.getTitle());
+			autMail.setValue(n.getAuthor().getEmail());
+			
+			Button ampliarButton = new Button("Ampliar");
+			ampliarButton.addClickListener(parentView);
+			ampliarButton.setData(n.getId());
+			
+			topHorizontalLayout.addComponents(date, career, subject, autMail, ampliarButton);
+			elementLayout.addComponents(topHorizontalLayout, title);
 			mainLayout.addComponent(elementLayout);
 		}
 	}

@@ -17,6 +17,7 @@ public class DataInitializer {
 	private static UserManager userMngr = new UserManager();
 	private static SubjectManager subjectMngr = new SubjectManager(); 
 	private static NewsManager newsMngr = new NewsManager();
+	private static User user1;
 	
 	public DataInitializer() {
 		
@@ -44,7 +45,7 @@ public class DataInitializer {
 	
 	private static void populateUsersTable(){
 
-		User user1 = new User();
+		user1 = new User();
 		user1.setId(13122717217802891560D);
 		user1.setName("Jesus");
 		user1.setLastName("Biaggioni");
@@ -150,9 +151,11 @@ public class DataInitializer {
 	private static void populateNewsTable() { 
 		News news = new News();
 		news.setCareer(careerMngr.getById(1));
+		news.setTitle("Parcial Simulacion");
 		news.setContent("El parcial del miércoles 1/10 se pasa al viernes 3/10.");
 		news.setDate(new Date());
 		news.setSubject(subjectMngr.getById(32));
+		news.setAuthor(user1);
 		newsMngr.save(news);
 	}
 	

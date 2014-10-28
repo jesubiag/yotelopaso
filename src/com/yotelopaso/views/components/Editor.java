@@ -29,13 +29,22 @@ import com.yotelopaso.persistence.UserManager;
 
 public class Editor extends Window implements Content {
 
-	NewsManager manNews = new NewsManager();
-	UserManager manUser = new UserManager();
-	SubjectManager manSubject = new SubjectManager();
-	News news = new News();
-	String subjectName;
-	Career carrera;
-	Subject materia;
+	private NewsManager manNews = new NewsManager();
+	private UserManager manUser = new UserManager();
+	private SubjectManager manSubject = new SubjectManager();
+	private News news = new News();
+	private String subjectName;
+	private Career carrera;
+	private Subject materia;
+	private Long id;
+	private RichTextArea cuerpo;
+	private DateField fecha;
+	private TextField titulo;
+	private TextField carr;
+	private TextField mat;
+	private TextField autor;
+	private Button aceptar;
+	
 	
 	private Panel panel;
 	private VerticalLayout mainLayout = new VerticalLayout();
@@ -43,12 +52,33 @@ public class Editor extends Window implements Content {
 	
 	private static final long serialVersionUID = 1L;
 
-	public Editor(String subjectName){
+	//Constructor para el caso de editar y nueva noticia
+	public Editor(String subjectName, Long id){
+		this.id = id;
 		this.subjectName = subjectName;
+		carrera = manUser.getCurrentUser().getCareer();
+		materia = manSubject.getByProperty("name", this.subjectName).get(0);
 		buildMainLayout();
+		autor.setValue(manUser.getCurrentUser().getEmail());
 		//setCompositionRoot(mainLayout);
 	}
 	
+	//Constructor para el caso de ampliar una noticia, todos los campos disabled
+	public Editor(Long id) {
+		this.id = id;
+		news=manNews.getById(this.id);
+		materia=news.getSubject();
+		carrera=news.getCareer();
+		buildMainLayout();
+		autor.setValue(news.getAuthor().getEmail());
+		titulo.setEnabled(false);
+		cuerpo.setReadOnly(true);
+		fecha.setEnabled(false);
+		carr.setEnabled(false);
+		mat.setEnabled(false);
+		aceptar.setVisible(false);
+	}
+
 	private void buildMainLayout(){
 		
 		//Primero vamos a crear un form que es donde el usuario va a cargar los datos y luego se va a crear el panel
@@ -62,36 +92,39 @@ public class Editor extends Window implements Content {
 		 //getRightLayout().setExpandRatio(form, 1.0f);
 		 
 		//Creamos el RichTextArea para el cuerpo de la noticia
-		final RichTextArea cuerpo = new RichTextArea();
+		cuerpo = new RichTextArea();
 		cuerpo.setValue(null);
 		cuerpo.setNullRepresentation("Complete el contenido de la noticia");
        	cuerpo.setImmediate(true);
         cuerpo.setSizeFull();
         cuerpo.setCaption("Descripción de la Noticia");
+        cuerpo.addStyleName("borderless");
        
-		final DateField fecha = new DateField("Fecha de publicación");
+		fecha = new DateField("Fecha de publicación");
 		fecha.setValue(new Date());
 		fecha.setEnabled(false);
 		fecha.addStyleName("borderless");
 		
-		final TextField titulo = new TextField("Título");
+		titulo = new TextField("Título");
 		titulo.setMaxLength(50);
 		titulo.setWidth("60%");
 		titulo.setImmediate(true);
 		titulo.setRequired(true);
 		titulo.setRequiredError("Obligatorio");
 		
-		carrera = manUser.getCurrentUser().getCareer();
-		materia = manSubject.getByProperty("name", this.subjectName).get(0);
+		autor = new TextField("Autor");
+		autor.setWidth("60%");
+		autor.setEnabled(false);
+		autor.addStyleName("borderless");		
 		
-		TextField carr = new TextField("Carrera");
+		carr = new TextField("Carrera");
 		carr.setValue(carrera.getName());
 		carr.setWidth("60%");
 		carr.setEnabled(false);
 		carr.addStyleName("borderless");
 		
-		TextField mat = new TextField("Materia");
-		mat.setValue(this.subjectName);
+		mat = new TextField("Materia");
+		mat.setValue(materia.getName());
 		mat.setWidth("60%");
 		mat.setEnabled(false);
 		mat.addStyleName("borderless");
@@ -99,10 +132,17 @@ public class Editor extends Window implements Content {
 		form.addComponent(titulo);
 		form.addComponent(carr);
 		form.addComponent(mat);
+		form.addComponent(autor);
 		form.addComponent(fecha);
 		form.addComponent(cuerpo);
 		
-		Button aceptar = new Button("Aceptar",
+		if (id!=null){
+			news = manNews.getById(id);
+			cuerpo.setValue(news.getContent());
+			titulo.setValue(news.getTitle());
+		}
+		
+		aceptar = new Button("Aceptar",
 				new Button.ClickListener() {
 				
 				private static final long serialVersionUID = 1L;
@@ -126,7 +166,8 @@ public class Editor extends Window implements Content {
 					}
 					
 				}
-	}); //Aca se crea el boton aceptar que persiste los datos y te envia a la home
+	}); //Aca se crea el boton aceptar que persiste los datos
+		
 		Button cancelar = new Button("Cancelar",
 				new Button.ClickListener() {
 				private static final long serialVersionUID = 1L;

@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HasComponents.ComponentAttachListener;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.HomeView;
+import com.yotelopaso.views.SubjectsView.SubjectsViewListener;
+import com.yotelopaso.views.components.Editor;
 import com.yotelopaso.views.components.LastNews;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;
 
@@ -89,7 +94,10 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 	}
 
 	@Override
-	public void setLastNews(LastNews lastNews) {
+	public void setLastNews() {
+		UserManager userService = new UserManager();
+		String cn = userService.getCurrentUser().getCareer().getName();
+		LastNews lastNews = new LastNews(cn,this);
 		this.lastNews = lastNews;
 	}
 
@@ -98,6 +106,20 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 		for (HomeViewListener listener : listeners) {
 			listener.addWindowsNewsContent(event.getComponent().getCaption());
 		}
+	}
+
+	@Override
+	public void buttonClick(ClickEvent event) {
+		super.buttonClick(event);
+		for (HomeViewListener listener : listeners) {
+			listener.buttonClick(event.getButton().getCaption(), event);
+		}
+	}
+	@Override
+	public void showNewsEditorWindow(Long id) {
+		// TODO Auto-generated method 
+		Editor editor = new Editor(id);
+		UI.getCurrent().addWindow(editor);
 	}
 	
 }

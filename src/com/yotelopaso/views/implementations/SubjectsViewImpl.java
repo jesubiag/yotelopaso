@@ -11,6 +11,9 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;		
+import com.vaadin.ui.Button.ClickListener;		
+import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Label;
@@ -20,17 +23,20 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.presenters.SubjectsPresenter;
 import com.yotelopaso.views.SubjectsView;
 import com.yotelopaso.views.components.Editor;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;
 
 public class SubjectsViewImpl extends AbstractHomeViewImpl implements SubjectsView, 
-ItemClickListener {
+ItemClickListener, ClickListener {
 
 	private static final long serialVersionUID = 1L;
 	
 	private SubjectsPresenter presenter;
+	private NewsManager manNews;
 	final HorizontalLayout mainLayout = new HorizontalLayout();
 	final Panel panel = new Panel();
 	final TabSheet sections = new TabSheet();
@@ -76,6 +82,14 @@ ItemClickListener {
 	@Override
 	public void addListener(SubjectsViewListener listener) {
 		listeners.add(listener);
+	}
+	
+	@Override
+	public void buttonClick(ClickEvent event) {
+		super.buttonClick(event);
+		for (SubjectsViewListener listener : listeners) {
+			listener.buttonClick(event.getButton().getCaption(), event);
+		}
 	}
 	
 	@Override
@@ -126,7 +140,7 @@ ItemClickListener {
 		VerticalLayout tabFiles = new VerticalLayout();
 		HorizontalLayout topLayout = new HorizontalLayout();
 		topLayout.setWidth("100%");
-		topLayout.setMargin(true);
+		topLayout.setMargin(false);
 		
 		//PopupView editor = new PopupView(new Editor(subjectName));
 		//topLayout.addComponent(editor);
@@ -135,6 +149,7 @@ ItemClickListener {
 		Button createNews = new Button("Nueva Noticia");
 		createNews.addClickListener(this);
 		createNews.addStyleName("primary");
+		createNews.setHeight("80%");
 		topLayout.addComponent(createNews);
 		
 		tabNews.addComponent(topLayout);
@@ -171,8 +186,9 @@ ItemClickListener {
 	}
 	
 	@Override
-	public void showNewsEditorWindow() {
-		UI.getCurrent().addWindow(new Editor(subjectName));
+	public void showNewsEditorWindow(Long id) {
+		Vaadintest01UI.getCurrent().addWindow(new Editor(subjectName,id));
+		//UI.getCurrent().addWindow(new Editor(subjectName));
 	}
 
 	@Override
@@ -202,7 +218,6 @@ ItemClickListener {
 		//TODO: setear como posicion el ancho del segundo componente
 		
 	}
-
 
 	//@Override
 	//public void selectedTabChange(SelectedTabChangeEvent event) {

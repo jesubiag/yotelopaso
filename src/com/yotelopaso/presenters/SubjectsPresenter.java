@@ -3,6 +3,8 @@ package com.yotelopaso.presenters;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Component.Event;
 import com.vaadin.ui.UI;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.domain.User;
@@ -60,9 +62,6 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 			VaadinSession.getCurrent().setAttribute("currentUser", null);
 			view.nagivate(Vaadintest01UI.MAIN_VIEW);
 			break;
-		case "Nueva Noticia":
-			view.showNewsEditorWindow();
-			break;
 		default:
 			this.userCareer = userService.getCurrentUser().getCareer().getName();
 			view.cleanComponents();
@@ -94,4 +93,18 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		
 	}
 
+	@Override
+	public void buttonClick(String caption, ClickEvent event) {
+		// TODO Auto-generated method stub
+		switch (caption) {
+		case "Nueva Noticia":
+			view.showNewsEditorWindow(null);
+			break;
+		case "Editar":
+			view.showNewsEditorWindow((Long)event.getButton().getData());
+			break;
+		case "Eliminar":
+			//newsService.delete((Long)event.getButton().getData());
+		}
+	}
 }

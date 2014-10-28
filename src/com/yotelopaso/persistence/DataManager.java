@@ -36,10 +36,11 @@ public class DataManager<T> {
 	}
 	
 	public <TN extends Number> void delete(TN id) {
-		String jpql = "DELETE FROM " + tableName + " e WHERE e.id = :id";
-		Query query = em.createQuery(jpql);
-		query.setParameter("id", id);
-		query.executeUpdate();
+		em.remove(getById(id));
+		//String jpql = "DELETE FROM " + tableName + " e WHERE e.id = :id";
+		//Query query = em.createQuery(jpql);
+		//query.setParameter("id", id);
+		//query.executeUpdate();
 	}
 	
 	@SuppressWarnings("unchecked")
