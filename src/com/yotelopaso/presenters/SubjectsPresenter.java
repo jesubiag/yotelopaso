@@ -1,46 +1,67 @@
 package com.yotelopaso.presenters;
 
-import com.vaadin.navigator.Navigator;
-import com.vaadin.server.Page;
+
+import com.vaadin.data.Item;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.UI;
+import com.vaadin.ui.Link;
+import com.vaadin.ui.Notification;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.domain.User;
+import com.yotelopaso.persistence.FileManager;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.persistence.UserManager;
-import com.yotelopaso.utils.StringUtils;
 import com.yotelopaso.views.SubjectsView;
 
 public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> implements SubjectsView.SubjectsViewListener {
 	
-	SubjectsView view;
-	NewsManager newsService;
-	SubjectManager subjectService;
-	UserManager userService;
-	String userCareer;
+	private SubjectsView view;
+	private NewsManager newsService;
+	private SubjectManager subjectService;
+	private UserManager userService;
+	private String userCareer;
+	private FileManager fileService;
 
-	public SubjectsPresenter(SubjectsView view, UserManager userService, SubjectManager subjectService) {
+	public SubjectsPresenter(SubjectsView view, UserManager userService, 
+			SubjectManager subjectService, FileManager fileService) {
 		super(view, userService);
 		
 		this.view = view;
 		this.subjectService = subjectService;
 		this.userService = userService;
+		this.fileService = fileService;
 		
 		view.addListener(this);
 	}
 
 	@Override
-	public void itemClick(String caption) {
+	public void treeItemClick(String caption) {
 		// TODO: Arreglar, esto debería funcionar, no debería repetirse el contenido del método en este
 		//super.panelButtonClick(caption);
 		
-		// No se como implementar lo siguiente en un case
+		// Acciones para el tree
 		if (caption.contains("Materias")) {
 			// hacer algo en la view
 			view.toggleTreeRoot(caption);
 			return;
+		} else {
+			this.userCareer = userService.getCurrentUser().getCareer().getName();
+			view.cleanComponents();
+			view.nagivate(Vaadintest01UI.SUBJECTS_VIEW + "/" + caption);
 		}
+	}
+	
+	@Override
+	public void tableItemClick(Item item) {
+		String fileAuthor = (String) item.getItemProperty("Autor").getValue();
+		String fileDate = (String) item.getItemProperty("Fecha de creación").getValue();
+		String fileDesc = (String) item.getItemProperty("Descripción").getValue();
+		Link l = (Link) item.getItemProperty("Nombre").getValue();
+		view.showFileDetail(fileAuthor, fileDate, l.getCaption(), fileDesc);
+	}
+	
+	@Override
+	public void buttonClick(String caption) {
 		
 		switch (caption) {
 		case "Inicio":
@@ -64,9 +85,6 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 			view.showNewsEditorWindow();
 			break;
 		default:
-			this.userCareer = userService.getCurrentUser().getCareer().getName();
-			view.cleanComponents();
-			view.nagivate(Vaadintest01UI.SUBJECTS_VIEW + "/" + caption);
 			//view.buildSubjectLayout(caption);
 			break;
 		}

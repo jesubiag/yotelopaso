@@ -3,20 +3,26 @@ package com.yotelopaso.utils;
 import java.util.Date;
 
 import com.yotelopaso.domain.Career;
+import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.News;
 import com.yotelopaso.domain.Subject;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.CareerManager;
+import com.yotelopaso.persistence.FileManager;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.persistence.UserManager;
 
 public class DataInitializer {
 	
+	static User user1 = new User();
+	
 	private static CareerManager careerMngr = new CareerManager();
 	private static UserManager userMngr = new UserManager();
 	private static SubjectManager subjectMngr = new SubjectManager(); 
 	private static NewsManager newsMngr = new NewsManager();
+	private static FileManager fileMngr = new FileManager();
+	
 	
 	public DataInitializer() {
 		
@@ -28,6 +34,7 @@ public class DataInitializer {
 		populateUsersTable();
 		populateSubjectsTable();
 		populateNewsTable();
+		populateFilesTable();
 		
 	}
 	
@@ -44,7 +51,6 @@ public class DataInitializer {
 	
 	private static void populateUsersTable(){
 
-		User user1 = new User();
 		user1.setId(13122717217802891560D);
 		user1.setName("Jesus");
 		user1.setLastName("Biaggioni");
@@ -154,6 +160,19 @@ public class DataInitializer {
 		news.setDate(new Date());
 		news.setSubject(subjectMngr.getById(32));
 		newsMngr.save(news);
+	}
+	
+	private static void populateFilesTable() {
+		Subject s = subjectMngr.getById(32);
+		File file1 = new File("https://drive.google.com/file/d/0BwyBLzUTWd4vd21qTFE4S1hkczQ/view?usp=sharing",
+				user1,
+				"Doc test",
+				new Date(),
+				s,
+				s.getCareer(),
+				File.Type.APUNTE,
+				"Rejunte de los temas de la materia TEST");
+		fileMngr.save(file1);
 	}
 	
 }

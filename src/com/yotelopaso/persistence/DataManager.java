@@ -36,10 +36,8 @@ public class DataManager<T> {
 	}
 	
 	public <TN extends Number> void delete(TN id) {
-		String jpql = "DELETE FROM " + tableName + " e WHERE e.id = :id";
-		Query query = em.createQuery(jpql);
-		query.setParameter("id", id);
-		query.executeUpdate();
+		//T entity = em.merge(getById(id));
+		em.remove(getById(id));
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -53,7 +51,8 @@ public class DataManager<T> {
 	}
 	
 	public <TN extends Number> T getById(TN id) {
-		return ep.getEntity(container, id);
+		//return ep.getEntity(container, id);
+		return em.find(clazz, id);
 	}
 	
 	@SuppressWarnings("unchecked")

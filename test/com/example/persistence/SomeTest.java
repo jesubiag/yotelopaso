@@ -6,18 +6,39 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 
 import org.apache.tomcat.jni.User;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.yotelopaso.domain.Career;
 import com.yotelopaso.domain.News;
+import com.yotelopaso.domain.Subject;
 import com.yotelopaso.persistence.CareerManager;
 import com.yotelopaso.persistence.NewsManager;
+import com.yotelopaso.utils.DataInitializer;
 import com.yotelopaso.utils.StringUtils;
 
 public class SomeTest {
 	
+	CareerManager cm = new CareerManager();
+	
+	@Before
+	public void setUp() {
+		DataInitializer.populateTables();
+	}
+	
 	@Test
+	public void delete() {
+		cm.save(new Career(2000, "Ser borrada"));
+		Career c = cm.getById(2000);
+		System.out.println("***************" + c.getName());
+		cm.delete(2000);
+		c = cm.getById(2000);
+	//	System.out.println("***************" + c.getName());
+		assertTrue(c == null);
+	}
+	
+	//@Test
 	public void stringTest() {
 		String[] s = StringUtils.parseURL("primero/hola/que tal");
 		System.out.println(s.length);

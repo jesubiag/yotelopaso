@@ -11,6 +11,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.yotelopaso.persistence.CareerManager;
+import com.yotelopaso.persistence.FileManager;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.persistence.UserManager;
@@ -18,7 +19,6 @@ import com.yotelopaso.presenters.DatosRegPresenter;
 import com.yotelopaso.presenters.HomePresenter;
 import com.yotelopaso.presenters.MainPresenter;
 import com.yotelopaso.presenters.SubjectsPresenter;
-import com.yotelopaso.utils.DataInitializer;
 import com.yotelopaso.views.EditorNoticiasView;
 import com.yotelopaso.views.implementations.DatosRegImpl;
 import com.yotelopaso.views.implementations.HomeViewImpl;
@@ -65,6 +65,7 @@ public class Vaadintest01UI extends UI {
 		NewsManager newsManager = new NewsManager();
 		CareerManager carrManager = new CareerManager();
 		SubjectManager subjectManager = new SubjectManager();
+		FileManager fileManager = new FileManager();
 		
 		// Vistas
 		MainViewImpl mainView = new MainViewImpl();
@@ -82,7 +83,8 @@ public class Vaadintest01UI extends UI {
 		// Presenters con sus vistas y managers asociados
 		new MainPresenter(mainView);
 		new HomePresenter(homeView, userManager);
-		SubjectsPresenter subjectsPresenter = new SubjectsPresenter(subjectsView, userManager, subjectManager);
+		SubjectsPresenter subjectsPresenter = new SubjectsPresenter(subjectsView, 
+				userManager, subjectManager, fileManager);
 		new DatosRegPresenter(datosView,userManager,carrManager);
 		
 		subjectsView.setPresenter(subjectsPresenter);

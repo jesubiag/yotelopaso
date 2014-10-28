@@ -17,6 +17,7 @@
 			<class>com.yotelopaso.domain.Session</class>
 			<class>com.yotelopaso.domain.Subject</class>
 			<class>com.yotelopaso.domain.User</class>
+			<class>com.yotelopaso.domain.File</class>
 		<properties>
 			<property name="eclipselink.jdbc.platform"
 				value="org.eclipse.persistence.platform.database.H2Platform"/>
@@ -25,7 +26,7 @@
 			<property name="javax.persistence.jdbc.user" value="sa"/>
 			<property name="javax.persistence.jdbc.password" value="sa"/>
 			<property name="eclipselink.logging.level" value="FINE" />
-			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
 			<!-- "create-tables" -->
 			<!-- "create-or-extend-tables" -->
 			<!-- "drop-and-create-tables"-->

@@ -1,6 +1,7 @@
 package com.yotelopaso.views.implementations;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +12,12 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PopupView;
 import com.vaadin.ui.TabSheet;
+import com.vaadin.ui.Table;
+import com.vaadin.ui.Tree;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -33,6 +35,11 @@ ItemClickListener {
 	final HorizontalLayout mainLayout = new HorizontalLayout();
 	final Panel panel = new Panel();
 	final TabSheet sections = new TabSheet();
+	private FilesTableImpl filesTableApuntes;
+	private FilesTableImpl filesTableParciales;
+	private FilesTableImpl filesTableFinales;
+	private FilesTableImpl filesTableTPs;
+	private String currentTableData;
 	private SubjectsByYearImpl subjectsTreeComponent;
 	
 	@Override
@@ -79,7 +86,14 @@ ItemClickListener {
 	public void itemClick(ItemClickEvent event) {
 		//super.buttonClick(event);
 		for (SubjectsViewListener listener : listeners) {
-				listener.itemClick((String) event.getItemId());
+			Class<? extends Object> sourceClass = event.getSource().getClass();
+			if (sourceClass == Tree.class) {
+				listener.treeItemClick( (String) event.getItemId());
+			} else if (sourceClass == Table.class) {
+				Table currentTable = (Table) event.getSource();
+				currentTableData = (String) currentTable.getData();
+				listener.tableItemClick(event.getItem());
+			}
 		}
 	}
 
@@ -147,7 +161,7 @@ ItemClickListener {
 		// Archivos
 		TabSheet filesTypes = new TabSheet();
 		
-		buildFilesView(filesTypes);
+		buildFilesView(filesTypes, subjectName, careerName);
 		
 		
 		
@@ -171,26 +185,56 @@ ItemClickListener {
 		subjectsTreeComponent.toggleRoot(rootName);
 	}
 	
-	private void buildFilesView(final TabSheet ft) {
+	private void buildFilesView(final TabSheet ft, String subjectName, String careerName) {
 		final VerticalLayout subtabParciales = new VerticalLayout();
 		final VerticalLayout subtabApuntes = new VerticalLayout();
 		final VerticalLayout subtabTPs = new VerticalLayout();
 		final VerticalLayout subtabFinales = new VerticalLayout();
 		
 		HashMap<String, VerticalLayout> tabs = new HashMap<String, VerticalLayout>();
+		HashMap<String, FilesTableImpl> tables = new HashMap<String, FilesTableImpl>();
 		
 		tabs.put("Apuntes", subtabApuntes);
 		tabs.put("Finales", subtabFinales);
 		tabs.put("Parciales", subtabParciales);
 		tabs.put("TPs", subtabTPs);
 		
+		// TODO: mejorar el siguiente bloque de codigo. Tal vez no convenga usar Hash sino listas
 		for (Map.Entry<String, VerticalLayout> entry : tabs.entrySet()) {
 			ft.addTab(entry.getValue(), entry.getKey());
-			//entry.getValue().addComponent(new FilesTableImpl());
+			FilesTableImpl aux = new FilesTableImpl(subjectName, this, entry.getKey(), careerName);
+			tables.put(entry.getKey(), aux);
+			entry.getValue().addComponent(aux);
 		}
+		filesTableApuntes = tables.get("Apuntes");
+		filesTableParciales = tables.get("Parciales");
+		filesTableFinales = tables.get("Finales");
+		filesTableTPs = tables.get("TPs");
 		
 		
 		//TODO: setear como posicion el ancho del segundo componente
+		
+	}
+
+	@Override
+	public void showFileDetail(String authorName, String date, String name, 
+			String desc) {
+		switch (currentTableData) {
+		case "Apuntes":
+			filesTableApuntes.buildFileDetailLayout(authorName, date, name, desc);
+			break;
+		case "Finales":
+			filesTableFinales.buildFileDetailLayout(authorName, date, name, desc);
+			break;
+		case "Parciales":
+			filesTableParciales.buildFileDetailLayout(authorName, date, name, desc);
+			break;
+		case "TPs":
+			filesTableTPs.buildFileDetailLayout(authorName, date, name, desc);
+			break;
+		default:
+			break;
+		}
 		
 	}
 

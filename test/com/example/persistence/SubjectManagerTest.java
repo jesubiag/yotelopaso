@@ -20,7 +20,6 @@ public class SubjectManagerTest {
 	public void setUp() {
 		DataInitializer.populateTables();
 	}
-	
 
 	@Test
 	public void test() {
