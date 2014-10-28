@@ -121,7 +121,8 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 			view.showNewsEditorWindow(newsId);
 			break;
 		case "Eliminar":
-			newsService.delete(newsId);
+			view.deleteNew((Long)newsId);
+			//newsService.delete(newsId);
 			break;
 		}
 	}
