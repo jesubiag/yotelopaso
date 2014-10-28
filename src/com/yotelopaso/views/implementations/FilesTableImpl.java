@@ -69,9 +69,9 @@ public class FilesTableImpl extends CustomComponent implements FilesTable {
 		filesTable.addStyleName(ValoTheme.TABLE_NO_HORIZONTAL_LINES);
 		filesTable.addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
 		filesTable.setColumnReorderingAllowed(true);
-		//TODO: cuando seteo esta propiedad, el contenido deja de mostrarse
 		filesTable.setColumnCollapsingAllowed(true);
 		filesTable.setColumnCollapsed(tableIds[3], true);
+		//TODO: cuando seteo esta propiedad, el contenido deja de mostrarse
 		//filesTable.setVisibleColumns(new Object[] {tableIds[0], tableIds[1], tableIds[2]});
 		fileDetailLayout.setSizeFull();
 		
@@ -92,7 +92,7 @@ public class FilesTableImpl extends CustomComponent implements FilesTable {
 		hsplit.setFirstComponent(filesTable);
 		hsplit.setSecondComponent(fileDetailLayout);
 		
-		
+		mainLayout.setSizeFull();
 		mainLayout.addComponent(hsplit);
 	}
 

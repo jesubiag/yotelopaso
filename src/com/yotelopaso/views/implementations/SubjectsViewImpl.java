@@ -1,7 +1,6 @@
 package com.yotelopaso.views.implementations;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,16 +8,13 @@ import java.util.Map;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;		
-import com.vaadin.ui.Button.ClickListener;		
-import com.vaadin.ui.Component;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.PopupView;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Tree;
@@ -26,7 +22,6 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.Vaadintest01UI;
-import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.presenters.SubjectsPresenter;
 import com.yotelopaso.utils.Hr;
 import com.yotelopaso.views.SubjectsView;
@@ -39,7 +34,6 @@ ItemClickListener, ClickListener {
 	private static final long serialVersionUID = 1L;
 	
 	private SubjectsPresenter presenter;
-	private NewsManager manNews;
 	final HorizontalLayout mainLayout = new HorizontalLayout();
 	final Panel panel = new Panel();
 	final TabSheet sections = new TabSheet();
@@ -115,14 +109,6 @@ ItemClickListener, ClickListener {
 		}
 	}
 
-	public SubjectsPresenter getPresenter() {
-		return presenter;
-	}
-
-	public void setPresenter(SubjectsPresenter presenter) {
-		this.presenter = presenter;
-	}
-
 	@Override
 	public void setSubjects(String careerName) {
 		subjectsTreeComponent = new SubjectsByYearImpl(careerName, this);
@@ -153,6 +139,7 @@ ItemClickListener, ClickListener {
 		VerticalLayout tabNews = new VerticalLayout();
 		tabNews.setSizeFull();
 		VerticalLayout tabFiles = new VerticalLayout();
+		tabFiles.setSizeFull();
 		HorizontalLayout topLayout = new HorizontalLayout();
 		topLayout.setWidth("100%");
 		topLayout.setMargin(false);
@@ -214,9 +201,13 @@ ItemClickListener, ClickListener {
 	
 	private void buildFilesView(final TabSheet ft, String subjectName, String careerName) {
 		final VerticalLayout subtabParciales = new VerticalLayout();
+		subtabParciales.setSizeFull();
 		final VerticalLayout subtabApuntes = new VerticalLayout();
+		subtabApuntes.setSizeFull();
 		final VerticalLayout subtabTPs = new VerticalLayout();
+		subtabTPs.setSizeFull();
 		final VerticalLayout subtabFinales = new VerticalLayout();
+		subtabFinales.setSizeFull(); 
 		
 		HashMap<String, VerticalLayout> tabs = new HashMap<String, VerticalLayout>();
 		HashMap<String, FilesTableImpl> tables = new HashMap<String, FilesTableImpl>();
@@ -230,8 +221,10 @@ ItemClickListener, ClickListener {
 		for (Map.Entry<String, VerticalLayout> entry : tabs.entrySet()) {
 			ft.addTab(entry.getValue(), entry.getKey());
 			FilesTableImpl aux = new FilesTableImpl(subjectName, this, entry.getKey(), careerName);
+			aux.setSizeFull();
 			tables.put(entry.getKey(), aux);
 			entry.getValue().addComponent(aux);
+			//entry.getValue().setExpandRatio(aux, 1.0f);
 		}
 		filesTableApuntes = tables.get("Apuntes");
 		filesTableParciales = tables.get("Parciales");
@@ -263,7 +256,16 @@ ItemClickListener, ClickListener {
 			break;
 		}
 		
+	}	
+
+	public SubjectsPresenter getPresenter() {
+		return presenter;
 	}
+
+	public void setPresenter(SubjectsPresenter presenter) {
+		this.presenter = presenter;
+	}
+
 
 
 	//@Override
