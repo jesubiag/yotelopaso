@@ -29,7 +29,7 @@ public class FilesTablePresenter implements FilesTable.FilesTableListener {
 			fileType = File.Type.FINAL;
 			break;
 		case "Parciales":
-			fileType = File.Type.FINAL;
+			fileType = File.Type.PARCIAL;
 			break;
 		case "TPs":
 			fileType = File.Type.TP;
