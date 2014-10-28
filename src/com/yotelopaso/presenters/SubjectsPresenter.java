@@ -23,13 +23,14 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 	private FileManager fileService;
 
 	public SubjectsPresenter(SubjectsView view, UserManager userService, 
-			SubjectManager subjectService, FileManager fileService) {
+			SubjectManager subjectService, FileManager fileService, NewsManager newsService) {
 		super(view, userService);
 		
 		this.view = view;
 		this.subjectService = subjectService;
 		this.userService = userService;
 		this.fileService = fileService;
+		this.newsService = newsService;
 		
 		view.addListener(this);
 	}
@@ -110,17 +111,17 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 	}
 
 	@Override
-	public void buttonClick(String caption, ClickEvent event) {
+	public void buttonClick(String caption,Long newsId) {
 		// TODO: pasar el evento a la vista, que solo reciba la data del componente
 		switch (caption) {
 		case "Nueva Noticia":
 			view.showNewsEditorWindow(null);
 			break;
 		case "Editar":
-			view.showNewsEditorWindow((Long)event.getButton().getData());
+			view.showNewsEditorWindow(newsId);
 			break;
 		case "Eliminar":
-			newsService.delete((Long)event.getButton().getData());
+			newsService.delete(newsId);
 			break;
 		}
 	}

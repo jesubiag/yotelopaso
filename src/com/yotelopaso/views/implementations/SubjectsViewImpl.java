@@ -90,7 +90,8 @@ ItemClickListener, ClickListener {
 	public void buttonClick(ClickEvent event) {
 		super.buttonClick(event);
 		for (SubjectsViewListener listener : listeners) {
-			listener.buttonClick(event.getButton().getCaption(), event);
+			listener.buttonClick(event.getButton().getCaption(), 
+					(Long) event.getButton().getData());
 		}
 	}
 	

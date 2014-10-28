@@ -22,7 +22,7 @@ public interface SubjectsView extends AbstractHomeView {
 		public void setDefaultContent();
 		public void setSubjectContent(String subjectName);
 		public void selectedTabChange(String caption);
-		public void buttonClick(String caption, ClickEvent event);
+		public void buttonClick(String caption, Long newsId);
 	}
 	
 	public void addListener(SubjectsViewListener listener);

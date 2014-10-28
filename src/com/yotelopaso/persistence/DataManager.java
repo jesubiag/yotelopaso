@@ -37,6 +37,7 @@ public class DataManager<T> {
 	
 	public <TN extends Number> void delete(TN id) {
 		T entity = em.merge(getById(id));
+		//container.removeItem(id);
 		container.removeItem(id);
 		em.remove(entity);
 	}

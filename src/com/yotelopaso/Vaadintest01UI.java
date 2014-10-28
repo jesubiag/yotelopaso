@@ -85,7 +85,7 @@ public class Vaadintest01UI extends UI {
 		new MainPresenter(mainView);
 		new HomePresenter(homeView, userManager);
 		SubjectsPresenter subjectsPresenter = new SubjectsPresenter(subjectsView, 
-				userManager, subjectManager, fileManager);
+				userManager, subjectManager, fileManager, newsManager);
 		new DatosRegPresenter(datosView,userManager,carrManager);
 		
 		subjectsView.setPresenter(subjectsPresenter);
