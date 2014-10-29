@@ -220,15 +220,19 @@ ItemClickListener, ClickListener {
 		final VerticalLayout subtabParciales = new VerticalLayout();
 		subtabParciales.setSizeFull();
 		subtabParciales.setSpacing(true);
+		subtabParciales.setId("Parciales");
 		final VerticalLayout subtabApuntes = new VerticalLayout();
 		subtabApuntes.setSizeFull();
 		subtabApuntes.setSpacing(true);
+		subtabApuntes.setId("Apuntes");
 		final VerticalLayout subtabTPs = new VerticalLayout();
 		subtabTPs.setSizeFull();
 		subtabTPs.setSpacing(true);
+		subtabTPs.setId("Tps");
 		final VerticalLayout subtabFinales = new VerticalLayout();
 		subtabFinales.setSizeFull(); 
 		subtabFinales.setSpacing(true);
+		subtabFinales.setId("Finales");
 		
 		HashMap<String, VerticalLayout> tabs = new HashMap<String, VerticalLayout>();
 		HashMap<String, FilesTableImpl> tables = new HashMap<String, FilesTableImpl>();
