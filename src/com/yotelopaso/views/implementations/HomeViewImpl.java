@@ -64,6 +64,7 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 		// Content should be retrieved from database
 		//LastNews contentNews = new LastNews(getCurrentUser().getCareer().getName());
 		subContentNews.addComponent(lastNews);
+		subContentNews.setId("NewsH");
 		
 		windowRecentFiles = new Panel("Archivos más recientes");
 		VerticalLayout subContentRecentFiles = new VerticalLayout();
@@ -73,6 +74,7 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 		windowRecentFiles.setWidth("100%");
 		// Content should be retrieved from database
 		subContentRecentFiles.addComponent(new Label("Contenido"));
+		subContentRecentFiles.setId("FilesH");
 		
 		windowRecentEvents = new Panel("Eventos más recientes");
 		VerticalLayout subContentRecentEvents = new VerticalLayout();
@@ -82,6 +84,7 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 		windowRecentEvents.setWidth("100%");
 		// Content should be retrieved from database
 		subContentRecentEvents.addComponent(new Label("Contenido"));
+		subContentRecentEvents.setId("EventsH");
 		
 		horLayout = new HorizontalLayout();
 		horLayout.setSizeFull();

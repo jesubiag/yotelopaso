@@ -165,6 +165,7 @@ ItemClickListener, ClickListener {
 		createNews.setHeight("60%");
 		topLayout.addComponent(createNews);
 		topLayout.setComponentAlignment(createNews, Alignment.MIDDLE_LEFT);
+		createNews.setId("NuevaNoticia");
 		
 		tabNews.addComponent(topLayout);
 		tabNews.addComponent(new Hr());
@@ -218,12 +219,16 @@ ItemClickListener, ClickListener {
 	private void buildFilesView(final TabSheet ft, String subjectName, String careerName) {
 		final VerticalLayout subtabParciales = new VerticalLayout();
 		subtabParciales.setSizeFull();
+		subtabParciales.setSpacing(true);
 		final VerticalLayout subtabApuntes = new VerticalLayout();
 		subtabApuntes.setSizeFull();
+		subtabApuntes.setSpacing(true);
 		final VerticalLayout subtabTPs = new VerticalLayout();
 		subtabTPs.setSizeFull();
+		subtabTPs.setSpacing(true);
 		final VerticalLayout subtabFinales = new VerticalLayout();
 		subtabFinales.setSizeFull(); 
+		subtabFinales.setSpacing(true);
 		
 		HashMap<String, VerticalLayout> tabs = new HashMap<String, VerticalLayout>();
 		HashMap<String, FilesTableImpl> tables = new HashMap<String, FilesTableImpl>();
