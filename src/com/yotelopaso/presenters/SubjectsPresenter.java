@@ -124,6 +124,7 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		case "Eliminar":
 			view.deleteNew((Long)newsId);
 			//newsService.delete(newsId);
+			break;
 		case "Subir Parciales":
 			view.showUploadFileWindow(Type.PARCIAL);
 			break;
