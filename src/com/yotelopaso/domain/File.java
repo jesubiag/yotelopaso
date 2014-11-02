@@ -40,7 +40,8 @@ public class File implements Serializable {
 	@ManyToOne
 	private Subject subject;
 	
-	@Transient
+	//@Transient
+	@ManyToOne
 	private Career career;
 	
 	private Type type;
@@ -112,7 +113,7 @@ public class File implements Serializable {
 	}
 
 	public Career getCareer() {
-		return this.subject.getCareer();
+		return career;
 	}
 
 	public void setCareer(Career career) {

@@ -4,19 +4,17 @@ import java.util.Date;
 
 import org.vaadin.addon.googlepicker.GooglePicker;
 
-
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DateField;
-import com.vaadin.ui.Form;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.PopupView.Content;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.PopupView.Content;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.yotelopaso.Vaadintest01UI;
@@ -27,6 +25,7 @@ import com.yotelopaso.domain.Subject;
 import com.yotelopaso.persistence.FileManager;
 import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.persistence.UserManager;
+import com.yotelopaso.views.SubjectsView;
 
 public class UploadFiles extends Window implements Content {
 
@@ -53,8 +52,10 @@ public class UploadFiles extends Window implements Content {
 	private Panel panel;
 	private VerticalLayout mainLayout;
 	private Window ventana;
+	private SubjectsView parentView;
 	
-	public UploadFiles(String subjectName, File.Type fileType){
+	public UploadFiles(String subjectName, File.Type fileType, SubjectsView parentView){
+		this.parentView = parentView;
 		this.subjectName = subjectName;
 		this.fileType = fileType;
 		ventana = this;
@@ -180,7 +181,10 @@ public class UploadFiles extends Window implements Content {
 						archivo.setUrl(dirArchivo.getValue());
 						archivo.setName(nomArchivo.getValue());
 						manFile.save(archivo);
-						getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW + "/" + materia.getName());		
+						getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW + "/" + materia.getName());
+						//parentView.reloadComponent();
+						//Page.getCurrent().reload();
+						Notification.show("Archivo subido");
 						close();
 					}
 					else {

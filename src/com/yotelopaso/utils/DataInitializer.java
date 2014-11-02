@@ -172,7 +172,7 @@ public class DataInitializer {
 				s,
 				s.getCareer(),
 				File.Type.APUNTE,
-				"Rejunte de los temas de la materia TEST");
+				"Descripción de un documento de prueba");
 		fileMngr.save(file1);
 	}
 	

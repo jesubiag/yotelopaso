@@ -25,7 +25,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 	private final Google2ApiInfo api = new Google2ApiInfo();
 	
 	final HorizontalLayout topHorizontalLayout = new HorizontalLayout();
-	Label bienvenida = new Label("<h1><b>Yo Te Lo Paso!</b></h1>");
+	Label bienvenida = new Label("<h1><b>Yo te lo paso!</b></h1>");
 	Link homeLink = new Link("Home", new ExternalResource("/VaadinTest01/#!home"));
 	/*Label appTitle = new Label("<h1><b></b></h1>");*/
 	Label appDesc = new Label("Todo lo que necesitas en un solo lugar");

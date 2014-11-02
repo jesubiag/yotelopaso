@@ -13,6 +13,17 @@ public class FileManager extends DataManager<File> {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<File> filterByCareer(Integer careerId) {
+		String jpql = "SELECT f "
+				+ "FROM File f "
+				+ "WHERE f.career.id = :id "
+				+ "ORDER BY f.creationDate DESC";
+		Query query = em.createQuery(jpql);
+		query.setParameter("id", careerId);
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<File> filterByCareerSubjectType(String careerName, String subjectName, File.Type fileType) {
 		String jpql = "SELECT f "
 				+ "FROM File f "

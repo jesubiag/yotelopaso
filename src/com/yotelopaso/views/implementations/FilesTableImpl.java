@@ -47,6 +47,7 @@ public class FilesTableImpl extends CustomComponent implements FilesTable {
 		this.type = type;
 		this.presenter = new FilesTablePresenter(this);
 		this.parentView = parentView;
+		setImmediate(true);
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 	}
@@ -57,6 +58,7 @@ public class FilesTableImpl extends CustomComponent implements FilesTable {
 		
 		//Seteo los elementos de la tabla
 		filesTable.setSizeFull();
+		filesTable.setImmediate(true);
 		filesTable.addStyleName("components-inside");
 		String[] tableIds = {"Nombre", "Autor", "Fecha de creación", "Descripción"};
 		filesTable.addContainerProperty(tableIds[0], Link.class, null);
@@ -114,6 +116,11 @@ public class FilesTableImpl extends CustomComponent implements FilesTable {
 
 	public HorizontalSplitPanel getHsplit() {
 		return hsplit;
+	}
+	
+	public void reload() {
+		//filesTable.markAsDirty();
+		filesTable.refreshRowCache();
 	}
 
 }

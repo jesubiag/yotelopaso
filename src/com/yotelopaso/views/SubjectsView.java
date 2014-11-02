@@ -17,6 +17,7 @@ public interface SubjectsView extends AbstractHomeView {
 	public void showNewsEditorWindow(Long id);
 	public void showUploadFileWindow(Type fileType);
 	public void toggleTreeRoot(String rootName);
+	public void reloadComponent();
 	public void showFileDetail(String authorName, String date, String name, String desc);
 	
 	interface SubjectsViewListener extends AbstractHomeViewListener {

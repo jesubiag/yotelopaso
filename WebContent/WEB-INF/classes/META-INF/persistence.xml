@@ -22,11 +22,11 @@
 			<property name="eclipselink.jdbc.platform"
 				value="org.eclipse.persistence.platform.database.H2Platform"/>
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:./my-app-h2db"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:./ytlp_db"/>
 			<property name="javax.persistence.jdbc.user" value="sa"/>
 			<property name="javax.persistence.jdbc.password" value="sa"/>
 			<property name="eclipselink.logging.level" value="FINE" />
-			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
 			<!-- Posibles valores para la propiedad:
 			"create-tables"
 			"create-or-extend-tables"

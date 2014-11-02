@@ -73,7 +73,7 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 		windowRecentFiles.setHeight("60%");
 		windowRecentFiles.setWidth("100%");
 		// Content should be retrieved from database
-		subContentRecentFiles.addComponent(new Label("Contenido"));
+		subContentRecentFiles.addComponent(new LastFilesImpl(this));
 		subContentRecentFiles.setId("FilesH");
 		
 		windowRecentEvents = new Panel("Eventos más recientes");

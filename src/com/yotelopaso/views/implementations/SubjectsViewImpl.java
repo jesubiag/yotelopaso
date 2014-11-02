@@ -5,15 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;		
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -26,11 +24,8 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.Vaadintest01UI;
-import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.File.Type;
-import com.yotelopaso.domain.Subject;
 import com.yotelopaso.persistence.NewsManager;
-import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.presenters.SubjectsPresenter;
 import com.yotelopaso.utils.Hr;
 import com.yotelopaso.views.SubjectsView;
@@ -54,6 +49,7 @@ ItemClickListener, ClickListener {
 	private String currentTableData;
 	private SubjectsByYearImpl subjectsTreeComponent;
 	private String subjectName;
+	private String careerName;
 	
 	@Override
 	public void enter(ViewChangeEvent event) {
@@ -140,6 +136,8 @@ ItemClickListener, ClickListener {
 	@Override
 	public void buildSubjectLayout(String subjectName, String careerName) {
 		cleanComponents();
+		// TODO: sacar esto cuando mejore la implementación de la recarga de componente
+		this.careerName = careerName;
 		VerticalLayout subjectLayout = new VerticalLayout();
 		subjectLayout.setSizeFull();
 		subjectLayout.addComponent(new Label(subjectName));
@@ -207,7 +205,7 @@ ItemClickListener, ClickListener {
 	}
 	@Override
 	public void showUploadFileWindow(Type fileType) {
-		Vaadintest01UI.getCurrent().addWindow(new UploadFiles(subjectName,fileType));
+		Vaadintest01UI.getCurrent().addWindow(new UploadFiles(subjectName,fileType, this));
 		//UI.getCurrent().addWindow(new Editor(subjectName));
 	}
 	
@@ -217,6 +215,7 @@ ItemClickListener, ClickListener {
 	}
 	
 	private void buildFilesView(final TabSheet ft, String subjectName, String careerName) {
+		
 		final VerticalLayout subtabParciales = new VerticalLayout();
 		subtabParciales.setSizeFull();
 		subtabParciales.setSpacing(true);
@@ -304,6 +303,30 @@ ItemClickListener, ClickListener {
 		Notification notif = new Notification("Noticia Borrada", Notification.Type.ERROR_MESSAGE);
 		notif.setDelayMsec(2500);
 		notif.show(Page.getCurrent());
+	}
+
+	@Override
+	// TODO: mejorar implementación de metodo de recarga
+	public void reloadComponent() {
+		//FilesTableImpl aux = null;
+		switch (currentTableData) {
+		case "Apuntes":
+			//aux = new FilesTableImpl(subjectName, this, "Apuntes", careerName);
+			//replaceComponent(filesTableApuntes, aux);
+			filesTableApuntes.reload();
+			break;
+		case "Finales":
+			filesTableFinales.reload();
+			break;
+		case "Parciales":
+			filesTableParciales.reload();
+			break;
+		case "TPs":
+			filesTableTPs.reload();
+			break;
+		default:
+			break;
+		}
 	}
 
 
