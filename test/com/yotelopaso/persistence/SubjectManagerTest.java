@@ -1,4 +1,4 @@
-package com.example.persistence;
+package com.yotelopaso.persistence;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

@@ -18,6 +18,7 @@
 			<class>com.yotelopaso.domain.Subject</class>
 			<class>com.yotelopaso.domain.User</class>
 			<class>com.yotelopaso.domain.File</class>
+			<class>com.yotelopaso.domain.UserCalendarEvent</class>
 		<properties>
 			<property name="eclipselink.jdbc.platform"
 				value="org.eclipse.persistence.platform.database.H2Platform"/>

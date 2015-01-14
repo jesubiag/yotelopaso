@@ -2,6 +2,7 @@ package com.yotelopaso.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -39,6 +40,8 @@ public class User implements Serializable {
 	
 	@OneToOne
 	PersonalInfo personalinfo;
+	
+	private List<Long> userEvents;
 	
 	public User() {}
 
@@ -113,6 +116,14 @@ public class User implements Serializable {
 	}
 	public void setCareer(Career career) {
 		this.career = career;
+	}
+
+	public List<Long> getUserEvents() {
+		return userEvents;
+	}
+
+	public void setUserEvents(List<Long> userEvents) {
+		this.userEvents = userEvents;
 	}
 
 }
