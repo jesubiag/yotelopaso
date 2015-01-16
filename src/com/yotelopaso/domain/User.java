@@ -1,11 +1,13 @@
 package com.yotelopaso.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,7 +43,8 @@ public class User implements Serializable {
 	@OneToOne
 	PersonalInfo personalinfo;
 	
-	private List<Long> userEvents;
+	@ManyToMany
+	private List<UserCalendarEvent> userEvents = new ArrayList<UserCalendarEvent>();
 	
 	public User() {}
 
@@ -67,7 +70,6 @@ public class User implements Serializable {
 		this.birthday = birthday;
 		this.personalinfo = personalinfo;
 	}
-
 
 	public Date getBirthday() {
 		return birthday;
@@ -117,13 +119,19 @@ public class User implements Serializable {
 	public void setCareer(Career career) {
 		this.career = career;
 	}
-
-	public List<Long> getUserEvents() {
+	public List<UserCalendarEvent> getUserEvents() {
+		//userEvents.size();
 		return userEvents;
 	}
-
-	public void setUserEvents(List<Long> userEvents) {
+	public void setUserEvents(List<UserCalendarEvent> userEvents) {
 		this.userEvents = userEvents;
 	}
-
+	
+	public void addUserEvent(UserCalendarEvent event) {
+		userEvents.add(event);
+	}
+	
+	public void removeUserEvent(UserCalendarEvent event) {
+		userEvents.remove(event);
+	}
 }

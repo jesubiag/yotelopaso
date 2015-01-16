@@ -1,32 +1,27 @@
 package com.yotelopaso.persistence;
 
-import com.vaadin.ui.components.calendar.ContainerEventProvider;
+import java.util.List;
+
 import com.yotelopaso.domain.UserCalendarEvent;
 
 public class UserCalendarEventManager extends DataManager<UserCalendarEvent>{
 	
-	private ContainerEventProvider cep = 
-			new ContainerEventProvider(container) {
-				private static final long serialVersionUID = 1L;
-				
-				public void addEvent(UserCalendarEvent event) {
-					UserCalendarEvent entity = new UserCalendarEvent(event.getAuthorId(),
-							event.getSubjectId(), event.getCaption(), event.getDescription(),
-							event.getStart(), event.getEnd());
-					container.addEntity(entity);
-		}
-	};
+	private UserManager userManager = new UserManager();
 	
 	public UserCalendarEventManager() {
 		super(UserCalendarEvent.class);
 	}
-
-	public ContainerEventProvider getCep() {
-		return cep;
+	
+	@Override
+	public Long save(UserCalendarEvent event) {
+		Long id = (Long) super.save(event);
+		event.setId(id);
+		userManager.addUserEvent(event);
+		return id;
 	}
-
-	public void setCep(ContainerEventProvider cep) {
-		this.cep = cep;
+	
+	public List<UserCalendarEvent> getCurrentUserEvents() {
+		return userManager.getCurrentUserEvents();
 	}
 	
 }

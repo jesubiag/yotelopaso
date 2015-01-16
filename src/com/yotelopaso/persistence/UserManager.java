@@ -1,7 +1,10 @@
 package com.yotelopaso.persistence;
 
+import java.util.List;
+
 import com.vaadin.server.VaadinSession;
 import com.yotelopaso.domain.User;
+import com.yotelopaso.domain.UserCalendarEvent;
 
 public class UserManager extends DataManager<User> {
 	
@@ -26,6 +29,17 @@ public class UserManager extends DataManager<User> {
 	
 	public void setCurrentUser(User currentUser) {
 		VaadinSession.getCurrent().setAttribute("currentUser", currentUser);
+	}
+	
+	public void addUserEvent(UserCalendarEvent event) {
+		User cu = getCurrentUser();
+		cu.addUserEvent(event);
+		save(cu);
+		setCurrentUser(cu);
+	}
+	
+	public List<UserCalendarEvent> getCurrentUserEvents() {
+		return getCurrentUser().getUserEvents();
 	}
 
 }

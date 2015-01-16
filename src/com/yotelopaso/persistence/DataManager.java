@@ -31,8 +31,13 @@ public class DataManager<T> {
 		em = ep.getEntityManager();
 	}
 	
-	public void save(T entity) {
-		container.addEntity(entity);
+	/**
+	 * 
+	 * @param entity
+	 * @return the Object id of the persisted entity
+	 */
+	public Object save(T entity) {
+		return container.addEntity(entity);
 	}
 	
 	public <TN extends Number> void delete(TN id) {
