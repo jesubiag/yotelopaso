@@ -20,7 +20,6 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Tree;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.Vaadintest01UI;
@@ -120,11 +119,6 @@ ItemClickListener, ClickListener {
 	public void setSubjects(String careerName) {
 		subjectsTreeComponent = new SubjectsByYearImpl(careerName, this);
 		this.mainLayout.addComponent(subjectsTreeComponent);
-	}
-
-	@Override
-	public void nagivate(String viewName) {
-		UI.getCurrent().getNavigator().navigateTo(viewName);
 	}
 
 	@Override

@@ -3,8 +3,6 @@ package com.yotelopaso.presenters;
 import com.vaadin.ui.Button.ClickEvent;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.HomeView;
-import com.yotelopaso.views.components.LastNews;
-import com.yotelopaso.views.implementations.HomeViewImpl;
 
 public class HomePresenter extends AbstractHomePresenter<HomeView> implements HomeView.HomeViewListener {
 	

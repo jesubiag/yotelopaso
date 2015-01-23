@@ -2,16 +2,12 @@ package com.yotelopaso.views;
 
 
 import com.vaadin.data.Item;
-import com.vaadin.ui.Button.ClickEvent;
-import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.File.Type;
-import com.yotelopaso.persistence.NewsManager;
 
 
 public interface SubjectsView extends AbstractHomeView {
 	
 	public void setSubjects(String careerName);
-	public void nagivate(String viewName);
 	public void cleanComponents();
 	public void buildSubjectLayout(String subjectName, String careerName);
 	public void showNewsEditorWindow(Long id);

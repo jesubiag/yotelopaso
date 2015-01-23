@@ -14,7 +14,6 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.HomeView;
-import com.yotelopaso.views.SubjectsView.SubjectsViewListener;
 import com.yotelopaso.views.components.Editor;
 import com.yotelopaso.views.components.LastNews;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;

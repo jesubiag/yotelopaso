@@ -1,19 +1,20 @@
 package com.yotelopaso.views.templates;
 
-import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.utils.UserUtils;
+import com.yotelopaso.views.AuthView;
 
 /**Vista abstracta que comprueba automáticamente si el usuario esta autentificado.
  * Redirige al usuario a la página principal en caso de no estarlo.
  */
 
-public class AuthView extends VerticalLayout implements View {
+public class AuthViewImpl extends VerticalLayout implements AuthView {
 	private static final long serialVersionUID = 1L;
 	
 	private User currentUser;
@@ -22,7 +23,7 @@ public class AuthView extends VerticalLayout implements View {
 	public void enter(ViewChangeEvent event) {
 		if (!UserUtils.isLogged((Double) VaadinSession.getCurrent().getAttribute("userId"))) {
 			// Lo mejor seria que lo haga loguearse en vez de llevarlo a la pagina principal.
-			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAIN_VIEW);
+			navigate(Vaadintest01UI.MAIN_VIEW);
 		} else {
 			setCurrentUser( (User) VaadinSession.getCurrent().getAttribute("currentUser"));
 		}
@@ -34,6 +35,24 @@ public class AuthView extends VerticalLayout implements View {
 
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
+	}
+	
+	@Override
+	public void navigate(String viewName) {
+		UI.getCurrent().getNavigator().navigateTo( viewName );
+	}
+	
+	@Override
+	public void addWindow(Window window) {
+		try {
+			UI.getCurrent().addWindow(window);
+		// TODO: mejorar sistema de mensajes de error
+		} catch (IllegalArgumentException e) {	
+			System.out.println( e.getMessage() );
+		} catch (NullPointerException e) {
+			System.out.println( e.getMessage() );
+		}
+		
 	}
 
 }

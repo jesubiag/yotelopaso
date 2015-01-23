@@ -4,7 +4,6 @@ package com.yotelopaso.presenters;
 import com.vaadin.data.Item;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Link;
-import com.vaadin.ui.Button.ClickEvent;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.domain.File.Type;
 import com.yotelopaso.domain.User;
@@ -49,7 +48,7 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		} else {
 			this.userCareer = userService.getCurrentUser().getCareer().getName();
 			view.cleanComponents();
-			view.nagivate(Vaadintest01UI.SUBJECTS_VIEW + "/" + caption);
+			view.navigate(Vaadintest01UI.SUBJECTS_VIEW + "/" + caption);
 		}
 	}
 	
@@ -67,13 +66,13 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		
 		switch (caption) {
 		case "Inicio":
-			view.nagivate(Vaadintest01UI.HOME_VIEW);
+			view.navigate(Vaadintest01UI.HOME_VIEW);
 			break;
 		case "Materias":
-			view.nagivate(Vaadintest01UI.SUBJECTS_VIEW);
+			view.navigate(Vaadintest01UI.SUBJECTS_VIEW);
 			break;
 		case "Mi Calendario":
-			//navigator.navigateTo(Vaadintest01UI.CALENDAR_VIEW);
+			view.navigate(Vaadintest01UI.CALENDAR_VIEW);
 			break;
 		case "Mi Actividad":
 			//navigator.navigateTo(Vaadintest01UI.ACTIVITY_VIEW);
@@ -81,7 +80,7 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		case "Logout":
 			VaadinSession.getCurrent().setAttribute("userId", null);
 			VaadinSession.getCurrent().setAttribute("currentUser", null);
-			view.nagivate(Vaadintest01UI.MAIN_VIEW);
+			view.navigate(Vaadintest01UI.MAIN_VIEW);
 			break;
 		default:
 			//view.buildSubjectLayout(caption);

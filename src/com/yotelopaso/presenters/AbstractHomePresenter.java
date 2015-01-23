@@ -1,8 +1,6 @@
 package com.yotelopaso.presenters;
 
-import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.UI;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.AbstractHomeView;
@@ -21,16 +19,15 @@ public class AbstractHomePresenter<T extends AbstractHomeView> implements Abstra
 
 	@Override
 	public void panelButtonClick(String caption) {
-		Navigator navigator = UI.getCurrent().getNavigator();
 		switch (caption) {
 		case "Inicio":
-			navigator.navigateTo(Vaadintest01UI.HOME_VIEW);
+			view.navigate(Vaadintest01UI.HOME_VIEW);
 			break;
 		case "Materias":
-			navigator.navigateTo(Vaadintest01UI.SUBJECTS_VIEW);
+			view.navigate(Vaadintest01UI.SUBJECTS_VIEW);
 			break;
 		case "Mi Calendario":
-			navigator.navigateTo(Vaadintest01UI.CALENDAR_VIEW);
+			view.navigate(Vaadintest01UI.CALENDAR_VIEW);
 			break;
 		case "Mi Actividad":
 			//navigator.navigateTo(Vaadintest01UI.ACTIVITY_VIEW);
@@ -39,7 +36,7 @@ public class AbstractHomePresenter<T extends AbstractHomeView> implements Abstra
 			//logout
 			VaadinSession.getCurrent().setAttribute("userId", null);
 			VaadinSession.getCurrent().setAttribute("currentUser", null);
-			navigator.navigateTo(Vaadintest01UI.MAIN_VIEW);
+			view.navigate(Vaadintest01UI.MAIN_VIEW);
 			break;
 		}
 	}

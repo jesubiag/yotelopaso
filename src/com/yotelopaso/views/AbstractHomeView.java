@@ -1,6 +1,6 @@
 package com.yotelopaso.views;
 
-public interface AbstractHomeView {
+public interface AbstractHomeView extends AuthView {
 	
 	interface AbstractHomeViewListener {
 		void panelButtonClick(String caption);
