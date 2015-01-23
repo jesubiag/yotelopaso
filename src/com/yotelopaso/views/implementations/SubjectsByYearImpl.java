@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.presenters.SubjectsByYearPresenter;
 import com.yotelopaso.views.components.SubjectsByYear;
 

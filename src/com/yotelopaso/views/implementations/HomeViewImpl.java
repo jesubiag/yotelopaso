@@ -10,7 +10,6 @@ import com.vaadin.ui.HasComponents.ComponentAttachListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.HomeView;

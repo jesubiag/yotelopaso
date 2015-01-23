@@ -7,19 +7,16 @@ import java.util.List;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.HasComponents.ComponentAttachEvent;
-import com.vaadin.ui.HasComponents.ComponentAttachListener;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.yotelopaso.persistence.SubjectManager;
-import com.yotelopaso.views.DatosReg.DatosRegListener;
 import com.yotelopaso.views.components.NewsEditor;
 
 

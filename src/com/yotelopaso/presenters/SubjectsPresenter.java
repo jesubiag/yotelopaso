@@ -23,7 +23,7 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 
 	public SubjectsPresenter(SubjectsView view, UserManager userService, 
 			SubjectManager subjectService, FileManager fileService, NewsManager newsService) {
-		super(view, userService);
+		super(view);
 		
 		this.view = view;
 		this.subjectService = subjectService;
@@ -62,7 +62,7 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 	
 	@Override
 	public void buttonClick(String caption, Long newsId) {
-		super.panelButtonClick(caption);
+		panelButtonClick(caption);
 		
 		switch (caption) {
 		case "Nueva Noticia":

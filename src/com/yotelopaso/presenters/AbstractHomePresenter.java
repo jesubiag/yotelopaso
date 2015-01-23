@@ -2,17 +2,14 @@ package com.yotelopaso.presenters;
 
 import com.vaadin.server.VaadinSession;
 import com.yotelopaso.Vaadintest01UI;
-import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.AbstractHomeView;
 
 public class AbstractHomePresenter<T extends AbstractHomeView> implements AbstractHomeView.AbstractHomeViewListener {
 	
 	T view;
-	UserManager service;
 	
-	public AbstractHomePresenter(T view, UserManager service) {
+	public AbstractHomePresenter(T view) {
 		this.view = view;
-		this.service = service;
 		
 		view.addListener(this);
 	}

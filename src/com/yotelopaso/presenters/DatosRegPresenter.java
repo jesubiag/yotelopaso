@@ -8,7 +8,6 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.yotelopaso.Vaadintest01UI;
-import com.yotelopaso.domain.Career;
 import com.yotelopaso.domain.PersonalInfo;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.CareerManager;
@@ -25,7 +24,7 @@ public class DatosRegPresenter extends AbstractHomePresenter<DatosReg> implement
 
 
 	public DatosRegPresenter(DatosReg view, UserManager service, CareerManager carrManager) {
-		super(view, service);
+		super(view);
 		
 		this.view = view;
 		this.manager = service;

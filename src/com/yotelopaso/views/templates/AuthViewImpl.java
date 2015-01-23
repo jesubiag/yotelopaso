@@ -14,7 +14,7 @@ import com.yotelopaso.views.AuthView;
  * Redirige al usuario a la página principal en caso de no estarlo.
  */
 
-public class AuthViewImpl extends VerticalLayout implements AuthView {
+abstract class AuthViewImpl extends VerticalLayout implements AuthView {
 	private static final long serialVersionUID = 1L;
 	
 	private User currentUser;
@@ -38,12 +38,12 @@ public class AuthViewImpl extends VerticalLayout implements AuthView {
 	}
 	
 	@Override
-	public void navigate(String viewName) {
+	final public void navigate(String viewName) {
 		UI.getCurrent().getNavigator().navigateTo( viewName );
 	}
 	
 	@Override
-	public void addWindow(Window window) {
+	final public void addWindow(Window window) {
 		try {
 			UI.getCurrent().addWindow(window);
 		// TODO: mejorar sistema de mensajes de error

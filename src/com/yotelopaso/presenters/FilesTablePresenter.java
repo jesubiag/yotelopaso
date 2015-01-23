@@ -3,7 +3,6 @@ package com.yotelopaso.presenters;
 import java.util.List;
 
 import com.yotelopaso.domain.File;
-import com.yotelopaso.domain.File.Type;
 import com.yotelopaso.persistence.FileManager;
 import com.yotelopaso.views.components.FilesTable;
 

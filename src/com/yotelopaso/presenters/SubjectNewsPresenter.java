@@ -2,7 +2,6 @@ package com.yotelopaso.presenters;
 
 import java.util.List;
 
-import com.vaadin.ui.UI;
 import com.yotelopaso.domain.News;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.NewsManager;

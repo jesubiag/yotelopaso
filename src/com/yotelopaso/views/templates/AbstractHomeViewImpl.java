@@ -14,7 +14,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.views.AbstractHomeView;
 
-public class AbstractHomeViewImpl extends AuthViewImpl implements AbstractHomeView, ClickListener {
+abstract public class AbstractHomeViewImpl extends AuthViewImpl implements AbstractHomeView, ClickListener {
 	
 	private static final long serialVersionUID = 1L;
 	private VerticalLayout rightLayout;

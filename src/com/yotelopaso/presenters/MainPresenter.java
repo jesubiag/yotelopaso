@@ -1,6 +1,5 @@
 package com.yotelopaso.presenters;
 
-import com.vaadin.navigator.Navigator;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.MainView;

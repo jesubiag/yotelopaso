@@ -2,16 +2,13 @@ package com.yotelopaso.views.implementations;
 
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 import com.yotelopaso.presenters.SubjectNewsPresenter;
-import com.yotelopaso.utils.DateUtils;
 import com.yotelopaso.utils.Hr;
-import com.yotelopaso.views.SubjectsView.SubjectsViewListener;
 import com.yotelopaso.views.components.SubjectNews;
 
 public class SubjectNewsImpl extends CustomComponent implements SubjectNews {

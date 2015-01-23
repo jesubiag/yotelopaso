@@ -3,7 +3,6 @@ package com.yotelopaso.views.components;
 import org.scribe.builder.api.Google2Api;
 import org.vaadin.addon.oauthpopup.OAuthPopupButton;
 
-import com.vaadin.server.FontAwesome;
 import com.yotelopaso.presenters.Google2ButtonListener;
 import com.yotelopaso.utils.Google2ApiInfo;
 

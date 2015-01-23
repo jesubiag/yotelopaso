@@ -14,13 +14,15 @@ import com.yotelopaso.persistence.CareerManager;
 import com.yotelopaso.persistence.FileManager;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.persistence.SubjectManager;
+import com.yotelopaso.persistence.UserCalendarEventManager;
 import com.yotelopaso.persistence.UserManager;
+import com.yotelopaso.presenters.CalendarPresenter;
 import com.yotelopaso.presenters.DatosRegPresenter;
 import com.yotelopaso.presenters.HomePresenter;
 import com.yotelopaso.presenters.MainPresenter;
 import com.yotelopaso.presenters.SubjectsPresenter;
-import com.yotelopaso.utils.DataInitializer;
 import com.yotelopaso.views.EditorNoticiasView;
+import com.yotelopaso.views.implementations.CalendarViewImpl;
 import com.yotelopaso.views.implementations.DatosRegImpl;
 import com.yotelopaso.views.implementations.HomeViewImpl;
 import com.yotelopaso.views.implementations.MainViewImpl;
@@ -44,6 +46,7 @@ public class Vaadintest01UI extends UI {
 	public static final String REGISTER_VIEW = "register";
 	public static final String EDITORVIEW = "editornoticias";
 	public static final String SUBJECTS_VIEW = "materias";
+	public static final String CALENDAR_VIEW = "calendario";
 	
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = Vaadintest01UI.class)
@@ -67,12 +70,15 @@ public class Vaadintest01UI extends UI {
 		CareerManager carrManager = new CareerManager();
 		SubjectManager subjectManager = new SubjectManager();
 		FileManager fileManager = new FileManager();
+		UserCalendarEventManager userCalendarEventManager = new UserCalendarEventManager();
 		
 		// Vistas
 		MainViewImpl mainView = new MainViewImpl();
 		HomeViewImpl homeView = new HomeViewImpl();
 		SubjectsViewImpl subjectsView = new SubjectsViewImpl();
 		DatosRegImpl datosView = new DatosRegImpl();
+		CalendarViewImpl calendarView = new CalendarViewImpl();
+		
 		
 		// Agrego las vistas al navigator
 		nav.addView(MAIN_VIEW, mainView);
@@ -80,6 +86,7 @@ public class Vaadintest01UI extends UI {
 		nav.addView(SUBJECTS_VIEW, subjectsView);
 		nav.addView(REGISTER_VIEW, datosView);
 		nav.addView(EDITORVIEW, new EditorNoticiasView());
+		nav.addView(CALENDAR_VIEW, calendarView);
 		
 		// Presenters con sus vistas y managers asociados
 		new MainPresenter(mainView);
@@ -87,6 +94,7 @@ public class Vaadintest01UI extends UI {
 		SubjectsPresenter subjectsPresenter = new SubjectsPresenter(subjectsView, 
 				userManager, subjectManager, fileManager, newsManager);
 		new DatosRegPresenter(datosView,userManager,carrManager);
+		new CalendarPresenter(calendarView, userCalendarEventManager);
 		
 		subjectsView.setPresenter(subjectsPresenter);
 		

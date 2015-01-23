@@ -9,7 +9,7 @@ public class HomePresenter extends AbstractHomePresenter<HomeView> implements Ho
 	UserManager service;
 	
 	public HomePresenter(HomeView view, UserManager service) {
-		super(view, service);
+		super(view);
 		
 		this.view = view;
 		this.service = service;
@@ -19,7 +19,7 @@ public class HomePresenter extends AbstractHomePresenter<HomeView> implements Ho
 	
 	@Override
 	public void buttonClick(String caption, Long newsId) {
-		super.panelButtonClick(caption);
+		panelButtonClick(caption);
 		switch (caption) {
 		case "Ampliar":
 			view.showNewsEditorWindow( newsId );
