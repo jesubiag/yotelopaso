@@ -2,7 +2,6 @@ package com.yotelopaso.presenters;
 
 
 import com.vaadin.data.Item;
-import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Link;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.domain.File.Type;
@@ -42,7 +41,7 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		
 		// Acciones para el tree
 		if (caption.contains("Materias")) {
-			// hacer algo en la view
+			// TODO: hacer algo en la view
 			view.toggleTreeRoot(caption);
 			return;
 		} else {
@@ -62,28 +61,32 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 	}
 	
 	@Override
-	public void buttonClick(String caption) {
+	public void buttonClick(String caption, Long newsId) {
+		super.panelButtonClick(caption);
 		
 		switch (caption) {
-		case "Inicio":
-			view.navigate(Vaadintest01UI.HOME_VIEW);
+		case "Nueva Noticia":
+			view.showNewsEditorWindow(null);
 			break;
-		case "Materias":
-			view.navigate(Vaadintest01UI.SUBJECTS_VIEW);
+		case "Editar":
+			view.showNewsEditorWindow(newsId);
 			break;
-		case "Mi Calendario":
-			view.navigate(Vaadintest01UI.CALENDAR_VIEW);
+		case "Eliminar":
+			// TODO: acá hay que delegar. Parte de deleteNew se hace acá y lo demás en la vista
+			view.deleteNew(newsId);
+			//newsService.delete(newsId);
 			break;
-		case "Mi Actividad":
-			//navigator.navigateTo(Vaadintest01UI.ACTIVITY_VIEW);
+		case "Subir Parciales":
+			view.showUploadFileWindow(Type.PARCIAL);
 			break;
-		case "Logout":
-			VaadinSession.getCurrent().setAttribute("userId", null);
-			VaadinSession.getCurrent().setAttribute("currentUser", null);
-			view.navigate(Vaadintest01UI.MAIN_VIEW);
+		case "Subir Finales":
+			view.showUploadFileWindow(Type.FINAL);
 			break;
-		default:
-			//view.buildSubjectLayout(caption);
+		case "Subir TPs":
+			view.showUploadFileWindow(Type.TP);
+			break;
+		case "Subir Apuntes":
+			view.showUploadFileWindow(Type.APUNTE);
 			break;
 		}
 	}
@@ -110,32 +113,5 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		
 	}
 
-	@Override
-	public void buttonClick(String caption,Long newsId) {
-		// TODO: pasar el evento a la vista, que solo reciba la data del componente
-		switch (caption) {
-		case "Nueva Noticia":
-			view.showNewsEditorWindow(null);
-			break;
-		case "Editar":
-			view.showNewsEditorWindow(newsId);
-			break;
-		case "Eliminar":
-			view.deleteNew((Long)newsId);
-			//newsService.delete(newsId);
-			break;
-		case "Subir Parciales":
-			view.showUploadFileWindow(Type.PARCIAL);
-			break;
-		case "Subir Finales":
-			view.showUploadFileWindow(Type.FINAL);
-			break;
-		case "Subir TPs":
-			view.showUploadFileWindow(Type.TP);
-			break;
-		case "Subir Apuntes":
-			view.showUploadFileWindow(Type.APUNTE);
-			break;
-		}
-	}
+	
 }

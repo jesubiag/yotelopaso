@@ -1,6 +1,5 @@
 package com.yotelopaso.views;
 
-import com.vaadin.ui.Button.ClickEvent;
 
 public interface HomeView extends AbstractHomeView {
 	
@@ -8,7 +7,7 @@ public interface HomeView extends AbstractHomeView {
 	
 	interface HomeViewListener extends AbstractHomeViewListener {
 		public void addWindowsNewsContent(String caption);
-		public void buttonClick(String caption, ClickEvent event);
+		public void buttonClick(String caption, Long newsId);
 	}
 	
 	public void addListener(HomeViewListener listener);

@@ -124,16 +124,16 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 
 	@Override
 	public void buttonClick(ClickEvent event) {
-		super.buttonClick(event);
+		//super.buttonClick(event);
 		for (HomeViewListener listener : listeners) {
-			listener.buttonClick(event.getButton().getCaption(), event);
+			listener.buttonClick( event.getButton().getCaption(),
+					(Long) event.getButton().getData() );
 		}
 	}
 	@Override
 	public void showNewsEditorWindow(Long id) {
-		// TODO Auto-generated method 
 		Editor editor = new Editor(id);
-		UI.getCurrent().addWindow(editor);
+		addWindow(editor);
 	}
 	
 }

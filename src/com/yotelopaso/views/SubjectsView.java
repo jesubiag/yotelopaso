@@ -19,7 +19,6 @@ public interface SubjectsView extends AbstractHomeView {
 	interface SubjectsViewListener extends AbstractHomeViewListener {
 		public void treeItemClick(String subjectName);
 		public void tableItemClick(Item item);
-		public void buttonClick(String caption);
 		public void setDefaultContent();
 		public void setSubjectContent(String subjectName);
 		public void selectedTabChange(String caption);
