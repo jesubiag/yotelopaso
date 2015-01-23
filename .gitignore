@@ -2,6 +2,7 @@
 /.settings/
 .settings
 .classpath
+.project
 *.class
 *.snapshot
 *.db
