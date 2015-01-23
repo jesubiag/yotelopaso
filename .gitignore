@@ -1,7 +1,6 @@
 /build/
 /.settings/
 .settings
-/.classpath
 .classpath
 *.class
 *.snapshot
