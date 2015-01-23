@@ -1,3 +1,9 @@
 /build/
 /.settings/
+.settings
 /.classpath
+.classpath
+*.class
+*.snapshot
+*.db
+/WebContent/VAADIN/widgetsets/
