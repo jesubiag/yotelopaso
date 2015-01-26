@@ -1,3 +1,5 @@
+@import "variables";
+@import "valotest";
 @import "addons.scss";
 @import "vaadintest01.scss";
 
@@ -6,4 +8,5 @@
 .vaadintest01 {
   @include addons;
   @include vaadintest01;
+  @include valotest;
 }

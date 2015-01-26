@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.yotelopaso.domain.Subject;
 
 public class SubjectManager extends DataManager<Subject> {
 	
 	public SubjectManager() {
 		super(Subject.class);
+		getContainer().sort(new String[] {"name"}, new boolean[] {true});
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -28,4 +30,8 @@ public class SubjectManager extends DataManager<Subject> {
 		return getByProperty("career.name", careerName);
 	}
 	
+	public JPAContainer<Subject> filterContainerByCareer(Integer careerId) {
+		String propertyId = "career.id";
+		return filterContainer(propertyId, careerId);
+	}
 }

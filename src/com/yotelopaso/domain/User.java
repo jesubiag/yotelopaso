@@ -1,9 +1,9 @@
 package com.yotelopaso.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -44,7 +44,7 @@ public class User implements Serializable {
 	PersonalInfo personalinfo;
 	
 	@ManyToMany
-	private List<UserCalendarEvent> userEvents = new ArrayList<UserCalendarEvent>();
+	private Set<UserCalendarEvent> userEvents = new HashSet<UserCalendarEvent>();
 	
 	public User() {}
 
@@ -119,11 +119,10 @@ public class User implements Serializable {
 	public void setCareer(Career career) {
 		this.career = career;
 	}
-	public List<UserCalendarEvent> getUserEvents() {
-		//userEvents.size();
+	public Set<UserCalendarEvent> getUserEvents() {
 		return userEvents;
 	}
-	public void setUserEvents(List<UserCalendarEvent> userEvents) {
+	public void setUserEvents(Set<UserCalendarEvent> userEvents) {
 		this.userEvents = userEvents;
 	}
 	

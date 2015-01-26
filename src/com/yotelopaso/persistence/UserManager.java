@@ -1,6 +1,6 @@
 package com.yotelopaso.persistence;
 
-import java.util.List;
+import java.util.Set;
 
 import com.vaadin.server.VaadinSession;
 import com.yotelopaso.domain.User;
@@ -13,14 +13,12 @@ public class UserManager extends DataManager<User> {
 	}
 	
 	public boolean isRegistered(Double id) {
-		
 		User user = getById(id);
 		if (user == null) {
 			return false;
 		} else {
 			return true;
 		}
-		
 	}
 	
 	public User getCurrentUser() {
@@ -38,7 +36,14 @@ public class UserManager extends DataManager<User> {
 		setCurrentUser(cu);
 	}
 	
-	public List<UserCalendarEvent> getCurrentUserEvents() {
+	public void removeUserEvent(UserCalendarEvent event) {
+		User cu = getCurrentUser();
+		cu.removeUserEvent(event);
+		save(cu);
+		setCurrentUser(cu);
+	}
+	
+	public Set<UserCalendarEvent> getCurrentUserEvents() {
 		return getCurrentUser().getUserEvents();
 	}
 

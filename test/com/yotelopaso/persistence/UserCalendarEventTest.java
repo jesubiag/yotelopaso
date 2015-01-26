@@ -12,7 +12,7 @@ import com.yotelopaso.utils.DataInitializer;
 
 public class UserCalendarEventTest {
 	
-	UserCalendarEventManager mngr = new UserCalendarEventManager();
+	CalendarManager mngr = new CalendarManager();
 	
 	@Before
 	public void setUp() {

@@ -14,7 +14,7 @@ import com.yotelopaso.persistence.CareerManager;
 import com.yotelopaso.persistence.FileManager;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.persistence.SubjectManager;
-import com.yotelopaso.persistence.UserCalendarEventManager;
+import com.yotelopaso.persistence.CalendarManager;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.presenters.CalendarPresenter;
 import com.yotelopaso.presenters.DatosRegPresenter;
@@ -56,7 +56,6 @@ public class Vaadintest01UI extends UI {
 
 	@Override
 	protected void init(VaadinRequest request) {
-		
 		// Datos de prueba
 		//DataInitializer.populateTables();
 		
@@ -70,7 +69,7 @@ public class Vaadintest01UI extends UI {
 		CareerManager carrManager = new CareerManager();
 		SubjectManager subjectManager = new SubjectManager();
 		FileManager fileManager = new FileManager();
-		UserCalendarEventManager userCalendarEventManager = new UserCalendarEventManager();
+		CalendarManager calendarManager = new CalendarManager();
 		
 		// Vistas
 		MainViewImpl mainView = new MainViewImpl();
@@ -94,9 +93,11 @@ public class Vaadintest01UI extends UI {
 		SubjectsPresenter subjectsPresenter = new SubjectsPresenter(subjectsView, 
 				userManager, subjectManager, fileManager, newsManager);
 		new DatosRegPresenter(datosView,userManager,carrManager);
-		new CalendarPresenter(calendarView, userCalendarEventManager);
+		CalendarPresenter calendarPresenter = new CalendarPresenter(calendarView, 
+				calendarManager);
 		
 		subjectsView.setPresenter(subjectsPresenter);
+		calendarView.setPresenter(calendarPresenter);
 		
 		// Navego a la vista principal
 		nav.navigateTo(MAIN_VIEW);

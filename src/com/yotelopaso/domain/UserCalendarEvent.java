@@ -2,7 +2,9 @@ package com.yotelopaso.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +19,43 @@ import com.vaadin.ui.components.calendar.event.EditableCalendarEvent;
 
 @Entity
 public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNotifier {
+	
+	public enum CalendarEventType {
+		
+		ENTREGA("Entrega", "color1"),
+		FINAL("Final", "color2"),
+		PARCIAL("Parcial", "color3"),
+		PRESENTACION("Presentación", "color4"),
+		OTRO("Otro", "color5"),
+		NONE(null, null);
+		
+		private String name;
+		private String color;
+		
+		private CalendarEventType(String name, String color) {
+			this.name = name;
+			this.color = color;
+		}
+		
+		@Override
+		public String toString() {
+			return name;
+		}
+		
+		public String getColor() {
+			return color;
+		}
+		
+		public static List<CalendarEventType> getAll() {
+			List<CalendarEventType> l = new ArrayList<CalendarEventType>();
+			l.add(ENTREGA);
+			l.add(FINAL);
+			l.add(PARCIAL);
+			l.add(PRESENTACION);
+			l.add(OTRO);
+			return l;
+		}
+	}
 	
 	private static final long serialVersionUID = 1353312615888351945L;
 	@Id
@@ -33,9 +72,10 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 	private String styleName;
 	private boolean isAllDay;
 	@ManyToMany(mappedBy="userEvents")
-	private List<User> suscriptors = new ArrayList<User>();
-	@Transient //no se si esta anotación deba ir
-	private transient List<EventChangeListener> listeners = new ArrayList<EventChangeListener>();
+	private Set<User> suscriptors = new HashSet<User>();
+	private CalendarEventType eventType;
+	@Transient
+	private List<EventChangeListener> listeners = new ArrayList<EventChangeListener>();
 	
 	public UserCalendarEvent() {}
 	
@@ -77,11 +117,11 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 		fireEventChange();
 	}
 
-	public List<User> getSuscriptors() {
+	public Set<User> getSuscriptors() {
 		return suscriptors;
 	}
 
-	public void setSuscriptors(List<User> suscriptors) {
+	public void setSuscriptors(Set<User> suscriptors) {
 		this.suscriptors = suscriptors;
 		fireEventChange();
 	}
@@ -185,5 +225,13 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 	public void removeSuscriptor(User suscriptor) {
 		suscriptors.remove(suscriptor);
 		fireEventChange();
+	}
+
+	public CalendarEventType getEventType() {
+		return eventType;
+	}
+
+	public void setEventType(CalendarEventType eventType) {
+		this.eventType = eventType;
 	}
 }

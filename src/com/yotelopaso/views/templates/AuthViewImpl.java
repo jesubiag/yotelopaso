@@ -2,6 +2,9 @@ package com.yotelopaso.views.templates;
 
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.ui.AbstractComponentContainer;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -53,6 +56,21 @@ abstract class AuthViewImpl extends VerticalLayout implements AuthView {
 			System.out.println( e.getMessage() );
 		}
 		
+	}
+	
+	@Override
+	final public void closeWindow(Window window) {
+		UI uI = UI.getCurrent();
+		if (uI != null) {
+			uI.removeWindow(window);
+		}
+	}
+	
+	@Override
+	final public <T extends AbstractComponentContainer> Label addLine(final T component) {
+		Label line = new Label("<hr/>", ContentMode.HTML);
+		component.addComponent(line);
+		return line;
 	}
 
 }

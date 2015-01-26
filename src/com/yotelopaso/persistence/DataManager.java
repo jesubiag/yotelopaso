@@ -8,6 +8,8 @@ import javax.persistence.Query;
 import com.vaadin.addon.jpacontainer.EntityProvider;
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.addon.jpacontainer.JPAContainerFactory;
+import com.vaadin.data.Container.Filter;
+import com.vaadin.data.util.filter.Compare;
 
 /**Administrador abstracto de entidades genérico.
  * Se hereda definiendo el tipo de clase a administrar.
@@ -75,6 +77,13 @@ public class DataManager<T> {
 
 	public void setContainer(JPAContainer<T> container) {
 		this.container = container;
+	}
+	
+	public JPAContainer<T> filterContainer(String propertyId, Object value) {
+		JPAContainer<T> container = getContainer();
+		Filter filter = new Compare.Equal(propertyId, value);
+		container.addContainerFilter(filter);
+		return container;
 	}
 
 }
