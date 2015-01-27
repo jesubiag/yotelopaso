@@ -69,6 +69,11 @@ implements CalendarView.CalendarViewListener {
 	}
 	
 	@Override
+	public void valueChange(String viewType) {
+		view.setCalendarView(viewType);
+	}
+	
+	@Override
 	public void initCalendar() {
 		Set<UserCalendarEvent> events = service.getCurrentUserEvents();
 		view.initCalendarContainer(events);

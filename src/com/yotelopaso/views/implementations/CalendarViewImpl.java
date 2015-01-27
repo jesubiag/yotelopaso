@@ -1,9 +1,12 @@
 package com.yotelopaso.views.implementations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -14,6 +17,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Calendar;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
@@ -21,13 +25,18 @@ import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClick;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClickHandler;
 import com.yotelopaso.domain.UserCalendarEvent;
 import com.yotelopaso.presenters.CalendarPresenter;
+import com.yotelopaso.utils.DateUtils;
 import com.yotelopaso.views.CalendarView;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;
 
 public class CalendarViewImpl extends AbstractHomeViewImpl implements CalendarView, 
-ClickListener, EventClickHandler {
+ClickListener, EventClickHandler, ValueChangeListener {
 
 	private static final long serialVersionUID = 1L;
+	private static final String CALENDAR_MONTHLY = DateUtils.MONTHLY;
+	private static final String CALENDAR_WEEKLY = DateUtils.WEEKLY;
+	private static final String CALENDAR_DAILY = DateUtils.DAILY;
+	private static final List<String> CALENDAR_VIEWS = Arrays.asList(CALENDAR_MONTHLY, CALENDAR_WEEKLY, CALENDAR_DAILY);
 	
 	private CalendarPresenter presenter;
 	BeanItemContainer<UserCalendarEvent> container;
@@ -38,6 +47,7 @@ ClickListener, EventClickHandler {
 	private EventWindowImpl window;
 	
 	private Button addNewEvent;
+	private NativeSelect viewSelection;
 	
 	private Panel panel;
 	
@@ -96,12 +106,22 @@ ClickListener, EventClickHandler {
 		topLayout.setHeightUndefined();
 		topLayout.setMargin(false);
 		
+		viewSelection = new NativeSelect("Tipo de vista");
+		viewSelection.addItems(CALENDAR_VIEWS);
+		viewSelection.setItemCaption(CALENDAR_MONTHLY, "Vista mensual");
+		viewSelection.setItemCaption(CALENDAR_WEEKLY, "Vista semanal");
+		viewSelection.setItemCaption(CALENDAR_DAILY, "Vista diaria");
+		viewSelection.setNullSelectionAllowed(false);
+		viewSelection.setValue(CALENDAR_WEEKLY);
+		viewSelection.addValueChangeListener( (ValueChangeListener) this );
+		
 		addNewEvent = new Button("Agregar nuevo evento", this);
 		addNewEvent.addStyleName("friendly");
 		addNewEvent.addStyleName("small");
 		
 		mainLayout.addComponent(topLayout);
-		topLayout.addComponent(addNewEvent);
+		topLayout.addComponents(viewSelection, addNewEvent);
+		topLayout.setComponentAlignment(viewSelection, Alignment.MIDDLE_LEFT);
 		topLayout.setComponentAlignment(addNewEvent, Alignment.MIDDLE_RIGHT);
 		
 	}
@@ -173,6 +193,12 @@ ClickListener, EventClickHandler {
 			listener.eventClick( (UserCalendarEvent) event.getCalendarEvent() );
 		}
 	}
+	
+	@Override
+	public void setCalendarView(String type) {
+		calendar.setStartDate( DateUtils.getStartDate(type) );
+		calendar.setEndDate( DateUtils.getEndDate(type) );
+	}
 
 	public CalendarPresenter getPresenter() {
 		return presenter;
@@ -180,6 +206,13 @@ ClickListener, EventClickHandler {
 
 	public void setPresenter(CalendarPresenter presenter) {
 		this.presenter = presenter;
+	}
+
+	@Override
+	public void valueChange(ValueChangeEvent event) {
+		for ( CalendarViewListener listener : listeners ) {
+			listener.valueChange( String.valueOf(event.getProperty().getValue()) );
+		}
 	}
 
 }

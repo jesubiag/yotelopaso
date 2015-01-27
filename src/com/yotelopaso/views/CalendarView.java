@@ -14,10 +14,12 @@ public interface CalendarView extends AbstractHomeView {
 	public void showNotification(String message);
 	public void notificateFieldsError();
 	public void closeCurrentWindow();
+	public void setCalendarView(String type);
 	
 	interface CalendarViewListener extends AbstractHomeViewListener {
 		public void buttonClick(String caption, BeanItem<UserCalendarEvent> item);
 		public void eventClick(UserCalendarEvent event);
+		public void valueChange(String viewType);
 		public void initCalendar();
 	}
 	
