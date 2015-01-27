@@ -21,8 +21,12 @@ import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.components.calendar.CalendarComponentEvents.DateClickEvent;
+import com.vaadin.ui.components.calendar.CalendarComponentEvents.DateClickHandler;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClick;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClickHandler;
+import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClick;
+import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClickHandler;
 import com.yotelopaso.domain.UserCalendarEvent;
 import com.yotelopaso.presenters.CalendarPresenter;
 import com.yotelopaso.utils.DateUtils;
@@ -30,7 +34,11 @@ import com.yotelopaso.views.CalendarView;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;
 
 public class CalendarViewImpl extends AbstractHomeViewImpl implements CalendarView, 
-ClickListener, EventClickHandler, ValueChangeListener {
+ClickListener,
+ValueChangeListener,
+EventClickHandler,
+DateClickHandler,
+WeekClickHandler {
 
 	private static final long serialVersionUID = 1L;
 	private static final String CALENDAR_MONTHLY = DateUtils.MONTHLY;
@@ -83,8 +91,14 @@ ClickListener, EventClickHandler, ValueChangeListener {
 		
 		presenter.initCalendar();
 		
-		calendar.setHandler( (EventClickHandler) this);
+		setCalendarHandlers();
 		
+	}
+	
+	private void setCalendarHandlers() {
+		calendar.setHandler( (EventClickHandler) this );
+		calendar.setHandler( (DateClickHandler) this );
+		calendar.setHandler( (WeekClickHandler) this );
 	}
 	
 	@Override
@@ -213,6 +227,16 @@ ClickListener, EventClickHandler, ValueChangeListener {
 		for ( CalendarViewListener listener : listeners ) {
 			listener.valueChange( String.valueOf(event.getProperty().getValue()) );
 		}
+	}
+
+	@Override
+	public void dateClick(DateClickEvent event) {
+		viewSelection.setValue(CALENDAR_DAILY);
+	}
+
+	@Override
+	public void weekClick(WeekClick event) {
+		viewSelection.setValue(CALENDAR_WEEKLY);
 	}
 
 }
