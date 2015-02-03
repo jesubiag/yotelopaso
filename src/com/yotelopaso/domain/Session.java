@@ -21,10 +21,10 @@ public class Session {
 	//@ManyToOne
 	private Double idUser;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date in;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date out;
 
 	public Long getId() {

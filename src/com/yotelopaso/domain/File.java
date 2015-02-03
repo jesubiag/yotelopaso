@@ -33,7 +33,7 @@ public class File implements Serializable {
 	
 	private String name;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
 	
 	@ManyToOne
