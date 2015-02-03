@@ -1,32 +1,43 @@
 package com.yotelopaso.views.implementations;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import com.vaadin.addon.jpacontainer.JPAContainer;
+import com.vaadin.data.Property;
+import com.vaadin.event.ItemClickEvent;
+import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.HasComponents.ComponentAttachListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
-import com.yotelopaso.persistence.UserManager;
+import com.vaadin.ui.themes.ValoTheme;
+import com.yotelopaso.domain.File;
+import com.yotelopaso.domain.News;
+import com.yotelopaso.presenters.HomePresenter;
+import com.yotelopaso.utils.DateUtils;
 import com.yotelopaso.views.HomeView;
 import com.yotelopaso.views.components.Editor;
-import com.yotelopaso.views.components.LastNews;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;
 
-public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, ComponentAttachListener {
+public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, ItemClickListener {
 
 	private static final long serialVersionUID = 1L;
+	private HomePresenter presenter;
 	private Panel panel;
 	private Panel windowNews;
 	private VerticalLayout subContentNews;
 	private HorizontalLayout horLayout;
-	private LastNews lastNews;
 	private Panel windowRecentFiles;
 	private Panel windowRecentEvents;
+	
+	private Table lastNewsTable;
+	private Table lastFilesTable;
 
 	public HomeViewImpl() {
 	}
@@ -47,31 +58,31 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 		panel.setContent(panelLayout);
 		
 		windowNews = new Panel("Novedades");
-		windowNews.addComponentAttachListener(this);
 		
 		subContentNews = new VerticalLayout();
-		subContentNews.setMargin(true);
+		subContentNews.setMargin(false);
+		subContentNews.setSizeFull();
+		
 		windowNews.setContent(subContentNews);
-		//User cu = getCurrentUser();
-		//Career c = cu.getCareer();
-		//String cn = c.getName();
-		//LastNews ln = new LastNews(cn);
-		//windowNews.setContent(lastNews);
 		windowNews.setHeight("140%");
 		windowNews.setWidth("100%");
-		// Content should be retrieved from database
-		//LastNews contentNews = new LastNews(getCurrentUser().getCareer().getName());
-		subContentNews.addComponent(lastNews);
+		
+		presenter.initLastNewsTable();
+		subContentNews.addComponent(lastNewsTable);
+		//subContentNews.addComponent(lastNews);
 		subContentNews.setId("NewsH");
 		
 		windowRecentFiles = new Panel("Archivos más recientes");
 		VerticalLayout subContentRecentFiles = new VerticalLayout();
-		subContentRecentFiles.setMargin(true);
+		subContentRecentFiles.setMargin(false);
+		subContentRecentFiles.setSizeFull();
 		windowRecentFiles.setContent(subContentRecentFiles);
 		windowRecentFiles.setHeight("60%");
 		windowRecentFiles.setWidth("100%");
 		// Content should be retrieved from database
-		subContentRecentFiles.addComponent(new LastFilesImpl(this));
+		// subContentRecentFiles.addComponent(new LastFilesImpl(this));
+		presenter.initLastFilesTable();
+		subContentRecentFiles.addComponent(lastFilesTable);
 		subContentRecentFiles.setId("FilesH");
 		
 		windowRecentEvents = new Panel("Eventos más recientes");
@@ -105,20 +116,64 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 	public void addListener(HomeViewListener listener) {
 		listeners.add(listener);
 	}
-
+	
 	@Override
+	public void buildLastNewsTable(JPAContainer<News> container) {
+		lastNewsTable = new Table() {
+			private static final long serialVersionUID = 3342248652486833257L;
+			
+			@SuppressWarnings("rawtypes")
+			@Override
+			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
+				if ( property.getType() == Date.class ) { 
+					return DateUtils.dateFormat( (Date) property.getValue());
+				}
+				return super.formatPropertyValue(rowId, colId, property);
+			}
+		};
+		lastNewsTable.setId("lastNewsTable");
+		lastNewsTable.addItemClickListener(this);
+		lastNewsTable.setContainerDataSource(container);
+		
+		lastNewsTable.setSelectable(true);
+		lastNewsTable.setVisibleColumns(new Object[] {"subject", "title", "author", "date"});
+		lastNewsTable.setSizeFull();
+		lastNewsTable.setImmediate(true);
+		lastNewsTable.setColumnExpandRatio("subject", 0.25f);
+		lastNewsTable.setColumnExpandRatio("title", 0.6f);
+		lastNewsTable.setColumnExpandRatio("author", 0.15f);
+		lastNewsTable.setColumnWidth("date", 150);
+		setTableStyleNames(lastNewsTable);
+	}
+
+	/*@Override
 	public void setLastNews() {
 		UserManager userService = new UserManager();
 		String cn = userService.getCurrentUser().getCareer().getName();
 		LastNews lastNews = new LastNews(cn,this);
 		this.lastNews = lastNews;
-	}
-
+	}*/
+	
 	@Override
-	public void componentAttachedToContainer(ComponentAttachEvent event) {
-		for (HomeViewListener listener : listeners) {
-			listener.addWindowsNewsContent(event.getComponent().getCaption());
-		}
+	public void buildLastFilesTable(JPAContainer<File> container) {
+		lastFilesTable = new Table();
+		lastFilesTable.setId("lastFilesTable");
+		lastFilesTable.addItemClickListener(this);
+		lastFilesTable.setSelectable(true);
+		lastFilesTable.setContainerDataSource(container);
+		lastFilesTable.setVisibleColumns(new Object[] {"subject", "name", "author", "creationDate"});
+		lastFilesTable.setSizeFull();
+		setTableStyleNames(lastFilesTable);
+	}
+	
+	private void setTableStyleNames(Table table) {
+		table.addStyleName("table-selectable");
+		table.addStyleName(ValoTheme.TABLE_BORDERLESS);
+		table.addStyleName(ValoTheme.TABLE_COMPACT);
+		table.addStyleName(ValoTheme.TABLE_SMALL);
+		table.addStyleName(ValoTheme.TABLE_NO_HEADER);
+		table.addStyleName(ValoTheme.TABLE_NO_VERTICAL_LINES);
+		table.addStyleName(ValoTheme.TABLE_NO_HORIZONTAL_LINES);
 	}
 
 	@Override
@@ -133,6 +188,22 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Comp
 	public void showNewsEditorWindow(Long id) {
 		Editor editor = new Editor(id);
 		addWindow(editor);
+	}
+
+	@Override
+	public void itemClick(ItemClickEvent event) {
+		for ( HomeViewListener listener : listeners ) {
+			Table t = (Table) event.getSource();
+			listener.itemClick( t.getId(), event.getItemId() );
+		}
+	}
+
+	public HomePresenter getPresenter() {
+		return presenter;
+	}
+
+	public void setPresenter(HomePresenter presenter) {
+		this.presenter = presenter;
 	}
 	
 }

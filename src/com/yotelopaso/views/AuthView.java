@@ -11,5 +11,6 @@ public interface AuthView extends View {
 	public void navigate(String viewName);
 	public void closeWindow(Window window);
 	public <T extends AbstractComponentContainer> Label addLine(final T component);
+	public void openLink(String url, String windowName);
 
 }

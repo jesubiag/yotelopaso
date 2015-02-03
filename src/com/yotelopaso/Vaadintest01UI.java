@@ -89,13 +89,14 @@ public class Vaadintest01UI extends UI {
 		
 		// Presenters con sus vistas y managers asociados
 		new MainPresenter(mainView);
-		new HomePresenter(homeView, userManager);
+		HomePresenter homePresenter = new HomePresenter(homeView, userManager);
 		SubjectsPresenter subjectsPresenter = new SubjectsPresenter(subjectsView, 
 				userManager, subjectManager, fileManager, newsManager);
 		new DatosRegPresenter(datosView,userManager,carrManager);
 		CalendarPresenter calendarPresenter = new CalendarPresenter(calendarView, 
 				calendarManager);
 		
+		homeView.setPresenter(homePresenter);
 		subjectsView.setPresenter(subjectsPresenter);
 		calendarView.setPresenter(calendarPresenter);
 		

@@ -133,4 +133,9 @@ public class User implements Serializable {
 	public void removeUserEvent(UserCalendarEvent event) {
 		userEvents.remove(event);
 	}
+	
+	@Override
+	public String toString() {
+		return email;
+	}
 }

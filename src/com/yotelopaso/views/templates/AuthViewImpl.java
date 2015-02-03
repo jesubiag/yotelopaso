@@ -60,9 +60,9 @@ abstract class AuthViewImpl extends VerticalLayout implements AuthView {
 	
 	@Override
 	final public void closeWindow(Window window) {
-		UI uI = UI.getCurrent();
-		if (uI != null) {
-			uI.removeWindow(window);
+		UI ui = UI.getCurrent();
+		if (ui != null) {
+			ui.removeWindow(window);
 		}
 	}
 	
@@ -71,6 +71,14 @@ abstract class AuthViewImpl extends VerticalLayout implements AuthView {
 		Label line = new Label("<hr/>", ContentMode.HTML);
 		component.addComponent(line);
 		return line;
+	}
+	
+	@Override
+	final public void openLink(String url, String windowName) {
+		UI ui = UI.getCurrent();
+		if (ui != null) {
+			ui.getPage().open(url, windowName);
+		}
 	}
 
 }

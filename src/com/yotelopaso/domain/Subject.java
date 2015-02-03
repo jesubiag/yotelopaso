@@ -73,5 +73,10 @@ public class Subject implements Serializable {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 
 }

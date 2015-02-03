@@ -151,25 +151,36 @@
 	}
 	
 	#NuevaNoticia{
-	 font-size : 17px;
-	 }
-	 
-	 div.v-slot.v-slot-primary.v-align-middle{
-	 height : 130%;
-	 }
-	 
-	 /*layout boton para subir.. */
-	 #Apuntes{
-	 margin-top: 1%;
-	 }
-	 #Tps{
-	 margin-top: 1%;
-	 }
-	 #Finales{
-	 margin-top: 1%;
-	 }
-	 #Parciales{
-	 margin-top: 1%;
-	 }
+	font-size : 17px;
+	}
+	
+	div.v-slot.v-slot-primary.v-align-middle{
+	height : 130%;
+	}
+	
+	/*layout boton para subir.. */
+	#Apuntes{
+	margin-top: 1%;
+	}
+	#Tps{
+	margin-top: 1%;
+	}
+	#Finales{
+	margin-top: 1%;
+	}
+	#Parciales{
+	margin-top: 1%;
+	}
+	
+	.table-selectable {
+		.v-table-row { 
+			cursor: pointer;
+			cursor: hand;
+		}
+		.v-table-row-odd {
+			cursor: pointer;
+			cursor: hand;
+		}
+	}
 }
 
