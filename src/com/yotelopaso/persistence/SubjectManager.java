@@ -11,7 +11,7 @@ public class SubjectManager extends DataManager<Subject> {
 	
 	public SubjectManager() {
 		super(Subject.class);
-		getContainer().sort(new String[] {"name"}, new boolean[] {true});
+		container.sort(new String[] {"name"}, new boolean[] {true});
 	}
 	
 	@SuppressWarnings("unchecked")
