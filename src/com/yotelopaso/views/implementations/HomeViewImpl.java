@@ -57,6 +57,7 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		panelLayout.setMargin(true);
 		panel.setContent(panelLayout);
 		
+		// Noticias
 		windowNews = new Panel("Novedades");
 		
 		subContentNews = new VerticalLayout();
@@ -67,11 +68,13 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		windowNews.setHeight("140%");
 		windowNews.setWidth("100%");
 		
+		lastNewsTable = createTable();
 		presenter.initLastNewsTable();
 		subContentNews.addComponent(lastNewsTable);
 		//subContentNews.addComponent(lastNews);
 		subContentNews.setId("NewsH");
 		
+		// Archivos
 		windowRecentFiles = new Panel("Archivos más recientes");
 		VerticalLayout subContentRecentFiles = new VerticalLayout();
 		subContentRecentFiles.setMargin(false);
@@ -79,19 +82,19 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		windowRecentFiles.setContent(subContentRecentFiles);
 		windowRecentFiles.setHeight("60%");
 		windowRecentFiles.setWidth("100%");
-		// Content should be retrieved from database
 		// subContentRecentFiles.addComponent(new LastFilesImpl(this));
+		lastFilesTable = createTable();
 		presenter.initLastFilesTable();
 		subContentRecentFiles.addComponent(lastFilesTable);
 		subContentRecentFiles.setId("FilesH");
 		
+		// Eventos
 		windowRecentEvents = new Panel("Eventos más recientes");
 		VerticalLayout subContentRecentEvents = new VerticalLayout();
 		subContentRecentEvents.setMargin(true);
 		windowRecentEvents.setContent(subContentRecentEvents);
 		windowRecentEvents.setHeight("60%");
 		windowRecentEvents.setWidth("100%");
-		// Content should be retrieved from database
 		subContentRecentEvents.addComponent(new Label("Contenido"));
 		subContentRecentEvents.setId("EventsH");
 		
@@ -117,10 +120,9 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		listeners.add(listener);
 	}
 	
-	@Override
-	public void buildLastNewsTable(JPAContainer<News> container) {
-		lastNewsTable = new Table() {
-			private static final long serialVersionUID = 3342248652486833257L;
+	private Table createTable() {
+		Table t = new Table() {
+			private static final long serialVersionUID = 1L;
 			
 			@SuppressWarnings("rawtypes")
 			@Override
@@ -131,6 +133,12 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 				return super.formatPropertyValue(rowId, colId, property);
 			}
 		};
+		setTableStyleNames(t);
+		return t;
+	}
+	
+	@Override
+	public void buildLastNewsTable(JPAContainer<News> container) {
 		lastNewsTable.setId("lastNewsTable");
 		lastNewsTable.addItemClickListener(this);
 		lastNewsTable.setContainerDataSource(container);
@@ -143,7 +151,6 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		lastNewsTable.setColumnExpandRatio("title", 0.6f);
 		lastNewsTable.setColumnExpandRatio("author", 0.15f);
 		lastNewsTable.setColumnWidth("date", 150);
-		setTableStyleNames(lastNewsTable);
 	}
 
 	/*@Override
@@ -156,14 +163,12 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 	
 	@Override
 	public void buildLastFilesTable(JPAContainer<File> container) {
-		lastFilesTable = new Table();
 		lastFilesTable.setId("lastFilesTable");
 		lastFilesTable.addItemClickListener(this);
 		lastFilesTable.setSelectable(true);
 		lastFilesTable.setContainerDataSource(container);
 		lastFilesTable.setVisibleColumns(new Object[] {"subject", "name", "author", "creationDate"});
 		lastFilesTable.setSizeFull();
-		setTableStyleNames(lastFilesTable);
 	}
 	
 	private void setTableStyleNames(Table table) {
