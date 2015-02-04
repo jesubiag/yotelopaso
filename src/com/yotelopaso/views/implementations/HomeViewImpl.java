@@ -12,17 +12,20 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.Table.ColumnGenerator;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.News;
+import com.yotelopaso.domain.UserCalendarEvent;
+import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.presenters.HomePresenter;
 import com.yotelopaso.utils.DateUtils;
 import com.yotelopaso.views.HomeView;
 import com.yotelopaso.views.components.Editor;
+import com.yotelopaso.views.components.EventWindowRO;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;
 
 public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, ItemClickListener {
@@ -38,6 +41,7 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 	
 	private Table lastNewsTable;
 	private Table lastFilesTable;
+	private Table lastEventsTable;
 
 	public HomeViewImpl() {
 	}
@@ -91,11 +95,14 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		// Eventos
 		windowRecentEvents = new Panel("Eventos más recientes");
 		VerticalLayout subContentRecentEvents = new VerticalLayout();
-		subContentRecentEvents.setMargin(true);
+		subContentRecentEvents.setMargin(false);
+		subContentRecentEvents.setSizeFull();
 		windowRecentEvents.setContent(subContentRecentEvents);
 		windowRecentEvents.setHeight("60%");
 		windowRecentEvents.setWidth("100%");
-		subContentRecentEvents.addComponent(new Label("Contenido"));
+		lastEventsTable = createTable();
+		presenter.initLastEventsTable();
+		subContentRecentEvents.addComponent(lastEventsTable);
 		subContentRecentEvents.setId("EventsH");
 		
 		horLayout = new HorizontalLayout();
@@ -171,6 +178,28 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		lastFilesTable.setSizeFull();
 	}
 	
+	@Override
+	public void buildLastEventsTable(JPAContainer<UserCalendarEvent> container) {
+		lastEventsTable.setId("lastEventsTable");
+		lastEventsTable.addItemClickListener(this);
+		lastEventsTable.setSelectable(true);
+		lastEventsTable.setContainerDataSource(container);
+		lastEventsTable.setVisibleColumns(new Object[] {"subjectId", "caption", "start"});
+		lastEventsTable.addGeneratedColumn("subjectId", new ColumnGenerator() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public Object generateCell(Table source, Object itemId,
+					Object columnId) {
+				Integer id = (Integer) source.getItem(itemId).getItemProperty(columnId).getValue();
+				return (new SubjectManager()).getById(id);
+			}
+			
+		});
+		lastEventsTable.setVisibleColumns(new Object[] {"subjectId", "caption", "start"});
+		lastEventsTable.setSizeFull();
+	}
+	
 	private void setTableStyleNames(Table table) {
 		table.addStyleName("table-selectable");
 		table.addStyleName(ValoTheme.TABLE_BORDERLESS);
@@ -209,6 +238,11 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 
 	public void setPresenter(HomePresenter presenter) {
 		this.presenter = presenter;
+	}
+
+	@Override
+	public void showEventWindow(UserCalendarEvent event) {
+		addWindow( new EventWindowRO(event) );
 	}
 	
 }
