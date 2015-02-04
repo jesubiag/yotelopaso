@@ -1,5 +1,7 @@
 package com.yotelopaso;
 
+import java.util.Locale;
+
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.PreserveOnRefresh;
@@ -10,11 +12,11 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
+import com.yotelopaso.persistence.CalendarManager;
 import com.yotelopaso.persistence.CareerManager;
 import com.yotelopaso.persistence.FileManager;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.persistence.SubjectManager;
-import com.yotelopaso.persistence.CalendarManager;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.presenters.CalendarPresenter;
 import com.yotelopaso.presenters.DatosRegPresenter;
@@ -61,6 +63,10 @@ public class Vaadintest01UI extends UI {
 		//DataInitializer.populateTables();
 		
 		//getSession().setAttribute("userId", 0D);
+		
+		Locale locale = new Locale("es", "AR");
+		this.setLocale(locale);
+		this.getSession().setLocale(locale);
 		
 		nav = new Navigator(this, this);
 		

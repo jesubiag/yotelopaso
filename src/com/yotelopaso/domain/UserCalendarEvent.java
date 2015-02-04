@@ -7,15 +7,20 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
 
 import com.vaadin.ui.components.calendar.event.CalendarEvent.EventChangeNotifier;
 import com.vaadin.ui.components.calendar.event.EditableCalendarEvent;
+import com.yotelopaso.persistence.constraints.NotEmpty;
 
 @Entity
 public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNotifier {
@@ -27,7 +32,7 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 		PARCIAL("Parcial", "color3"),
 		PRESENTACION("Presentación", "color4"),
 		OTRO("Otro", "color5"),
-		NONE(null, null);
+		NONE(null , null);
 		
 		private String name;
 		private String color;
@@ -39,6 +44,10 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 		
 		@Override
 		public String toString() {
+			return name;
+		}
+		
+		public String getName() {
 			return name;
 		}
 		
@@ -62,7 +71,10 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 	@GeneratedValue
 	private Long id;
 	private Double authorId;
+	@Min(1)
 	private Integer subjectId;
+	@ManyToOne
+	private Career career;
 	private String caption;
 	private String description;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -73,6 +85,7 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 	private boolean isAllDay;
 	@ManyToMany(mappedBy="userEvents")
 	private Set<User> suscriptors = new HashSet<User>();
+	@Enumerated(EnumType.ORDINAL) @NotEmpty
 	private CalendarEventType eventType;
 	@Transient
 	private List<EventChangeListener> listeners = new ArrayList<EventChangeListener>();
@@ -233,5 +246,13 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 
 	public void setEventType(CalendarEventType eventType) {
 		this.eventType = eventType;
+	}
+
+	public Career getCareer() {
+		return career;
+	}
+
+	public void setCareer(Career career) {
+		this.career = career;
 	}
 }

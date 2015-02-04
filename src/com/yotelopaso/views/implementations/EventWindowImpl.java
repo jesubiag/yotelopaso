@@ -3,8 +3,10 @@ package com.yotelopaso.views.implementations;
 import java.util.Date;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
+import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.ObjectProperty;
+import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.shared.ui.datefield.Resolution;
 import com.vaadin.ui.AbstractSelect.ItemCaptionMode;
@@ -41,6 +43,7 @@ public class EventWindowImpl extends Window implements EventWindow {
 	private ComboBox type;
 	private FieldGroup binder;
 	private boolean isNew = false;
+	private SubjectManager sm = new SubjectManager();
 	
 	public final static Resolution RESOLUTION = Resolution.MINUTE;
 	
@@ -89,7 +92,7 @@ public class EventWindowImpl extends Window implements EventWindow {
 		
 		FormLayout form = new FormLayout();
 		binder = new FieldGroup(item);
-		binder.setBuffered(false);
+		binder.setBuffered(true);
 		
 		startDate = new DateField("Fecha de inicio");
 		startDate.setResolution(RESOLUTION);
@@ -97,8 +100,7 @@ public class EventWindowImpl extends Window implements EventWindow {
 		endDate = new DateField("Fecha de fin");
 		endDate.setResolution(RESOLUTION);
 		endDate.setWidth("100%");
-		subject = new ComboBox("Materia", 
-				(new SubjectManager()).filterContainerByCareer(this.careerId));
+		subject = new ComboBox("Materia", sm.filterContainerByCareer(this.careerId));
 		subject.setWidth("100%");
 		subject.setInputPrompt("Seleccione una materia");
 		subject.setItemCaptionPropertyId("name");
@@ -107,12 +109,16 @@ public class EventWindowImpl extends Window implements EventWindow {
 		subject.setImmediate(true);
 		subject.setNullSelectionAllowed(false);
 		subject.setRequired(true);
+		subject.setValidationVisible(false);
+		subject.addValidator(new BeanValidator(UserCalendarEvent.class, "subjectId"));
 		type = new ComboBox("Tipo de evento", CalendarEventType.getAll());
 		type.setWidth("100%");
 		type.setInputPrompt("Seleccione el tipo de evento");
 		type.setImmediate(true);
 		type.setNullSelectionAllowed(false);
 		type.setRequired(true);
+		type.setValidationVisible(false);
+		type.addValidator(new BeanValidator(UserCalendarEvent.class, "eventType"));
 		caption = new TextField("Asunto");
 		caption.setWidth("100%");
 		description = new TextArea("Descripción");
@@ -162,11 +168,26 @@ public class EventWindowImpl extends Window implements EventWindow {
 	}
 	
 	public boolean requiredFieldsAreValid() {
-		return ( subject.isValid() && type.isValid() );
+		if ( subject.isValid() && type.isValid() ) {
+			try {
+				commitChanges();
+			} catch (CommitException e) {
+				e.printStackTrace();
+			}
+			return true;
+		} else {
+			subject.setValidationVisible(true);
+			type.setValidationVisible(true);
+			return false;
+		}
 	}
 	
 	public void discardItem() {
 		binder.discard();
+	}
+	
+	private void commitChanges() throws CommitException {
+		binder.commit();
 	}
 	
 }

@@ -80,7 +80,6 @@ public class DataManager<T> {
 	}
 	
 	public JPAContainer<T> filterContainer(String propertyId, Object value) {
-		JPAContainer<T> container = getContainer();
 		Filter filter = new Compare.Equal(propertyId, value);
 		container.addContainerFilter(filter);
 		return container;

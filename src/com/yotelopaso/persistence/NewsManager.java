@@ -10,6 +10,7 @@ public class NewsManager extends DataManager<News> {
 	
 	public NewsManager() {
 		super(News.class);
+		container.sort(new String[] {"date"}, new boolean[] {false});
 	}
 	
 	@SuppressWarnings("unchecked")

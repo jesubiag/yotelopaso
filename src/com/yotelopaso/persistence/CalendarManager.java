@@ -16,6 +16,7 @@ public class CalendarManager extends DataManager<UserCalendarEvent>{
 	public Long save(UserCalendarEvent event) {
 		String c = event.getEventType().getColor();
 		event.setStyleName(c);
+		if (event.getCareer() == null) event.setCareer(userManager.getCurrentUser().getCareer());
 		Long id = (Long) super.save(event);
 		if ( event.getId() == null ) {
 			event.setId(id);
