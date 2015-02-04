@@ -194,8 +194,12 @@ ItemClickListener, ClickListener {
 	
 	@Override
 	public void showNewsEditorWindow(Long id) {
-		Vaadintest01UI.getCurrent().addWindow(new Editor(subjectName,id));
-		//UI.getCurrent().addWindow(new Editor(subjectName));
+		Editor editor = new Editor(subjectName,id);
+		editor.center();
+		editor.setModal(true);
+		editor.setResizable(false);
+		editor.setWidth("650px");
+		Vaadintest01UI.getCurrent().addWindow(editor);
 	}
 	@Override
 	public void showUploadFileWindow(Type fileType) {

@@ -4,26 +4,34 @@ package com.yotelopaso.views.components;
 import java.util.Date;
 
 import com.vaadin.server.Page;
+import com.vaadin.server.Sizeable;
+import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PopupView.Content;
 import com.vaadin.ui.RichTextArea;
+import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.domain.Career;
 import com.yotelopaso.domain.News;
 import com.yotelopaso.domain.Subject;
+import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.persistence.UserManager;
+import com.yotelopaso.utils.DateUtils;
 
 public class Editor extends Window implements Content {
 
@@ -34,18 +42,22 @@ public class Editor extends Window implements Content {
 	private String subjectName;
 	private Career carrera;
 	private Subject materia;
+	private User author;
+	private Date newsDate;
 	private Long id;
 	private RichTextArea cuerpo;
 	private DateField fecha;
 	private TextField titulo;
 	private TextField carr;
+	private TextArea contenido;
 	private TextField mat;
 	private TextField autor;
 	private Button aceptar;
 	private String labelNotif;
+	private FormLayout form;
+	private HorizontalLayout botones;
+	private HorizontalLayout topHorizontalLayout;
 	
-	
-	private Panel panel;
 	private VerticalLayout mainLayout = new VerticalLayout();
 	
 	
@@ -58,6 +70,9 @@ public class Editor extends Window implements Content {
 		carrera = manUser.getCurrentUser().getCareer();
 		materia = manSubject.getByProperty("name", this.subjectName).get(0);
 		buildMainLayout();
+		form.addComponent(titulo);
+		form.addComponent(cuerpo);
+		form.addComponent(botones);
 		autor.setValue(manUser.getCurrentUser().getEmail());
 		//setCompositionRoot(mainLayout);
 	}
@@ -68,24 +83,65 @@ public class Editor extends Window implements Content {
 		news=manNews.getById(this.id);
 		materia=news.getSubject();
 		carrera=news.getCareer();
+		author=news.getAuthor();
+		newsDate=news.getDate();
+		
 		buildMainLayout();
-		autor.setValue(news.getAuthor().getEmail());
-		titulo.setEnabled(false);
-		cuerpo.setReadOnly(true);
-		fecha.setEnabled(false);
-		carr.setEnabled(false);
-		mat.setEnabled(false);
-		aceptar.setVisible(false);
+		
+		contenido = new TextArea();
+		contenido.setSizeFull();
+		contenido.setValue(cuerpo.getValue());
+		
+		topHorizontalLayout = new HorizontalLayout();
+		topHorizontalLayout.setSizeFull();
+		topHorizontalLayout.setSpacing(true);
+		
+		Label date = new Label();
+		date.setValue("Publicado: " + DateUtils.dateFormat(newsDate));
+		date.setStyleName(ValoTheme.LABEL_TINY);
+		date.setSizeUndefined();
+		
+		Label authorName = new Label();
+		authorName.setValue("Autor: " + author.getEmail());
+		authorName.setStyleName(ValoTheme.LABEL_TINY);
+		authorName.setSizeUndefined();
+		
+		Label contentNews = new Label();
+		contentNews.setContentMode(ContentMode.HTML);
+		contentNews.setValue(cuerpo.getValue());
+		contentNews.setSizeUndefined();
+		
+		Panel panel = new Panel();
+		panel.setContent(contentNews);
+		panel.setSizeFull();
+		panel.setHeight("300px");
+		
+		topHorizontalLayout.addComponents(authorName,date);
+		topHorizontalLayout.setComponentAlignment(date, Alignment.MIDDLE_RIGHT);
+		topHorizontalLayout.setComponentAlignment(authorName, Alignment.MIDDLE_LEFT);
+		
+		VerticalLayout vLayout = new VerticalLayout();
+		vLayout.setMargin(true);
+		this.setContent(vLayout);
+		
+		vLayout.addComponent(panel);
+		vLayout.addComponent(topHorizontalLayout);
+		
+		this.center();
+		this.setWidth("650px");	
+		this.setResizable(false);
+		this.setModal(true);
+		this.setCaption(materia.getName() + ": " + news.getTitle());
 	}
 
 	private void buildMainLayout(){
 		
 		//Primero vamos a crear un form que es donde el usuario va a cargar los datos y luego se va a crear el panel
 		//en donde se va a colocar el form
-		FormLayout form = new FormLayout();
+		form = new FormLayout();
 		 form.addStyleName("Menu");
 		 form.setSizeFull();
-		 form.setSpacing(true);
+		 //form.setSpacing(true);
 		 
 		 //getRightLayout().addComponent(form);
 		 //getRightLayout().setExpandRatio(form, 1.0f);
@@ -96,7 +152,7 @@ public class Editor extends Window implements Content {
 		cuerpo.setNullRepresentation("Complete el contenido de la noticia");
        	cuerpo.setImmediate(true);
         cuerpo.setSizeFull();
-        cuerpo.setCaption("Descripción de la Noticia");
+        cuerpo.setCaption("Contenido");
         cuerpo.addStyleName("borderless");
        
 		fecha = new DateField("Fecha de publicación");
@@ -128,21 +184,17 @@ public class Editor extends Window implements Content {
 		mat.setEnabled(false);
 		mat.addStyleName("borderless");
 		
-		form.addComponent(titulo);
-		form.addComponent(carr);
-		form.addComponent(mat);
-		form.addComponent(autor);
-		form.addComponent(fecha);
-		form.addComponent(cuerpo);
-		
 		if (id!=null){
 			news = manNews.getById(id);
 			cuerpo.setValue(news.getContent());
 			titulo.setValue(news.getTitle());
 			labelNotif="Noticia editada con éxito";
+			this.setCaption("Editar Noticia: " + materia.getName());
 		}
-		else
+		else {
 			labelNotif="Noticia Creada";
+			this.setCaption("Crear Noticia en: " + materia.getName());
+		}
 		
 		aceptar = new Button("Aceptar",
 				new Button.ClickListener() {
@@ -183,20 +235,18 @@ public class Editor extends Window implements Content {
 		}
 	}); //Boton Cancelar, te envia a la home
 		
-		HorizontalLayout botones= new HorizontalLayout();
+		botones= new HorizontalLayout();
 		botones.addComponent(aceptar);
 		botones.addComponent(cancelar);
 		
-		form.addComponent(botones);
-		
-		panel = new Panel("Editor de Noticias");
-		panel.setContent(form);
-		panel.setSizeFull();
-		mainLayout.addComponent(panel);
-		mainLayout.setExpandRatio(panel, 1.0f);
+		//panel = new Panel();
+		//panel.setContent(form);
+		//panel.setSizeFull();
+		mainLayout.addComponent(form);
+		mainLayout.setExpandRatio(form, 1.0f);
 		this.setContent(mainLayout);
-		this.setWidth("60%");
-		this.setPositionX(180);
+		this.setWidth("70%");
+		//this.setPositionX(180);
 	}
 
 	@Override

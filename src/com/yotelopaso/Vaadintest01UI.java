@@ -21,6 +21,7 @@ import com.yotelopaso.presenters.DatosRegPresenter;
 import com.yotelopaso.presenters.HomePresenter;
 import com.yotelopaso.presenters.MainPresenter;
 import com.yotelopaso.presenters.SubjectsPresenter;
+import com.yotelopaso.utils.DataInitializer;
 import com.yotelopaso.views.EditorNoticiasView;
 import com.yotelopaso.views.implementations.CalendarViewImpl;
 import com.yotelopaso.views.implementations.DatosRegImpl;

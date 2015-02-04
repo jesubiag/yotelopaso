@@ -3,9 +3,12 @@ package com.yotelopaso.views.implementations;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.yotelopaso.presenters.SubjectNewsPresenter;
 import com.yotelopaso.utils.Hr;
@@ -44,16 +47,12 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 		
 		addStyleName("subjectNews");
 		
+		
 		Label subjectDate = new Label();
 		subjectDate.setContentMode(labelContentMode);
-		subjectDate.setValue(date);
-		// no esta funcionando el estilo
-		subjectDate.addStyleName("subjectNews");
-		
-		// career
-		Label career = new Label();
-		career.setContentMode(labelContentMode);
-		career.setValue(this.careerName);
+		subjectDate.setValue("Publicado: " + date);
+		subjectDate.setStyleName(ValoTheme.LABEL_TINY);
+		subjectDate.setSizeUndefined();
 		
 		// subject
 		Label subject = new Label();
@@ -64,50 +63,73 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 		Label contentSubject = new Label();
 		contentSubject.setContentMode(labelContentMode);
 		contentSubject.setValue(content);
+		contentSubject.setSizeUndefined();
 		
 		// title
 		Label titleSubject = new Label();
 		titleSubject.setContentMode(labelContentMode);
 		titleSubject.setValue(title);
+		titleSubject.setStyleName(ValoTheme.LABEL_BOLD);
 		
 		// author
 		Label autMail = new Label();
 		autMail.setContentMode(labelContentMode);
-		autMail.setValue(authorMail);
+		autMail.setValue("Autor: " + authorMail);
+		autMail.setStyleName(ValoTheme.LABEL_TINY);
+		autMail.setSizeUndefined();
+		
+		Panel panel = new Panel();
+		panel.setContent(contentSubject);
+		panel.setSizeFull();
+		panel.setHeight("100px");
 		
 		HorizontalLayout topHorizontalLayout = new HorizontalLayout();
+		HorizontalLayout botHorizontalLayout = new HorizontalLayout();
+		HorizontalLayout auxHorizontalLayout = new HorizontalLayout();
 		VerticalLayout elementLayout = new VerticalLayout();
 		
-		topHorizontalLayout.setWidth("100%");
-		topHorizontalLayout.setSpacing(true);
+		topHorizontalLayout.setSizeFull();
+		topHorizontalLayout.setSpacing(false);
 		topHorizontalLayout.setMargin(false);
-		topHorizontalLayout.setSizeUndefined();
-		
+		topHorizontalLayout.addComponents(autMail, subjectDate);
+		topHorizontalLayout.setComponentAlignment(subjectDate, Alignment.MIDDLE_RIGHT);
+		topHorizontalLayout.setComponentAlignment(autMail, Alignment.MIDDLE_LEFT);
+			
 		Button editButton = new Button("Editar");
 		editButton.setData(id);
 		editButton.addClickListener(parentView);
-		//editButton.addStyleName("primary");
-		editButton.setWidth("60%");
-		editButton.setHeight("80%");
+		editButton.addStyleName(ValoTheme.BUTTON_TINY);
+		editButton.setWidth("70%");
+		editButton.setHeight("70%");
 		
 		Button deleteButton = new Button("Eliminar");
 		deleteButton.setData(id);
 		deleteButton.addClickListener(parentView);
-		//deleteButton.addStyleName("primary");
-		deleteButton.setWidth("60%");
-		deleteButton.setHeight("80%");
+		deleteButton.addStyleName(ValoTheme.BUTTON_TINY);
+		deleteButton.setWidth("70%");
+		deleteButton.setHeight("70%");
 		
+		botHorizontalLayout.setSizeUndefined();
+		botHorizontalLayout.setSpacing(false);
+		botHorizontalLayout.addComponents(editButton,deleteButton);
+		
+		auxHorizontalLayout.setSizeFull();
+		auxHorizontalLayout.setSpacing(false);
 		
 		elementLayout.setMargin(false);
 		elementLayout.setSizeFull();
-		elementLayout.setSpacing(true);
+		elementLayout.setSpacing(false);
+		
 		
 		if (id==null) 
-			topHorizontalLayout.addComponents(subjectDate, career, subject, autMail);
+			auxHorizontalLayout.addComponents(titleSubject);
 		else
-			topHorizontalLayout.addComponents(subjectDate, career, subject, autMail, editButton, deleteButton);
+			auxHorizontalLayout.addComponents(titleSubject, botHorizontalLayout);
 		
-		elementLayout.addComponents(topHorizontalLayout, titleSubject, contentSubject, new Hr());
+		auxHorizontalLayout.setComponentAlignment(botHorizontalLayout, Alignment.MIDDLE_RIGHT);
+		
+		elementLayout.addComponents(auxHorizontalLayout, panel, topHorizontalLayout, new Hr());
+		
 		this.mainLayout.addComponent(elementLayout);
 	}
 
