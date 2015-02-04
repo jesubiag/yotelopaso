@@ -33,7 +33,7 @@ import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.presenters.SubjectsPresenter;
 import com.yotelopaso.utils.Hr;
 import com.yotelopaso.views.SubjectsView;
-import com.yotelopaso.views.templates.AbstractHomeViewImpl;
+import com.yotelopaso.views.implementations.templates.AbstractHomeViewImpl;
 
 public class SubjectsViewImpl extends AbstractHomeViewImpl implements SubjectsView, 
 ItemClickListener, ClickListener {

@@ -1,4 +1,4 @@
-package com.yotelopaso.views.templates;
+package com.yotelopaso.views.implementations.templates;
 
 import java.util.ArrayList;
 import java.util.List;

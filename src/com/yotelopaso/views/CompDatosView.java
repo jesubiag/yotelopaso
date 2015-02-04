@@ -22,7 +22,7 @@ import com.yotelopaso.domain.PersonalInfo;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.CareerManager;
 import com.yotelopaso.persistence.UserManager;
-import com.yotelopaso.views.templates.AbstractHomeViewImpl;
+import com.yotelopaso.views.implementations.templates.AbstractHomeViewImpl;
 
 public class CompDatosView extends AbstractHomeViewImpl implements View {
 	

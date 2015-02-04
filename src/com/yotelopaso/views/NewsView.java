@@ -1,7 +1,7 @@
 package com.yotelopaso.views;
 
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.yotelopaso.views.templates.AbstractHomeViewImpl;
+import com.yotelopaso.views.implementations.templates.AbstractHomeViewImpl;
 
 public class NewsView extends AbstractHomeViewImpl {
 	

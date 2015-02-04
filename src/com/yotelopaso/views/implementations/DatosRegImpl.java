@@ -7,6 +7,7 @@ import java.util.Locale;
 
 
 
+
 import com.vaadin.data.util.converter.StringToLongConverter;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button;
@@ -20,7 +21,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.HasComponents.ComponentAttachListener;
 import com.yotelopaso.views.DatosReg;
-import com.yotelopaso.views.templates.AbstractHomeViewImpl;
+import com.yotelopaso.views.implementations.templates.AbstractHomeViewImpl;
 
 public class DatosRegImpl extends AbstractHomeViewImpl implements DatosReg, ComponentAttachListener, ClickListener{
 

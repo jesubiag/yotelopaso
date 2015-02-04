@@ -26,7 +26,7 @@ import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.presenters.HomePresenter;
 import com.yotelopaso.utils.DateUtils;
 import com.yotelopaso.views.HomeView;
-import com.yotelopaso.views.templates.AbstractHomeViewImpl;
+import com.yotelopaso.views.implementations.templates.AbstractHomeViewImpl;
 
 public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, ItemClickListener {
 

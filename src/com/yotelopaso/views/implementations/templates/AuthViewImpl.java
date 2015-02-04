@@ -1,4 +1,4 @@
-package com.yotelopaso.views.templates;
+package com.yotelopaso.views.implementations.templates;
 
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.VaadinSession;

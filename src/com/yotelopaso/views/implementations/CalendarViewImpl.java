@@ -32,7 +32,7 @@ import com.yotelopaso.domain.UserCalendarEvent;
 import com.yotelopaso.presenters.CalendarPresenter;
 import com.yotelopaso.utils.DateUtils;
 import com.yotelopaso.views.CalendarView;
-import com.yotelopaso.views.templates.AbstractHomeViewImpl;
+import com.yotelopaso.views.implementations.templates.AbstractHomeViewImpl;
 
 public class CalendarViewImpl extends AbstractHomeViewImpl implements CalendarView, 
 ClickListener,
