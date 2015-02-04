@@ -32,13 +32,13 @@ public class FilesTableImpl extends CustomComponent implements FilesTable {
 	private String type;
 	private ItemClickListener parentView;
 	final private Label fileAuthorTitle = new Label("<b>Autor:</b>", ContentMode.HTML);
-	final private Label fileDateTitle = new Label("<b>Fecha:</b>", ContentMode.HTML);;
-	final private Label fileNameTitle = new Label("<b>Nombre:</b>", ContentMode.HTML);;
-	final private Label fileDescTitle = new Label("<b>Descripción:</b>", ContentMode.HTML);;
+	final private Label fileDateTitle = new Label("<b>Fecha:</b>", ContentMode.HTML);
+	final private Label fileNameTitle = new Label("<b>Nombre:</b>", ContentMode.HTML);
+	final private Label fileDescTitle = new Label("<b>Descripción:</b>", ContentMode.HTML);
 	final private Label fileAuthor = new Label("", ContentMode.HTML);
-	final private Label fileDate = new Label("", ContentMode.HTML);;
-	final private Label fileName = new Label("", ContentMode.HTML);;
-	final private Label fileDesc = new Label("", ContentMode.HTML);;
+	final private Label fileDate = new Label("", ContentMode.HTML);
+	final private Label fileName = new Label("", ContentMode.HTML);
+	final private Label fileDesc = new Label("", ContentMode.HTML);
 	
 	public FilesTableImpl(String subjectName, ItemClickListener parentView, 
 			String type, String careerName) {

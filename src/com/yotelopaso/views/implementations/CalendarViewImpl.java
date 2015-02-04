@@ -71,8 +71,8 @@ WeekClickHandler {
 		panel = new Panel("Mi Calendario");
 		panel.setSizeFull();
 		
-		getRightLayout().addComponent(panel);
-		getRightLayout().setExpandRatio(panel, 1.0f);
+		rightLayout.addComponent(panel);
+		rightLayout.setExpandRatio(panel, 1.0f);
 		
 		cleanComponents();
 		

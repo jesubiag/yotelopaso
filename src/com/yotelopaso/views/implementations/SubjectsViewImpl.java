@@ -62,7 +62,7 @@ ItemClickListener, ClickListener {
 		
 		mainLayout.setMargin(true);
 		
-		getRightLayout().addComponent(panel);
+		rightLayout.addComponent(panel);
 		
 		panel.setContent(mainLayout);
 		panel.setSizeFull();

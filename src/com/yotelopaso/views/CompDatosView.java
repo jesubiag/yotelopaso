@@ -44,8 +44,8 @@ public class CompDatosView extends AbstractHomeViewImpl implements View {
 		form.setWidth("500");
 		form.setSpacing(true);
 		
-		getRightLayout().addComponent(form);
-		getRightLayout().setExpandRatio(form, 1.0f);
+		rightLayout.addComponent(form);
+		rightLayout.setExpandRatio(form, 1.0f);
 
 		
 				final DateField fecha = new DateField("Fecha de nacimiento");
@@ -153,8 +153,8 @@ public class CompDatosView extends AbstractHomeViewImpl implements View {
 		Panel panel = new Panel("Complete sus datos por favor");
 		panel.setSizeFull();
 		panel.setContent(form);
-		getRightLayout().addComponent(panel);
-		getRightLayout().setExpandRatio(panel, 1.0f);
+		rightLayout.addComponent(panel);
+		rightLayout.setExpandRatio(panel, 1.0f);
 		
 		
 		

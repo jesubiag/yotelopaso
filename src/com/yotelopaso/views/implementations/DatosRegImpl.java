@@ -97,8 +97,8 @@ public class DatosRegImpl extends AbstractHomeViewImpl implements DatosReg, Comp
 		panel.addComponentAttachListener(this);
 		panel.setSizeFull();
 		panel.setContent(form);
-		getRightLayout().addComponent(panel);
-		getRightLayout().setExpandRatio(panel, 1.0f);
+		rightLayout.addComponent(panel);
+		rightLayout.setExpandRatio(panel, 1.0f);
 	}
 	
 	

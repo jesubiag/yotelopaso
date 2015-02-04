@@ -17,7 +17,7 @@ import com.yotelopaso.views.AbstractHomeView;
 abstract public class AbstractHomeViewImpl extends AuthViewImpl implements AbstractHomeView, ClickListener {
 	
 	private static final long serialVersionUID = 1L;
-	private VerticalLayout rightLayout;
+	protected VerticalLayout rightLayout;
 	private HorizontalLayout hLayout;
 	private Button buttonHome;
 	private Button buttonSubjects;
@@ -103,15 +103,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 	@Override
 	public void enter(ViewChangeEvent event) {
 		super.enter(event);
-		getRightLayout().removeAllComponents();
-	}
-	
-	public VerticalLayout getRightLayout() {
-		return rightLayout;
-	}
-
-	public void setRightLayout(VerticalLayout rightLayout) {
-		this.rightLayout = rightLayout;
+		rightLayout.removeAllComponents();
 	}
 
 }

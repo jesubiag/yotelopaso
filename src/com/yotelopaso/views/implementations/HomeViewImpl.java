@@ -9,7 +9,6 @@ import com.vaadin.data.Property;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
-import com.vaadin.server.Sizeable;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
@@ -17,7 +16,6 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnGenerator;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.News;
@@ -54,8 +52,8 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		
 		panel = new Panel("Inicio");
 		panel.setSizeFull();
-		getRightLayout().addComponent(panel);
-		getRightLayout().setExpandRatio(panel, 1.0f);
+		rightLayout.addComponent(panel);
+		rightLayout.setExpandRatio(panel, 1.0f);
 		
 		VerticalLayout panelLayout = new VerticalLayout();
 		panelLayout.setSpacing(true);
