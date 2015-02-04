@@ -102,7 +102,7 @@ public class Editor extends Window implements Content {
 		date.setSizeUndefined();
 		
 		Label authorName = new Label();
-		authorName.setValue("Autor: " + author.getEmail());
+		authorName.setValue("Autor: " + author.getUsername());
 		authorName.setStyleName(ValoTheme.LABEL_TINY);
 		authorName.setSizeUndefined();
 		
@@ -161,7 +161,7 @@ public class Editor extends Window implements Content {
 		fecha.addStyleName("borderless");
 		
 		titulo = new TextField("Título");
-		titulo.setMaxLength(50);
+		titulo.setMaxLength(35);
 		titulo.setWidth("60%");
 		titulo.setImmediate(true);
 		titulo.setRequired(true);

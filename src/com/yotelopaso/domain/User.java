@@ -138,4 +138,9 @@ public class User implements Serializable {
 	public String toString() {
 		return email;
 	}
+	
+	public String getUsername() {
+		String userName = this.email.split("@")[0];
+		return userName;
+	}
 }
