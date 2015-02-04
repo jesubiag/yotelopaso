@@ -2,9 +2,9 @@ package com.yotelopaso.presenters;
 
 import java.util.List;
 
+import com.yotelopaso.components.FilesTable;
 import com.yotelopaso.domain.File;
 import com.yotelopaso.persistence.FileManager;
-import com.yotelopaso.views.components.FilesTable;
 
 public class FilesTablePresenter implements FilesTable.FilesTableListener {
 	

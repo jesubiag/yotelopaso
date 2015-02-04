@@ -23,13 +23,16 @@ import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.components.Editor;
+import com.yotelopaso.components.UploadFiles;
+import com.yotelopaso.components.implementations.FilesTableImpl;
+import com.yotelopaso.components.implementations.SubjectNewsImpl;
+import com.yotelopaso.components.implementations.SubjectsByYearImpl;
 import com.yotelopaso.domain.File.Type;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.presenters.SubjectsPresenter;
 import com.yotelopaso.utils.Hr;
 import com.yotelopaso.views.SubjectsView;
-import com.yotelopaso.views.components.Editor;
-import com.yotelopaso.views.components.UploadFiles;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;
 
 public class SubjectsViewImpl extends AbstractHomeViewImpl implements SubjectsView, 

@@ -1,4 +1,4 @@
-package com.yotelopaso.views.implementations;
+package com.yotelopaso.components.implementations;
 
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
@@ -10,9 +10,9 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.yotelopaso.components.SubjectNews;
 import com.yotelopaso.presenters.SubjectNewsPresenter;
 import com.yotelopaso.utils.Hr;
-import com.yotelopaso.views.components.SubjectNews;
 
 public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 	

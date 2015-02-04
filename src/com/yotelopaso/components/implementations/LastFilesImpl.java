@@ -1,4 +1,4 @@
-package com.yotelopaso.views.implementations;
+package com.yotelopaso.components.implementations;
 
 import com.vaadin.server.ExternalResource;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -8,8 +8,8 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.VerticalLayout;
+import com.yotelopaso.components.LastFiles;
 import com.yotelopaso.presenters.LastFilesPresenter;
-import com.yotelopaso.views.components.LastFiles;
 
 public class LastFilesImpl extends CustomComponent implements LastFiles {
 	

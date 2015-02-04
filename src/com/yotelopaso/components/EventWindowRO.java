@@ -1,4 +1,4 @@
-package com.yotelopaso.views.components;
+package com.yotelopaso.components;
 
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Label;

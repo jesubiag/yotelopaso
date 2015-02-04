@@ -1,4 +1,4 @@
-package com.yotelopaso.views.components;
+package com.yotelopaso.components;
 
 import java.util.Date;
 

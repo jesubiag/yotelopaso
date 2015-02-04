@@ -1,4 +1,4 @@
-package com.yotelopaso.views.implementations;
+package com.yotelopaso.components.implementations;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,8 +16,8 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.yotelopaso.components.NewsEditor;
 import com.yotelopaso.persistence.SubjectManager;
-import com.yotelopaso.views.components.NewsEditor;
 
 
 public class NewsEditorImpl extends CustomComponent implements NewsEditor, ClickListener{

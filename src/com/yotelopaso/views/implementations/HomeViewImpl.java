@@ -17,6 +17,8 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnGenerator;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import com.yotelopaso.components.Editor;
+import com.yotelopaso.components.EventWindowRO;
 import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.News;
 import com.yotelopaso.domain.UserCalendarEvent;
@@ -24,8 +26,6 @@ import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.presenters.HomePresenter;
 import com.yotelopaso.utils.DateUtils;
 import com.yotelopaso.views.HomeView;
-import com.yotelopaso.views.components.Editor;
-import com.yotelopaso.views.components.EventWindowRO;
 import com.yotelopaso.views.templates.AbstractHomeViewImpl;
 
 public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, ItemClickListener {

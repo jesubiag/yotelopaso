@@ -3,12 +3,12 @@ package com.yotelopaso.presenters;
 import java.util.Set;
 
 import com.vaadin.data.util.BeanItem;
+import com.yotelopaso.components.EventWindow;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.domain.UserCalendarEvent;
 import com.yotelopaso.persistence.CalendarManager;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.CalendarView;
-import com.yotelopaso.views.components.EventWindow;
 
 public class CalendarPresenter extends AbstractHomePresenter<CalendarView> 
 implements CalendarView.CalendarViewListener {

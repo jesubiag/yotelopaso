@@ -1,4 +1,4 @@
-package com.yotelopaso.views.implementations;
+package com.yotelopaso.components.implementations;
 
 import java.util.Date;
 
@@ -12,9 +12,9 @@ import com.vaadin.ui.Link;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import com.yotelopaso.components.FilesTable;
 import com.yotelopaso.presenters.FilesTablePresenter;
 import com.yotelopaso.utils.DateUtils;
-import com.yotelopaso.views.components.FilesTable;
 
 public class FilesTableImpl extends CustomComponent implements FilesTable {
 

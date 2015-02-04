@@ -1,4 +1,4 @@
-package com.yotelopaso.views.implementations;
+package com.yotelopaso.components.implementations;
 
 import java.util.Date;
 
@@ -21,10 +21,10 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.yotelopaso.components.EventWindow;
 import com.yotelopaso.domain.UserCalendarEvent;
 import com.yotelopaso.domain.UserCalendarEvent.CalendarEventType;
 import com.yotelopaso.persistence.SubjectManager;
-import com.yotelopaso.views.components.EventWindow;
 
 public class EventWindowImpl extends Window implements EventWindow {
 

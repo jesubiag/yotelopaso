@@ -4,12 +4,12 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
+import com.yotelopaso.components.NewsEditor;
 import com.yotelopaso.domain.Career;
 import com.yotelopaso.domain.News;
 import com.yotelopaso.domain.Subject;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.persistence.SubjectManager;
-import com.yotelopaso.views.components.NewsEditor;
 
 public class NewsEditorPresenter implements NewsEditor.NewsEditorListener {
 	

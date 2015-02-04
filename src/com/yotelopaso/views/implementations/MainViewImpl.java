@@ -13,10 +13,10 @@ import com.vaadin.ui.Link;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.components.Google2Button;
 import com.yotelopaso.utils.Google2ApiInfo;
 import com.yotelopaso.utils.UserUtils;
 import com.yotelopaso.views.MainView;
-import com.yotelopaso.views.components.Google2Button;
 
 public class MainViewImpl extends VerticalLayout implements MainView {
 	

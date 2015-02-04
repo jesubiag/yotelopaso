@@ -3,9 +3,9 @@ package com.yotelopaso.presenters;
 import java.util.HashMap;
 import java.util.List;
 
+import com.yotelopaso.components.SubjectsByYear;
 import com.yotelopaso.domain.Subject;
 import com.yotelopaso.persistence.SubjectManager;
-import com.yotelopaso.views.components.SubjectsByYear;
 
 public class SubjectsByYearPresenter implements SubjectsByYear.SubjectsByYearListener {
 	

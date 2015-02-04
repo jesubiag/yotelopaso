@@ -1,4 +1,4 @@
-package com.yotelopaso.views.components;
+package com.yotelopaso.components;
 
 import org.scribe.builder.api.Google2Api;
 import org.vaadin.addon.oauthpopup.OAuthPopupButton;

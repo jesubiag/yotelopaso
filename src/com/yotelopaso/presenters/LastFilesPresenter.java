@@ -2,11 +2,11 @@ package com.yotelopaso.presenters;
 
 import java.util.List;
 
+import com.yotelopaso.components.LastFiles;
 import com.yotelopaso.domain.File;
 import com.yotelopaso.persistence.FileManager;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.utils.DateUtils;
-import com.yotelopaso.views.components.LastFiles;
 
 public class LastFilesPresenter implements LastFiles.LastFilesListener {
 	

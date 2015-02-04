@@ -1,4 +1,4 @@
-package com.yotelopaso.views.implementations;
+package com.yotelopaso.components.implementations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
+import com.yotelopaso.components.SubjectsByYear;
 import com.yotelopaso.presenters.SubjectsByYearPresenter;
-import com.yotelopaso.views.components.SubjectsByYear;
 
 public class SubjectsByYearImpl extends CustomComponent implements SubjectsByYear {
 
