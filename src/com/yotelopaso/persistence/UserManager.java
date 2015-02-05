@@ -1,5 +1,6 @@
 package com.yotelopaso.persistence;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.vaadin.server.VaadinSession;
@@ -64,6 +65,12 @@ public class UserManager extends DataManager<User> {
 	
 	public Set<Subject> getCurrentUserSubjects() {
 		return getCurrentUser().getSubscriptedSubjects();
+	}
+	
+	public void setNewUserDefaultSubjects(User user, String careerName, Integer year) {
+		SubjectManager sm = new SubjectManager();
+		Set<Subject> subjects = new HashSet<Subject>(sm.filterByCareerAndYear(careerName, year));
+		user.addSubjects(subjects);
 	}
 
 }
