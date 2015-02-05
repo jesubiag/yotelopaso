@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.vaadin.addon.googlepicker.GooglePicker;
+
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
+import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Alignment;
@@ -52,6 +55,7 @@ ItemClickListener, ClickListener {
 	private SubjectsByYearImpl subjectsTreeComponent;
 	private String subjectName;
 	private String careerName;
+	private SubjectsView view = this;
 	
 	@Override
 	public void enter(ViewChangeEvent event) {
@@ -206,8 +210,9 @@ ItemClickListener, ClickListener {
 	}
 	@Override
 	public void showUploadFileWindow(Type fileType) {
-		Vaadintest01UI.getCurrent().addWindow(new UploadFiles(subjectName,fileType, this));
-		//UI.getCurrent().addWindow(new Editor(subjectName));
+		UploadFiles uploadWindow = new UploadFiles(subjectName,fileType, this);
+		addWindow(uploadWindow);
+		//Vaadintest01UI.getCurrent().addWindow(new UploadFiles(subjectName,fileType, this));
 	}
 	
 	@Override
@@ -330,13 +335,29 @@ ItemClickListener, ClickListener {
 		}
 	}
 
+	@Override
+	public void addPicker(Type fileType) {
+		final Type type;
+		type = fileType;
+		GooglePicker picker = new GooglePicker("AIzaSyAQ9PvsZuf6rGzRD71k9jWGES8ti6vjDTE", "398023219009-gsn7asjfgpvspfrmd8oh5shkdidpmi4a.apps.googleusercontent.com");
+	    picker.addSelectionListener(new GooglePicker.SelectionListener() {
+	    	private static final long serialVersionUID = 1L;
+			
+	    	@Override
+		    public void documentSelected(GooglePicker.Document document) {
+		         String pickerName = document.getName();
+		         String pickerDir = document.getUrlString();
+		         UploadFiles uploadWindow = new UploadFiles(subjectName, type, view, pickerName, pickerDir);
+		         addWindow(uploadWindow);
+			}
+			
+			//Aca elegimos que hacer con el archivo que selecciona el usuario
+			//En nuestro caso obtenemos el nombre y la URL
 
-
-	//@Override
-	//public void selectedTabChange(SelectedTabChangeEvent event) {
-	//	for (SubjectsViewListener listener : listeners) {
-	//		listener.selectedTabChange(event.getTabSheet().getCaption());
-	//	}
-	//}
-}
+	   });
+	   addExtension(picker);
+	   // Abre el picker de Google que muestra las carpetas de drive del usuario
+	   picker.pickDocument(GooglePicker.Type.DOCS);
+	}
+}	
 

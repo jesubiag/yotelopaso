@@ -10,9 +10,9 @@ import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.shared.ui.datefield.Resolution;
 import com.vaadin.ui.AbstractSelect.ItemCaptionMode;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
@@ -69,6 +69,7 @@ public class EventWindowImpl extends Window implements EventWindow {
 		setContent(layout);
 		setWidth("650px");
 		setModal(true);
+		setResizable(false);
 		center();
 	}
 	
@@ -121,21 +122,24 @@ public class EventWindowImpl extends Window implements EventWindow {
 		type.addValidator(new BeanValidator(UserCalendarEvent.class, "eventType"));
 		caption = new TextField("Asunto");
 		caption.setWidth("100%");
+		caption.setMaxLength(35);
 		description = new TextArea("Descripción");
 		description.setWidth("100%");
 		
-		form.addComponents(startDate, endDate, subject, type, caption, description);
-		
 		HorizontalLayout buttons = new HorizontalLayout();
-		buttons.setSpacing(true);
-		if ( !isNew ) {
-			Button deleteButton = new Button("Borrar", parentView);
-			deleteButton.setStyleName("small");
-			buttons.addComponent(deleteButton);
-		}
+		buttons.setSpacing(false);
 		buttons.addComponents(saveButton, cancelButton);
-		layout.addComponents(form, buttons);
-		layout.setComponentAlignment(buttons, Alignment.BOTTOM_RIGHT);
+		if ( !isNew ) {
+			Button deleteButton = new Button("Eliminar", parentView);
+			deleteButton.setStyleName(ValoTheme.BUTTON_SMALL);
+			buttons.addComponent(deleteButton);
+				}
+		
+		form.addComponents(startDate, endDate, subject, type, caption, description, buttons);
+		
+		layout.addComponents(form);
+		setCaption("Crear Evento");
+		
 	}
 	
 	private void bindFields() {

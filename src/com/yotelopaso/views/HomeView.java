@@ -16,13 +16,12 @@ public interface HomeView extends AbstractHomeView {
 		public void initLastNewsTable();
 		public void initLastFilesTable();
 		public void initLastEventsTable();
-		public void buttonClick(String caption, Long newsId);
 		public void itemClick(String sourceId, Object itemId);
 	}
 	
 	public void addListener(HomeViewListener listener);
 
-	public void showNewsEditorWindow(Long id);
 	public void showEventWindow(UserCalendarEvent event);
+	public void showNewsVisualizerWindow(Long newsId);
 
 }

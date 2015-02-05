@@ -3,6 +3,7 @@ package com.yotelopaso.components;
 import java.util.Date;
 
 import org.vaadin.addon.googlepicker.GooglePicker;
+import org.vaadin.addon.googlepicker.GooglePicker.SelectionListener;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -27,7 +28,7 @@ import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.SubjectsView;
 
-public class UploadFiles extends Window implements Content {
+public class UploadFiles extends Window {
 
 	private static final long serialVersionUID = 1L;
 	private File archivo = new File();
@@ -43,48 +44,63 @@ public class UploadFiles extends Window implements Content {
 	private TextField dirArchivo;
 	private TextField nomArchivo;
 	private Button aceptar;
-	private TextField carr;
-	private TextField mat;
 	private Type fileType;
 	private Button cancelar;
 	private Button cargarArchivo;
-	private VerticalLayout vertLayout;
-	private Panel panel;
 	private VerticalLayout mainLayout;
-	private Window ventana;
 	private SubjectsView parentView;
 	
-	public UploadFiles(String subjectName, File.Type fileType, SubjectsView parentView){
+	public UploadFiles (String subjectName, File.Type fileType, SubjectsView parentView){
 		this.parentView = parentView;
 		this.subjectName = subjectName;
 		this.fileType = fileType;
-		ventana = this;
 		carrera = manUser.getCurrentUser().getCareer();
 		materia = manSubject.getByProperty("name", this.subjectName).get(0);
+		
 		buildMainLayout();
+		
 		autor.setValue(manUser.getCurrentUser().getEmail());
-			
+		setWidth("650px");	
 	}
 	
 	
-	
+	public UploadFiles(String subjectName, File.Type fileType,	SubjectsView parentView, String pickerName, String pickerDir) {
+		this.parentView = parentView;
+		this.subjectName = subjectName;
+		this.fileType = fileType;
+		carrera = manUser.getCurrentUser().getCareer();
+		materia = manSubject.getByProperty("name", this.subjectName).get(0);
+		
+		buildMainLayout();
+		nomArchivo.setValue(pickerName);
+		dirArchivo.setValue(pickerDir);
+		
+		autor.setValue(manUser.getCurrentUser().getEmail());
+		setWidth("650px");	
+	}
+
+
+
 	private void buildMainLayout() {
 		// TODO Auto-generated method stub
-		FormLayout form = new FormLayout();
-		 form.addStyleName("light");
+		center();
+		setWidth("650px");	
+		setResizable(false);
+		setModal(false);
+		setCaption("Subir " + fileType + " - "+ subjectName);
+		
+		 FormLayout form = new FormLayout();
 		 form.setSizeFull();
-		 form.setSpacing(true);
-		 
+		 form.setSpacing(true);		 
 		 
 		 fecha = new DateField("Fecha de publicación");
 		 fecha.setValue(new Date());
 		 fecha.setEnabled(false);
-		 fecha.addStyleName("borderless");
 		 
 		 descripcion = new TextArea();
 		 descripcion.setSizeFull();
 	     descripcion.setCaption("Descripción del archivo");
-	     descripcion.addStyleName("borderless");
+	     //descripcion.addStyleName("borderless");
 	     
 	     dirArchivo = new TextField("Cargue el archivo");
 	     dirArchivo.setWidth("60%");
@@ -94,77 +110,38 @@ public class UploadFiles extends Window implements Content {
 	     dirArchivo.setRequiredError("Por favor cargue un archivo");
 	     
 	     nomArchivo = new TextField("Nombre del archivo");
-	     nomArchivo.setWidth("60%");
+	     nomArchivo.setWidth("100%");
 	     nomArchivo.setEnabled(false);
-	     nomArchivo.addStyleName("borderless");
+	     nomArchivo.setNullSettingAllowed(false);
+	     nomArchivo.setRequired(true);
+	     nomArchivo.setRequiredError("Por favor cargue un archivo");
+	     //nomArchivo.addStyleName("borderless");
+	     nomArchivo.setValue("El nombre será completado automaticamente");
+	     nomArchivo.setNullRepresentation("El nombre será completado automaticamente");
 	     
-	     cargarArchivo = new Button("Cargar archivo", new Button.ClickListener() {
+	     cargarArchivo = new Button("Seleccionar archivo", new Button.ClickListener() {
 	    	 static final long serialVersionUID = 1L;
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				 ventana.setHeight("0px");
-				 ventana.setWidth("0px");
-			     GooglePicker picker = new GooglePicker("AIzaSyAQ9PvsZuf6rGzRD71k9jWGES8ti6vjDTE", "398023219009-gsn7asjfgpvspfrmd8oh5shkdidpmi4a.apps.googleusercontent.com");
-			     picker.addSelectionListener(new GooglePicker.SelectionListener() {
-			    
-					private static final long serialVersionUID = 1L;
-
-						@Override
-			            public void documentSelected(GooglePicker.Document document) {
-			                String name = document.getName();
-			                nomArchivo.setValue(name);
-			                String url = document.getUrlString();
-			                dirArchivo.setValue(url);
-			                ventana.setHeight("520px");
-			                ventana.setWidth("700px");
-			            }//Aca elegimos que hacer con el archivo que selecciona el usuario
-						//En nuestro caso obtenemos el nombre y la URL
-
-			        });
-			        addExtension(picker);
-
-			        // Abre el picker de Google que muestra las carpetas de drive del usuario
-			        picker.pickDocument(GooglePicker.Type.DOCS);
-				
+				parentView.addPicker(fileType);
+				close();
 			}
-		}
-	    		 
-	    		);
-	    cargarArchivo.addStyleName("primary");
-	    
-	    vertLayout = new VerticalLayout();
-	    vertLayout.addComponent(dirArchivo);
-	    vertLayout.addComponent(cargarArchivo);
+	     }		 
+	    );
+	    cargarArchivo.addStyleName("friendly");
+	    cargarArchivo.addStyleName("small");
 	    
 	 	autor = new TextField("Autor");
 		autor.setWidth("60%");
 		autor.setEnabled(false);
 		autor.addStyleName("borderless");		
 		
-		carr = new TextField("Carrera");
-		carr.setValue(carrera.getName());
-		carr.setWidth("60%");
-		carr.setEnabled(false);
-		carr.addStyleName("borderless");
-		
-		mat = new TextField("Materia");
-		mat.setValue(materia.getName());
-		mat.setWidth("60%");
-		mat.setEnabled(false);
-		mat.addStyleName("borderless");
-		
-		form.addComponent(carr);
-		form.addComponent(mat);
-		form.addComponent(autor);
-		form.addComponent(fecha);
 		form.addComponent(nomArchivo);
-		form.addComponent(vertLayout);
+		form.addComponent(cargarArchivo);
 		form.addComponent(descripcion);
-		
-		
-	     
-		aceptar = new Button("Aceptar",
+		 
+		aceptar = new Button("Guardar",
 				new Button.ClickListener() {
 				
 				private static final long serialVersionUID = 1L;
@@ -202,43 +179,24 @@ public class UploadFiles extends Window implements Content {
 		//@Override
 		public void buttonClick(ClickEvent event) {
 			close();
-			//getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW);
 		}
 		});
 		
-		aceptar.addStyleName("primary");
-		cancelar.addStyleName("primary");
+		aceptar.addStyleName("small");
+		cancelar.addStyleName("small");
 		HorizontalLayout botones= new HorizontalLayout();
 		botones.addComponent(aceptar);
 		botones.addComponent(cancelar);
 		
 		form.addComponent(botones);
 		
-		panel = new Panel("Cargar archivo");
-		panel.setContent(form);
-		panel.setSizeFull();
 		mainLayout = new VerticalLayout();
-		mainLayout.addComponent(panel);
-		mainLayout.setExpandRatio(panel, 1.0f);
+		mainLayout.setMargin(true);
+		mainLayout.addComponent(form);
+		
 		this.setContent(mainLayout);
-		this.setWidth("60%");
-		this.setPositionX(180);
+		this.setWidth("60%");	
 		
-		
-	}
-
-
-
-	@Override
-	public String getMinimizedValueAsHTML() {
-		// TODO Auto-generated method stub
-		return "Agregar archivo";
-	}
-
-	@Override
-	public Component getPopupComponent() {
-		// TODO Auto-generated method stub
-		return this;
 	}
 
 }

@@ -43,7 +43,7 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 	}
 
 	@Override
-	public void buildComponent(String date, String title, String content, Long id, String authorMail) {
+	public void buildComponent(String date, String title, String content, Long id, String authorName) {
 		
 		addStyleName("subjectNews");
 		
@@ -63,7 +63,7 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 		Label contentSubject = new Label();
 		contentSubject.setContentMode(labelContentMode);
 		contentSubject.setValue(content);
-		contentSubject.setSizeUndefined();
+		contentSubject.setWidth("100%");
 		
 		// title
 		Label titleSubject = new Label();
@@ -72,16 +72,17 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 		titleSubject.setStyleName(ValoTheme.LABEL_BOLD);
 		
 		// author
-		Label autMail = new Label();
-		autMail.setContentMode(labelContentMode);
-		autMail.setValue("Autor: " + authorMail);
-		autMail.setStyleName(ValoTheme.LABEL_TINY);
-		autMail.setSizeUndefined();
+		Label autName = new Label();
+		autName.setContentMode(labelContentMode);
+		autName.setValue("Autor: " + authorName);
+		autName.setStyleName(ValoTheme.LABEL_TINY);
+		autName.setSizeUndefined();
 		
 		Panel panel = new Panel();
 		panel.setContent(contentSubject);
 		panel.setSizeFull();
 		panel.setHeight("100px");
+		panel.setStyleName(ValoTheme.PANEL_WELL);
 		
 		HorizontalLayout topHorizontalLayout = new HorizontalLayout();
 		HorizontalLayout botHorizontalLayout = new HorizontalLayout();
@@ -91,9 +92,9 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 		topHorizontalLayout.setSizeFull();
 		topHorizontalLayout.setSpacing(false);
 		topHorizontalLayout.setMargin(false);
-		topHorizontalLayout.addComponents(autMail, subjectDate);
+		topHorizontalLayout.addComponents(autName, subjectDate);
 		topHorizontalLayout.setComponentAlignment(subjectDate, Alignment.MIDDLE_RIGHT);
-		topHorizontalLayout.setComponentAlignment(autMail, Alignment.MIDDLE_LEFT);
+		topHorizontalLayout.setComponentAlignment(autName, Alignment.MIDDLE_LEFT);
 			
 		Button editButton = new Button("Editar");
 		editButton.setData(id);

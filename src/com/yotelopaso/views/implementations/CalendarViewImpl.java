@@ -27,6 +27,7 @@ import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClick;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClickHandler;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClick;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClickHandler;
+import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.components.implementations.EventWindowImpl;
 import com.yotelopaso.domain.UserCalendarEvent;
 import com.yotelopaso.presenters.CalendarPresenter;
@@ -130,8 +131,8 @@ WeekClickHandler {
 		viewSelection.setValue(CALENDAR_WEEKLY);
 		viewSelection.addValueChangeListener( (ValueChangeListener) this );
 		
-		addNewEvent = new Button("Agregar nuevo evento", this);
-		addNewEvent.addStyleName("friendly");
+		addNewEvent = new Button("Nuevo evento", this);
+		addNewEvent.addStyleName(ValoTheme.BUTTON_PRIMARY);
 		addNewEvent.addStyleName("small");
 		
 		mainLayout.addComponent(topLayout);

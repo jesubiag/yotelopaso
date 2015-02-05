@@ -15,6 +15,7 @@ public interface SubjectsView extends AbstractHomeView {
 	public void toggleTreeRoot(String rootName);
 	public void reloadComponent();
 	public void showFileDetail(String authorName, String date, String name, String desc);
+	public void addPicker(Type fileType);
 	
 	interface SubjectsViewListener extends AbstractHomeViewListener {
 		public void treeItemClick(String subjectName);

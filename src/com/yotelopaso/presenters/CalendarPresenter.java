@@ -33,7 +33,7 @@ implements CalendarView.CalendarViewListener {
 		if (currentUser == null) currentUser = userService.getCurrentUser();
 		panelButtonClick(caption);
 		switch (caption) {
-		case "Agregar nuevo evento":
+		case "Nuevo evento":
 			view.addEventWindow(null, currentUser.getId(), currentUser.getCareer().getId());
 			break;
 		case "Guardar":
@@ -48,7 +48,7 @@ implements CalendarView.CalendarViewListener {
 		case "Cancelar":
 			view.closeCurrentWindow();
 			break;
-		case "Borrar":
+		case "Eliminar":
 			service.delete(currentEvent);
 			initCalendar();
 			view.eventRemovedSuccessfully();

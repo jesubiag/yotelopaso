@@ -10,15 +10,14 @@ import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnGenerator;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
-import com.yotelopaso.components.Editor;
 import com.yotelopaso.components.EventWindowRO;
+import com.yotelopaso.components.NewsVisualizer;
 import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.News;
 import com.yotelopaso.domain.UserCalendarEvent;
@@ -154,19 +153,11 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		lastNewsTable.setVisibleColumns(new Object[] {"subject", "title", "author", "date"});
 		lastNewsTable.setSizeFull();
 		lastNewsTable.setImmediate(true);
-		lastNewsTable.setColumnExpandRatio("subject", 0.25f);
-		lastNewsTable.setColumnExpandRatio("title", 0.6f);
-		lastNewsTable.setColumnExpandRatio("author", 0.15f);
-		lastNewsTable.setColumnWidth("date", 150);
+		lastNewsTable.setColumnExpandRatio("subject", 2);
+		lastNewsTable.setColumnExpandRatio("title", 3);
+		lastNewsTable.setColumnExpandRatio("author", 1);
+		lastNewsTable.setColumnExpandRatio("date", 1);
 	}
-
-	/*@Override
-	public void setLastNews() {
-		UserManager userService = new UserManager();
-		String cn = userService.getCurrentUser().getCareer().getName();
-		LastNews lastNews = new LastNews(cn,this);
-		this.lastNews = lastNews;
-	}*/
 	
 	@Override
 	public void buildLastFilesTable(JPAContainer<File> container) {
@@ -198,6 +189,10 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		});
 		lastEventsTable.setVisibleColumns(new Object[] {"subjectId", "caption", "start"});
 		lastEventsTable.setSizeFull();
+		lastEventsTable.setColumnExpandRatio("subjectId", 9);
+		lastEventsTable.setColumnExpandRatio("caption", 8);
+		lastEventsTable.setColumnExpandRatio("start", 5);
+		
 	}
 	
 	private void setTableStyleNames(Table table) {
@@ -210,18 +205,11 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		table.addStyleName(ValoTheme.TABLE_NO_HORIZONTAL_LINES);
 	}
 
+	
 	@Override
-	public void buttonClick(ClickEvent event) {
-		//super.buttonClick(event);
-		for (HomeViewListener listener : listeners) {
-			listener.buttonClick( event.getButton().getCaption(),
-					(Long) event.getButton().getData() );
-		}
-	}
-	@Override
-	public void showNewsEditorWindow(Long id) {
-		Editor editor = new Editor(id);	
-		addWindow(editor);
+	public void showNewsVisualizerWindow(Long id) {
+		NewsVisualizer visualizer = new NewsVisualizer(id);	
+		addWindow(visualizer);
 	}
 
 	@Override

@@ -27,21 +27,12 @@ public class HomePresenter extends AbstractHomePresenter<HomeView> implements Ho
 		view.addListener(this);
 	}
 	
-	@Override
-	public void buttonClick(String caption, Long newsId) {
-		panelButtonClick(caption);
-		switch (caption) {
-		case "Ampliar":
-			view.showNewsEditorWindow( newsId );
-			break;
-		}
-	}
-	
+
 	@Override
 	public void itemClick(String sourceId, Object itemId) {
 		switch (sourceId) {
 		case "lastNewsTable":
-			view.showNewsEditorWindow( (Long) itemId );
+			view.showNewsVisualizerWindow( (Long) itemId );
 			break;
 		case "lastFilesTable":
 			Long fileId = (Long) itemId;
@@ -81,4 +72,5 @@ public class HomePresenter extends AbstractHomePresenter<HomeView> implements Ho
 		JPAContainer<UserCalendarEvent> ce = calendarService.filterContainer(p, id);
 		view.buildLastEventsTable(ce);
 	}
+
 }

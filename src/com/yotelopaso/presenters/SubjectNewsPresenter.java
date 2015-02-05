@@ -29,9 +29,9 @@ public class SubjectNewsPresenter implements SubjectNews.SubjectNewsListener {
 			Long id = n.getId();
 			User autor = n.getAuthor();
 			if (manUser.getCurrentUser().getId() == autor.getId())
-					view.buildComponent(date, title, content, id, autor.getEmail());
+					view.buildComponent(date, title, content, id, autor.getUsername());
 			else
-					view.buildComponent(date, title, content, null, autor.getEmail());
+					view.buildComponent(date, title, content, null, autor.getUsername());
 		}
 		
 	}
