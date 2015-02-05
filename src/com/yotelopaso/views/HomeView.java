@@ -17,6 +17,7 @@ public interface HomeView extends AbstractHomeView {
 		public void initLastFilesTable();
 		public void initLastEventsTable();
 		public void itemClick(String sourceId, Object itemId);
+		public void setInitData();
 	}
 	
 	public void addListener(HomeViewListener listener);

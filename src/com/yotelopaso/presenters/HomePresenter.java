@@ -1,8 +1,12 @@
 package com.yotelopaso.presenters;
 
+import java.util.Set;
+
 import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.News;
+import com.yotelopaso.domain.Subject;
+import com.yotelopaso.domain.User;
 import com.yotelopaso.domain.UserCalendarEvent;
 import com.yotelopaso.persistence.CalendarManager;
 import com.yotelopaso.persistence.FileManager;
@@ -17,6 +21,8 @@ public class HomePresenter extends AbstractHomePresenter<HomeView> implements Ho
 	NewsManager newsService = new NewsManager();
 	FileManager fileService = new FileManager();
 	CalendarManager calendarService = new CalendarManager();
+	private User currentUser;
+	private Set<Subject> subjects;
 	
 	public HomePresenter(HomeView view, UserManager service) {
 		super(view);
@@ -48,28 +54,29 @@ public class HomePresenter extends AbstractHomePresenter<HomeView> implements Ho
 		}
 		
 	}
+	
+	@Override
+	public void setInitData() {
+		currentUser = service.getCurrentUser();
+		subjects = currentUser.getSubscriptedSubjects();
+	}
 
 	@Override
 	public void initLastNewsTable() {
-		String p = "career.id";
-		Integer id = service.getCurrentUser().getCareer().getId();
-		JPAContainer<News> cn = newsService.filterContainer(p, id);
+		JPAContainer<News> cn = newsService.getNewsFromSubscription(subjects);
 		view.buildLastNewsTable(cn);
 	}
 
 	@Override
 	public void initLastFilesTable() {
-		String p = "career.id";
-		Integer id = service.getCurrentUser().getCareer().getId();
-		JPAContainer<File> cf = fileService.filterContainer(p, id);
+		JPAContainer<File> cf = fileService.getFilesFromSubscription(subjects);
 		view.buildLastFilesTable(cf);
 	}
 	
 	@Override
 	public void initLastEventsTable() {
-		String p = "career.id";
-		Integer id = service.getCurrentUser().getCareer().getId();
-		JPAContainer<UserCalendarEvent> ce = calendarService.filterContainer(p, id);
+		JPAContainer<UserCalendarEvent> ce = calendarService.
+				getEventsFromSubscription(subjects, currentUser.getId());
 		view.buildLastEventsTable(ce);
 	}
 

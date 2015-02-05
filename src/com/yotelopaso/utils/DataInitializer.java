@@ -55,6 +55,8 @@ public class DataInitializer {
 		user1.setLastName("Biaggioni");
 		user1.setEmail("jesu772@gmail.com");
 		user1.setCareer(careerMngr.getById(1));
+		user1.setYear(4);
+		userMngr.setNewUserDefaultSubjects(user1, user1.getCareer().getName(), user1.getYear());
 		userMngr.save(user1);
 		
 	}

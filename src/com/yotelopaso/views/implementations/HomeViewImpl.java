@@ -54,6 +54,8 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		rightLayout.addComponent(panel);
 		rightLayout.setExpandRatio(panel, 1.0f);
 		
+		presenter.setInitData();
+		
 		VerticalLayout panelLayout = new VerticalLayout();
 		panelLayout.setSpacing(true);
 		panelLayout.setSizeFull();

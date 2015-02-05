@@ -1,10 +1,15 @@
 package com.yotelopaso.persistence;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Query;
 
+import com.vaadin.addon.jpacontainer.JPAContainer;
+import com.vaadin.data.Container.Filter;
+import com.vaadin.data.util.filter.Compare;
 import com.yotelopaso.domain.News;
+import com.yotelopaso.domain.Subject;
 
 public class NewsManager extends DataManager<News> {
 	
@@ -33,6 +38,16 @@ public class NewsManager extends DataManager<News> {
 		query.setParameter("careerName", careerName);
 		query.setParameter("subjectName", subjectName);
 		return query.getResultList();
+	}
+	
+
+	public JPAContainer<News> getNewsFromSubscription(Set<Subject> subjects) {
+		String propertyId = "subject";
+		for (Subject s : subjects) {
+			Filter filter = new Compare.Equal(propertyId, s);
+			container.addContainerFilter(filter);
+		}
+		return container;
 	}
 
 }
