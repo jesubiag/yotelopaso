@@ -31,6 +31,7 @@ import com.yotelopaso.components.UploadFiles;
 import com.yotelopaso.components.implementations.FilesTableImpl;
 import com.yotelopaso.components.implementations.SubjectNewsImpl;
 import com.yotelopaso.components.implementations.SubjectsByYearImpl;
+import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.File.Type;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.presenters.SubjectsPresenter;
@@ -47,6 +48,7 @@ ItemClickListener, ClickListener {
 	final HorizontalLayout mainLayout = new HorizontalLayout();
 	final Panel panel = new Panel();
 	final TabSheet sections = new TabSheet();
+	final TabSheet filesTypes = new TabSheet();
 	private FilesTableImpl filesTableApuntes;
 	private FilesTableImpl filesTableParciales;
 	private FilesTableImpl filesTableFinales;
@@ -132,6 +134,7 @@ ItemClickListener, ClickListener {
 	public void cleanComponents() {
 		mainLayout.removeAllComponents();
 		sections.removeAllComponents();
+		filesTypes.removeAllComponents();
 	}
 
 	@Override
@@ -161,9 +164,9 @@ ItemClickListener, ClickListener {
 		Button createNews = new Button("Nueva Noticia");
 		createNews.addClickListener(this);
 		createNews.addStyleName("primary");
-		createNews.setHeight("60%");
+		createNews.addStyleName("small");
 		topLayout.addComponent(createNews);
-		topLayout.setComponentAlignment(createNews, Alignment.MIDDLE_LEFT);
+		topLayout.setComponentAlignment(createNews, Alignment.MIDDLE_RIGHT);
 		createNews.setId("NuevaNoticia");
 		
 		tabNews.addComponent(topLayout);
@@ -182,7 +185,7 @@ ItemClickListener, ClickListener {
 		tabNews.setExpandRatio(newsContainer, 1.0f);
 		
 		// Archivos
-		TabSheet filesTypes = new TabSheet();
+		//TabSheet filesTypes = new TabSheet();
 		
 		buildFilesView(filesTypes, subjectName, careerName);
 		
@@ -190,6 +193,9 @@ ItemClickListener, ClickListener {
 		
 		tabFiles.addComponent(filesTypes);
 		
+		filesTypes.setStyleName(ValoTheme.TABSHEET_EQUAL_WIDTH_TABS);
+		
+		sections.setStyleName(ValoTheme.TABSHEET_FRAMED);
 		sections.setSizeFull();
 		sections.removeAllComponents();
 		sections.addTab(tabNews, "Noticias");
@@ -224,19 +230,19 @@ ItemClickListener, ClickListener {
 		
 		final VerticalLayout subtabParciales = new VerticalLayout();
 		subtabParciales.setSizeFull();
-		subtabParciales.setSpacing(true);
+		subtabParciales.setSpacing(false);
 		subtabParciales.setId("Parciales");
 		final VerticalLayout subtabApuntes = new VerticalLayout();
 		subtabApuntes.setSizeFull();
-		subtabApuntes.setSpacing(true);
+		subtabApuntes.setSpacing(false);
 		subtabApuntes.setId("Apuntes");
 		final VerticalLayout subtabTPs = new VerticalLayout();
 		subtabTPs.setSizeFull();
-		subtabTPs.setSpacing(true);
+		subtabTPs.setSpacing(false);
 		subtabTPs.setId("Tps");
 		final VerticalLayout subtabFinales = new VerticalLayout();
 		subtabFinales.setSizeFull(); 
-		subtabFinales.setSpacing(true);
+		subtabFinales.setSpacing(false);
 		subtabFinales.setId("Finales");
 		
 		HashMap<String, VerticalLayout> tabs = new HashMap<String, VerticalLayout>();
@@ -255,9 +261,11 @@ ItemClickListener, ClickListener {
 			tables.put(entry.getKey(), aux);
 			Button cargarArchivos = new Button("Subir " + entry.getKey());
 			cargarArchivos.addStyleName("primary");
+			cargarArchivos.addStyleName("small");
 			cargarArchivos.addClickListener(this);
 			entry.getValue().addComponent(cargarArchivos);
 			entry.getValue().addComponent(aux);
+			entry.getValue().setComponentAlignment(cargarArchivos, Alignment.TOP_RIGHT);
 			//entry.getValue().setExpandRatio(aux, 1.0f);
 		}
 		filesTableApuntes = tables.get("Apuntes");
@@ -311,30 +319,7 @@ ItemClickListener, ClickListener {
 		notif.show(Page.getCurrent());
 	}
 
-	@Override
-	// TODO: mejorar implementación de metodo de recarga
-	public void reloadComponent() {
-		//FilesTableImpl aux = null;
-		switch (currentTableData) {
-		case "Apuntes":
-			//aux = new FilesTableImpl(subjectName, this, "Apuntes", careerName);
-			//replaceComponent(filesTableApuntes, aux);
-			filesTableApuntes.reload();
-			break;
-		case "Finales":
-			filesTableFinales.reload();
-			break;
-		case "Parciales":
-			filesTableParciales.reload();
-			break;
-		case "TPs":
-			filesTableTPs.reload();
-			break;
-		default:
-			break;
-		}
-	}
-
+	
 	@Override
 	public void addPicker(Type fileType) {
 		final Type type;
@@ -358,6 +343,28 @@ ItemClickListener, ClickListener {
 	   addExtension(picker);
 	   // Abre el picker de Google que muestra las carpetas de drive del usuario
 	   picker.pickDocument(GooglePicker.Type.DOCS);
+	}
+
+	@Override
+	public void selectTab(File.Type fileType) {
+		sections.setSelectedTab(1);
+		switch (fileType) {
+		case APUNTE:
+			filesTypes.setSelectedTab(0);
+			break;
+		case FINAL:
+			filesTypes.setSelectedTab(1);
+			break;
+		case PARCIAL:
+			filesTypes.setSelectedTab(2);
+			break;
+		case TP:
+			filesTypes.setSelectedTab(3);
+			break;
+		default:
+			break;
+		}
+		
 	}
 }	
 
