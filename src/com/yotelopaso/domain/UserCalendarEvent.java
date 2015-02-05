@@ -87,6 +87,7 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 	private Set<User> suscriptors = new HashSet<User>();
 	@Enumerated(EnumType.ORDINAL) @NotEmpty
 	private CalendarEventType eventType;
+	private boolean publicEvent = false;
 	@Transient
 	private List<EventChangeListener> listeners = new ArrayList<EventChangeListener>();
 	
@@ -254,5 +255,13 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 
 	public void setCareer(Career career) {
 		this.career = career;
+	}
+
+	public boolean getPublicEvent() {
+		return publicEvent;
+	}
+
+	public void setPublicEvent(boolean publicEvent) {
+		this.publicEvent = publicEvent;
 	}
 }

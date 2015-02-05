@@ -12,7 +12,7 @@ import com.vaadin.shared.ui.datefield.Resolution;
 import com.vaadin.ui.AbstractSelect.ItemCaptionMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
@@ -21,6 +21,7 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.components.EventWindow;
 import com.yotelopaso.domain.UserCalendarEvent;
 import com.yotelopaso.domain.UserCalendarEvent.CalendarEventType;
@@ -41,6 +42,7 @@ public class EventWindowImpl extends Window implements EventWindow {
 	private Integer careerId;
 	private ComboBox subject;
 	private ComboBox type;
+	private CheckBox publicEvent;
 	private FieldGroup binder;
 	private boolean isNew = false;
 	private SubjectManager sm = new SubjectManager();
@@ -82,6 +84,7 @@ public class EventWindowImpl extends Window implements EventWindow {
 		item.addItemProperty("end", new ObjectProperty<Date>(event.getEnd()));
 		item.addItemProperty("caption", new ObjectProperty<String>(event.getCaption()));
 		item.addItemProperty("description", new ObjectProperty<String>(event.getDescription()));
+		item.addItemProperty("publicEvent", new ObjectProperty<Boolean>(event.getPublicEvent()));
 	}
 	
 	public void buildLayout(ClickListener parentView) {
@@ -125,6 +128,7 @@ public class EventWindowImpl extends Window implements EventWindow {
 		caption.setMaxLength(35);
 		description = new TextArea("Descripción");
 		description.setWidth("100%");
+		publicEvent = new CheckBox("Compartir evento con los demás usuarios");
 		
 		HorizontalLayout buttons = new HorizontalLayout();
 		buttons.setSpacing(false);
@@ -135,7 +139,7 @@ public class EventWindowImpl extends Window implements EventWindow {
 			buttons.addComponent(deleteButton);
 				}
 		
-		form.addComponents(startDate, endDate, subject, type, caption, description, buttons);
+		form.addComponents(startDate, endDate, subject, type, caption, description, publicEvent, buttons);
 		
 		layout.addComponents(form);
 		setCaption("Crear Evento");
@@ -149,6 +153,7 @@ public class EventWindowImpl extends Window implements EventWindow {
 		binder.bind(type, "eventType");
 		binder.bind(caption, "caption");
 		binder.bind(description, "description");
+		binder.bind(publicEvent, "publicEvent");
 	}
 	
 	private UserCalendarEvent createNewEvent(Double authorId) {
