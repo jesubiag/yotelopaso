@@ -46,6 +46,9 @@ public class User implements Serializable {
 	@ManyToMany
 	private Set<UserCalendarEvent> userEvents = new HashSet<UserCalendarEvent>();
 	
+	@ManyToMany
+	private Set<Subject> subscriptedSubjects = new HashSet<Subject>();
+	
 	public User() {}
 
 	/**
@@ -142,5 +145,21 @@ public class User implements Serializable {
 	public String getUsername() {
 		String userName = this.email.split("@")[0];
 		return userName;
+	}
+
+	public Set<Subject> getSubscriptedSubjects() {
+		return subscriptedSubjects;
+	}
+
+	public void setSubscriptedSubjects(Set<Subject> subscriptedSubjects) {
+		this.subscriptedSubjects = subscriptedSubjects;
+	}
+	
+	public void addSubjects(Set<Subject> subjects) {
+		subscriptedSubjects.addAll(subjects);
+	}
+	
+	public void removeSubjects(Set<Subject> subjects) {
+		subscriptedSubjects.removeAll(subjects);
 	}
 }

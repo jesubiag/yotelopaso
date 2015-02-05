@@ -2,11 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0">
-		<attributes>
-			<attribute name="owner.project.facets" value="jst.web"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry exported="true" kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=VaadinTest01&amp;ivyXmlPath=ivy.xml&amp;confs=default&amp;ivySettingsPath=%24%7Bworkspace_loc%3AVaadinTest01%2Fivysettings.xml%7D&amp;loadSettingsOnDemand=false&amp;ivyUserDir=&amp;propertyFiles=">
@@ -18,8 +13,9 @@
 	<classpathentry exported="true" kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=VaadinTest01&amp;ivyXmlPath=ivy.xml&amp;confs=nodeploy&amp;ivySettingsPath=%24%7Bworkspace_loc%3AVaadinTest01%2Fivysettings.xml%7D&amp;loadSettingsOnDemand=false&amp;ivyUserDir=&amp;propertyFiles="/>
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/oauthpopup-0.0.3-1.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Nicles/Downloads/picker/googlepicker-1.0.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Nicles/Downloads/picker/googlepicker-1.0.0-javadoc.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Nicles/Downloads/picker/googlepicker-1.0.0-sources.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/googlepicker-1.0.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/googlepicker-1.0.0-sources.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/googlepicker-1.0.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

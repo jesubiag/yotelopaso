@@ -3,6 +3,7 @@ package com.yotelopaso.persistence;
 import java.util.Set;
 
 import com.vaadin.server.VaadinSession;
+import com.yotelopaso.domain.Subject;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.domain.UserCalendarEvent;
 
@@ -43,8 +44,26 @@ public class UserManager extends DataManager<User> {
 		setCurrentUser(cu);
 	}
 	
+	public void addUserSubjects(Set<Subject> subjects) {
+		User cu = getCurrentUser();
+		cu.addSubjects(subjects);
+		save(cu);
+		setCurrentUser(cu);
+	}
+	
+	public void removeUserSubjects(Set<Subject> subjects) {
+		User cu = getCurrentUser();
+		cu.removeSubjects(subjects);
+		save(cu);
+		setCurrentUser(cu);
+	}
+	
 	public Set<UserCalendarEvent> getCurrentUserEvents() {
 		return getCurrentUser().getUserEvents();
+	}
+	
+	public Set<Subject> getCurrentUserSubjects() {
+		return getCurrentUser().getSubscriptedSubjects();
 	}
 
 }

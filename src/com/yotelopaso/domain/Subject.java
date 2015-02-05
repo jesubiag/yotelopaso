@@ -1,10 +1,13 @@
 package com.yotelopaso.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -26,6 +29,9 @@ public class Subject implements Serializable {
 	
 	@NotNull
 	private Integer year;
+	
+	@ManyToMany(mappedBy="subscriptedSubjects")
+	private Set<User> subscriptors = new HashSet<User>();
 	
 	public Subject() {}
 
@@ -77,6 +83,14 @@ public class Subject implements Serializable {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public Set<User> getSubscriptors() {
+		return subscriptors;
+	}
+
+	public void setSubscriptors(Set<User> subscriptors) {
+		this.subscriptors = subscriptors;
 	}
 
 }
