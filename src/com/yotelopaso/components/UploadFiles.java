@@ -86,7 +86,7 @@ public class UploadFiles extends Window {
 		center();
 		setWidth("650px");	
 		setResizable(false);
-		setModal(false);
+		setModal(true);
 		setCaption("Subir " + fileType + " - "+ subjectName);
 		
 		 FormLayout form = new FormLayout();
@@ -159,7 +159,7 @@ public class UploadFiles extends Window {
 						archivo.setName(nomArchivo.getValue());
 						manFile.save(archivo);
 						getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW + "/" + materia.getName());
-						//parentView.reloadComponent();
+						parentView.selectTab(fileType);
 						//Page.getCurrent().reload();
 						Notification.show("Archivo subido");
 						close();

@@ -2,6 +2,7 @@ package com.yotelopaso.views;
 
 
 import com.vaadin.data.Item;
+import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.File.Type;
 
 
@@ -13,7 +14,6 @@ public interface SubjectsView extends AbstractHomeView {
 	public void showNewsEditorWindow(Long id);
 	public void showUploadFileWindow(Type fileType);
 	public void toggleTreeRoot(String rootName);
-	public void reloadComponent();
 	public void showFileDetail(String authorName, String date, String name, String desc);
 	public void addPicker(Type fileType);
 	
@@ -28,6 +28,7 @@ public interface SubjectsView extends AbstractHomeView {
 	
 	public void addListener(SubjectsViewListener listener);
 	public void deleteNew(Long newsId);
+	public void selectTab(File.Type fileType);
 	
 	
 
