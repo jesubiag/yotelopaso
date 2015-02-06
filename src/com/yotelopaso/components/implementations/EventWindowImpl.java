@@ -4,8 +4,8 @@ import java.util.Date;
 
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
+import com.vaadin.data.util.BeanContainer;
 import com.vaadin.data.util.BeanItem;
-import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.ObjectProperty;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.shared.ui.combobox.FilteringMode;
@@ -104,7 +104,8 @@ public class EventWindowImpl extends Window implements EventWindow {
 		endDate = new DateField("Fecha de fin");
 		endDate.setResolution(RESOLUTION);
 		endDate.setWidth("100%");
-		BeanItemContainer<Subject> container = new BeanItemContainer<Subject>(Subject.class);
+		BeanContainer<Integer, Subject> container = new BeanContainer<Integer, Subject>(Subject.class);
+		container.setBeanIdProperty("id");
 		container.addAll(um.getCurrentUser().getSubscriptedSubjects());
 		container.sort(new Object[] {"name"}, new boolean[] {true});
 		subject = new ComboBox("Materia", container);
