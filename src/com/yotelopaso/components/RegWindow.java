@@ -21,6 +21,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.domain.Career;
 import com.yotelopaso.domain.PersonalInfo;
+import com.yotelopaso.domain.Subject;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.CareerManager;
 import com.yotelopaso.persistence.UserManager;
@@ -42,7 +43,6 @@ public class RegWindow extends Window{
 	private Navigator navigator;
 	private User usuario;
 	private PersonalInfo persInfo;
-	private StringToLongConverter convertidorLong= new StringToLongConverter();
 	final private CareerManager carrManager = new CareerManager();
 	final private UserManager userManager = new UserManager();
 	boolean firstLogin;
@@ -158,18 +158,30 @@ public class RegWindow extends Window{
 					usuario.setLastName(userLastName.getValue());
 					persInfo.setCity(ciu.getValue());
 					persInfo.setPhone((Long)tel.getConvertedValue());
-					Career c = carrManager.getById( (Integer) carr.getValue());
-					usuario.setCareer(c);
 					Integer y = (Integer)taño.getValue();
+					Career c = carrManager.getById( (Integer) carr.getValue());
+					if (firstLogin){
+						userManager.setNewUserDefaultSubjects(usuario,c.getName(),y);
+					} else {
+						if (usuario.getCareer().getId() != carr.getValue() || usuario.getYear() != y){
+							//System.out.println(usuario.getSubscriptedSubjects());
+							usuario.removeSubjects(usuario.getSubscriptedSubjects());
+							//System.out.println(usuario.getSubscriptedSubjects());
+							userManager.setNewUserDefaultSubjects(usuario,c.getName(),y);
+							//System.out.println(usuario.getSubscriptedSubjects());
+						}
+					}
+					usuario.setCareer(c);
 					usuario.setYear(y);
 					usuario.setPersonalinfo(persInfo);
 					usuario.setBirthday(fecha.getValue());
-					userManager.setNewUserDefaultSubjects(usuario, c.getName(), y);
+					
 					
 					usuario.setId(userManager.getCurrentUser().getId());
 					usuario.setEmail(userManager.getCurrentUser().getEmail());
 					userManager.save(usuario);
 					userManager.setCurrentUser(usuario);
+					//if (firstLogin)
 					navigator.navigateTo(Vaadintest01UI.HOME_VIEW);	
 					close();
 				}

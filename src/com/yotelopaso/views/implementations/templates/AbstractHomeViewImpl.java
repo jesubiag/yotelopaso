@@ -154,7 +154,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
       	setCurrentUser( (User) VaadinSession.getCurrent().getAttribute("currentUser"));
 		
         settingsItem.setText("Bienvenido");
-      	settingsItem.addItem("Edit Profile", new Command() {
+      	settingsItem.addItem("Editar Perfil", new Command() {
             @Override
             public void menuSelected(final MenuItem selectedItem) {
                 //ProfilePreferencesWindow.open(user, false);
@@ -163,14 +163,14 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
             	addWindow(regWindow);
             }
         });
-        settingsItem.addItem("Preferences", new Command() {
+        settingsItem.addItem("Mis Suscripciones", new Command() {
             @Override
             public void menuSelected(final MenuItem selectedItem) {
                 //ProfilePreferencesWindow.open(user, true);
             }
         });
         settingsItem.addSeparator();
-        settingsItem.addItem("Sign Out", new Command() {
+        settingsItem.addItem("Cerrar Sesión", new Command() {
             @Override
             //LOGOUT
             public void menuSelected(final MenuItem selectedItem) {
