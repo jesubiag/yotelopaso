@@ -44,6 +44,8 @@ public class CalendarManager extends DataManager<UserCalendarEvent>{
 	
 	public JPAContainer<UserCalendarEvent> getEventsFromSubscription(Set<Subject> subjects, 
 			Double userId ) {
+		container.removeAllContainerFilters();
+		container.refresh();
 		String propertyId1 = "subjectId";
 		String propertyId2 = "publicEvent";
 		String propertyId3 = "authorId";

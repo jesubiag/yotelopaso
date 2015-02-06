@@ -46,6 +46,8 @@ public class FileManager extends DataManager<File> {
 	};
 	
 	public JPAContainer<File> getFilesFromSubscription(Set<Subject> subjects) {
+		container.removeAllContainerFilters();
+		container.refresh();
 		String propertyId = "subject.id";
 		
 		List<Filter> filterList = new ArrayList<Filter>();

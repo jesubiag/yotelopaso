@@ -44,6 +44,8 @@ public class NewsManager extends DataManager<News> {
 	
 
 	public JPAContainer<News> getNewsFromSubscription(Set<Subject> subjects) {
+		container.removeAllContainerFilters();
+		container.refresh();
 		String propertyId = "subject.id";
 		
 		List<Filter> filterList = new ArrayList<Filter>();
