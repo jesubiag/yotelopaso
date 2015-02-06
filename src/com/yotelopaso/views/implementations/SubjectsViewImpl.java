@@ -156,10 +156,6 @@ ItemClickListener, ClickListener {
 		topLayout.setWidth("100%");
 		topLayout.setMargin(false);
 		
-		//PopupView editor = new PopupView(new Editor(subjectName));
-		//topLayout.addComponent(editor);
-		//topLayout.setComponentAlignment(editor, Alignment.MIDDLE_LEFT);
-		
 		Button createNews = new Button("Nueva Noticia");
 		createNews.addClickListener(this);
 		createNews.addStyleName("primary");
