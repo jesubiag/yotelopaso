@@ -1,7 +1,10 @@
 package com.yotelopaso.presenters;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
+import com.vaadin.addon.jpacontainer.JPAContainer;
 import com.vaadin.data.util.BeanItem;
 import com.yotelopaso.components.EventWindow;
 import com.yotelopaso.domain.User;
@@ -15,15 +18,16 @@ implements CalendarView.CalendarViewListener {
 	
 	private CalendarView view;
 	private CalendarManager service;
-	private UserManager userService = new UserManager();
+	private UserManager userService;
 	private User currentUser;
 	private UserCalendarEvent currentEvent;
 	private EventWindow window;
 	
-	public CalendarPresenter(CalendarView view, CalendarManager service) {
+	public CalendarPresenter(CalendarView view, CalendarManager service, UserManager userService) {
 		super(view);
 		this.view = view;
 		this.service = service;
+		this.userService = userService;
 		
 		view.addListener(this);
 	}
@@ -75,7 +79,14 @@ implements CalendarView.CalendarViewListener {
 	
 	@Override
 	public void initCalendar() {
-		Set<UserCalendarEvent> events = service.getCurrentUserEvents();
+		if (currentUser == null) currentUser = userService.getCurrentUser();
+		Set<UserCalendarEvent> events = new HashSet<UserCalendarEvent>();
+		JPAContainer<UserCalendarEvent> c = service.getEventsFromSubscription(
+				currentUser.getSubscriptedSubjects(), currentUser.getId());
+		Collection<Object> ids = c.getItemIds();
+		for (Object o : ids) {
+			events.add(c.getItem(o).getEntity());
+		}
 		view.initCalendarContainer(events);
 	}
 

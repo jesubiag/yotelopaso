@@ -152,7 +152,7 @@ WeekClickHandler {
 	
 	@Override
 	public void eventAddedSuccesfully() {
-		successfullOperation("Evento creado correctamente");
+		successfullOperation("Evento guardado correctamente");
 	}
 	
 	@Override
