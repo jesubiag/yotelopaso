@@ -6,30 +6,20 @@ import com.vaadin.ui.Link;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.domain.File.Type;
 import com.yotelopaso.domain.User;
-import com.yotelopaso.persistence.FileManager;
-import com.yotelopaso.persistence.NewsManager;
-import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.SubjectsView;
 
 public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> implements SubjectsView.SubjectsViewListener {
 	
 	private SubjectsView view;
-	private NewsManager newsService;
-	private SubjectManager subjectService;
 	private UserManager userService;
 	private String userCareer;
-	private FileManager fileService;
 
-	public SubjectsPresenter(SubjectsView view, UserManager userService, 
-			SubjectManager subjectService, FileManager fileService, NewsManager newsService) {
+	public SubjectsPresenter(SubjectsView view, UserManager userService) {
 		super(view);
 		
 		this.view = view;
-		this.subjectService = subjectService;
 		this.userService = userService;
-		this.fileService = fileService;
-		this.newsService = newsService;
 		
 		view.addListener(this);
 	}

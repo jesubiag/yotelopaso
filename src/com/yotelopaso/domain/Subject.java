@@ -84,6 +84,19 @@ public class Subject implements Serializable {
 	public String toString() {
 		return name;
 	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other == null) return false;
+		if (other == this) return true;
+		if (!(other instanceof Subject)) return false;
+		Subject rhs = (Subject) other;
+		if ( this.id == rhs.getId() ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	public Set<User> getSubscriptors() {
 		return subscriptors;

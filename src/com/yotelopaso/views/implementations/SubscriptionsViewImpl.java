@@ -1,12 +1,11 @@
 package com.yotelopaso.views.implementations;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
-import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.data.util.BeanContainer;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.ui.AbstractSelect.ItemCaptionMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -31,12 +30,12 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 	final private OptionGroup og4 = new OptionGroup("Cuarto Año");
 	final private OptionGroup og5 = new OptionGroup("Quinto Año");
 	private OptionGroup[] ogs = {og1, og2, og3, og4, og5};
-	private BeanItemContainer<Subject> c1 = new BeanItemContainer<Subject>(Subject.class);
-	private BeanItemContainer<Subject> c2 = new BeanItemContainer<Subject>(Subject.class);
-	private BeanItemContainer<Subject> c3 = new BeanItemContainer<Subject>(Subject.class);
-	private BeanItemContainer<Subject> c4 = new BeanItemContainer<Subject>(Subject.class);
-	private BeanItemContainer<Subject> c5 = new BeanItemContainer<Subject>(Subject.class);
-	private BeanItemContainer<Subject>[] containers;
+	private BeanContainer<Integer, Subject> c1 = new BeanContainer<Integer, Subject>(Subject.class);
+	private BeanContainer<Integer, Subject> c2 = new BeanContainer<Integer, Subject>(Subject.class);
+	private BeanContainer<Integer, Subject> c3 = new BeanContainer<Integer, Subject>(Subject.class);
+	private BeanContainer<Integer, Subject> c4 = new BeanContainer<Integer, Subject>(Subject.class);
+	private BeanContainer<Integer, Subject> c5 = new BeanContainer<Integer, Subject>(Subject.class);
+	private BeanContainer<Integer, Subject>[] containers;
 	final private Button save = new Button("Guardar");
 	
 	@SuppressWarnings("unchecked")
@@ -79,8 +78,8 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 			groups[i].setMultiSelect(true);
 			groups[i].setSizeFull();
 			groups[i].setImmediate(true);
-			//groups[i].setItemCaptionPropertyId("name");
-			//groups[i].setItemCaptionMode(ItemCaptionMode.PROPERTY);
+			groups[i].setItemCaptionPropertyId("name");
+			groups[i].setItemCaptionMode(ItemCaptionMode.PROPERTY);
 		}
 	}
 
@@ -89,8 +88,8 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void setContainer(BeanItemContainer<Subject>...beanItemContainers) {
-		containers = beanItemContainers;
+	private void setContainer(BeanContainer<Integer, Subject>...beanContainers) {
+		containers = beanContainers;
 	}
 
 	public void setPresenter(SubscriptionsPresenter presenter) {
@@ -99,46 +98,14 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 
 	@Override
 	public void setOptionGroupData(List<Subject> subjectList, int index) {
+		containers[index].setBeanIdProperty("id");
 		containers[index].addAll(subjectList);
-		//ogs[index].setContainerDataSource(containers[index]);
-		ogs[index].addItems(subjectList);
+		ogs[index].setContainerDataSource(containers[index]);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public void selectSubjects(Set<Subject> subjects) {
-		Collection<Subject> c1 = (Collection<Subject>) og1.getItemIds();
-		Collection<Subject> c2 = (Collection<Subject>) og2.getItemIds();
-		Collection<Subject> c3 = (Collection<Subject>) og3.getItemIds();
-		Collection<Subject> c4 = (Collection<Subject>) og4.getItemIds();
-		Collection<Subject> c5 = (Collection<Subject>) og5.getItemIds();
-		for (Subject s : subjects) {
-			for (Subject a : c1) {
-				if (s.getId() == a.getId() ) {
-					og1.select(a);
-				}
-			}
-			for (Subject a : c2) {
-				if (s.getId() == a.getId() ) {
-					og2.select(a);
-				}
-			}
-			for (Subject a : c3) {
-				if (s.getId() == a.getId() ) {
-					og3.select(a);
-				}
-			}
-			for (Subject a : c4) {
-				if (s.getId() == a.getId() ) {
-					og4.select(a);
-				}
-			}
-			for (Subject a : c5) {
-				if (s.getId() == a.getId() ) {
-					og5.select(a);
-				}
-			}
-		}
+	public void selectSubjects(Integer year, Integer id) {
+		ogs[year-1].select(id);
 	}
 	
 	@Override

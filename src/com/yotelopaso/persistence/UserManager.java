@@ -45,20 +45,6 @@ public class UserManager extends DataManager<User> {
 		setCurrentUser(cu);
 	}
 	
-	public void addUserSubjects(Set<Subject> subjects) {
-		User cu = getCurrentUser();
-		cu.addSubjects(subjects);
-		save(cu);
-		setCurrentUser(cu);
-	}
-	
-	public void removeUserSubjects(Set<Subject> subjects) {
-		User cu = getCurrentUser();
-		cu.removeSubjects(subjects);
-		save(cu);
-		setCurrentUser(cu);
-	}
-	
 	public Set<UserCalendarEvent> getCurrentUserEvents() {
 		return getCurrentUser().getUserEvents();
 	}

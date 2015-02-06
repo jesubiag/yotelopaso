@@ -103,7 +103,7 @@ public class Vaadintest01UI extends UI {
 		new MainPresenter(mainView);
 		HomePresenter homePresenter = new HomePresenter(homeView, userManager);
 		SubjectsPresenter subjectsPresenter = new SubjectsPresenter(subjectsView, 
-				userManager, subjectManager, fileManager, newsManager);
+				userManager);
 		new DatosRegPresenter(datosView,userManager,carrManager);
 		CalendarPresenter calendarPresenter = new CalendarPresenter(calendarView, 
 				calendarManager, userManager);

@@ -1,14 +1,13 @@
 package com.yotelopaso.views;
 
 import java.util.List;
-import java.util.Set;
 
 import com.yotelopaso.domain.Subject;
 
 public interface SubscriptionsView extends AbstractHomeView {
 	
 	public void setOptionGroupData(List<Subject> subjectList, int index);
-	public void selectSubjects(Set<Subject> subjects);
+	public void selectSubjects(Integer year, Integer id);
 	public void showSuccesfullSaveNotification(String message);
 	
 	interface SubscriptionsViewListener extends AbstractHomeViewListener {

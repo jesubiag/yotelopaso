@@ -59,8 +59,9 @@ implements SubscriptionsView.SubscriptionsViewListener {
 
 	@Override
 	public void setSelectedSubjects() {
-		//view.selectSubjects(s.getYear(), s);
-		view.selectSubjects(subscriptedSubjects);
+		for (Subject s : subscriptedSubjects) {
+			view.selectSubjects(s.getYear(), s.getId());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -71,8 +72,10 @@ implements SubscriptionsView.SubscriptionsViewListener {
 		case "Guardar":
 			Set<Subject> newSubjects = new HashSet<Subject>();
 			for (int i=0; i < values.length; i++) {
-				Collection<Subject> c = (Collection<Subject>) values[i];
-				newSubjects.addAll(c);
+				Collection<Integer> c = (Collection<Integer>) values[i];
+				for (int j : c) {
+					newSubjects.add(subjectService.getById(j));
+				}
 			}
 			userService.setCurrentUserSubjects(newSubjects);
 			view.showSuccesfullSaveNotification("Suscripciones guardadas correctamente");
