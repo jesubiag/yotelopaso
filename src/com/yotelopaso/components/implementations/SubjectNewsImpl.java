@@ -124,10 +124,10 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 		
 		if (id==null) 
 			auxHorizontalLayout.addComponents(titleSubject);
-		else
+		else {
 			auxHorizontalLayout.addComponents(titleSubject, botHorizontalLayout);
-		
-		auxHorizontalLayout.setComponentAlignment(botHorizontalLayout, Alignment.MIDDLE_RIGHT);
+			auxHorizontalLayout.setComponentAlignment(botHorizontalLayout, Alignment.MIDDLE_RIGHT);
+		}
 		
 		elementLayout.addComponents(auxHorizontalLayout, panel, topHorizontalLayout, new Hr());
 		

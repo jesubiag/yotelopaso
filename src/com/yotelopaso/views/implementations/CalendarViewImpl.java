@@ -128,7 +128,7 @@ WeekClickHandler {
 		viewSelection.setItemCaption(CALENDAR_WEEKLY, "Vista semanal");
 		viewSelection.setItemCaption(CALENDAR_DAILY, "Vista diaria");
 		viewSelection.setNullSelectionAllowed(false);
-		viewSelection.setValue(CALENDAR_WEEKLY);
+		viewSelection.setValue(CALENDAR_MONTHLY);
 		viewSelection.addValueChangeListener( (ValueChangeListener) this );
 		
 		addNewEvent = new Button("Nuevo evento", this);
@@ -140,6 +140,7 @@ WeekClickHandler {
 		topLayout.setComponentAlignment(viewSelection, Alignment.MIDDLE_LEFT);
 		topLayout.setComponentAlignment(addNewEvent, Alignment.MIDDLE_RIGHT);
 		
+		setCalendarView(CALENDAR_MONTHLY);
 	}
 	
 	@Override

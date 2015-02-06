@@ -1,5 +1,7 @@
 package com.yotelopaso.views;
 
+import com.vaadin.ui.Component;
+
 public interface AbstractHomeView extends AuthView {
 	
 	interface AbstractHomeViewListener {
@@ -7,5 +9,7 @@ public interface AbstractHomeView extends AuthView {
 	}
 	
 	public void addListener(AbstractHomeViewListener listener);
+
+	public Component buildTitle(String frase);
 
 }

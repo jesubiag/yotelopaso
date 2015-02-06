@@ -3,16 +3,36 @@ package com.yotelopaso.views.implementations.templates;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.ThemeResource;
+import com.vaadin.server.VaadinSession;
+import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.MenuBar;
+import com.vaadin.ui.MenuBar.Command;
+import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.components.RegWindow;
+import com.yotelopaso.domain.User;
+import com.yotelopaso.persistence.UserManager;
+import com.yotelopaso.utils.UserUtils;
 import com.yotelopaso.views.AbstractHomeView;
+
 
 abstract public class AbstractHomeViewImpl extends AuthViewImpl implements AbstractHomeView, ClickListener {
 	
@@ -23,7 +43,10 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 	private Button buttonSubjects;
 	private Button buttonCalendar;
 	private Button buttonSubscriptions;
-
+	private UserManager userManager = new UserManager();
+	private MenuItem settingsItem;
+	
+	
 	public AbstractHomeViewImpl() {
 		
 		setSizeFull();
@@ -56,6 +79,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		buttonSubscriptions = new Button();
 		
 		VerticalLayout menuContent = new VerticalLayout();
+		menuContent.addComponent(buildUserMenu());
 		
 		Button[] panelButtons = new Button[] {buttonHome, buttonSubjects, buttonCalendar, buttonSubscriptions};
 		
@@ -71,6 +95,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		
 		menuContent.setWidth("100%");
 		menuContent.setMargin(false);
+		
 		menu.setContent(menuContent);
 		hLayout.addComponent(menu);
 		
@@ -83,7 +108,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		// Allow going back to the start
 		Button logout = new Button("Logout", this);
 		
-		addComponent(logout);
+		//addComponent(logout);
 
 	}
 	
@@ -103,7 +128,59 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 	@Override
 	public void enter(ViewChangeEvent event) {
 		super.enter(event);
+		settingsItem.setText(userManager.getCurrentUser().getName());
 		rightLayout.removeAllComponents();
 	}
+
+	@Override
+	public Component buildTitle(String frase) {
+        Label logo = new Label(frase,
+                ContentMode.HTML);
+        logo.setSizeUndefined();
+        HorizontalLayout logoWrapper = new HorizontalLayout(logo);
+        logoWrapper.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
+        logoWrapper.addStyleName("valo-menu-title");
+        return logoWrapper;
+    }
+	
+	private Component buildUserMenu() {
+        final MenuBar settings = new MenuBar();
+        settings.setSizeFull();
+        settings.addStyleName("user-menu");
+        settings.addStyleName("user-test");
+        settingsItem = settings.addItem("", new ExternalResource(
+                "http://i.imgur.com/6I4EhvN.jpg"), null);
+        
+      	setCurrentUser( (User) VaadinSession.getCurrent().getAttribute("currentUser"));
+		
+        settingsItem.setText("Bienvenido");
+      	settingsItem.addItem("Edit Profile", new Command() {
+            @Override
+            public void menuSelected(final MenuItem selectedItem) {
+                //ProfilePreferencesWindow.open(user, false);
+            	navigate(Vaadintest01UI.HOME_VIEW);
+            	RegWindow regWindow = new RegWindow(userManager.getCurrentUser());
+            	addWindow(regWindow);
+            }
+        });
+        settingsItem.addItem("Preferences", new Command() {
+            @Override
+            public void menuSelected(final MenuItem selectedItem) {
+                //ProfilePreferencesWindow.open(user, true);
+            }
+        });
+        settingsItem.addSeparator();
+        settingsItem.addItem("Sign Out", new Command() {
+            @Override
+            //LOGOUT
+            public void menuSelected(final MenuItem selectedItem) {
+            	VaadinSession.getCurrent().setAttribute("userId", null);
+    			VaadinSession.getCurrent().setAttribute("currentUser", null);
+    			navigate(Vaadintest01UI.MAIN_VIEW);
+            	//DashboardEventBus.post(new UserLoggedOutEvent());
+            }
+        });
+        return settings;
+    }
 
 }

@@ -14,6 +14,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.components.RegWindow;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.utils.Google2ApiInfo;
@@ -76,7 +77,9 @@ public class Google2ButtonListener implements OAuthListener {
 				newUser.setName(name);
 				newUser.setEmail(email);
 				VaadinSession.getCurrent().setAttribute("currentUser", newUser);
-				navigator.navigateTo(Vaadintest01UI.REGISTER_VIEW);
+				RegWindow regWindow = new RegWindow();
+				UI.getCurrent().addWindow(regWindow);
+				//navigator.navigateTo(Vaadintest01UI.REGISTER_VIEW);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
