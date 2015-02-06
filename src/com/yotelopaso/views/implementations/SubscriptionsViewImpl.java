@@ -13,6 +13,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.domain.Subject;
 import com.yotelopaso.presenters.SubscriptionsPresenter;
 import com.yotelopaso.views.SubscriptionsView;
@@ -24,6 +25,8 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 	final private VerticalLayout mainLayout = new VerticalLayout();
 	private SubscriptionsPresenter presenter;
 	private Panel panel;
+	private Panel optionGroups;
+	final private VerticalLayout ogsLayout = new VerticalLayout();
 	final private OptionGroup og1 = new OptionGroup("Primer Año");
 	final private OptionGroup og2 = new OptionGroup("Segundo Año");
 	final private OptionGroup og3 = new OptionGroup("Tercer Año");
@@ -48,10 +51,18 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 		rightLayout.addComponent(panel);
 		rightLayout.setExpandRatio(panel, 1.0f);
 		
-		mainLayout.setSizeUndefined();
+		mainLayout.setSizeFull();
 		mainLayout.setSpacing(true);
 		mainLayout.setMargin(true);
 		panel.setContent(mainLayout);
+		
+		optionGroups = new Panel();
+		optionGroups.addStyleName(ValoTheme.PANEL_BORDERLESS);
+		optionGroups.setSizeFull();
+		
+		ogsLayout.setSizeUndefined();
+		ogsLayout.setSpacing(true);
+		optionGroups.setContent(ogsLayout);
 		
 		setContainer(c1, c2, c3, c4, c5);
 		
@@ -62,8 +73,12 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 		
 		save.addClickListener(this);
 		
-		mainLayout.addComponents(ogs);
+		ogsLayout.addComponents(ogs);
+		
+		mainLayout.addComponents(optionGroups);
 		mainLayout.addComponent(save);
+		
+		mainLayout.setExpandRatio(optionGroups, 1.0f);
 	}
 	
 	List<SubscriptionsViewListener> listeners = new ArrayList<SubscriptionsViewListener>();
