@@ -26,8 +26,8 @@ public class AbstractHomePresenter<T extends AbstractHomeView> implements Abstra
 		case "Mi Calendario":
 			view.navigate(Vaadintest01UI.CALENDAR_VIEW);
 			break;
-		case "Mi Actividad":
-			//navigator.navigateTo(Vaadintest01UI.ACTIVITY_VIEW);
+		case "Suscripciones":
+			view.navigate(Vaadintest01UI.SUBSCRIPTIONS_VIEW);
 			break;
 		case "Logout":
 			//logout

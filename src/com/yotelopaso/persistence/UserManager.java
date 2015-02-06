@@ -67,6 +67,13 @@ public class UserManager extends DataManager<User> {
 		return getCurrentUser().getSubscriptedSubjects();
 	}
 	
+	public void setCurrentUserSubjects(Set<Subject> subjects) {
+		User cu = getCurrentUser();
+		cu.setSubscriptedSubjects(subjects);
+		save(cu);
+		setCurrentUser(cu);
+	}
+	
 	public void setNewUserDefaultSubjects(User user, String careerName, Integer year) {
 		SubjectManager sm = new SubjectManager();
 		Set<Subject> subjects = new HashSet<Subject>(sm.filterByCareerAndYear(careerName, year));

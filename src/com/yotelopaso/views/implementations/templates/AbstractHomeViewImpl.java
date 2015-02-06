@@ -22,7 +22,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 	private Button buttonHome;
 	private Button buttonSubjects;
 	private Button buttonCalendar;
-	private Button buttonActivity;
+	private Button buttonSubscriptions;
 
 	public AbstractHomeViewImpl() {
 		
@@ -43,21 +43,21 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		menu.setWidth("182px");
 		
 		String[] buttonCaptions = new String[] {"Inicio", "Materias", "Mi Calendario", 
-				"Mi Actividad"};
+				"Suscripciones"};
 		String[] buttonIds = new String[] {"buttonHome", "buttonSubjects", "buttonCalendar", 
-				"buttonActivity"};
+				"buttonSubscriptions"};
 		FontAwesome[] buttonIcons = new FontAwesome[] {FontAwesome.HOME, FontAwesome.BOOK, 
-				FontAwesome.CALENDAR, FontAwesome.CLOCK_O};
+				FontAwesome.CALENDAR, FontAwesome.RSS};
 		String buttonStyles = ValoTheme.BUTTON_LINK + " " + ValoTheme.BUTTON_ICON_ALIGN_TOP + " " + "panelLink";
 		
 		buttonHome = new Button();
 		buttonSubjects = new Button();
 		buttonCalendar = new Button();
-		buttonActivity = new Button();
+		buttonSubscriptions = new Button();
 		
 		VerticalLayout menuContent = new VerticalLayout();
 		
-		Button[] panelButtons = new Button[] {buttonHome, buttonSubjects, buttonCalendar, buttonActivity};
+		Button[] panelButtons = new Button[] {buttonHome, buttonSubjects, buttonCalendar, buttonSubscriptions};
 		
 		for (int i = 0; i < 4; i++) {
 			panelButtons[i].setCaption(buttonCaptions[i]);

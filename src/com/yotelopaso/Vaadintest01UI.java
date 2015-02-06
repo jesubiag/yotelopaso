@@ -23,6 +23,7 @@ import com.yotelopaso.presenters.DatosRegPresenter;
 import com.yotelopaso.presenters.HomePresenter;
 import com.yotelopaso.presenters.MainPresenter;
 import com.yotelopaso.presenters.SubjectsPresenter;
+import com.yotelopaso.presenters.SubscriptionsPresenter;
 import com.yotelopaso.utils.DataInitializer;
 import com.yotelopaso.views.EditorNoticiasView;
 import com.yotelopaso.views.implementations.CalendarViewImpl;
@@ -30,6 +31,7 @@ import com.yotelopaso.views.implementations.DatosRegImpl;
 import com.yotelopaso.views.implementations.HomeViewImpl;
 import com.yotelopaso.views.implementations.MainViewImpl;
 import com.yotelopaso.views.implementations.SubjectsViewImpl;
+import com.yotelopaso.views.implementations.SubscriptionsViewImpl;
 
 @Theme("vaadintest01")
 @Push
@@ -50,6 +52,7 @@ public class Vaadintest01UI extends UI {
 	public static final String EDITORVIEW = "editornoticias";
 	public static final String SUBJECTS_VIEW = "materias";
 	public static final String CALENDAR_VIEW = "calendario";
+	public static final String SUBSCRIPTIONS_VIEW = "suscripciones";
 	
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = Vaadintest01UI.class)
@@ -84,6 +87,7 @@ public class Vaadintest01UI extends UI {
 		SubjectsViewImpl subjectsView = new SubjectsViewImpl();
 		DatosRegImpl datosView = new DatosRegImpl();
 		CalendarViewImpl calendarView = new CalendarViewImpl();
+		SubscriptionsViewImpl subscriptionsView = new SubscriptionsViewImpl();
 		
 		
 		// Agrego las vistas al navigator
@@ -93,6 +97,7 @@ public class Vaadintest01UI extends UI {
 		nav.addView(REGISTER_VIEW, datosView);
 		nav.addView(EDITORVIEW, new EditorNoticiasView());
 		nav.addView(CALENDAR_VIEW, calendarView);
+		nav.addView(SUBSCRIPTIONS_VIEW, subscriptionsView);
 		
 		// Presenters con sus vistas y managers asociados
 		new MainPresenter(mainView);
@@ -101,11 +106,14 @@ public class Vaadintest01UI extends UI {
 				userManager, subjectManager, fileManager, newsManager);
 		new DatosRegPresenter(datosView,userManager,carrManager);
 		CalendarPresenter calendarPresenter = new CalendarPresenter(calendarView, 
-				calendarManager);
+				calendarManager, userManager);
+		SubscriptionsPresenter subscriptionsPresenter = 
+				new SubscriptionsPresenter(subscriptionsView, userManager);
 		
 		homeView.setPresenter(homePresenter);
 		subjectsView.setPresenter(subjectsPresenter);
 		calendarView.setPresenter(calendarPresenter);
+		subscriptionsView.setPresenter(subscriptionsPresenter);
 		
 		// Navego a la vista principal
 		nav.navigateTo(MAIN_VIEW);

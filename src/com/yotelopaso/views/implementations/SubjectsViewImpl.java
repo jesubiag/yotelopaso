@@ -102,7 +102,7 @@ ItemClickListener, ClickListener {
 	
 	@Override
 	public void buttonClick(ClickEvent event) {
-		super.buttonClick(event);
+		//super.buttonClick(event);
 		for (SubjectsViewListener listener : listeners) {
 			listener.buttonClick(event.getButton().getCaption(), 
 					(Long) event.getButton().getData());

@@ -19,7 +19,9 @@ public class SubjectManager extends DataManager<Subject> {
 		String jpql = "SELECT s "
 				+ "FROM Subject s "
 				+ "WHERE s.career.name = :careerName "
-				+ "AND s.year = :year";
+				+ "AND s.year = :year "
+				+ "ORDER BY s.name ASC";
+		//Agregar orden a la query
 		Query query = em.createQuery(jpql);
 		query.setParameter("careerName", careerName);
 		query.setParameter("year", year);

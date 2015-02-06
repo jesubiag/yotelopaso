@@ -1,5 +1,7 @@
 package com.yotelopaso.persistence;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import com.vaadin.addon.jpacontainer.JPAContainer;
@@ -42,16 +44,21 @@ public class CalendarManager extends DataManager<UserCalendarEvent>{
 	
 	public JPAContainer<UserCalendarEvent> getEventsFromSubscription(Set<Subject> subjects, 
 			Double userId ) {
-		String property1 = "subjectId";
-		String property2 = "publicEvent";
-		String property3 = "authorId";
-		for (Subject s : subjects) {
-			Filter filter1 = new And( new Compare.Equal(property1, s.getId()),
-					new Compare.Equal(property2, true));
-			Filter filter2 = new Compare.Equal(property3, userId ); 
-			Filter filter = new Or(filter1, filter2);
-			container.addContainerFilter(filter);
+		String propertyId1 = "subjectId";
+		String propertyId2 = "publicEvent";
+		String propertyId3 = "authorId";
+		
+		List<Filter> filterList = new ArrayList<Filter>();
+		Subject[] array =  subjects.toArray(new Subject[subjects.size()]);
+		filterList.add( new Compare.Equal(propertyId3, userId) );
+		for (int i = 0; i < array.length; i++) {
+			Filter f1 = new Compare.Equal(propertyId1, array[i].getId());
+			Filter f2 = new Compare.Equal(propertyId2, true);
+			filterList.add(new And(f1, f2));
 		}
+		Filter[] filters = filterList.toArray(new Filter[filterList.size()]);
+		Filter filter = new Or(filters);
+		container.addContainerFilter(filter);
 		return container;
 	}
 }
