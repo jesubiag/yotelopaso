@@ -5,12 +5,14 @@ import java.util.Date;
 import org.vaadin.addon.googlepicker.GooglePicker;
 import org.vaadin.addon.googlepicker.GooglePicker.SelectionListener;
 
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PopupView.Content;
@@ -43,6 +45,7 @@ public class UploadFiles extends Window {
 	private TextArea descripcion;
 	private TextField dirArchivo;
 	private TextField nomArchivo;
+	private Label permisos;
 	private Button aceptar;
 	private Type fileType;
 	private Button cancelar;
@@ -137,9 +140,12 @@ public class UploadFiles extends Window {
 		autor.setEnabled(false);
 		autor.addStyleName("borderless");		
 		
+		permisos =new Label("* Por favor verifique que el archivo tenga permisos públicos. Para ir a Google Drive haga click  " + "<a href='https://drive.google.com/drive/#my-drive' target='_blank'>" + "aquí" + "</a>", ContentMode.HTML);
+		
 		form.addComponent(nomArchivo);
 		form.addComponent(cargarArchivo);
 		form.addComponent(descripcion);
+		form.addComponent(permisos);
 		 
 		aceptar = new Button("Guardar",
 				new Button.ClickListener() {
