@@ -81,7 +81,7 @@ implements CalendarView.CalendarViewListener {
 	public void initCalendar() {
 		if (currentUser == null) currentUser = userService.getCurrentUser();
 		Set<UserCalendarEvent> events = new HashSet<UserCalendarEvent>();
-		JPAContainer<UserCalendarEvent> c = service.getEventsFromSubscription(
+		JPAContainer<UserCalendarEvent> c = service.getCalendarEvents(
 				currentUser.getSubscriptedSubjects(), currentUser.getId());
 		Collection<Object> ids = c.getItemIds();
 		for (Object o : ids) {
