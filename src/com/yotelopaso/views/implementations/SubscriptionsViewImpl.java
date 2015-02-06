@@ -51,6 +51,7 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 		rightLayout.addComponent(panel);
 		rightLayout.setExpandRatio(panel, 1.0f);
 		
+		mainLayout.removeAllComponents();
 		mainLayout.setSizeFull();
 		mainLayout.setSpacing(true);
 		mainLayout.setMargin(true);
