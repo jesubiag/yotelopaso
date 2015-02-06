@@ -5,6 +5,7 @@ import java.util.Date;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.ObjectProperty;
 import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.shared.ui.combobox.FilteringMode;
@@ -23,9 +24,10 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.components.EventWindow;
+import com.yotelopaso.domain.Subject;
 import com.yotelopaso.domain.UserCalendarEvent;
 import com.yotelopaso.domain.UserCalendarEvent.CalendarEventType;
-import com.yotelopaso.persistence.SubjectManager;
+import com.yotelopaso.persistence.UserManager;
 
 public class EventWindowImpl extends Window implements EventWindow {
 
@@ -39,19 +41,17 @@ public class EventWindowImpl extends Window implements EventWindow {
 	private Button saveButton;
 	private Button cancelButton;
 	private BeanItem<UserCalendarEvent> item;
-	private Integer careerId;
 	private ComboBox subject;
 	private ComboBox type;
 	private CheckBox publicEvent;
 	private FieldGroup binder;
 	private boolean isNew = false;
-	private SubjectManager sm = new SubjectManager();
+	private UserManager um = new UserManager();
 	
 	public final static Resolution RESOLUTION = Resolution.MINUTE;
 	
 	public EventWindowImpl(ClickListener parentView, UserCalendarEvent selectedEvent, 
 			Double authorId, Integer subjectId, Integer careerId) {
-		this.careerId = careerId;
 		initWindow();
 		UserCalendarEvent event = selectedEvent;
 		if ( selectedEvent == null ) {
@@ -104,7 +104,10 @@ public class EventWindowImpl extends Window implements EventWindow {
 		endDate = new DateField("Fecha de fin");
 		endDate.setResolution(RESOLUTION);
 		endDate.setWidth("100%");
-		subject = new ComboBox("Materia", sm.filterContainerByCareer(this.careerId));
+		BeanItemContainer<Subject> container = new BeanItemContainer<Subject>(Subject.class);
+		container.addAll(um.getCurrentUser().getSubscriptedSubjects());
+		container.sort(new Object[] {"name"}, new boolean[] {true});
+		subject = new ComboBox("Materia", container);
 		subject.setWidth("100%");
 		subject.setInputPrompt("Seleccione una materia");
 		subject.setItemCaptionPropertyId("name");
