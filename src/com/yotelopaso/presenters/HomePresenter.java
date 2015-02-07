@@ -41,9 +41,7 @@ public class HomePresenter extends AbstractHomePresenter<HomeView> implements Ho
 			view.showNewsVisualizerWindow( (Long) itemId );
 			break;
 		case "lastFilesTable":
-			Long fileId = (Long) itemId;
-			File f = (new FileManager()).getById(fileId);
-			view.openLink(f.getUrl(), "_blank");
+			view.showFileVisualizerWindow((Long) itemId);
 			break;
 		case "lastEventsTable":
 			// TODO cambiar esto. No debe ser posible editar el evento. No al menos si no es el autor

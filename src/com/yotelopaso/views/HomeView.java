@@ -24,5 +24,6 @@ public interface HomeView extends AbstractHomeView {
 
 	public void showEventWindow(UserCalendarEvent event);
 	public void showNewsVisualizerWindow(Long newsId);
+	public void showFileVisualizerWindow(Long fileId);
 
 }

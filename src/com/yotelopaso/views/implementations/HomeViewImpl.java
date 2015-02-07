@@ -17,6 +17,7 @@ import com.vaadin.ui.Table.ColumnGenerator;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.components.EventWindowRO;
+import com.yotelopaso.components.FilesVisualizer;
 import com.yotelopaso.components.NewsVisualizer;
 import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.News;
@@ -241,6 +242,13 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 	@Override
 	public void showEventWindow(UserCalendarEvent event) {
 		addWindow( new EventWindowRO(event) );
+	}
+
+	@Override
+	public void showFileVisualizerWindow(Long fileId) {
+		FilesVisualizer visualizer = new FilesVisualizer(fileId);	
+		addWindow(visualizer);
+		
 	}
 	
 }
