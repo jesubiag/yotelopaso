@@ -62,7 +62,6 @@ public class UploadFiles extends Window {
 		
 		buildMainLayout();
 		
-		fecha.setValue(new Date());
 		autor.setValue(manUser.getCurrentUser().getEmail());
 		setWidth("650px");	
 	}
@@ -97,7 +96,6 @@ public class UploadFiles extends Window {
 		buildMainLayout();
 		nomArchivo.setValue(pickerName);
 		dirArchivo.setValue(pickerDir);
-		fecha.setValue(new Date());
 		
 		autor.setValue(manUser.getCurrentUser().getEmail());
 		setWidth("650px");	
@@ -118,6 +116,7 @@ public class UploadFiles extends Window {
 		 form.setSpacing(true);		 
 		 
 		 fecha = new DateField("Fecha de publicación");
+		 fecha.setValue(new Date());
 		 fecha.setEnabled(false);
 		 
 		 descripcion = new TextArea();
@@ -187,7 +186,7 @@ public class UploadFiles extends Window {
 						getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW + "/" + materia.getName());
 						parentView.selectTab(fileType);
 						//Page.getCurrent().reload();
-						Notification.show("Archivo subido");
+						Notification.show("Archivo guardado");
 						close();
 					}
 					else {
