@@ -64,6 +64,12 @@ public class DataInitializer {
 	}
 	
 	private static void populateSubjectsTable() {
+		Subject sub = new Subject();
+		sub.setCareer(careerMngr.getById(1));
+		sub.setName("Asuntos Generales");
+		sub.setId(0);
+		sub.setYear(6);
+		subjectMngr.save(sub);
 		
 		String[] s1 = {"Algoritmos Y Estructuras De Datos", "Matematica Discreta", 
 				"Sistemas Y Organizaciones", "Fisica I", "Álgebra y Geometría Analítica", 
@@ -146,7 +152,7 @@ public class DataInitializer {
 			for (int i = 0; i < 5; i++) {
 				int year = i + 1; 
 				for (String sn : subs[j][i]) {
-					Subject sub = new Subject();
+					sub = new Subject();
 					sub.setName(sn);
 					sub.setYear(year);
 					sub.setCareer(ca);
@@ -162,7 +168,16 @@ public class DataInitializer {
 		news.setTitle("Parcial Simulacion");
 		news.setContent("El parcial del miércoles 1/10 se pasa al viernes 3/10.");
 		news.setDate(new Date());
-		news.setSubject(subjectMngr.getById(32));
+		news.setSubject(subjectMngr.getById(31));
+		news.setAuthor(user1);
+		newsMngr.save(news);
+		
+		news = new News();
+		news.setCareer(careerMngr.getById(1));
+		news.setTitle("Horario de cierre de la facultad");
+		news.setContent("La facultad permanecera cerrada hasta las 21hs hasta la primer semana de finales.");
+		news.setDate(new Date());
+		news.setSubject(subjectMngr.getById(1));
 		news.setAuthor(user1);
 		newsMngr.save(news);
 	}

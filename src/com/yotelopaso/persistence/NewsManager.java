@@ -42,6 +42,17 @@ public class NewsManager extends DataManager<News> {
 		return query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<News> filterBySubject(String subjectName) {
+		String jpql = "SELECT n "
+				+ "FROM News n "
+				+ "WHERE n.subject.name = :subjectName "
+				+ "ORDER BY n.id DESC";
+		Query query = em.createQuery(jpql);
+		query.setParameter("subjectName", subjectName);
+		return query.getResultList();
+	}
+	
 
 	public JPAContainer<News> getNewsFromSubscription(Set<Subject> subjects) {
 		container.removeAllContainerFilters();

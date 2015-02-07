@@ -159,6 +159,10 @@ public class User implements Serializable {
 		subscriptedSubjects.addAll(subjects);
 	}
 	
+	public void addSubject(Subject subject) {
+		subscriptedSubjects.add(subject);
+	}
+	
 	public void removeSubjects(Set<Subject> subjects) {
 		subscriptedSubjects.removeAll(subjects);
 	}

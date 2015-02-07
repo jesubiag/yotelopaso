@@ -24,10 +24,9 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 	private String subjectName;
 	ContentMode labelContentMode = ContentMode.HTML;
 	
-	public SubjectNewsImpl(String careerName, String subjectName, ClickListener parentView) {
+	public SubjectNewsImpl(String subjectName, ClickListener parentView) {
 		this.presenter = new SubjectNewsPresenter(this);
 		this.parentView = parentView;
-		this.careerName = careerName;
 		this.subjectName = subjectName;
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
@@ -37,9 +36,7 @@ public class SubjectNewsImpl extends CustomComponent implements SubjectNews {
 		mainLayout = new VerticalLayout();
 		//mainLayout.setSizeUndefined();
 		mainLayout.setSizeFull();
-		
-		
-		presenter.setContent(careerName, subjectName);
+		presenter.setContent(subjectName);
 	}
 
 	@Override

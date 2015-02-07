@@ -166,10 +166,12 @@ public class RegWindow extends Window{
 					Career c = carrManager.getById( (Integer) carr.getValue());
 					if (firstLogin){
 						userManager.setNewUserDefaultSubjects(usuario,c.getName(),y);
+						usuario.addSubject(subManager.getById(1));
 					} else {
 						if (usuario.getCareer().getId() != carr.getValue() || usuario.getYear() != y){
 							Set <Subject> suscribedSubjects = new HashSet<Subject>();
 							suscribedSubjects.addAll(subManager.filterByCareerAndYear(c.getName(), y));
+							suscribedSubjects.add(subManager.getById(1));
 							usuario.setSubscriptedSubjects(suscribedSubjects);
 						}
 					}

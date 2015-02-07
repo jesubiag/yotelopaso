@@ -98,7 +98,7 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 	@Override
 	public void setSubjectContent(String subjectName) {
 		view.cleanComponents();
-		view.buildSubjectLayout(subjectName, userCareer);
+		view.buildSubjectLayout(subjectName);
 	}
 
 	@Override

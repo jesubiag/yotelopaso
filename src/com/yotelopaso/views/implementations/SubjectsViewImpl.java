@@ -141,10 +141,10 @@ ItemClickListener, ClickListener {
 	}
 
 	@Override
-	public void buildSubjectLayout(String subjectName, String careerName) {
+	public void buildSubjectLayout(String subjectName) {
 		cleanComponents();
 		// TODO: sacar esto cuando mejore la implementación de la recarga de componente
-		this.careerName = careerName;
+		//this.careerName = careerName;
 		VerticalLayout subjectLayout = new VerticalLayout();
 		subjectLayout.setSizeFull();
 		Label titulo = new Label();
@@ -182,7 +182,7 @@ ItemClickListener, ClickListener {
 		newsContainer.setContent(containerContent);
 		containerContent.setWidth("100%");
 		containerContent.setHeightUndefined();
-		containerContent.addComponent(new SubjectNewsImpl(careerName, subjectName, this));
+		containerContent.addComponent(new SubjectNewsImpl(subjectName, this));
 		
 		tabNews.addComponent(newsContainer);
 		tabNews.setExpandRatio(newsContainer, 1.0f);
@@ -202,7 +202,8 @@ ItemClickListener, ClickListener {
 		sections.setSizeFull();
 		sections.removeAllComponents();
 		sections.addTab(tabNews, "Noticias");
-		sections.addTab(tabFiles, "Archivos");
+		if (!subjectName.contentEquals("Asuntos Generales"))
+			sections.addTab(tabFiles, "Archivos");
 		//sections.addSelectedTabChangeListener(this);
 		subjectLayout.addComponent(sections);
 		subjectLayout.setExpandRatio(sections, 1.0f);

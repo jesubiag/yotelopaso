@@ -20,8 +20,13 @@ public class SubjectNewsPresenter implements SubjectNews.SubjectNewsListener {
 	}
 
 	@Override
-	public void setContent(String careerName, String subjectName) {
-		List<News> news = service.filterByCareerAndSubject(careerName, subjectName);
+	public void setContent(String subjectName) {
+		String careerName=manUser.getCurrentUser().getCareer().getName();
+		List<News> news;
+		if (subjectName.contentEquals("Asuntos Generales"))
+			news = service.filterBySubject(subjectName);
+		else
+			news = service.filterByCareerAndSubject(careerName, subjectName);
 		for (News n : news) {
 			String date = DateUtils.dateFormat(n.getDate());
 			String title = n.getTitle();

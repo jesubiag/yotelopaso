@@ -10,7 +10,7 @@ public interface SubjectsView extends AbstractHomeView {
 	
 	public void setSubjects(String careerName);
 	public void cleanComponents();
-	public void buildSubjectLayout(String subjectName, String careerName);
+	public void buildSubjectLayout(String subjectName);
 	public void showNewsEditorWindow(Long id);
 	public void showUploadFileWindow(Type fileType);
 	public void showUploadFileWindow(Long fileId);
@@ -31,7 +31,6 @@ public interface SubjectsView extends AbstractHomeView {
 	public void deleteNew(Long newsId);
 	public void selectTab(File.Type fileType);
 	public void deleteFile(Long newsId);
-	
 	
 
 }
