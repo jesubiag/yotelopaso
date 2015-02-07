@@ -97,7 +97,7 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		subContentRecentFiles.setId("FilesH");
 		
 		// Eventos
-		windowRecentEvents = new Panel("Eventos más recientes");
+		windowRecentEvents = new Panel("Próximos eventos");
 		windowRecentEvents.setStyleName("color1");
 		
 		VerticalLayout subContentRecentEvents = new VerticalLayout();
