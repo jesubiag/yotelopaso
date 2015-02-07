@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -30,7 +31,7 @@ public class Subject implements Serializable {
 	@NotNull
 	private Integer year;
 	
-	@ManyToMany(mappedBy="subscriptedSubjects")
+	@ManyToMany(mappedBy="subscriptedSubjects", fetch=FetchType.EAGER)
 	private Set<User> subscriptors = new HashSet<User>();
 	
 	public Subject() {}

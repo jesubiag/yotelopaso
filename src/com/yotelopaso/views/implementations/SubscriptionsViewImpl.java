@@ -9,6 +9,7 @@ import com.vaadin.ui.AbstractSelect.ItemCaptionMode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.OptionGroup;
 import com.vaadin.ui.Panel;
@@ -33,18 +34,25 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 	final private OptionGroup og4 = new OptionGroup("Cuarto Año");
 	final private OptionGroup og5 = new OptionGroup("Quinto Año");
 	private OptionGroup[] ogs = {og1, og2, og3, og4, og5};
-	private BeanContainer<Integer, Subject> c1 = new BeanContainer<Integer, Subject>(Subject.class);
-	private BeanContainer<Integer, Subject> c2 = new BeanContainer<Integer, Subject>(Subject.class);
-	private BeanContainer<Integer, Subject> c3 = new BeanContainer<Integer, Subject>(Subject.class);
-	private BeanContainer<Integer, Subject> c4 = new BeanContainer<Integer, Subject>(Subject.class);
-	private BeanContainer<Integer, Subject> c5 = new BeanContainer<Integer, Subject>(Subject.class);
+	private BeanContainer<Integer, Subject> c1;
+	private BeanContainer<Integer, Subject> c2;
+	private BeanContainer<Integer, Subject> c3;
+	private BeanContainer<Integer, Subject> c4;
+	private BeanContainer<Integer, Subject> c5;
 	private BeanContainer<Integer, Subject>[] containers;
 	final private Button save = new Button("Guardar");
+	final private Button cancel = new Button("Cancelar");
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void enter(ViewChangeEvent event) {
 		super.enter(event);
+		
+		c1 = new BeanContainer<Integer, Subject>(Subject.class);
+		c2 = new BeanContainer<Integer, Subject>(Subject.class);
+		c3 = new BeanContainer<Integer, Subject>(Subject.class);
+		c4 = new BeanContainer<Integer, Subject>(Subject.class);
+		c5 = new BeanContainer<Integer, Subject>(Subject.class);
 		
 		panel = new Panel("Suscripciones");
 		panel.setSizeFull();
@@ -73,11 +81,16 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 		presenter.setSelectedSubjects();
 		
 		save.addClickListener(this);
+		cancel.addClickListener(this);
 		
 		ogsLayout.addComponents(ogs);
 		
+		HorizontalLayout botones = new HorizontalLayout();
+		botones.setSizeUndefined();
+		botones.addComponents(save,cancel);
+		
 		mainLayout.addComponents(optionGroups);
-		mainLayout.addComponent(save);
+		mainLayout.addComponent(botones);
 		
 		mainLayout.setExpandRatio(optionGroups, 1.0f);
 	}

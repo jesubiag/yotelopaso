@@ -1,7 +1,9 @@
 package com.yotelopaso.components;
 
 import java.text.NumberFormat;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import com.vaadin.data.util.converter.StringToLongConverter;
 import com.vaadin.navigator.Navigator;
@@ -24,6 +26,7 @@ import com.yotelopaso.domain.PersonalInfo;
 import com.yotelopaso.domain.Subject;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.CareerManager;
+import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.persistence.UserManager;
 
 
@@ -45,19 +48,20 @@ public class RegWindow extends Window{
 	private PersonalInfo persInfo;
 	final private CareerManager carrManager = new CareerManager();
 	final private UserManager userManager = new UserManager();
+	final private SubjectManager subManager = new SubjectManager();
 	boolean firstLogin;
 	
 	//Constructor para primer Login
-	public RegWindow(){
-		usuario = new User();
+	public RegWindow(User user){
+		this.usuario = user;
 		persInfo = new PersonalInfo();
 		firstLogin = true;
 		buildMainLayout();	
 	}
 	
 	//Constructor para editar datos personales
-	public RegWindow(User user){
-		this.usuario = user;
+	public RegWindow(){
+		usuario = userManager.getCurrentUser();
 		firstLogin = false;
 		
 		buildMainLayout();			
@@ -164,11 +168,9 @@ public class RegWindow extends Window{
 						userManager.setNewUserDefaultSubjects(usuario,c.getName(),y);
 					} else {
 						if (usuario.getCareer().getId() != carr.getValue() || usuario.getYear() != y){
-							//System.out.println(usuario.getSubscriptedSubjects());
-							usuario.removeSubjects(usuario.getSubscriptedSubjects());
-							//System.out.println(usuario.getSubscriptedSubjects());
-							userManager.setNewUserDefaultSubjects(usuario,c.getName(),y);
-							//System.out.println(usuario.getSubscriptedSubjects());
+							Set <Subject> suscribedSubjects = new HashSet<Subject>();
+							suscribedSubjects.addAll(subManager.filterByCareerAndYear(c.getName(), y));
+							usuario.setSubscriptedSubjects(suscribedSubjects);
 						}
 					}
 					usuario.setCareer(c);
@@ -182,8 +184,8 @@ public class RegWindow extends Window{
 					userManager.save(usuario);
 					userManager.setCurrentUser(usuario);
 					//if (firstLogin)
-					navigator.navigateTo(Vaadintest01UI.HOME_VIEW);	
 					close();
+					navigator.navigateTo(Vaadintest01UI.HOME_VIEW);	
 				}
 				else {	
 					Notification.show("Revise los campos obligatorios\n",

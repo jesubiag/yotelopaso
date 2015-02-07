@@ -190,5 +190,40 @@
 	.user-test .v-menubar-menuitem-caption { 
 		color: #808080;
 	}
+	.user-test .valo-menu-title {
+		line-height: 1.2;
+		/* background-color: #4783eb; */
+		/* background-image: -webkit-linear-gradient(top, #4986eb 2%, #427de6 98%); */
+		background: url('http://api.thumbr.it/whitenoise-361x370.png?background=3d3d3dff&noise=6e6e6e&density=34&opacity=17');
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
+		padding: 12px 19px;
+		font-size: 15px;	
+		border-bottom-width: 0;
+	}
+
+	.user-test .v-menubar-user-menu  > .v-menubar-menuitem {
+		color: inherit;
+		white-space: normal;
+		line-height: 1;
+		margin: 0;
+	}
+	
+	.user-test .v-menubar-user-menu {
+		border: none;
+		border-radius: 0;
+		padding: 1px;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		text-shadow: none;
+		background: transparent;
+		color: inherit;
+		margin: 0;
+		display: block;
+		overflow: hidden;
+		text-align: center;
+		height: auto;
+		color: inherit;
+	}
+	
 }
 

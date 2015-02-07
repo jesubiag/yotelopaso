@@ -63,6 +63,7 @@ public class Google2ButtonListener implements OAuthListener {
 		VaadinSession.getCurrent().setAttribute("userId", userId);
 		if (userManager.isRegistered(userId)) {
 			User currentUser = userManager.getById(userId);
+			//userManager.setCurrentUser(currentUser);
 			VaadinSession.getCurrent().setAttribute("currentUser", currentUser);
 			navigator.navigateTo(Vaadintest01UI.HOME_VIEW);
 		} else {
@@ -77,7 +78,7 @@ public class Google2ButtonListener implements OAuthListener {
 				newUser.setName(name);
 				newUser.setEmail(email);
 				VaadinSession.getCurrent().setAttribute("currentUser", newUser);
-				RegWindow regWindow = new RegWindow();
+				RegWindow regWindow = new RegWindow(newUser);
 				UI.getCurrent().addWindow(regWindow);
 				//navigator.navigateTo(Vaadintest01UI.REGISTER_VIEW);
 			} catch (JSONException e) {

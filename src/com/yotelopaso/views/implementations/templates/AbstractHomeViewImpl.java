@@ -42,7 +42,6 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 	private Button buttonHome;
 	private Button buttonSubjects;
 	private Button buttonCalendar;
-	private Button buttonSubscriptions;
 	private UserManager userManager = new UserManager();
 	private MenuItem settingsItem;
 	
@@ -59,8 +58,8 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		rightLayout = new VerticalLayout();
 		rightLayout.setSizeFull();
 
-		// Have a menu on the left side of the screen
-		Panel menu = new Panel("<b>Yo Te Lo Paso</b>");
+		// Have a menu on the left side of the screen <b>Yo Te Lo Paso</b>
+		Panel menu = new Panel("");
 		menu.setId("menu-panel");
 		menu.setHeight("100%");
 		menu.setWidth("182px");
@@ -76,14 +75,14 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		buttonHome = new Button();
 		buttonSubjects = new Button();
 		buttonCalendar = new Button();
-		buttonSubscriptions = new Button();
 		
 		VerticalLayout menuContent = new VerticalLayout();
+		menuContent.addComponent(buildTitle("Yo Te Lo <b>Paso</b>"));
 		menuContent.addComponent(buildUserMenu());
 		
-		Button[] panelButtons = new Button[] {buttonHome, buttonSubjects, buttonCalendar, buttonSubscriptions};
+		Button[] panelButtons = new Button[] {buttonHome, buttonSubjects, buttonCalendar};
 		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 3; i++) {
 			panelButtons[i].setCaption(buttonCaptions[i]);
 			panelButtons[i].setId(buttonIds[i]);
 			panelButtons[i].addStyleName(buttonStyles);
@@ -95,6 +94,8 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		
 		menuContent.setWidth("100%");
 		menuContent.setMargin(false);
+		menuContent.setSpacing(false);
+		//menuContent.setStyleName(ValoTheme.lay)
 		
 		menu.setContent(menuContent);
 		hLayout.addComponent(menu);
@@ -105,11 +106,6 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		setExpandRatio(hLayout, 1.0f);
 		hLayout.setExpandRatio(rightLayout, 1.0f);
 		
-		// Allow going back to the start
-		Button logout = new Button("Logout", this);
-		
-		//addComponent(logout);
-
 	}
 	
 	List<AbstractHomeViewListener> listeners = new ArrayList<AbstractHomeViewListener>();
@@ -128,7 +124,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 	@Override
 	public void enter(ViewChangeEvent event) {
 		super.enter(event);
-		settingsItem.setText(userManager.getCurrentUser().getName());
+		settingsItem.setText(userManager.getCurrentUser().getName() + " " + userManager.getCurrentUser().getLastName());
 		rightLayout.removeAllComponents();
 	}
 
@@ -140,12 +136,13 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
         HorizontalLayout logoWrapper = new HorizontalLayout(logo);
         logoWrapper.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
         logoWrapper.addStyleName("valo-menu-title");
+        setStyleName("user-test");
         return logoWrapper;
     }
 	
 	private Component buildUserMenu() {
         final MenuBar settings = new MenuBar();
-        settings.setSizeFull();
+        settings.setHeight("70%");
         settings.addStyleName("user-menu");
         settings.addStyleName("user-test");
         settingsItem = settings.addItem("", new ExternalResource(
@@ -159,14 +156,15 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
             public void menuSelected(final MenuItem selectedItem) {
                 //ProfilePreferencesWindow.open(user, false);
             	navigate(Vaadintest01UI.HOME_VIEW);
-            	RegWindow regWindow = new RegWindow(userManager.getCurrentUser());
+            	RegWindow regWindow = new RegWindow();
             	addWindow(regWindow);
             }
         });
         settingsItem.addItem("Mis Suscripciones", new Command() {
             @Override
             public void menuSelected(final MenuItem selectedItem) {
-                //ProfilePreferencesWindow.open(user, true);
+                UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.SUBSCRIPTIONS_VIEW);
+            	//ProfilePreferencesWindow.open(user, true);
             }
         });
         settingsItem.addSeparator();
