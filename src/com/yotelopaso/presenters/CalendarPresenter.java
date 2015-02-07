@@ -62,12 +62,12 @@ implements CalendarView.CalendarViewListener {
 	
 	@Override
 	public void eventClick(UserCalendarEvent event) {
-		if (currentUser == null) currentUser = userService.getCurrentUser();
 		currentEvent = event;
+		if (currentUser == null) currentUser = userService.getCurrentUser();
 		if ( currentUser.getId().equals( currentEvent.getAuthorId() ) ) {
 			view.addEventWindow(currentEvent, currentUser.getId(), currentUser.getCareer().getId());
 		} else {
-			view.showNotification("Debes ser el autor del evento para poder editarlo");
+			view.showEventWindow(currentEvent);
 		}
 		
 	}

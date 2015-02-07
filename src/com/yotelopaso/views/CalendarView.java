@@ -12,6 +12,7 @@ public interface CalendarView extends AbstractHomeView {
 	public void eventAddedSuccesfully();
 	public void eventRemovedSuccessfully();
 	public void showNotification(String message);
+	public void showEventWindow(UserCalendarEvent event);
 	public void notificateFieldsError();
 	public void closeCurrentWindow();
 	public void setCalendarView(String type);

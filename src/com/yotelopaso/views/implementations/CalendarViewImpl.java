@@ -28,6 +28,7 @@ import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClickHandl
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClick;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClickHandler;
 import com.vaadin.ui.themes.ValoTheme;
+import com.yotelopaso.components.EventWindowRO;
 import com.yotelopaso.components.implementations.EventWindowImpl;
 import com.yotelopaso.domain.UserCalendarEvent;
 import com.yotelopaso.presenters.CalendarPresenter;
@@ -241,6 +242,12 @@ WeekClickHandler {
 	@Override
 	public void weekClick(WeekClick event) {
 		viewSelection.setValue(CALENDAR_WEEKLY);
+	}
+
+	@Override
+	public void showEventWindow(UserCalendarEvent event) {
+		addWindow( new EventWindowRO(event) );
+		
 	}
 
 }
