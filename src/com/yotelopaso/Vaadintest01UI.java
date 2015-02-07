@@ -19,15 +19,12 @@ import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.presenters.CalendarPresenter;
-import com.yotelopaso.presenters.DatosRegPresenter;
 import com.yotelopaso.presenters.HomePresenter;
 import com.yotelopaso.presenters.MainPresenter;
 import com.yotelopaso.presenters.SubjectsPresenter;
 import com.yotelopaso.presenters.SubscriptionsPresenter;
 import com.yotelopaso.utils.DataInitializer;
-import com.yotelopaso.views.EditorNoticiasView;
 import com.yotelopaso.views.implementations.CalendarViewImpl;
-import com.yotelopaso.views.implementations.DatosRegImpl;
 import com.yotelopaso.views.implementations.HomeViewImpl;
 import com.yotelopaso.views.implementations.MainViewImpl;
 import com.yotelopaso.views.implementations.SubjectsViewImpl;
@@ -48,8 +45,6 @@ public class Vaadintest01UI extends UI {
 	// Nombres de las vistas de la aplicación
 	public static final String MAIN_VIEW = "";
 	public static final String HOME_VIEW = "home";
-	public static final String REGISTER_VIEW = "register";
-	public static final String EDITORVIEW = "editornoticias";
 	public static final String SUBJECTS_VIEW = "materias";
 	public static final String CALENDAR_VIEW = "calendario";
 	public static final String SUBSCRIPTIONS_VIEW = "suscripciones";
@@ -85,7 +80,6 @@ public class Vaadintest01UI extends UI {
 		MainViewImpl mainView = new MainViewImpl();
 		HomeViewImpl homeView = new HomeViewImpl();
 		SubjectsViewImpl subjectsView = new SubjectsViewImpl();
-		DatosRegImpl datosView = new DatosRegImpl();
 		CalendarViewImpl calendarView = new CalendarViewImpl();
 		SubscriptionsViewImpl subscriptionsView = new SubscriptionsViewImpl();
 		
@@ -94,8 +88,6 @@ public class Vaadintest01UI extends UI {
 		nav.addView(MAIN_VIEW, mainView);
 		nav.addView(HOME_VIEW, homeView);
 		nav.addView(SUBJECTS_VIEW, subjectsView);
-		nav.addView(REGISTER_VIEW, datosView);
-		nav.addView(EDITORVIEW, new EditorNoticiasView());
 		nav.addView(CALENDAR_VIEW, calendarView);
 		nav.addView(SUBSCRIPTIONS_VIEW, subscriptionsView);
 		
@@ -104,7 +96,6 @@ public class Vaadintest01UI extends UI {
 		HomePresenter homePresenter = new HomePresenter(homeView, userManager);
 		SubjectsPresenter subjectsPresenter = new SubjectsPresenter(subjectsView, 
 				userManager);
-		new DatosRegPresenter(datosView,userManager,carrManager);
 		CalendarPresenter calendarPresenter = new CalendarPresenter(calendarView, 
 				calendarManager, userManager);
 		SubscriptionsPresenter subscriptionsPresenter = 
