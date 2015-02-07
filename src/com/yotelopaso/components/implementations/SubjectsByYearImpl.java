@@ -46,6 +46,7 @@ public class SubjectsByYearImpl extends CustomComponent implements SubjectsByYea
 		*/
 		presenter.setContent(careerName);
 		
+		subjectsTree.setStyleName("user-test");
 		subjectsTree.setImmediate(true);
 		subjectsTree.addItemClickListener(this.parentView);
 		contentLayout.addComponent(subjectsTree);
@@ -53,7 +54,7 @@ public class SubjectsByYearImpl extends CustomComponent implements SubjectsByYea
 		// Agrego los componentes
 		contentLayout.setSizeUndefined();
 		mainLayout.setSizeUndefined();
-		mainLayout.addComponents(title, contentLayout);
+		mainLayout.addComponents(contentLayout);
 		
 	}
 	

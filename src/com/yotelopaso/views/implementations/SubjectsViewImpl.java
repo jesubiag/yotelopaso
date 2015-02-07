@@ -11,6 +11,7 @@ import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -83,6 +84,7 @@ ItemClickListener, ClickListener {
 		if (parameters.isEmpty() || parameters == null) {
 			mainLayout.setSizeUndefined();
 			panel.setCaption("Materias");
+			panel.setStyleName("user-test");
 			presenter.setDefaultContent();
 			return;
 		}
@@ -143,7 +145,11 @@ ItemClickListener, ClickListener {
 		this.careerName = careerName;
 		VerticalLayout subjectLayout = new VerticalLayout();
 		subjectLayout.setSizeFull();
-		subjectLayout.addComponent(new Label(subjectName));
+		Label titulo = new Label();
+		titulo.setStyleName("user-test");
+		titulo.setContentMode(ContentMode.HTML);
+		titulo.setValue("<b>" + subjectName + "</b>");
+		subjectLayout.addComponent(titulo);
 		mainLayout.addComponent(subjectLayout);
 		
 		// TODO: usar metodos para crear el contenido de cada pestaña

@@ -56,6 +56,7 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 		
 		panel = new Panel("Suscripciones");
 		panel.setSizeFull();
+		panel.setStyleName("user-test");
 		rightLayout.addComponent(panel);
 		rightLayout.setExpandRatio(panel, 1.0f);
 		

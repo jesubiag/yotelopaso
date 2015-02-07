@@ -51,6 +51,9 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		
 		panel = new Panel("Inicio");
 		panel.setSizeFull();
+		//panel.setStyleName("color1");
+		panel.setStyleName("user-test");
+		
 		rightLayout.addComponent(panel);
 		rightLayout.setExpandRatio(panel, 1.0f);
 		
