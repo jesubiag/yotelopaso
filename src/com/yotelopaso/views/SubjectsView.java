@@ -13,8 +13,9 @@ public interface SubjectsView extends AbstractHomeView {
 	public void buildSubjectLayout(String subjectName, String careerName);
 	public void showNewsEditorWindow(Long id);
 	public void showUploadFileWindow(Type fileType);
+	public void showUploadFileWindow(Long fileId);
 	public void toggleTreeRoot(String rootName);
-	public void showFileDetail(String authorName, String date, String name, String desc);
+	public void showFileDetail(Long fileId,String authorName, String date, String name, String desc);
 	public void addPicker(Type fileType);
 	
 	interface SubjectsViewListener extends AbstractHomeViewListener {
@@ -29,6 +30,7 @@ public interface SubjectsView extends AbstractHomeView {
 	public void addListener(SubjectsViewListener listener);
 	public void deleteNew(Long newsId);
 	public void selectTab(File.Type fileType);
+	public void deleteFile(Long newsId);
 	
 	
 

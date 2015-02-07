@@ -62,10 +62,30 @@ public class UploadFiles extends Window {
 		
 		buildMainLayout();
 		
+		fecha.setValue(new Date());
 		autor.setValue(manUser.getCurrentUser().getEmail());
 		setWidth("650px");	
 	}
 	
+	public UploadFiles(Long fileId, SubjectsView parentView) {
+		archivo = manFile.getById(fileId);
+		this.parentView = parentView;
+		subjectName = archivo.getSubject().getName();
+		fileType = archivo.getType();
+		carrera = archivo.getCareer();
+		materia = archivo.getSubject();
+		
+		buildMainLayout();
+		
+		nomArchivo.setValue(archivo.getName());
+		dirArchivo.setValue(archivo.getUrl());
+		if (archivo.getDescription() != null) {
+			descripcion.setValue(archivo.getDescription());
+		}
+		
+		autor.setValue(manUser.getCurrentUser().getEmail());
+		setWidth("650px");	
+	}
 	
 	public UploadFiles(String subjectName, File.Type fileType,	SubjectsView parentView, String pickerName, String pickerDir) {
 		this.parentView = parentView;
@@ -77,6 +97,7 @@ public class UploadFiles extends Window {
 		buildMainLayout();
 		nomArchivo.setValue(pickerName);
 		dirArchivo.setValue(pickerDir);
+		fecha.setValue(new Date());
 		
 		autor.setValue(manUser.getCurrentUser().getEmail());
 		setWidth("650px");	
@@ -97,7 +118,6 @@ public class UploadFiles extends Window {
 		 form.setSpacing(true);		 
 		 
 		 fecha = new DateField("Fecha de publicación");
-		 fecha.setValue(new Date());
 		 fecha.setEnabled(false);
 		 
 		 descripcion = new TextArea();

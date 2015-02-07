@@ -46,8 +46,9 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		String fileAuthor = (String) item.getItemProperty("Autor").getValue();
 		String fileDate = (String) item.getItemProperty("Fecha de creación").getValue();
 		String fileDesc = (String) item.getItemProperty("Descripción").getValue();
+		Long fileId = (Long) item.getItemProperty("ID").getValue();
 		Link l = (Link) item.getItemProperty("Nombre").getValue();
-		view.showFileDetail(fileAuthor, fileDate, l.getCaption(), fileDesc);
+		view.showFileDetail(fileId,fileAuthor, fileDate, l.getCaption(), fileDesc);
 	}
 	
 	@Override
@@ -65,6 +66,12 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 			// TODO: acá hay que delegar. Parte de deleteNew se hace acá y lo demás en la vista
 			view.deleteNew(newsId);
 			//newsService.delete(newsId);
+			break;
+		case "Editar ":
+			view.showUploadFileWindow(newsId);
+			break;
+		case "Eliminar ":
+			view.deleteFile(newsId);
 			break;
 		case "Subir Parciales":
 			view.showUploadFileWindow(Type.PARCIAL);

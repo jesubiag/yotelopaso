@@ -33,6 +33,7 @@ import com.yotelopaso.components.implementations.SubjectNewsImpl;
 import com.yotelopaso.components.implementations.SubjectsByYearImpl;
 import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.File.Type;
+import com.yotelopaso.persistence.FileManager;
 import com.yotelopaso.persistence.NewsManager;
 import com.yotelopaso.presenters.SubjectsPresenter;
 import com.yotelopaso.utils.Hr;
@@ -58,6 +59,7 @@ ItemClickListener, ClickListener {
 	private String subjectName;
 	private String careerName;
 	private SubjectsView view = this;
+	private FileManager fileService = new FileManager();
 	
 	@Override
 	public void enter(ViewChangeEvent event) {
@@ -219,7 +221,11 @@ ItemClickListener, ClickListener {
 	public void showUploadFileWindow(Type fileType) {
 		UploadFiles uploadWindow = new UploadFiles(subjectName,fileType, this);
 		addWindow(uploadWindow);
-		//Vaadintest01UI.getCurrent().addWindow(new UploadFiles(subjectName,fileType, this));
+	}
+	@Override
+	public void showUploadFileWindow(Long fileId) {
+		UploadFiles uploadWindow = new UploadFiles(fileId,this);
+		addWindow(uploadWindow);
 	}
 	
 	@Override
@@ -257,7 +263,7 @@ ItemClickListener, ClickListener {
 		// TODO: mejorar el siguiente bloque de codigo. Tal vez no convenga usar Hash sino listas
 		for (Map.Entry<String, VerticalLayout> entry : tabs.entrySet()) {
 			ft.addTab(entry.getValue(), entry.getKey());
-			FilesTableImpl aux = new FilesTableImpl(subjectName, this, entry.getKey(), careerName);
+			FilesTableImpl aux = new FilesTableImpl(subjectName,this, this, entry.getKey(), careerName);
 			aux.setSizeFull();
 			tables.put(entry.getKey(), aux);
 			Button cargarArchivos = new Button("Subir " + entry.getKey());
@@ -280,20 +286,20 @@ ItemClickListener, ClickListener {
 	}
 	
 	@Override
-	public void showFileDetail(String authorName, String date, String name, 
+	public void showFileDetail(Long fileId, String authorName, String date, String name, 
 			String desc) {
 		switch (currentTableData) {
 		case "Apuntes":
-			filesTableApuntes.buildFileDetailLayout(authorName, date, name, desc);
+			filesTableApuntes.buildFileDetailLayout(fileId,authorName, date, name, desc);
 			break;
 		case "Finales":
-			filesTableFinales.buildFileDetailLayout(authorName, date, name, desc);
+			filesTableFinales.buildFileDetailLayout(fileId,authorName, date, name, desc);
 			break;
 		case "Parciales":
-			filesTableParciales.buildFileDetailLayout(authorName, date, name, desc);
+			filesTableParciales.buildFileDetailLayout(fileId,authorName, date, name, desc);
 			break;
 		case "TPs":
-			filesTableTPs.buildFileDetailLayout(authorName, date, name, desc);
+			filesTableTPs.buildFileDetailLayout(fileId,authorName, date, name, desc);
 			break;
 		default:
 			break;
@@ -366,6 +372,14 @@ ItemClickListener, ClickListener {
 			break;
 		}
 		
+	}
+
+	@Override
+	public void deleteFile(Long fileId) {
+		File archivo = fileService.getById(fileId);
+		fileService.delete(fileId);
+		getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW + "/" + archivo.getSubject().getName());
+		selectTab(archivo.getType());
 	}
 }	
 
