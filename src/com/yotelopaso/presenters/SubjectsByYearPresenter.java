@@ -23,7 +23,7 @@ public class SubjectsByYearPresenter implements SubjectsByYear.SubjectsByYearLis
 		view.cleanComponents();
 		view.setTreeCaption(careerName);
 		List<Subject> filteredSubjects = service.filterByCareer(careerName);
-		//Elimino la materia asuntos Grales
+		//Agrego la materia asuntos Grales para que se muestre en todas las carreras
 		if (!careerName.contentEquals("Ingeniería en Sistemas"))
 			filteredSubjects.add(service.getById(1));
 		HashMap<Integer, String> treeElements = new HashMap<Integer, String>();

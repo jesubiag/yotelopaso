@@ -168,7 +168,7 @@ public class DataInitializer {
 		news.setTitle("Parcial Simulacion");
 		news.setContent("El parcial del miércoles 1/10 se pasa al viernes 3/10.");
 		news.setDate(new Date());
-		news.setSubject(subjectMngr.getById(31));
+		news.setSubject(subjectMngr.getById(33));
 		news.setAuthor(user1);
 		newsMngr.save(news);
 		
@@ -183,7 +183,7 @@ public class DataInitializer {
 	}
 	
 	private static void populateFilesTable() {
-		Subject s = subjectMngr.getById(32);
+		Subject s = subjectMngr.getById(33);
 		File file1 = new File("https://drive.google.com/file/d/0BwyBLzUTWd4vd21qTFE4S1hkczQ/view?usp=sharing",
 				user1,
 				"Doc test",

@@ -141,10 +141,10 @@ ItemClickListener, ClickListener {
 	}
 
 	@Override
-	public void buildSubjectLayout(String subjectName) {
+	public void buildSubjectLayout(String careerName, String subjectName) {
 		cleanComponents();
 		// TODO: sacar esto cuando mejore la implementación de la recarga de componente
-		//this.careerName = careerName;
+		this.careerName = careerName;
 		VerticalLayout subjectLayout = new VerticalLayout();
 		subjectLayout.setSizeFull();
 		Label titulo = new Label();
@@ -189,6 +189,8 @@ ItemClickListener, ClickListener {
 		
 		// Archivos
 		//TabSheet filesTypes = new TabSheet();
+		
+		
 		
 		buildFilesView(filesTypes, subjectName, careerName);
 		

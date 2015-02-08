@@ -21,7 +21,6 @@ implements SubscriptionsView.SubscriptionsViewListener {
 	private SubjectManager subjectService = new SubjectManager();
 	private User currentUser;
 	private Set<Subject> subscriptedSubjects;
-	private List<Subject> s0;
 	private List<Subject> s1;
 	private List<Subject> s2;
 	private List<Subject> s3;
@@ -80,6 +79,7 @@ implements SubscriptionsView.SubscriptionsViewListener {
 					newSubjects.add(subjectService.getById(j));
 				}
 			}
+			newSubjects.add(subjectService.getById(1));
 			userService.setCurrentUserSubjects(newSubjects);
 			view.showSuccesfullSaveNotification("Suscripciones guardadas correctamente");
 			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOME_VIEW);
