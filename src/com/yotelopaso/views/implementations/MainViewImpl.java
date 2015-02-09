@@ -121,7 +121,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		// Hacer algo
-		if (UserUtils.isLogged( (Double) VaadinSession.getCurrent().getAttribute("userId"))) {
+		if ( UserUtils.isLogged( (Double) VaadinSession.getCurrent().getAttribute("userId")) ) {
 			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOME_VIEW);
 		}
 	}

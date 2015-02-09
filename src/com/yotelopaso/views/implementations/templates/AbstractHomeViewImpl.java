@@ -23,7 +23,6 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.components.RegWindow;
-import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.AbstractHomeView;
 
@@ -142,8 +141,6 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
         settingsItem = settings.addItem("", new ExternalResource(
                 "http://i.imgur.com/6I4EhvN.jpg"), null);
         
-      	setCurrentUser( (User) VaadinSession.getCurrent().getAttribute("currentUser"));
-		
         settingsItem.setText("Bienvenido");
       	settingsItem.addItem("Editar Perfil", new Command() {
 			private static final long serialVersionUID = 8978144534249397207L;
