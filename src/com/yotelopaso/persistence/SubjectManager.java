@@ -35,7 +35,7 @@ public class SubjectManager extends DataManager<Subject> {
 	}
 	
 	public List<Subject> filterByCareer(final String careerName) {
-		return getByPropertyOrdered("career.name", careerName, "name", QueryOrder.DESCENDING);
+		return getByPropertyOrdered("career.name", careerName, "name", QueryOrder.ASCENDING);
 	}
 	
 	public JPAContainer<Subject> filterContainerByCareer(Integer careerId) {
