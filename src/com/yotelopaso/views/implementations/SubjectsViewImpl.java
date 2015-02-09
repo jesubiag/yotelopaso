@@ -381,7 +381,7 @@ ItemClickListener, ClickListener {
 	public void deleteFile(Long fileId) {
 		File archivo = fileService.getById(fileId);
 		fileService.delete(fileId);
-		getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW + "/" + archivo.getSubject().getName());
+		view.navigate(Vaadintest01UI.SUBJECTS_VIEW + "/" + archivo.getSubject().getName());
 		selectTab(archivo.getType());
 	}
 }	
