@@ -36,10 +36,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 	private Button buttonSubjects;
 	private Button buttonCalendar;
 	private UserManager userManager = new UserManager();
-	private MenuItem settingsItem;
 	private VerticalLayout menuContent = new VerticalLayout();
-	private MenuBar settings;
-    
 	
 	
 	public AbstractHomeViewImpl() {
@@ -147,9 +144,12 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		userLayout.setSpacing(false);
 		userLayout.addComponent(buildTitle("Yo te lo <b>paso</b>"));
 		
-		settings = new MenuBar();
+		MenuItem settingsItem;
+		
+		MenuBar settings = new MenuBar();
         settings.setHeight("70%");
         settings.addStyleName("user-menu");
+        settings.addStyleName("dashboard");
         settings.addStyleName("user-test");
         if (userManager.getCurrentUser().getPersonalinfo().getAvatar() == null)
         	settingsItem = settings.addItem("", new ExternalResource("http://i.imgur.com/6I4EhvN.jpg"), null);
