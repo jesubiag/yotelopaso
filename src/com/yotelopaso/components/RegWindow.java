@@ -6,9 +6,11 @@ import java.util.Locale;
 import java.util.Set;
 
 import com.vaadin.data.util.converter.StringToLongConverter;
+import com.vaadin.data.validator.BeanValidator;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.FormLayout;
@@ -18,7 +20,6 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.domain.Career;
@@ -64,11 +65,11 @@ public class RegWindow extends Window{
 		usuario = userManager.getCurrentUser();
 		firstLogin = false;
 		
-		buildMainLayout();			
+		buildMainLayout();
 		
 		userName.setValue(usuario.getName());
 		userLastName.setValue(usuario.getLastName());
-		taño.setValue(usuario.getYear());		
+		taño.setValue(usuario.getYear());
 		carr.setValue(usuario.getCareer().getId());
 		persInfo=usuario.getPersonalinfo();
 		
@@ -91,7 +92,7 @@ public class RegWindow extends Window{
 		
 		taño = new ComboBox("Año");
 		taño.addItems(1,2,3,4,5);
-		taño.setNullSelectionAllowed(false);		
+		taño.setNullSelectionAllowed(false);
 		taño.setTextInputAllowed(false);
 		taño.setRequired(true);
 		taño.setRequiredError("Obligatorio");
@@ -119,12 +120,13 @@ public class RegWindow extends Window{
 		};
 		tel.setConverter(convertidorPlano);
 		tel.setConversionError("Por favor ingrese un número de teléfono válido");
-		tel.setMaxLength(20);	
+		tel.setMaxLength(20);
 		tel.setValue(null);
 		tel.setNullRepresentation("");
 		
 		ciu = new TextField("Ciudad");
 		ciu.setSizeFull();
+		ciu.addValidator(new BeanValidator(PersonalInfo.class, "city"));
 		
 		
 		userName = new TextField("Nombre");
@@ -134,6 +136,7 @@ public class RegWindow extends Window{
 		userName.setRequired(true);
 		userName.setRequiredError("Obligatorio");
 		userName.setSizeFull();
+		userName.addValidator(new BeanValidator(User.class, "name"));
 		
 		userLastName = new TextField("Apellido");
 		userLastName.setMaxLength(35);
@@ -142,6 +145,7 @@ public class RegWindow extends Window{
 		userLastName.setRequired(true);
 		userLastName.setRequiredError("Obligatorio");
 		userLastName.setSizeFull();
+		userLastName.addValidator(new BeanValidator(User.class, "lastName"));
 		
 		form.addComponent(userName);
 		form.addComponent(userLastName);
@@ -157,7 +161,12 @@ public class RegWindow extends Window{
 		aceptar = new Button("Guardar", new Button.ClickListener() {
 			private static final long serialVersionUID = 1L;
 			public void buttonClick(ClickEvent event) {
-				if (carr.isValid() & taño.isValid() & tel.isValid() ) {
+				if (userName.isValid()
+						&& userLastName.isValid()
+						&& ciu.isValid()
+						&& carr.isValid()
+						&& taño.isValid()
+						&& tel.isValid() ) {
 					usuario.setName(userName.getValue());
 					usuario.setLastName(userLastName.getValue());
 					persInfo.setCity(ciu.getValue());
@@ -189,10 +198,10 @@ public class RegWindow extends Window{
 					close();
 					navigator.navigateTo(Vaadintest01UI.HOME_VIEW);	
 				}
-				else {	
+				else {
 					Notification.show("Revise los campos obligatorios\n",
-						"Los campos obligatorios son el nombre, apellido, la carrera y el año que está cursando", 
-						Notification.Type.WARNING_MESSAGE);	
+							"Los campos obligatorios son el nombre, apellido, la carrera y el año que está cursando", 
+							Notification.Type.WARNING_MESSAGE);
 				}
 			}
 		});

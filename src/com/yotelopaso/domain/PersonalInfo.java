@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.vaadin.ui.Image;
+import com.yotelopaso.persistence.constraints.OnlyLettersOrDash;
 
 @Entity
 public class PersonalInfo implements Serializable {
@@ -17,6 +18,7 @@ public class PersonalInfo implements Serializable {
 	@GeneratedValue
 	private Long idUsuario;
 	
+	@OnlyLettersOrDash
 	private String city;
 	
 	private Long phone;

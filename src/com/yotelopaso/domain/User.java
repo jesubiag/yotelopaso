@@ -15,6 +15,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.yotelopaso.persistence.constraints.OnlyLetters;
+
 @Entity
 public class User implements Serializable {
 	
@@ -23,8 +25,10 @@ public class User implements Serializable {
 	@Id
 	private Double id;
 	
+	@OnlyLetters
 	private String name;
 	
+	@OnlyLetters
 	private String lastName;
 	
 	@NotNull
@@ -41,7 +45,7 @@ public class User implements Serializable {
 	private Date birthday;
 	
 	@OneToOne
-	PersonalInfo personalinfo;
+	private PersonalInfo personalinfo;
 	
 	@ManyToMany
 	private Set<UserCalendarEvent> userEvents = new HashSet<UserCalendarEvent>();
@@ -121,20 +125,6 @@ public class User implements Serializable {
 	}
 	public void setCareer(Career career) {
 		this.career = career;
-	}
-	public Set<UserCalendarEvent> getUserEvents() {
-		return userEvents;
-	}
-	public void setUserEvents(Set<UserCalendarEvent> userEvents) {
-		this.userEvents = userEvents;
-	}
-	
-	public void addUserEvent(UserCalendarEvent event) {
-		userEvents.add(event);
-	}
-	
-	public void removeUserEvent(UserCalendarEvent event) {
-		userEvents.remove(event);
 	}
 	
 	@Override
