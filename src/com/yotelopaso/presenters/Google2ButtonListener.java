@@ -15,6 +15,7 @@ import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.components.RegWindow;
+import com.yotelopaso.domain.PersonalInfo;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.utils.Google2ApiInfo;
@@ -27,7 +28,11 @@ public class Google2ButtonListener implements OAuthListener {
 	
 	Navigator navigator = UI.getCurrent().getNavigator();
 	
-	private static final String REQ_URL = "https://www.googleapis.com/drive/v2/about?fields=permissionId,name,user/emailAddress";
+	private static final String REQ_URL = "https://www.googleapis.com/drive/v2/about?fields="
+			+ "permissionId,"
+			+ "name,"
+			+ "user/emailAddress,"
+			+ "user/picture/url";
 	//private static String REQ_URL = "https://www.googleapis.com/plus/v1/people/me?key=";
 	
 	//private static final String exampleGetRequest = "https://www.googleapis.com/drive/v2/about?key=";
@@ -74,9 +79,12 @@ public class Google2ButtonListener implements OAuthListener {
 				email = jsonGoogle.getJSONObject("user").getString("emailAddress");
 				// persistir los datos nuevos en la base de datos
 				User newUser = new User();
+				PersonalInfo pi = new PersonalInfo();
+				pi.setAvatar(jsonGoogle.getJSONObject("user").getJSONObject("picture").getString("url"));
 				newUser.setId(userId);
 				newUser.setName(name);
 				newUser.setEmail(email);
+				newUser.setPersonalinfo(pi);
 				VaadinSession.getCurrent().setAttribute("currentUser", newUser);
 				RegWindow regWindow = new RegWindow(newUser);
 				UI.getCurrent().addWindow(regWindow);
