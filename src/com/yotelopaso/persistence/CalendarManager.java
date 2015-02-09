@@ -26,21 +26,11 @@ public class CalendarManager extends DataManager<UserCalendarEvent>{
 		String c = event.getEventType().getColor();
 		event.setStyleName(c);
 		if (event.getCareer() == null) event.setCareer(userManager.getCurrentUser().getCareer());
-		Long id = (Long) super.save(event);
-		if ( event.getId() == null ) {
-			event.setId(id);
-			userManager.addUserEvent(event);
-		}
-		return id;
+		return (Long) super.save(event);
 	}
 	
 	public void delete(UserCalendarEvent event) {
 		super.delete(event.getId());
-		userManager.removeUserEvent(event);
-	}
-	
-	public Set<UserCalendarEvent> getCurrentUserEvents() {
-		return userManager.getCurrentUserEvents();
 	}
 	
 	public JPAContainer<UserCalendarEvent> getEventsFromSubscription(Set<Subject> subjects, 

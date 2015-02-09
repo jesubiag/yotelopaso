@@ -2,6 +2,7 @@ package com.yotelopaso.components.implementations;
 
 import java.util.Date;
 
+import com.vaadin.data.Validator;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.data.util.BeanContainer;
@@ -101,6 +102,9 @@ public class EventWindowImpl extends Window implements EventWindow {
 		startDate = new DateField("Fecha de inicio");
 		startDate.setResolution(RESOLUTION);
 		startDate.setWidth("100%");
+		startDate.setValidationVisible(false);
+		startDate.setRequired(true);
+		startDate.addValidator(new DateValidator());
 		endDate = new DateField("Fecha de fin");
 		endDate.setResolution(RESOLUTION);
 		endDate.setWidth("100%");
@@ -181,7 +185,7 @@ public class EventWindowImpl extends Window implements EventWindow {
 	}
 	
 	public boolean requiredFieldsAreValid() {
-		if ( subject.isValid() && type.isValid() ) {
+		if ( startDate.isValid() && subject.isValid() && type.isValid() ) {
 			try {
 				commitChanges();
 			} catch (CommitException e) {
@@ -189,6 +193,7 @@ public class EventWindowImpl extends Window implements EventWindow {
 			}
 			return true;
 		} else {
+			startDate.setValidationVisible(true);
 			subject.setValidationVisible(true);
 			type.setValidationVisible(true);
 			return false;
@@ -201,6 +206,20 @@ public class EventWindowImpl extends Window implements EventWindow {
 	
 	private void commitChanges() throws CommitException {
 		binder.commit();
+	}
+	
+	private class DateValidator implements Validator {
+		
+		private static final long serialVersionUID = 1915478301599202350L;
+
+		@Override
+		public void validate(Object value) throws InvalidValueException {
+			Date start = (Date) value;
+			Date end = endDate.getValue();
+			if (!start.before(end)) 
+				throw new InvalidValueException("La fecha de inicio debe ser menor a la de fin");
+		}
+		
 	}
 	
 }
