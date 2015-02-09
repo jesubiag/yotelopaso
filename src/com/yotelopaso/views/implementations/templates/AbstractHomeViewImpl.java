@@ -151,7 +151,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 			@Override
             public void menuSelected(final MenuItem selectedItem) {
                 //ProfilePreferencesWindow.open(user, false);
-            	navigate(Vaadintest01UI.HOME_VIEW);
+            	//navigate(Vaadintest01UI.HOME_VIEW);
             	RegWindow regWindow = new RegWindow();
             	addWindow(regWindow);
             }
