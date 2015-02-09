@@ -13,6 +13,13 @@ public class SubjectManager extends DataManager<Subject> {
 		super(Subject.class);
 		container.sort(new String[] {"name"}, new boolean[] {true});
 	}
+	/*
+	 * Devuelve la materia "Asuntos Generales" a la que cualquier 
+	 * usuario siempre está suscripto
+	 */
+	public Subject getDefaultSubject() {
+		return getById(2000);
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Subject> filterByCareerAndYear(final String careerName, final int year) {

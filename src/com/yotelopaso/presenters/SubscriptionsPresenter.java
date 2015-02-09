@@ -78,7 +78,7 @@ implements SubscriptionsView.SubscriptionsViewListener {
 					newSubjects.add(subjectService.getById(j));
 				}
 			}
-			newSubjects.add(subjectService.getById(1));
+			newSubjects.add(subjectService.getDefaultSubject());
 			userService.setCurrentUserSubjects(newSubjects);
 			view.showSuccesfullSaveNotification("Suscripciones guardadas correctamente");
 			view.navigate(Vaadintest01UI.HOME_VIEW);

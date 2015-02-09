@@ -13,6 +13,7 @@ public class OnlyLettersOrDashValidator implements ConstraintValidator<OnlyLette
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
+		if (value == null) return true;
 		char[] chars = value.toCharArray();
 		int length = chars.length;
 		for (int i=0; i < length; i++) {

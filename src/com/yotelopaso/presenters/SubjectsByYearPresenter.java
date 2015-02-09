@@ -25,7 +25,7 @@ public class SubjectsByYearPresenter implements SubjectsByYear.SubjectsByYearLis
 		List<Subject> filteredSubjects = service.filterByCareer(careerName);
 		//Agrego la materia asuntos Grales para que se muestre en todas las carreras
 		if (!careerName.contentEquals("Ingeniería en Sistemas"))
-			filteredSubjects.add(service.getById(1));
+			filteredSubjects.add(service.getDefaultSubject());
 		HashMap<Integer, String> treeElements = new HashMap<Integer, String>();
 		for (int i=1; i<6; i++) {
 			treeElements.put(i, "Materias de " + i + "º Año");

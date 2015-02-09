@@ -22,6 +22,10 @@ public class UserManager extends DataManager<User> {
 		}
 	}
 	
+	public void logInUser(Double userId) {
+		VaadinSession.getCurrent().setAttribute("userId", userId);
+	}
+	
 	public User getCurrentUser() {
 		return (User) VaadinSession.getCurrent().getAttribute("currentUser");
 	}

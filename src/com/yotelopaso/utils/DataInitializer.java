@@ -5,6 +5,7 @@ import java.util.Date;
 import com.yotelopaso.domain.Career;
 import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.News;
+import com.yotelopaso.domain.PersonalInfo;
 import com.yotelopaso.domain.Subject;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.CareerManager;
@@ -58,6 +59,7 @@ public class DataInitializer {
 		user1.setEmail("jesu772@gmail.com");
 		user1.setCareer(careerMngr.getById(1));
 		user1.setYear(4);
+		user1.setPersonalinfo(new PersonalInfo());
 		
 		userMngr.save(user1);
 		
@@ -67,7 +69,7 @@ public class DataInitializer {
 		Subject sub = new Subject();
 		sub.setCareer(careerMngr.getById(1));
 		sub.setName("Asuntos Generales");
-		sub.setId(0);
+		sub.setId(2000);
 		sub.setYear(6);
 		subjectMngr.save(sub);
 		
@@ -177,7 +179,7 @@ public class DataInitializer {
 		news.setTitle("Horario de cierre de la facultad");
 		news.setContent("La facultad permanecera cerrada hasta las 21hs hasta la primer semana de finales.");
 		news.setDate(new Date());
-		news.setSubject(subjectMngr.getById(1));
+		news.setSubject(subjectMngr.getDefaultSubject());
 		news.setAuthor(user1);
 		newsMngr.save(news);
 	}

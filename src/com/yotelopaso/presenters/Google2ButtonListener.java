@@ -58,19 +58,38 @@ public class Google2ButtonListener implements OAuthListener {
 		// Extraigo los datos del JSON enviado por Google
 		JSONObject jsonGoogle = null;
 		Double userId = null;
+		JSONObject jsonUser = null;
 		try {
 			jsonGoogle = new JSONObject(resp.getBody());
 			userId = jsonGoogle.getDouble("permissionId");
+			jsonUser = jsonGoogle.getJSONObject("user");
 		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		JSONObject jsonPicture = null;
+		String profileImage = null;
+		try {
+			jsonPicture = jsonUser.getJSONObject("picture");
+			if (jsonPicture != null ) {
+				profileImage = jsonPicture.getString("url");
+			}
+		} catch (JSONException e2) {
+			e2.printStackTrace();
+		}
 		if (userManager.isRegistered(userId)) {
-			VaadinSession.getCurrent().setAttribute("userId", userId);
+			userManager.logInUser(userId);
 			User currentUser = userManager.getById(userId);
-			//userManager.setCurrentUser(currentUser);
-			VaadinSession.getCurrent().setAttribute("currentUser", currentUser);
+			if ( profileImage != null) {
+				if ( currentUser.getPersonalinfo().getAvatar() != profileImage ) {
+					currentUser.getPersonalinfo().setAvatar(profileImage);
+					userManager.save(currentUser);
+				}
+			}
+			userManager.setCurrentUser(currentUser);
+			//VaadinSession.getCurrent().setAttribute("currentUser", currentUser);
 			navigator.navigateTo(Vaadintest01UI.HOME_VIEW);
+			
+			
 		} else {
 			String name = null;
 			String email = null;
@@ -80,10 +99,10 @@ public class Google2ButtonListener implements OAuthListener {
 				// persistir los datos nuevos en la base de datos
 				User newUser = new User();
 				PersonalInfo pi = new PersonalInfo();
-				pi.setAvatar(jsonGoogle.getJSONObject("user").getJSONObject("picture").getString("url"));
 				newUser.setId(userId);
 				newUser.setName(name);
 				newUser.setEmail(email);
+				pi.setAvatar(profileImage);
 				newUser.setPersonalinfo(pi);
 				VaadinSession.getCurrent().setAttribute("currentUser", newUser);
 				RegWindow regWindow = new RegWindow(newUser);

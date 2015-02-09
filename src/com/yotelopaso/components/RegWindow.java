@@ -55,7 +55,7 @@ public class RegWindow extends Window{
 	//Constructor para primer Login
 	public RegWindow(User user){
 		this.usuario = user;
-		persInfo = new PersonalInfo();
+		persInfo = userManager.getCurrentUser().getPersonalinfo();
 		firstLogin = true;
 		buildMainLayout();	
 	}
@@ -175,12 +175,12 @@ public class RegWindow extends Window{
 					Career c = carrManager.getById( (Integer) carr.getValue());
 					if (firstLogin){
 						userManager.setNewUserDefaultSubjects(usuario,c.getName(),y);
-						usuario.addSubject(subManager.getById(1));
+						usuario.addSubject(subManager.getDefaultSubject());
 					} else {
 						if (usuario.getCareer().getId() != carr.getValue() || usuario.getYear() != y){
 							Set <Subject> suscribedSubjects = new HashSet<Subject>();
 							suscribedSubjects.addAll(subManager.filterByCareerAndYear(c.getName(), y));
-							suscribedSubjects.add(subManager.getById(1));
+							suscribedSubjects.add(subManager.getDefaultSubject());
 							usuario.setSubscriptedSubjects(suscribedSubjects);
 						}
 					}
@@ -194,6 +194,7 @@ public class RegWindow extends Window{
 					usuario.setEmail(userManager.getCurrentUser().getEmail());
 					userManager.save(usuario);
 					userManager.setCurrentUser(usuario);
+					userManager.logInUser(usuario.getId());
 					//if (firstLogin)
 					close();
 					navigator.navigateTo(Vaadintest01UI.HOME_VIEW);	
