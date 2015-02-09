@@ -37,6 +37,9 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 	private Button buttonCalendar;
 	private UserManager userManager = new UserManager();
 	private MenuItem settingsItem;
+	private VerticalLayout menuContent = new VerticalLayout();
+	private MenuBar settings;
+    
 	
 	
 	public AbstractHomeViewImpl() {
@@ -56,22 +59,34 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		menu.setId("menu-panel");
 		menu.setHeight("100%");
 		menu.setWidth("182px");
+			
+		menu.setContent(menuContent);
 		
+		menuContent.addComponent(buildMenuButtons());
+		
+		hLayout.addComponent(menu);		
+		hLayout.addComponent(rightLayout);
+		
+		addComponent(hLayout);
+		setExpandRatio(hLayout, 1.0f);
+		hLayout.setExpandRatio(rightLayout, 1.0f);
+		
+	}
+	
+	private Component buildMenuButtons() {
 		String[] buttonCaptions = new String[] {"Inicio", "Materias", "Mi Calendario", 
-				"Suscripciones"};
+		"Suscripciones"};
 		String[] buttonIds = new String[] {"buttonHome", "buttonSubjects", "buttonCalendar", 
 				"buttonSubscriptions"};
 		FontAwesome[] buttonIcons = new FontAwesome[] {FontAwesome.HOME, FontAwesome.BOOK, 
 				FontAwesome.CALENDAR, FontAwesome.RSS};
 		String buttonStyles = ValoTheme.BUTTON_LINK + " " + ValoTheme.BUTTON_ICON_ALIGN_TOP + " " + "panelLink";
 		
+		VerticalLayout menuButtons = new VerticalLayout();
+		
 		buttonHome = new Button();
 		buttonSubjects = new Button();
 		buttonCalendar = new Button();
-		
-		VerticalLayout menuContent = new VerticalLayout();
-		menuContent.addComponent(buildTitle("Yo te lo <b>paso</b>"));
-		menuContent.addComponent(buildUserMenu());
 		
 		Button[] panelButtons = new Button[] {buttonHome, buttonSubjects, buttonCalendar};
 		
@@ -82,25 +97,16 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 			panelButtons[i].setWidth("100%");
 			panelButtons[i].setIcon(buttonIcons[i]);
 			panelButtons[i].addClickListener(this);
-			menuContent.addComponent(panelButtons[i]);
+			menuButtons.addComponent(panelButtons[i]);
 		}
 		
-		menuContent.setWidth("100%");
-		menuContent.setMargin(false);
-		menuContent.setSpacing(false);
+		menuButtons.setWidth("100%");
+		menuButtons.setMargin(false);
+		menuButtons.setSpacing(false);
 		//menuContent.setStyleName(ValoTheme.lay)
-		
-		menu.setContent(menuContent);
-		hLayout.addComponent(menu);
-		
-		hLayout.addComponent(rightLayout);
-		
-		addComponent(hLayout);
-		setExpandRatio(hLayout, 1.0f);
-		hLayout.setExpandRatio(rightLayout, 1.0f);
-		
+		return menuButtons;
 	}
-	
+
 	List<AbstractHomeViewListener> listeners = new ArrayList<AbstractHomeViewListener>();
 	
 	public void addListener(AbstractHomeViewListener listener) {
@@ -117,7 +123,10 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 	@Override
 	public void enter(ViewChangeEvent event) {
 		super.enter(event);
-		settingsItem.setText(userManager.getCurrentUser().getName() + " " + userManager.getCurrentUser().getLastName());
+		menuContent.removeAllComponents();	
+		menuContent.addComponent(buildUserMenu());
+		menuContent.addComponent(buildMenuButtons());
+		
 		rightLayout.removeAllComponents();
 	}
 
@@ -134,15 +143,19 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
     }
 	
 	private Component buildUserMenu() {
-        final MenuBar settings = new MenuBar();
+		VerticalLayout userLayout = new VerticalLayout();
+		userLayout.setSpacing(false);
+		userLayout.addComponent(buildTitle("Yo te lo <b>paso</b>"));
+		
+		settings = new MenuBar();
         settings.setHeight("70%");
         settings.addStyleName("user-menu");
         settings.addStyleName("user-test");
-        settingsItem = settings.addItem("", new ExternalResource(
-                "http://i.imgur.com/6I4EhvN.jpg"), null);
-        
-        settingsItem.setText("Bienvenido");
-      	settingsItem.addItem("Editar Perfil", new Command() {
+        if (userManager.getCurrentUser().getPersonalinfo().getAvatar() == null)
+        	settingsItem = settings.addItem("", new ExternalResource("http://i.imgur.com/6I4EhvN.jpg"), null);
+        else
+        	settingsItem = settings.addItem("", new ExternalResource(userManager.getCurrentUser().getPersonalinfo().getAvatar()), null);
+        settingsItem.addItem("Editar Perfil", new Command() {
 			private static final long serialVersionUID = 8978144534249397207L;
 
 			@Override
@@ -153,6 +166,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
             	addWindow(regWindow);
             }
         });
+        settingsItem.setText(userManager.getCurrentUser().getName() + " " + userManager.getCurrentUser().getLastName());
         settingsItem.addItem("Mis Suscripciones", new Command() {
 			private static final long serialVersionUID = -4042646371962008523L;
 
@@ -175,7 +189,9 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
             	//DashboardEventBus.post(new UserLoggedOutEvent());
             }
         });
-        return settings;
+        
+        userLayout.addComponent(settings);
+        return userLayout;
     }
 
 }

@@ -56,7 +56,7 @@ public class FilesVisualizer extends Window {
 			
 		Label nombre = new Label();
 		nombre.setContentMode(ContentMode.HTML);
-		nombre.setValue("Archivo: " + "<a href="+"'" + url+ "' "+"target='_blank'>" + fileName + "</a>");
+		nombre.setValue("<b>Archivo:</b> " + "<a href="+"'" + url+ "' "+"target='_blank'>" + fileName + "</a>");
 		nombre.setWidth("100%");
 		
 		Panel panel = new Panel();
