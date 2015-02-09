@@ -58,6 +58,7 @@ public class FileManager extends DataManager<File> {
 		Filter[] filters = filterList.toArray(new Filter[filterList.size()]);
 		Filter filter = new Or(filters);
 		container.addContainerFilter(filter);
+		container.sort(new Object[] {"creationDate"}, new boolean[] {false});
 		return container;
 	}
 

@@ -18,6 +18,30 @@ import com.vaadin.data.util.filter.Compare;
  */
 public class DataManager<T> {
 	
+	public enum QueryOrder {
+		ASCENDING("ASC"),
+		DESCENDING("DESC");
+		
+		private String order;
+		
+		private QueryOrder(String order) {
+			this.order = order;
+		}
+		
+		@Override
+		public String toString() {
+			return order;
+		}
+		
+		public String getOrder() {
+			return order;
+		}
+		
+		public void setOrder(String order) {
+			this.order = order;
+		}
+	}
+	
 	public static final String PERSISTENCE_UNIT = "vaadintest";
 	protected Class<T> clazz;
 	protected String tableName;
@@ -54,6 +78,18 @@ public class DataManager<T> {
 		String jpql = "SELECT e FROM " + tableName 
 				+ " e WHERE e." + entityProperty 
 				+ "= :property";
+		Query query = em.createQuery(jpql);
+		query.setParameter("property", property);
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <TP> List<T> getByPropertyOrdered(String entityProperty, TP property, 
+			String orderingProperty, QueryOrder order) {
+		String jpql = "SELECT e FROM " + tableName 
+				+ " e WHERE e." + entityProperty 
+				+ "= :property "
+				+ "ORDER BY e." + orderingProperty + " " + order;
 		Query query = em.createQuery(jpql);
 		query.setParameter("property", property);
 		return query.getResultList();
