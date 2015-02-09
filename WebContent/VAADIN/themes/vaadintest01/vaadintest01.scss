@@ -26,6 +26,9 @@
 
 // For more information, see: https://vaadin.com/book/-/page/themes.valo.html
 // Example variants can be copy/pasted from https://vaadin.com/wiki/-/wiki/Main/Valo+Examples
+$buttonHome-color: #B0D6F2 ;
+$buttonSubjects-color: #B0D6F2 ;
+$buttonCalendar-color: #B0D6F2 ;
 
 @import "../valo/valo.scss";
 
@@ -121,17 +124,30 @@
 	}
 	
 	#buttonHome {
-		border-left-color: yellow;
+		border-left-color: transparent;
 		/*a:hover {
 		}*/
 	}
 	
+	#buttonHome:hover {
+		border-left-color: $buttonHome-color;
+		color: $buttonHome-color;
+	}
+	
 	#buttonSubjects {
-		border-left-color: blue;
+		border-left-color: transparent;
+	}
+	#buttonSubjects:hover {
+		border-left-color: $buttonSubjects-color;
+		color: $buttonSubjects-color;
 	}
 	
 	#buttonCalendar {
-		border-left-color: green;
+		border-left-color: transparent;
+	}
+	#buttonCalendar:hover {
+		border-left-color: $buttonCalendar-color;
+		color: $buttonCalendar-color;
 	}
 	
 	#buttonActivity {
