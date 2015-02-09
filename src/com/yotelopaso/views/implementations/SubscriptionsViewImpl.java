@@ -16,7 +16,6 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.domain.Subject;
-import com.yotelopaso.persistence.SubjectManager;
 import com.yotelopaso.presenters.SubscriptionsPresenter;
 import com.yotelopaso.views.SubscriptionsView;
 import com.yotelopaso.views.implementations.templates.AbstractHomeViewImpl;
@@ -136,7 +135,7 @@ public class SubscriptionsViewImpl extends AbstractHomeViewImpl implements Subsc
 
 	@Override
 	public void selectSubjects(Integer year, Integer id) {
-		if (id!=1)
+		if (id!=2000)
 			ogs[year-1].select(id);
 	}
 	
