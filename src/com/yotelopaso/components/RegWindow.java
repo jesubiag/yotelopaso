@@ -157,7 +157,7 @@ public class RegWindow extends Window{
 		aceptar = new Button("Guardar", new Button.ClickListener() {
 			private static final long serialVersionUID = 1L;
 			public void buttonClick(ClickEvent event) {
-				if (carr.isValid() & taño.isValid()) {
+				if (carr.isValid() & taño.isValid() & tel.isValid() ) {
 					usuario.setName(userName.getValue());
 					usuario.setLastName(userLastName.getValue());
 					persInfo.setCity(ciu.getValue());
