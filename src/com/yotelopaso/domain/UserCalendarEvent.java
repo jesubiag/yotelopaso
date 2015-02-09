@@ -2,16 +2,13 @@ package com.yotelopaso.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -71,7 +68,7 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 	@GeneratedValue
 	private Long id;
 	private Double authorId;
-	@Min(1)
+	@Min(value=1, message="Por favor seleccione una materia")
 	private Integer subjectId;
 	@ManyToOne
 	private Career career;
@@ -83,9 +80,7 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 	private Date end;
 	private String styleName;
 	private boolean isAllDay;
-	@ManyToMany(mappedBy="userEvents")
-	private Set<User> suscriptors = new HashSet<User>();
-	@Enumerated(EnumType.ORDINAL) @NotEmpty
+	@Enumerated(EnumType.ORDINAL) @NotEmpty(message="Por favor seleccione un tipo de evento")
 	private CalendarEventType eventType;
 	private boolean publicEvent = false;
 	@Transient
@@ -128,15 +123,6 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 
 	public void setSubjectId(Integer subjectId) {
 		this.subjectId = subjectId;
-		fireEventChange();
-	}
-
-	public Set<User> getSuscriptors() {
-		return suscriptors;
-	}
-
-	public void setSuscriptors(Set<User> suscriptors) {
-		this.suscriptors = suscriptors;
 		fireEventChange();
 	}
 
@@ -231,16 +217,6 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 		}
 	}
 	
-	public void addSuscriptor(User suscriptor) {
-		suscriptors.add(suscriptor);
-		fireEventChange();
-	}
-	
-	public void removeSuscriptor(User suscriptor) {
-		suscriptors.remove(suscriptor);
-		fireEventChange();
-	}
-
 	public CalendarEventType getEventType() {
 		return eventType;
 	}
