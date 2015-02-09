@@ -3,13 +3,9 @@ package com.yotelopaso.views.implementations.templates;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
@@ -23,14 +19,12 @@ import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import com.yotelopaso.Vaadintest01UI;
 import com.yotelopaso.components.RegWindow;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.UserManager;
-import com.yotelopaso.utils.UserUtils;
 import com.yotelopaso.views.AbstractHomeView;
 
 
@@ -77,7 +71,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		buttonCalendar = new Button();
 		
 		VerticalLayout menuContent = new VerticalLayout();
-		menuContent.addComponent(buildTitle("Yo Te Lo <b>Paso</b>"));
+		menuContent.addComponent(buildTitle("Yo te lo <b>paso</b>"));
 		menuContent.addComponent(buildUserMenu());
 		
 		Button[] panelButtons = new Button[] {buttonHome, buttonSubjects, buttonCalendar};
@@ -152,7 +146,9 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 		
         settingsItem.setText("Bienvenido");
       	settingsItem.addItem("Editar Perfil", new Command() {
-            @Override
+			private static final long serialVersionUID = 8978144534249397207L;
+
+			@Override
             public void menuSelected(final MenuItem selectedItem) {
                 //ProfilePreferencesWindow.open(user, false);
             	navigate(Vaadintest01UI.HOME_VIEW);
@@ -161,15 +157,19 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
             }
         });
         settingsItem.addItem("Mis Suscripciones", new Command() {
-            @Override
+			private static final long serialVersionUID = -4042646371962008523L;
+
+			@Override
             public void menuSelected(final MenuItem selectedItem) {
-                UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.SUBSCRIPTIONS_VIEW);
+                navigate(Vaadintest01UI.SUBSCRIPTIONS_VIEW);
             	//ProfilePreferencesWindow.open(user, true);
             }
         });
         settingsItem.addSeparator();
         settingsItem.addItem("Cerrar Sesión", new Command() {
-            @Override
+			private static final long serialVersionUID = -1625825067103196986L;
+
+			@Override
             //LOGOUT
             public void menuSelected(final MenuItem selectedItem) {
             	VaadinSession.getCurrent().setAttribute("userId", null);
