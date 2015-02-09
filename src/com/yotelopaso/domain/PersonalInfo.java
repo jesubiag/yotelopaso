@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import com.vaadin.ui.Image;
 import com.yotelopaso.persistence.constraints.OnlyLettersOrDash;
 
 @Entity
@@ -23,7 +22,7 @@ public class PersonalInfo implements Serializable {
 	
 	private Long phone;
 	
-	private Image avatar;
+	private String avatar;
 	
 	public PersonalInfo() {}
 
@@ -33,7 +32,7 @@ public class PersonalInfo implements Serializable {
 	 * @param phone
 	 * @param avatar
 	 */
-	public PersonalInfo(Long idUsuario, String city, Long phone, Image avatar) {
+	public PersonalInfo(Long idUsuario, String city, Long phone, String avatar) {
 		this.idUsuario = idUsuario;
 		this.city = city;
 		this.phone = phone;
@@ -64,11 +63,11 @@ public class PersonalInfo implements Serializable {
 		this.phone = phone;
 	}
 
-	public Image getAvatar() {
+	public String getAvatar() {
 		return avatar;
 	}
 
-	public void setAvatar(Image avatar) {
+	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
 
