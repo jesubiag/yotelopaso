@@ -12,7 +12,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.components.Google2Button;
 import com.yotelopaso.utils.Google2ApiInfo;
 import com.yotelopaso.utils.UserUtils;
@@ -122,7 +122,7 @@ public class MainViewImpl extends VerticalLayout implements MainView {
 	public void enter(ViewChangeEvent event) {
 		// Hacer algo
 		if ( UserUtils.isLogged( (Double) VaadinSession.getCurrent().getAttribute("userId")) ) {
-			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.HOME_VIEW);
+			UI.getCurrent().getNavigator().navigateTo(YotelopasoUI.HOME_VIEW);
 		}
 	}
 

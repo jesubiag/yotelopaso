@@ -13,7 +13,7 @@ import org.vaadin.addon.oauthpopup.OAuthListener;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.UI;
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.components.RegWindow;
 import com.yotelopaso.domain.PersonalInfo;
 import com.yotelopaso.domain.User;
@@ -87,7 +87,7 @@ public class Google2ButtonListener implements OAuthListener {
 			}
 			userManager.setCurrentUser(currentUser);
 			//VaadinSession.getCurrent().setAttribute("currentUser", currentUser);
-			navigator.navigateTo(Vaadintest01UI.HOME_VIEW);
+			navigator.navigateTo(YotelopasoUI.HOME_VIEW);
 			
 			
 		} else {

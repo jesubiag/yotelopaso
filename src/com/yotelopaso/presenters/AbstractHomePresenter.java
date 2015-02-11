@@ -1,7 +1,7 @@
 package com.yotelopaso.presenters;
 
 import com.vaadin.server.VaadinSession;
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.views.AbstractHomeView;
 
 public class AbstractHomePresenter<T extends AbstractHomeView> implements AbstractHomeView.AbstractHomeViewListener {
@@ -18,22 +18,22 @@ public class AbstractHomePresenter<T extends AbstractHomeView> implements Abstra
 	public void panelButtonClick(String caption) {
 		switch (caption) {
 		case "Inicio":
-			view.navigate(Vaadintest01UI.HOME_VIEW);
+			view.navigate(YotelopasoUI.HOME_VIEW);
 			break;
 		case "Materias":
-			view.navigate(Vaadintest01UI.SUBJECTS_VIEW);
+			view.navigate(YotelopasoUI.SUBJECTS_VIEW);
 			break;
 		case "Mi Calendario":
-			view.navigate(Vaadintest01UI.CALENDAR_VIEW);
+			view.navigate(YotelopasoUI.CALENDAR_VIEW);
 			break;
 		case "Suscripciones":
-			view.navigate(Vaadintest01UI.SUBSCRIPTIONS_VIEW);
+			view.navigate(YotelopasoUI.SUBSCRIPTIONS_VIEW);
 			break;
 		case "Logout":
 			//logout
 			VaadinSession.getCurrent().setAttribute("userId", null);
 			VaadinSession.getCurrent().setAttribute("currentUser", null);
-			view.navigate(Vaadintest01UI.MAIN_VIEW);
+			view.navigate(YotelopasoUI.MAIN_VIEW);
 			break;
 		}
 	}

@@ -21,7 +21,7 @@ import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.components.RegWindow;
 import com.yotelopaso.persistence.UserManager;
 import com.yotelopaso.views.AbstractHomeView;
@@ -172,7 +172,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
 
 			@Override
             public void menuSelected(final MenuItem selectedItem) {
-                navigate(Vaadintest01UI.SUBSCRIPTIONS_VIEW);
+                navigate(YotelopasoUI.SUBSCRIPTIONS_VIEW);
             	//ProfilePreferencesWindow.open(user, true);
             }
         });
@@ -185,7 +185,7 @@ abstract public class AbstractHomeViewImpl extends AuthViewImpl implements Abstr
             public void menuSelected(final MenuItem selectedItem) {
             	VaadinSession.getCurrent().setAttribute("userId", null);
     			VaadinSession.getCurrent().setAttribute("currentUser", null);
-    			navigate(Vaadintest01UI.MAIN_VIEW);
+    			navigate(YotelopasoUI.MAIN_VIEW);
             	//DashboardEventBus.post(new UserLoggedOutEvent());
             }
         });

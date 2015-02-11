@@ -25,7 +25,7 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.Tree;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.components.Editor;
 import com.yotelopaso.components.UploadFiles;
 import com.yotelopaso.components.implementations.FilesTableImpl;
@@ -218,7 +218,7 @@ ItemClickListener, ClickListener {
 		editor.setModal(true);
 		editor.setResizable(false);
 		editor.setWidth("650px");
-		Vaadintest01UI.getCurrent().addWindow(editor);
+		YotelopasoUI.getCurrent().addWindow(editor);
 	}
 	@Override
 	public void showUploadFileWindow(Type fileType) {
@@ -323,7 +323,7 @@ ItemClickListener, ClickListener {
 		NewsManager newsService = new NewsManager();
 		String materia=newsService.getById(newsId).getSubject().getName();
 		newsService.delete((Long)newsId);
-		getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW + "/" + materia);
+		getUI().getNavigator().navigateTo(YotelopasoUI.SUBJECTS_VIEW + "/" + materia);
 		Notification notif = new Notification("Noticia Borrada", Notification.Type.ERROR_MESSAGE);
 		notif.setDelayMsec(2500);
 		notif.show(Page.getCurrent());
@@ -381,7 +381,7 @@ ItemClickListener, ClickListener {
 	public void deleteFile(Long fileId) {
 		File archivo = fileService.getById(fileId);
 		fileService.delete(fileId);
-		view.navigate(Vaadintest01UI.SUBJECTS_VIEW + "/" + archivo.getSubject().getName());
+		view.navigate(YotelopasoUI.SUBJECTS_VIEW + "/" + archivo.getSubject().getName());
 		selectTab(archivo.getType());
 	}
 }	

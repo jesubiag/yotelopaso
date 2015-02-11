@@ -14,7 +14,7 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.domain.Career;
 import com.yotelopaso.domain.File;
 import com.yotelopaso.domain.File.Type;
@@ -177,7 +177,7 @@ public class UploadFiles extends Window {
 						archivo.setUrl(dirArchivo.getValue());
 						archivo.setName(nomArchivo.getValue());
 						manFile.save(archivo);
-						getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW + "/" + materia.getName());
+						getUI().getNavigator().navigateTo(YotelopasoUI.SUBJECTS_VIEW + "/" + materia.getName());
 						parentView.selectTab(fileType);
 						//Page.getCurrent().reload();
 						Notification.show("Archivo guardado");

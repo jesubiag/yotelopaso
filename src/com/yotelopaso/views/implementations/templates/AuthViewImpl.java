@@ -8,7 +8,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.utils.UserUtils;
 import com.yotelopaso.views.AuthView;
 
@@ -23,7 +23,7 @@ abstract class AuthViewImpl extends VerticalLayout implements AuthView {
 	public void enter(ViewChangeEvent event) {
 		if ( !UserUtils.isLogged((Double) VaadinSession.getCurrent().getAttribute("userId")) ) {
 			// Lo mejor seria que lo haga loguearse en vez de llevarlo a la pagina principal.
-			navigate(Vaadintest01UI.MAIN_VIEW);
+			navigate(YotelopasoUI.MAIN_VIEW);
 		}
 	}
 

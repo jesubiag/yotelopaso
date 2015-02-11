@@ -33,7 +33,7 @@ import com.yotelopaso.views.implementations.SubscriptionsViewImpl;
 @Theme("vaadintest01")
 @Push
 @PreserveOnRefresh
-public class Vaadintest01UI extends UI {
+public class YotelopasoUI extends UI {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -50,7 +50,7 @@ public class Vaadintest01UI extends UI {
 	public static final String SUBSCRIPTIONS_VIEW = "suscripciones";
 	
 	@WebServlet(value = "/*", asyncSupported = true)
-	@VaadinServletConfiguration(productionMode = false, ui = Vaadintest01UI.class)
+	@VaadinServletConfiguration(productionMode = false, ui = YotelopasoUI.class)
 	public static class Servlet extends VaadinServlet {
 		private static final long serialVersionUID = 1L;
 	}

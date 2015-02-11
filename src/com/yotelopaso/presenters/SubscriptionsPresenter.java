@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.domain.Subject;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.SubjectManager;
@@ -81,10 +81,10 @@ implements SubscriptionsView.SubscriptionsViewListener {
 			newSubjects.add(subjectService.getDefaultSubject());
 			userService.setCurrentUserSubjects(newSubjects);
 			view.showSuccesfullSaveNotification("Suscripciones guardadas correctamente");
-			view.navigate(Vaadintest01UI.HOME_VIEW);
+			view.navigate(YotelopasoUI.HOME_VIEW);
 			break;
 		case "Cancelar":
-			view.navigate(Vaadintest01UI.HOME_VIEW);
+			view.navigate(YotelopasoUI.HOME_VIEW);
 			break;
 		default:
 			break;

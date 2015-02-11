@@ -15,7 +15,7 @@ import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.domain.Career;
 import com.yotelopaso.domain.News;
 import com.yotelopaso.domain.Subject;
@@ -142,7 +142,7 @@ public class Editor extends Window{
 						Notification notif = new Notification(labelNotif, Notification.Type.HUMANIZED_MESSAGE);
 						notif.setDelayMsec(2500);
 						notif.show(Page.getCurrent());
-						getUI().getNavigator().navigateTo(Vaadintest01UI.SUBJECTS_VIEW + "/" + materia.getName());		
+						getUI().getNavigator().navigateTo(YotelopasoUI.SUBJECTS_VIEW + "/" + materia.getName());		
 						close();
 					}
 					else {

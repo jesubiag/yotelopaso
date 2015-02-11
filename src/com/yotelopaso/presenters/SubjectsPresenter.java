@@ -3,7 +3,7 @@ package com.yotelopaso.presenters;
 
 import com.vaadin.data.Item;
 import com.vaadin.ui.Link;
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.domain.File.Type;
 import com.yotelopaso.domain.User;
 import com.yotelopaso.persistence.UserManager;
@@ -37,7 +37,7 @@ public class SubjectsPresenter extends AbstractHomePresenter<SubjectsView> imple
 		} else {
 			this.userCareer = userService.getCurrentUser().getCareer().getName();
 			view.cleanComponents();
-			view.navigate(Vaadintest01UI.SUBJECTS_VIEW + "/" + caption);
+			view.navigate(YotelopasoUI.SUBJECTS_VIEW + "/" + caption);
 		}
 	}
 	

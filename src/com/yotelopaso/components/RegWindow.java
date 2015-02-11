@@ -21,7 +21,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.ValoTheme;
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.domain.Career;
 import com.yotelopaso.domain.PersonalInfo;
 import com.yotelopaso.domain.Subject;
@@ -197,7 +197,7 @@ public class RegWindow extends Window{
 					userManager.logInUser(usuario.getId());
 					//if (firstLogin)
 					close();
-					navigator.navigateTo(Vaadintest01UI.HOME_VIEW);	
+					navigator.navigateTo(YotelopasoUI.HOME_VIEW);	
 				}
 				else {
 					Notification.show("Revise los campos obligatorios\n",
@@ -212,9 +212,9 @@ public class RegWindow extends Window{
 				if (firstLogin) {
 					VaadinSession.getCurrent().setAttribute("userId", null);
 					VaadinSession.getCurrent().setAttribute("currentUser", null);
-					navigator.navigateTo(Vaadintest01UI.MAIN_VIEW);
+					navigator.navigateTo(YotelopasoUI.MAIN_VIEW);
 				} else
-					navigator.navigateTo(Vaadintest01UI.HOME_VIEW);
+					navigator.navigateTo(YotelopasoUI.HOME_VIEW);
 				close();
 			}
 		});

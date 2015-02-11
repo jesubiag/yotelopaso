@@ -16,7 +16,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
-import com.yotelopaso.Vaadintest01UI;
+import com.yotelopaso.YotelopasoUI;
 import com.yotelopaso.domain.Career;
 import com.yotelopaso.domain.PersonalInfo;
 import com.yotelopaso.domain.User;
@@ -116,7 +116,7 @@ public class CompDatosView extends AbstractHomeViewImpl implements View {
 				usuario.setBirthday(fecha.getValue()); 
 				usuario.setEmail("nicohuvi@gmail.com");
 				manUsuario.save(usuario);
-				getUI().getNavigator().navigateTo(Vaadintest01UI.HOME_VIEW);
+				getUI().getNavigator().navigateTo(YotelopasoUI.HOME_VIEW);
 				
 				
 				
@@ -138,7 +138,7 @@ public class CompDatosView extends AbstractHomeViewImpl implements View {
 		//@Override
 		public void buttonClick(ClickEvent event) {
 
-			getUI().getNavigator().navigateTo(Vaadintest01UI.MAIN_VIEW);
+			getUI().getNavigator().navigateTo(YotelopasoUI.MAIN_VIEW);
 		}
 	}); //Lo mismo que el anterior pero para volver al Main
 
@@ -170,13 +170,13 @@ public class CompDatosView extends AbstractHomeViewImpl implements View {
 		
 		public ButtonListener(String menuitem) {
 			//this.menuitem = menuitem;
-			this.menuitem = Vaadintest01UI.HOME_VIEW;
+			this.menuitem = YotelopasoUI.HOME_VIEW;
 		}
 
 		@Override
 		public void buttonClick(ClickEvent event) {
 			// Navigate to a specific state
-			UI.getCurrent().getNavigator().navigateTo(Vaadintest01UI.MAIN_VIEW + menuitem);
+			UI.getCurrent().getNavigator().navigateTo(YotelopasoUI.MAIN_VIEW + menuitem);
 		}
 	}
 		
