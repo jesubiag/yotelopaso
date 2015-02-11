@@ -1,12 +1,12 @@
 @import "variables";
 @import "valotest";
 @import "addons.scss";
-@import "vaadintest01.scss";
+@import "yotelopaso.scss";
 
 /* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
 /* The actual styles should be defined in vaadintest01.scss */
-.vaadintest01 {
+.yotelopaso {
   @include addons;
-  @include vaadintest01;
+  @include yotelopaso;
   @include valotest;
 }

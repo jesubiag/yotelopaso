@@ -30,15 +30,13 @@ import com.yotelopaso.views.implementations.MainViewImpl;
 import com.yotelopaso.views.implementations.SubjectsViewImpl;
 import com.yotelopaso.views.implementations.SubscriptionsViewImpl;
 
-@Theme("vaadintest01")
+@Theme("yotelopaso")
 @Push
 @PreserveOnRefresh
 public class YotelopasoUI extends UI {
 	
 	private static final long serialVersionUID = 1L;
 
-	public static final String PERSISTENCE_UNIT = "vaadintest";
-	
 	//Navigator
 	protected Navigator nav;
 	
@@ -50,7 +48,7 @@ public class YotelopasoUI extends UI {
 	public static final String SUBSCRIPTIONS_VIEW = "suscripciones";
 	
 	@WebServlet(value = "/*", asyncSupported = true)
-	@VaadinServletConfiguration(productionMode = false, ui = YotelopasoUI.class)
+	@VaadinServletConfiguration(productionMode = true, ui = YotelopasoUI.class)
 	public static class Servlet extends VaadinServlet {
 		private static final long serialVersionUID = 1L;
 	}

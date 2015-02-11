@@ -42,7 +42,7 @@ public class DataManager<T> {
 		}
 	}
 	
-	public static final String PERSISTENCE_UNIT = "vaadintest";
+	public static final String PERSISTENCE_UNIT = "yotelopaso";
 	protected Class<T> clazz;
 	protected String tableName;
 	protected JPAContainer<T> container;
