@@ -9,6 +9,7 @@ import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.navigator.Navigator;
+import com.vaadin.server.Responsive;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
@@ -48,7 +49,7 @@ public class YotelopasoUI extends UI {
 	public static final String SUBSCRIPTIONS_VIEW = "suscripciones";
 	
 	@WebServlet(value = "/*", asyncSupported = true)
-	@VaadinServletConfiguration(productionMode = true, ui = YotelopasoUI.class)
+	@VaadinServletConfiguration(productionMode = false, ui = YotelopasoUI.class)
 	public static class Servlet extends VaadinServlet {
 		private static final long serialVersionUID = 1L;
 	}
@@ -59,6 +60,8 @@ public class YotelopasoUI extends UI {
 		//DataInitializer.populateTables();
 		
 		//getSession().setAttribute("userId", 0D);
+		
+		Responsive.makeResponsive(this);
 		
 		Locale locale = new Locale("es", "AR");
 		this.setLocale(locale);
