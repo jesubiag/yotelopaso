@@ -300,6 +300,7 @@ $buttonCalendar-color: #AB9DCC ;
 		border-bottom-color: #bcbcbc;
 		background-color: #fafafa;
 		background-image: -webkit-linear-gradient(top, #fafafa 2%, #efefef 98%);
+		background-image: -moz-linear-gradient(top, #fafafa 2%, #efefef 98%);
 		background-image: linear-gradient(to bottom,#fafafa 2%, #efefef 98%);
 		-webkit-box-shadow: inset 0 1px 0 white, inset 0 -1px 0 #e7e7e7;
 		box-shadow: inset 0 1px 0 white, inset 0 -1px 0 #e7e7e7;
@@ -711,5 +712,47 @@ $buttonCalendar-color: #AB9DCC ;
 		font-size: 22px;
 	}
 	
+	.window-news {
+		.v-panel-caption {
+			background-image: -webkit-linear-gradient(rgba(149, 214, 164, 0.19) 2%, rgba(29, 81, 33, 0.17) 150%);
+			background-image: -moz-linear-gradient(rgba(149, 214, 164, 0.19) 2%, rgba(29, 81, 33, 0.17) 150%);
+			background-image: -o-linear-gradient(rgba(149, 214, 164, 0.19) 2%, rgba(29, 81, 33, 0.17) 150%);
+			background-image: linear-gradient(rgba(149, 214, 164, 0.19) 2%, rgba(29, 81, 33, 0.17) 150%);
+		}
+		
+		.v-table {
+			.v-table-row-odd {
+				background-color: #F1F6F4;
+			}
+		}
+	}
+	
+	.window-files {
+		.v-panel-caption {
+			background-image: -webkit-linear-gradient(rgba(133, 185, 225, 0.19) 2%, rgba(86, 141, 179, 0.17) 150%);
+			background-image: -moz-linear-gradient(rgba(133, 185, 225, 0.19) 2%, rgba(86, 141, 179, 0.17) 150%);
+			background-image: -o-linear-gradient(rgba(133, 185, 225, 0.19) 2%, rgba(86, 141, 179, 0.17) 150%);
+			background-image: linear-gradient(rgba(133, 185, 225, 0.19) 2%, rgba(86, 141, 179, 0.17) 150%);
+		}
+		.v-table {
+			.v-table-row-odd {
+				background-color: #F3F9FD;
+			}
+		}
+	}
+	
+	.window-events {
+		.v-panel-caption {
+			background-image: -webkit-linear-gradient(rgba(106, 63, 225, 0.19) 2%, rgba(61, 17, 103, 0.17) 150%);
+			background-image: -moz-linear-gradient(rgba(106, 63, 225, 0.19) 2%, rgba(61, 17, 103, 0.17) 150%);
+			background-image: -o-linear-gradient(rgba(106, 63, 225, 0.19) 2%, rgba(61, 17, 103, 0.17) 150%);
+			background-image: linear-gradient(rgba(106, 63, 225, 0.19) 2%, rgba(61, 17, 103, 0.17) 150%);
+		}
+		.v-table {
+			.v-table-row-odd {
+				background-color: #F3E9F8;
+			}
+		}
+	}
 }
 

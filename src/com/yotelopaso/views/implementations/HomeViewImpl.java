@@ -68,7 +68,8 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		
 		// Noticias
 		windowNews = new Panel("Novedades");
-		windowNews.setStyleName("color1");
+		windowNews.addStyleName("window-news");
+		//windowNews.addStyleName("color2");
 		
 		subContentNews = new VerticalLayout();
 		subContentNews.setMargin(false);
@@ -86,7 +87,8 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		
 		// Archivos
 		windowRecentFiles = new Panel("Archivos más recientes");
-		windowRecentFiles.setStyleName("color1");
+		windowRecentFiles.addStyleName("window-files");
+		//windowRecentFiles.addStyleName("color4");
 		
 		VerticalLayout subContentRecentFiles = new VerticalLayout();
 		subContentRecentFiles.setMargin(false);
@@ -102,7 +104,8 @@ public class HomeViewImpl extends AbstractHomeViewImpl implements HomeView, Item
 		
 		// Eventos
 		windowRecentEvents = new Panel("Próximos eventos");
-		windowRecentEvents.setStyleName("color1");
+		windowRecentEvents.addStyleName("window-events");
+		//windowRecentEvents.addStyleName("color5");
 		
 		VerticalLayout subContentRecentEvents = new VerticalLayout();
 		subContentRecentEvents.setMargin(false);
