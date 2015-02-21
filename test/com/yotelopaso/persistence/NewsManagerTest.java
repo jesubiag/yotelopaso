@@ -37,5 +37,26 @@ public class NewsManagerTest {
 		}
 		assertTrue(flag==0);
 	}
-
+	// HACER EL ABM
+	@Test
+	public void testABM() {
+	//dar de alta una noticia
+	News nuevaNew = new News();
+	//los campos obligatorios existen
+	nuevaNew.setId(3L);
+	nuevaNew.setTitle("Nueva Noticia");  
+	nuevaNew.setContent("Esta es el contenido de la nueva noticia creada");
+	nm.save(nuevaNew);
+	assertTrue(nuevaNew.getTitle()!=null);
+	assertTrue(nuevaNew.getContent()!=null);
+	assertTrue(nuevaNew.getId()!= null);
+	//modificar noticia y verificar que haya cambiado
+	nuevaNew.setContent("Nuevo contenido");
+	nm.save(nuevaNew);
+	assertTrue(nuevaNew.getContent()=="Nuevo contenido");
+	//eliminar una noticia y al buscarla que no exista
+	nm.delete(3L);
+	assertTrue(nm.getById(3L)== null);
+	
+	}
 }
