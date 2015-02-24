@@ -30,4 +30,14 @@ public class UserCalendarEventTest {
 		assertTrue("Evento borrado correctamente", mngr.getById(1L) == null);
 	}
 
+	// verificar fechas
+	@Test
+	public void testfechas() {
+		UserCalendarEvent event = new UserCalendarEvent(123456D, 42, "Soy el caption", 
+				"Soy la description\n Y salto de linea", new GregorianCalendar().getTime());
+		//event.getStart();
+		//event.getEnd();
+		assertTrue(event.getStart().before(event.getEnd()));
+	}
+	
 }
