@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PostLoad;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class News implements Serializable {
@@ -20,14 +23,18 @@ public class News implements Serializable {
 	private Long id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull
 	private Date date;
 	
-	@ManyToOne
+	@Transient
+	//@ManyToOne
 	private Career career;
 	
 	@ManyToOne
+	@NotNull
 	private Subject subject;
 	
+	@NotNull
 	private String title;
 	
 	private String content;
@@ -52,6 +59,11 @@ public class News implements Serializable {
 		this.subject = subject;
 		this.content = content;
 		this.author = author;
+	}
+	
+	@PostLoad
+	void onPostLoad() {
+		this.career = this.subject.getCareer();
 	}
 
 	public Long getId() {

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Career implements Serializable {
@@ -13,6 +14,7 @@ public class Career implements Serializable {
 	@Id
 	private Integer id;
 	
+	@NotNull
 	private String name;
 	
 	public Career() {}

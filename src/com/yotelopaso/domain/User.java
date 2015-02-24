@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,18 +27,21 @@ public class User implements Serializable {
 	private Double id;
 	
 	@OnlyLetters
+	@NotNull
 	private String name;
 	
 	@OnlyLetters
+	@NotNull
 	private String lastName;
 	
 	@NotNull
 	private String email;
 	
-	//@NotNull
-	@OneToOne
+	@NotNull
+	@ManyToOne
 	private Career career;
 	
+	@NotNull
 	@Min(1) @Max(5)
 	private Integer year;
 	
@@ -45,12 +49,11 @@ public class User implements Serializable {
 	private Date birthday;
 	
 	@OneToOne
+	@NotNull
 	private PersonalInfo personalinfo;
 	
 	@ManyToMany
-	private Set<UserCalendarEvent> userEvents = new HashSet<UserCalendarEvent>();
-	
-	@ManyToMany
+	@NotNull
 	private Set<Subject> subscriptedSubjects = new HashSet<Subject>();
 	
 	public User() {}

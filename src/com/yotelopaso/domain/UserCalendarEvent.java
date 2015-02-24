@@ -10,10 +10,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.vaadin.ui.components.calendar.event.CalendarEvent.EventChangeNotifier;
 import com.vaadin.ui.components.calendar.event.EditableCalendarEvent;
@@ -67,22 +69,41 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@NotNull
 	private Double authorId;
+	
 	@Min(value=1, message="Por favor seleccione una materia")
+	@NotNull
 	private Integer subjectId;
+	
 	@ManyToOne
 	private Career career;
+	
+	@NotNull
 	private String caption;
+	
 	private String description;
+	
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date start;
+	
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date end;
+	
 	private String styleName;
+	
 	private boolean isAllDay;
+	
+	@NotNull
 	@Enumerated(EnumType.ORDINAL) @NotEmpty(message="Por favor seleccione un tipo de evento")
 	private CalendarEventType eventType;
+	
+	@NotNull
 	private boolean publicEvent = false;
+	
 	@Transient
 	private List<EventChangeListener> listeners = new ArrayList<EventChangeListener>();
 	
@@ -106,6 +127,11 @@ public class UserCalendarEvent implements EditableCalendarEvent, EventChangeNoti
 		this.description = description;
 		start = date;
 		end = date;
+	}
+	
+	@PrePersist
+	void onPrePersist() {
+		this.styleName = this.eventType.getColor();
 	}
 
 	public Double getAuthorId() {

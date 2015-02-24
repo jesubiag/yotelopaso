@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -29,9 +31,11 @@ public class Subject implements Serializable {
 	private Career career;
 	
 	@NotNull
+	@Min(1) @Max(6)
 	private Integer year;
 	
 	@ManyToMany(mappedBy="subscriptedSubjects", fetch=FetchType.EAGER)
+	@NotNull
 	private Set<User> subscriptors = new HashSet<User>();
 	
 	public Subject() {}

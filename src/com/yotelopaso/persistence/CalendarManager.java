@@ -23,8 +23,9 @@ public class CalendarManager extends DataManager<UserCalendarEvent>{
 	
 	@Override
 	public Long save(UserCalendarEvent event) {
-		String c = event.getEventType().getColor();
-		event.setStyleName(c);
+		// Implementado con @PrePersist en la clase UserCalendarEvent
+		/*String c = event.getEventType().getColor();
+		event.setStyleName(c);*/
 		if (event.getCareer() == null) event.setCareer(userManager.getCurrentUser().getCareer());
 		return (Long) super.save(event);
 	}
